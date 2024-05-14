@@ -1,0 +1,37 @@
+version: "3.5"
+
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    container_name: bookworm-database
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  server:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: bookworm-admin-server
+    environment:
+      - PORT=${PORT}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+  customer:
+    build:
+      context: ./customer
+      dockerfile: Dockerfile
+    container_name: bookworm-customer-client
+    environment:
+      - PORT=${PORT}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - server
