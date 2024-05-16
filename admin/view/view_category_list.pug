@@ -1,15 +1,23 @@
 extends global_layout.pug
 
 block content
-     table
-          thead
-               tr
-                    th ID
-                    th Name
-                    th Books Count
-          tbody
-               each category in categories
-                    tr
-                         td #{category.id}
-                         td #{category.name}
-                         td #{category.book_count}
+     div 
+          div(class='flex justify-between')
+               p(class='font-bold text-xl text-slate-900') CATEGORY
+               button(class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
+          div(class='p-4')
+          if categories.length > 0
+               table(class='table w-full shadow-slate-900')
+               thead(class='table-header-group bg-slate-100')
+                    tr(class='table-row')
+                         th(class="table-cell text-left p-3") ID
+                         th(class="table-cell text-left ...") NAME
+                         th(class="table-cell text-left ...") BOOKS COUNT
+               tbody(class="table-row-group")
+                    each category in categories
+                         tr(class="table-row")
+                              td(class="table-cell ...") #{category.id}
+                              td(class="table-cell ...") #{category.name}
+                              td(class="table-cell ...") #{category.book_count}
+          else 
+               include announcement_no_data.pug
