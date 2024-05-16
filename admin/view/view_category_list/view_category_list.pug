@@ -1,10 +1,10 @@
-extends global_layout.pug
+extends ../global_layout.pug
 
-block content
+block content   
      div 
           div(class='flex justify-between')
                p(class='font-bold text-xl text-slate-900') CATEGORY
-               button(class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
+               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
           div(class='p-4')
           if categories.length > 0
                div(class='bg-white p-8 shadow-slate-950 rounded-xl')
@@ -23,4 +23,12 @@ block content
                                         td(class="table-cell") #{category._count.books}
                                         td(class="table-cell") #{category.createdAt}
           else 
-               include announcement_no_data.pug
+               include ../announcement_no_data.pug
+
+     include create_category_modal.html
+
+     script(type="text/javascript").
+          u("#open-category-modal").on('click', (event) => {
+              u("#create-category-modal-overlay").removeClass('hidden')
+              u("#create-category-modal").removeClass('hidden')
+          });   

@@ -10,8 +10,7 @@ export class CategoryController {
   @Get()
   async buildCategoryListPage(@Res() res: Response): Promise<void> {
     const categories = await this.categoryService.queryCategories();
-    console.log(categories);
-    res.render('view_category_list', {
+    res.render('./view_category_list/view_category_list', {
       categories,
     });
   }
