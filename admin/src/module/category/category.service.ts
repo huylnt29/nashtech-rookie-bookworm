@@ -7,6 +7,12 @@ export class CategoryService {
   constructor(private prisma: PrismaService) {}
 
   async categories(): Promise<Category[]> {
-    return this.prisma.category.findMany();
+    return this.prisma.category.findMany({
+      include: {
+        _count: {
+          select: { books: true },
+        },
+      },
+    });
   }
 }
