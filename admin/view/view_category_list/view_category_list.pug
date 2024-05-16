@@ -37,3 +37,11 @@ block content
                u("#create-category-modal-overlay").addClass('hidden')
                u("#create-category-modal").addClass('hidden');   
           }
+
+          const submitCreateCategory = async () => {
+               const categoryName = u('#name').nodes[0].value;
+               const res = await axios.post('http://localhost:3000/category', {
+                    name: categoryName
+               })
+               location.reload(true)
+          }
