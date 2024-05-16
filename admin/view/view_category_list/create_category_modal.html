@@ -10,7 +10,7 @@
 >
   <div class="flex justify-between">
     <h1 class="text-xl font-semibold">Create New Category</h1>
-    <img src="close.svg" class="w-8" />
+    <img src="close.svg" class="w-8 cursor-pointer" onclick="closeModal()" />
   </div>
   <form>
     <div class="grid gap-4 mb-4 grid-cols-2">
@@ -30,7 +30,6 @@
     </div>
   </form>
   <div class="flex justify-end">
-    <!-- This button is used to close the dialog -->
     <button
       id="submit"
       type="submit"

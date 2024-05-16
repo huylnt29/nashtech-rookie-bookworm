@@ -4,7 +4,7 @@ block content
      div 
           div(class='flex justify-between')
                p(class='font-bold text-xl text-slate-900') CATEGORY
-               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
+               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded', onclick='openModal()') Tạo mới
           div(class='p-4')
           if categories.length > 0
                div(class='bg-white p-8 shadow-slate-950 rounded-xl')
@@ -28,7 +28,12 @@ block content
      include create_category_modal.html
 
      script(type="text/javascript").
-          u("#open-category-modal").on('click', (event) => {
-              u("#create-category-modal-overlay").removeClass('hidden')
-              u("#create-category-modal").removeClass('hidden')
-          });   
+          const openModal = () => {
+               u("#create-category-modal-overlay").removeClass('hidden')
+               u("#create-category-modal").removeClass('hidden')   
+          }
+
+          const closeModal = () => {
+               u("#create-category-modal-overlay").addClass('hidden')
+               u("#create-category-modal").addClass('hidden');   
+          }
