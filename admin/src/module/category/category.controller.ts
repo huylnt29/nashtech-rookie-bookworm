@@ -10,6 +10,7 @@ export class CategoryController {
   @Get()
   async buildCategoryListPage(@Res() res: Response): Promise<void> {
     const categories = await this.categoryService.queryCategories();
+    console.log(categories);
     res.render('view_category_list', {
       categories,
     });
@@ -17,6 +18,7 @@ export class CategoryController {
 
   @Post()
   async postCategory(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoryService.createCategory(createCategoryDto);
+    const result = this.categoryService.createCategory(createCategoryDto);
+    return result;
   }
 }
