@@ -7,5 +7,15 @@ html
      title BookWorm Admin
      link(href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css", rel="stylesheet")
      body
-          p(class='has-text-warning has-text-weight-bold') Hello World!
-          block content
+          div(class='is-flex')
+               div(class='is-flex is-flex-direction-column has-background-dark p-5', style={height: '100vh'})
+                    div(class='is-flex')
+                         img(src='logo.png', class='image is-32x32')
+                         div(class='p-2')
+                         p(class='has-text-white-ter') BookWorm Admin
+                    div(class='p-2')
+                    div(class='is-flex')
+                         img(src='sidebar_category.svg', class='image is-32x32')
+                         div(class='p-2')
+                         p(class='has-text-white-ter') Category
+               block content
