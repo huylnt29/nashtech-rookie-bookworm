@@ -1,0 +1,15 @@
+extends global_layout.pug
+
+block content
+     table
+          thead
+               tr
+                    th ID
+                    th Name
+                    th Books Count
+          tbody
+               each category in categories
+                    tr
+                         td #{category.id}
+                         td #{category.name}
+                         td #{category.book_count}
