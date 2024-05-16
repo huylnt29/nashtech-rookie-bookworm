@@ -15,6 +15,8 @@ model Book {
   publishedYear Int
   publisherId   Int
   categoryId    Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   authors       Author[]
   reviews       Review[]
   batchs        Batch[]
@@ -29,9 +31,11 @@ model Publisher {
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  books Book[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  books     Book[]
 }
 
 model Author {
@@ -41,12 +45,14 @@ model Author {
 }
 
 model Review {
-  id      Int     @id @default(autoincrement())
-  author  String
-  content String?
-  rating  Int
-  bookId  Int
-  book    Book    @relation(fields: [bookId], references: [id])
+  id        Int      @id @default(autoincrement())
+  author    String
+  content   String?
+  rating    Int
+  bookId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  book      Book     @relation(fields: [bookId], references: [id])
 }
 
 model Batch {
@@ -55,16 +61,20 @@ model Batch {
   soldQuantity    Int             @default(0)
   originalPrice   Float
   bookId          Int
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   book            Book            @relation(fields: [bookId], references: [id])
   promotionLists  PromotionList[]
   Price           Price[]
 }
 
 model PromotionList {
-  id      Int    @id @default(autoincrement())
-  name    String
-  batchId Int
-  batch   Batch  @relation(fields: [batchId], references: [id])
+  id        Int      @id @default(autoincrement())
+  name      String
+  batchId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  batch     Batch    @relation(fields: [batchId], references: [id])
 }
 
 model Price {
@@ -73,6 +83,8 @@ model Price {
   discountPercentage Float
   state              PriceState
   batchId            Int
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
   batch              Batch       @relation(fields: [batchId], references: [id])
   OrderLine          OrderLine[]
 }
@@ -83,17 +95,21 @@ enum PriceState {
 }
 
 model OrderLine {
-  id       Int   @id @default(autoincrement())
-  quantity Int
-  priceId  Int
-  orderId  Int
-  price    Price @relation(fields: [priceId], references: [id])
-  order    Order @relation(fields: [orderId], references: [id])
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  priceId   Int
+  orderId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  price     Price    @relation(fields: [priceId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
 }
 
 model Order {
   id         Int         @id @default(autoincrement())
   customerId Int
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   state      OrderState
   customer   Customer    @relation(fields: [customerId], references: [id])
   OrderLine  OrderLine[]
