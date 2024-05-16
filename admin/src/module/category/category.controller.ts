@@ -1,6 +1,7 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Response } from 'express';
+import { CreateCategoryDto } from './dto/create_category.dto';
 
 @Controller('category')
 export class CategoryController {
@@ -8,9 +9,16 @@ export class CategoryController {
 
   @Get()
   async buildCategoryListPage(@Res() res: Response): Promise<void> {
-    const categories = await this.categoryService.categories();
+    const categories = await this.categoryService.queryCategories();
+    console.log(categories);
     res.render('view_category_list', {
       categories,
     });
+  }
+
+  @Post()
+  async postCategory(@Body() createCategoryDto: CreateCategoryDto) {
+    const result = this.categoryService.createCategory(createCategoryDto);
+    return result;
   }
 }

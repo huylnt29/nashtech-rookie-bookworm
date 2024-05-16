@@ -7,17 +7,20 @@ block content
                button(class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
           div(class='p-4')
           if categories.length > 0
-               table(class='table w-full shadow-slate-900')
-               thead(class='table-header-group bg-slate-100')
-                    tr(class='table-row')
-                         th(class="table-cell text-left p-3") ID
-                         th(class="table-cell text-left ...") NAME
-                         th(class="table-cell text-left ...") BOOKS COUNT
-               tbody(class="table-row-group")
-                    each category in categories
-                         tr(class="table-row")
-                              td(class="table-cell ...") #{category.id}
-                              td(class="table-cell ...") #{category.name}
-                              td(class="table-cell ...") #{category.book_count}
+               div(class='bg-white p-8 shadow-slate-950 rounded-xl')
+                    table(class='table w-full shadow-slate-900')
+                         thead(class='table-header-group bg-slate-100')
+                              tr(class='table-row')
+                                   th(class="table-cell text-left p-3") ID
+                                   th(class="table-cell text-left") NAME
+                                   th(class="table-cell text-left") BOOKS COUNT
+                                   th(class="table-cell text-left") CREATED AT
+                         tbody(class="table-row-group")
+                              each category in categories
+                                   tr(class="table-row hover:bg-slate-50 hover:cursor-pointer")
+                                        td(class="table-cell p-3") #{category.id}
+                                        td(class="table-cell") #{category.name}
+                                        td(class="table-cell") #{category._count.books}
+                                        td(class="table-cell") #{category.createdAt}
           else 
                include announcement_no_data.pug
