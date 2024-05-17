@@ -34,7 +34,6 @@ export class BookController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateBookDto: UpdateBookDto,
   ): Promise<any> {
-    console.log(updateBookDto);
     return this.bookService.updateBook(id, updateBookDto);
   }
 }
