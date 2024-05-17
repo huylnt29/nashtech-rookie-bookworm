@@ -17,6 +17,7 @@ model Book {
   categoryId    Int
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  state         State
   authors       Author[]
   reviews       Review[]
   batchs        Batch[]
@@ -52,6 +53,7 @@ model Review {
   bookId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  state     State
   book      Book     @relation(fields: [bookId], references: [id])
 }
 
@@ -63,6 +65,7 @@ model Batch {
   bookId          Int
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
+  state           State
   book            Book            @relation(fields: [bookId], references: [id])
   promotionLists  PromotionList[]
   Price           Price[]
@@ -81,15 +84,15 @@ model Price {
   id                 Int         @id @default(autoincrement())
   value              Float
   discountPercentage Float
-  state              PriceState
   batchId            Int
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
+  state              State
   batch              Batch       @relation(fields: [batchId], references: [id])
   OrderLine          OrderLine[]
 }
 
-enum PriceState {
+enum State {
   ACTIVE
   INACTIVE
 }
@@ -101,6 +104,7 @@ model OrderLine {
   orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  state     State
   price     Price    @relation(fields: [priceId], references: [id])
   order     Order    @relation(fields: [orderId], references: [id])
 }
@@ -110,7 +114,8 @@ model Order {
   customerId Int
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  state      OrderState
+  state      State
+  status     OrderStatus
   customer   Customer    @relation(fields: [customerId], references: [id])
   OrderLine  OrderLine[]
 }
@@ -125,7 +130,7 @@ model Customer {
   Order    Order[]
 }
 
-enum OrderState {
+enum OrderStatus {
   PLACED
   PROCESSED
   COMPLETED

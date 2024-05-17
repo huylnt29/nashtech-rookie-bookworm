@@ -12,7 +12,7 @@ html
      script(src="https://cdn.jsdelivr.net/npm/umbrellajs")
      script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
      link(href="style.css", rel="stylesheet")
-     body(class='overflow-y-hidden')
+     body(class='overflow-y-hidden text-slate-900 text-base')
           div(class='flex h-screen')
                aside(class='flex flex-col bg-slate-900 p-4 gap-1')
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
@@ -34,6 +34,9 @@ html
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          img(src='sidebar_order.svg', class='w-8')
                          p(class='') Order
+                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         img(src='sidebar_customer.svg', class='w-8')
+                         p(class='') Customer
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          img(src='sidebar_about.svg', class='w-8')
                          p(class='') About
