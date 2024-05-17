@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Response } from 'express';
 import { CreateCategoryDto } from './dto/create_category.dto';
@@ -19,5 +29,22 @@ export class CategoryController {
   async postCategory(@Body() createCategoryDto: CreateCategoryDto) {
     const result = this.categoryService.createCategory(createCategoryDto);
     return result;
+  }
+
+  @Delete(':id')
+  async deleteCategory(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.categoryService.deleteCategory(id);
+      return {
+        message: 'The category has been deleted successfully',
+      };
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'There is no category contains the provided id',
+      });
+    }
   }
 }
