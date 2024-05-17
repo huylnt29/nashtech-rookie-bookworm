@@ -1,13 +1,13 @@
-extends global_layout.pug
+extends ../global_layout.pug
 
-block content
-     div 
+block content   
+     div
           div(class='flex justify-between')
                p(class='font-bold text-xl text-slate-900') CATEGORY
-               button(class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded') Tạo mới
+               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded', onclick='openModal()') Tạo mới
           div(class='p-4')
           if categories.length > 0
-               div(class='bg-white p-8 shadow-slate-950 rounded-xl')
+               div(class='bg-white p-8 shadow-slate-950 rounded-2xl')
                     table(class='table w-full shadow-slate-900')
                          thead(class='table-header-group bg-slate-100')
                               tr(class='table-row')
@@ -23,4 +23,16 @@ block content
                                         td(class="table-cell") #{category._count.books}
                                         td(class="table-cell") #{category.createdAt}
           else 
-               include announcement_no_data.pug
+               +announcement('illustration_no_data.svg', 'You have not created any category')
+
+     include create_category_modal.pug
+
+     script(type="text/javascript").
+          const submitCreateCategory = async () => {
+               const categoryName = u('#name').nodes[0].value;
+               axios.post('/category', {
+                    name: categoryName
+               })
+               .then(() => location.reload(true))
+               .catch((error) => showToast('#create-category-toast', error.response.data.message.toString()));
+          }

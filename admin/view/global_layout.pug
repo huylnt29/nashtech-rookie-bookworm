@@ -1,3 +1,6 @@
+include mixin/announcement.pug
+include mixin/toast.pug
+
 doctype html
 html
      head
@@ -6,10 +9,12 @@ html
      meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
      title BookWorm Admin
      script(src="https://cdn.tailwindcss.com")
+     script(src="https://cdn.jsdelivr.net/npm/umbrellajs")
+     script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
      link(href="style.css", rel="stylesheet")
-     body
-          div(class='flex')
-               div(class='flex flex-col bg-slate-900 h-screen p-4 gap-1')
+     body(class='overflow-y-hidden text-slate-900 text-base')
+          div(class='flex h-screen')
+               aside(class='flex flex-col bg-slate-900 p-4 gap-1')
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
                          img(src='logo.png', class='w-8')
                          p(class='font-bold') BookWorm Admin
@@ -30,11 +35,14 @@ html
                          img(src='sidebar_order.svg', class='w-8')
                          p(class='') Order
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         img(src='sidebar_customer.svg', class='w-8')
+                         p(class='') Customer
+                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          img(src='sidebar_about.svg', class='w-8')
                          p(class='') About
                     div(class="grow")
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
                          img(src='sidebar_avatar_placeholder.svg', class='w-8')
                          p(class='font-bold') Huy Le Nguyen Truong
-               div(class="pt-6 pl-6 pr-6 w-screen bg-slate-50")
+               div(class="pt-6 pl-6 pr-6 grow bg-slate-50 overflow-y-auto")
                     block content
