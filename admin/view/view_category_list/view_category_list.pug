@@ -4,7 +4,7 @@ block content
      div
           div(class='flex justify-between items-center')
                p(class='font-bold text-xl text-slate-900') CATEGORY
-               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl', onclick='openModal()') Tạo mới
+               button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl', onclick='openCreateModal()') Tạo mới
           div(class='h-4')
           if categories.length > 0
                div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
@@ -15,7 +15,7 @@ block content
                                    th(class="table-cell text-left") NAME
                                    th(class="table-cell text-left") BOOKS COUNT
                                    th(class="table-cell text-left") CREATED AT
-                                   th(class="table-cell text-left") ___
+                                   th(class="table-cell text-left w-8")          
                          tbody(class="table-row-group")
                               each category in categories
                                    tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
@@ -24,18 +24,10 @@ block content
                                         td(class="table-cell") #{category._count.books}
                                         td(class="table-cell") #{category.createdAt}
                                         td(class="table-cell")
-                                             img(src="trash_can.svg", class="hidden group-hover:block w-4")
+                                             img(src="trash_can.svg", class="hidden group-hover:block w-4", onclick=`openDeleteModal(${category.id})`)
           else 
                +announcement('illustration_no_data.svg', 'You have not created any category')
 
      include create_category_modal.pug
-
-     script(type="text/javascript").
-          const submitCreateCategory = async () => {
-               const categoryName = u('#name').nodes[0].value;
-               axios.post('/category', {
-                    name: categoryName
-               })
-               .then(() => location.reload(true))
-               .catch((error) => showToast('#create-category-toast', error.response.data.message.toString()));
-          }
+     include delete_category_modal.pug
+          
