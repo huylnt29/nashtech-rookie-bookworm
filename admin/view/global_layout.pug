@@ -1,5 +1,6 @@
 include mixin/announcement.pug
 include mixin/toast.pug
+include mixin/row_text.pug
 
 doctype html
 html
@@ -11,38 +12,38 @@ html
      script(src="https://cdn.tailwindcss.com")
      script(src="https://cdn.jsdelivr.net/npm/umbrellajs")
      script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
-     link(href="style.css", rel="stylesheet")
+     link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
      body(class='overflow-y-hidden text-slate-900 text-base')
           div(class='flex h-screen')
                aside(class='flex flex-col bg-slate-900 p-4 gap-1')
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         img(src='logo.png', class='w-8')
+                         img(src='http://localhost:3000/logo.png', class='w-8')
                          p(class='font-bold') BookWorm Admin
                     div(class='p-2')
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_book.svg', class='w-8')
+                         i(class="material-icons w-8") menu_book
                          p(class='') Book
                     div(id='sidebar-category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_category.svg', class='w-8')
+                         i(class="material-icons w-8") category
                          p(class='') Category
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_batch.svg', class='w-8')
+                         i(class="material-icons w-8") batch_prediction
                          p(class='') Batch
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_promotion_list.svg', class='w-8')
+                         i(class="material-icons w-8") bolt
                          p(class='') Promotion List
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_order.svg', class='w-8')
+                         i(class="material-icons w-8") filter_frames
                          p(class='') Order
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_customer.svg', class='w-8')
+                         i(class="material-icons w-8") diversity_1
                          p(class='') Customer
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         img(src='sidebar_about.svg', class='w-8')
+                         i(class="material-icons w-8") info
                          p(class='') About
                     div(class="grow")
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         img(src='sidebar_avatar_placeholder.svg', class='w-8')
+                         i(class="material-icons w-8") account_circle
                          p(class='font-bold') Huy Le Nguyen Truong
                div(class="pt-6 pl-6 pr-6 grow bg-slate-50 overflow-y-auto")
                     block content
