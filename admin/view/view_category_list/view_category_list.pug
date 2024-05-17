@@ -7,7 +7,7 @@ block content
                button(id="open-category-modal", class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded', onclick='openModal()') Tạo mới
           div(class='p-4')
           if categories.length > 0
-               div(class='bg-white p-8 shadow-slate-950 rounded-xl')
+               div(class='bg-white p-8 shadow-slate-950 rounded-2xl')
                     table(class='table w-full shadow-slate-900')
                          thead(class='table-header-group bg-slate-100')
                               tr(class='table-row')
@@ -28,17 +28,9 @@ block content
      include create_category_modal.pug
 
      script(type="text/javascript").
-          const openModal = () => {
-               u("#create-category-modal").removeClass('hidden')   
-          }
-
-          const closeModal = () => {
-               u("#create-category-modal").addClass('hidden');   
-          }
-
           const submitCreateCategory = async () => {
                const categoryName = u('#name').nodes[0].value;
-               axios.post('http://localhost:3000/category', {
+               axios.post('/category', {
                     name: categoryName
                })
                .then(() => location.reload(true))

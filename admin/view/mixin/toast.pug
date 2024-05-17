@@ -1,4 +1,5 @@
 mixin toast(type, id)
+     //- - var toastId = id
      div(id=id, class='hidden fixed bottom-3 right-5 z-100 flex items-center gap-2 w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 bg-red-50')
           div(class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg")
                if (type == 'danger')
@@ -8,16 +9,15 @@ mixin toast(type, id)
                else if (type == 'warning')
                     img(src='toast_warning.svg')
           div(id=`${id}-content`, class="ms-3 text-sm text-red-900 font-bold")
-          img(src='close.svg', class='w-6 cursor-pointer', onClick="hideAllToasts()")
+          img(src='close.svg', class='w-6 cursor-pointer', onClick="hideToast()")
      
      script(type='text/javascript').
           const showToast = (id, message) => {
                u(id).removeClass("hidden")
                u(`${id}-content`).html(message)
           }
-          const hideAllToasts = () => {
-               u('[id*="toast"]').nodes.forEach(e => {
-                    e.classList.add("hidden")
-                    //- e.html('')
-               })
+          const hideToast = () => {
+               let id = "#" + "#{id}"
+               u(id).addClass("hidden")
+               u(`${id}-content`).html("")
           }
