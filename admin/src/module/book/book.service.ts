@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { Book } from '@prisma/client';
 import { CreateBookDto } from './dto/create_book.dto';
+import { UpdateBookDto } from './dto/update_book.dto';
 
 @Injectable()
 export class BookService {
@@ -27,6 +28,18 @@ export class BookService {
       },
       select: {
         id: true,
+      },
+    });
+  }
+
+  async updateBook(id: number, updateBookDto: UpdateBookDto) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...updateBookDto,
+        id: undefined,
       },
     });
   }
