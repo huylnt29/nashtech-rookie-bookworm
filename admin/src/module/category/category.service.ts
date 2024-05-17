@@ -42,7 +42,13 @@ export class CategoryService {
         id: id,
       },
       include: {
-        books: true,
+        books: {
+          select: {
+            id: true,
+            name: true,
+            publishedYear: true,
+          },
+        },
       },
     });
   }
