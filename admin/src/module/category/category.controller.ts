@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Res,
 } from '@nestjs/common';
@@ -13,6 +14,7 @@ import { CategoryService } from './category.service';
 import { Response } from 'express';
 import { CreateCategoryDto } from './dto/create_category.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateCategoryDto } from './dto/update_category.dto';
 
 @Controller('category')
 @ApiTags('CATEGORY')
@@ -59,5 +61,13 @@ export class CategoryController {
         message: 'There is no category contains the provided id',
       });
     }
+  }
+
+  @Patch(':id')
+  async patchCategory(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCategoryDto: UpdateCategoryDto,
+  ): Promise<any> {
+    return this.categoryService.updateCategory(id, updateCategoryDto);
   }
 }
