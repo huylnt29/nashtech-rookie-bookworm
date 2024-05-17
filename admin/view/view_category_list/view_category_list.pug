@@ -25,16 +25,14 @@ block content
           else 
                +announcement('illustration_no_data.svg', 'You have not created any category')
 
-     include create_category_modal.html
+     include create_category_modal.pug
 
      script(type="text/javascript").
           const openModal = () => {
-               u("#create-category-modal-overlay").removeClass('hidden')
                u("#create-category-modal").removeClass('hidden')   
           }
 
           const closeModal = () => {
-               u("#create-category-modal-overlay").addClass('hidden')
                u("#create-category-modal").addClass('hidden');   
           }
 
@@ -44,5 +42,5 @@ block content
                     name: categoryName
                })
                .then(() => location.reload(true))
-               .catch((error) => showDangerToast(error.response.data.message.toString()));
+               .catch((error) => showToast('#create-category-toast', error.response.data.message.toString()));
           }
