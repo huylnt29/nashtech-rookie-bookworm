@@ -21,7 +21,7 @@ export class BookController {
 
   @Get()
   async buildBookListPage(@Res() res: Response): Promise<void> {
-    const books = this.bookService.selectBooks();
+    const books = await this.bookService.selectBooks();
     res.render('./view_book_list/view_book_list_page', {
       books,
     });
