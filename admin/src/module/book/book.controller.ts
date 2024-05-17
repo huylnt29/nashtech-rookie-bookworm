@@ -6,9 +6,10 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Res,
 } from '@nestjs/common';
 import { BookService } from './book.service';
-import { Book as BookModel } from '@prisma/client';
+import { Response } from 'express';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -19,8 +20,11 @@ export class BookController {
   constructor(private readonly bookService: BookService) {}
 
   @Get()
-  async getBooks(): Promise<BookModel[]> {
-    return this.bookService.selectBooks();
+  async buildBookListPage(@Res() res: Response): Promise<void> {
+    const books = await this.bookService.selectBooks();
+    res.render('./view_book_list/view_book_list_page', {
+      books,
+    });
   }
 
   @Post()
