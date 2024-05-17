@@ -1,4 +1,9 @@
-mixin row_text(keyName, value)
-     div(class='flex justify-between items-center gap-12 my-3')
+mixin row_text(keyName, value, onOpenEditModal)
+     div(class='flex items-center gap-12 my-3')
           p(class='text-slate-600 font-bold uppercase')= keyName
+          div(class='grow')
           p(class='text-slate-900')= value
+          if (onOpenEditModal)
+               i(class="material-icons w-3 text-orange-200 cursor-pointer hover:text-orange-700", onclick=onOpenEditModal) draw
+          else 
+               div(class="w-3")
