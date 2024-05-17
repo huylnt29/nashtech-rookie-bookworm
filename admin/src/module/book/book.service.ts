@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { Book } from '@prisma/client';
+import { Book, State } from '@prisma/client';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 
@@ -8,8 +8,28 @@ import { UpdateBookDto } from './dto/update_book.dto';
 export class BookService {
   constructor(private prisma: PrismaService) {}
 
-  async selectBooks(): Promise<Book[]> {
-    return this.prisma.book.findMany();
+  async selectBooks(): Promise<any> {
+    return this.prisma.book.findMany({
+      where: {
+        state: State.ACTIVE,
+      },
+      select: {
+        id: true,
+        name: true,
+        publishedYear: true,
+        updatedAt: true,
+        category: {
+          select: {
+            name: true,
+          },
+        },
+        publisher: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   }
 
   async insertBook(createBookDto: CreateBookDto) {
