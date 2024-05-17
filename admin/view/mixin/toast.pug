@@ -9,7 +9,7 @@ mixin toast(type, id)
                else if (type == 'warning')
                     img(src='toast_warning.svg')
           div(id=`${id}-content`, class="ms-3 text-sm text-red-900 font-bold")
-          img(src='close.svg', class='w-6 cursor-pointer', onClick="hideToast()")
+          i(class="material-icons w-8 cursor-pointer", onclick="hideToast()") close
      
      script(type='text/javascript').
           const showToast = (id, message) => {
