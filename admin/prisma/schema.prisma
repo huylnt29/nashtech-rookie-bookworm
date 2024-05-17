@@ -8,21 +8,21 @@ datasource db {
 }
 
 model Book {
-  id            Int       @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   imageUrls     String[]
   name          String
   description   String?
   publishedYear Int
-  publisherId   Int
-  categoryId    Int
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  state         State
+  publisherId   Int?
+  categoryId    Int?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  state         State      @default(ACTIVE)
   authors       Author[]
   reviews       Review[]
   batchs        Batch[]
-  publisher     Publisher @relation(fields: [publisherId], references: [id])
-  category      Category  @relation(fields: [categoryId], references: [id])
+  publisher     Publisher? @relation(fields: [publisherId], references: [id])
+  category      Category?  @relation(fields: [categoryId], references: [id])
 }
 
 model Publisher {
@@ -47,13 +47,13 @@ model Author {
 
 model Review {
   id        Int      @id @default(autoincrement())
-  author    String
+  author    String?
   content   String?
-  rating    Int
+  rating    Int?
   bookId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  state     State
+  state     State    @default(ACTIVE)
   book      Book     @relation(fields: [bookId], references: [id])
 }
 
@@ -65,7 +65,7 @@ model Batch {
   bookId          Int
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
-  state           State
+  state           State           @default(ACTIVE)
   book            Book            @relation(fields: [bookId], references: [id])
   promotionLists  PromotionList[]
   Price           Price[]
@@ -74,20 +74,19 @@ model Batch {
 model PromotionList {
   id        Int      @id @default(autoincrement())
   name      String
-  batchId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  batch     Batch    @relation(fields: [batchId], references: [id])
+  batch     Batch[]
 }
 
 model Price {
   id                 Int         @id @default(autoincrement())
   value              Float
-  discountPercentage Float
+  discountPercentage Float       @default(0)
   batchId            Int
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
-  state              State
+  state              State       @default(ACTIVE)
   batch              Batch       @relation(fields: [batchId], references: [id])
   OrderLine          OrderLine[]
 }
@@ -104,7 +103,7 @@ model OrderLine {
   orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  state     State
+  state     State    @default(ACTIVE)
   price     Price    @relation(fields: [priceId], references: [id])
   order     Order    @relation(fields: [orderId], references: [id])
 }
@@ -114,8 +113,8 @@ model Order {
   customerId Int
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  state      State
-  status     OrderStatus
+  state      State       @default(ACTIVE)
+  status     OrderStatus @default(PLACED)
   customer   Customer    @relation(fields: [customerId], references: [id])
   OrderLine  OrderLine[]
 }
@@ -124,9 +123,10 @@ model Customer {
   id       Int     @id @default(autoincrement())
   name     String
   phone    String
-  address  String
-  city     String
-  district String
+  address  String?
+  city     String?
+  district String?
+  state    State   @default(ACTIVE)
   Order    Order[]
 }
 
