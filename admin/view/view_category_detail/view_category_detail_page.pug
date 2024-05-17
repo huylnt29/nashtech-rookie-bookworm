@@ -10,7 +10,7 @@ block content
           div(class='h-3')
           div(class='bg-white py-3 px-8 shadow-lg shadow-slate-200 rounded-2xl')
                +row_text('id', categoryDetail.id)
-               +row_text('name', categoryDetail.name)
+               +row_text('name', categoryDetail.name, "openEditModal()")
                +row_text('created at', categoryDetail.createdAt)
                +row_text('updated at', categoryDetail.updatedAt)
           div(class='h-8')
@@ -43,4 +43,6 @@ block content
                })
                .then(() => location.reload(true))
           }
+     
+     include edit_category_modal.pug
      include ../view_category_list/delete_category_modal.pug
