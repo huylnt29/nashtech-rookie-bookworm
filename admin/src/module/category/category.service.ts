@@ -7,7 +7,7 @@ import { CreateCategoryDto } from './dto/create_category.dto';
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
 
-  async queryCategories(): Promise<Category[]> {
+  async selectCategories(): Promise<Category[]> {
     return this.prisma.category.findMany({
       include: {
         _count: {
@@ -17,7 +17,7 @@ export class CategoryService {
     });
   }
 
-  async createCategory(createCategoryDto: CreateCategoryDto) {
+  async insertCategory(createCategoryDto: CreateCategoryDto) {
     return this.prisma.category.create({
       data: {
         name: createCategoryDto.name,
@@ -32,6 +32,17 @@ export class CategoryService {
     return this.prisma.category.delete({
       where: {
         id: id,
+      },
+    });
+  }
+
+  async selectCategoryDetail(id: number) {
+    return this.prisma.category.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        books: true,
       },
     });
   }

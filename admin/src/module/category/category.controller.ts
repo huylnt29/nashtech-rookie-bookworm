@@ -19,15 +19,26 @@ export class CategoryController {
 
   @Get()
   async buildCategoryListPage(@Res() res: Response): Promise<void> {
-    const categories = await this.categoryService.queryCategories();
-    res.render('./view_category_list/view_category_list', {
+    const categories = await this.categoryService.selectCategories();
+    res.render('./view_category_list/view_category_list_page', {
       categories,
+    });
+  }
+
+  @Get(':id')
+  async buildCategoryDetailPage(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    const categoryDetail = await this.categoryService.selectCategoryDetail(id);
+    res.render('./view_category_detail/view_category_detail_page', {
+      categoryDetail,
     });
   }
 
   @Post()
   async postCategory(@Body() createCategoryDto: CreateCategoryDto) {
-    const result = this.categoryService.createCategory(createCategoryDto);
+    const result = this.categoryService.insertCategory(createCategoryDto);
     return result;
   }
 
