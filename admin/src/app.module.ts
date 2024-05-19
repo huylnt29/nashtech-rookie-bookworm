@@ -7,6 +7,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthMiddleware } from './core/auth/auth.middleware';
 import { ConfigModule } from '@nestjs/config';
+import { LoggerMiddleware } from './core/logger/logger.middleware';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { ConfigModule } from '@nestjs/config';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware, AuthMiddleware).forRoutes('*');
   }
 }
