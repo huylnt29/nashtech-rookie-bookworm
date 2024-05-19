@@ -6,8 +6,7 @@ export class AppController {
   constructor() {}
 
   @Get()
-  getHello(@Req() req: Request, @Res() res: Response): void {
-    if (req.user) res.redirect('/book');
-    else res.redirect(process.env.AWS_COGNITO_DOMAIN);
+  accessInitialRoute(@Req() req: Request, @Res() res: Response): void {
+    res.redirect('/book');
   }
 }
