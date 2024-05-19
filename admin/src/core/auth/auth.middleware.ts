@@ -11,14 +11,22 @@ export class AuthMiddleware implements NestMiddleware {
     });
   }
   use(req: Request, res: Response, next: NextFunction) {
-    if (!req.cookies) res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE);
+    if (!req.cookies || !req.cookies['id_token'])
+      res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE);
     else {
-      const payload = this.awsCognitoVerifier.verify(req.cookies['id-token']);
-      if (!payload) res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE);
-      else {
-        req.user = payload;
-        next();
-      }
+      const verifyPromise = new Promise((onResolve, onReject) => {
+        const payload = this.awsCognitoVerifier.verify(req.cookies['id_token']);
+        onResolve(payload);
+        onReject();
+      });
+      verifyPromise.then(
+        (payload) => {
+          console.log(payload);
+          req.user = payload;
+          next();
+        },
+        () => res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE),
+      );
     }
   }
 }

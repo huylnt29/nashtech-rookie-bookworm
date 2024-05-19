@@ -11,26 +11,22 @@ export class AuthService {
     const clientSecretBasic = btoa(
       `${process.env.AWS_COGNITO_CLIENT_ID}:${process.env.AWS_COGNITO_CLIENT_SECRET}`,
     );
-    try {
-      const response = await this.httpService.axiosRef.post(
-        `${process.env.AWS_COGNITO_DOMAIN}/oauth2/token`,
-        {
-          grant_type: 'authorization_code',
-          client_id: process.env.AWS_COGNITO_CLIENT_ID,
-          client_secret: process.env.AWS_COGNITO_CLIENT_SECRET,
-          code: authorizationCodeGrant,
-          redirect_uri: 'http://localhost:3000/auth/token-exchange',
+    const response = await this.httpService.axiosRef.post(
+      `${process.env.AWS_COGNITO_DOMAIN}/oauth2/token`,
+      {
+        grant_type: 'authorization_code',
+        client_id: process.env.AWS_COGNITO_CLIENT_ID,
+        client_secret: process.env.AWS_COGNITO_CLIENT_SECRET,
+        code: authorizationCodeGrant,
+        redirect_uri: 'http://localhost:3000/auth/token-exchange',
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          // Authorization: `Basic ${clientSecretBasic}`,
         },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            // Authorization: `Basic ${clientSecretBasic}`,
-          },
-        },
-      );
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+      },
+    );
+    return response.data;
   }
 }

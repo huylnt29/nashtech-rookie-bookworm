@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Req, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -9,11 +9,15 @@ export class AuthController {
   @Get('token-exchange')
   async exchangeTokens(
     @Query('code') authorizationCodeGrant: String,
-    @Res() res: Response,
+    @Res({ passthrough: true }) response: Response,
   ): Promise<void> {
     const tokens = await this.authService.getAmazonCognitoTokens(
       authorizationCodeGrant,
     );
-    console.log(tokens);
+    response.cookie('id_token', `${tokens['id_token']}`, {
+      httpOnly: true,
+      maxAge: 60_000,
+    });
+    response.redirect('/');
   }
 }
