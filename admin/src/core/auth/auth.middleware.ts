@@ -6,15 +6,15 @@ export class AuthMiddleware implements NestMiddleware {
   constructor(private awsCognitoVerifier: any) {
     this.awsCognitoVerifier = JwtRsaVerifier.create({
       issuer: process.env.AWS_COGNITO_AUTHORITY,
-      audience: process.env.AWS_COGNITO_COGNITO_CLIENT_ID,
+      audience: process.env.AWS_COGNITO_CLIENT_ID,
       jwksUri: process.env.AWS_COGNITO_AUTHORITY + '/.well-known/jwks.json',
     });
   }
   use(req: Request, res: Response, next: NextFunction) {
-    if (!req.cookies) res.redirect(process.env.AWS_COGNITO_DOMAIN);
+    if (!req.cookies) res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE);
     else {
       const payload = this.awsCognitoVerifier.verify(req.cookies['id-token']);
-      if (!payload) res.redirect(process.env.AWS_COGNITO_DOMAIN);
+      if (!payload) res.redirect(process.env.AWS_COGNITO_LOG_IN_PAGE);
       else {
         req.user = payload;
         next();
