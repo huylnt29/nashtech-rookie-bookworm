@@ -44,5 +44,10 @@ export class CreateBookDto {
   @ApiProperty()
   @IsArray()
   @IsOptional()
-  authorIds: Array<number>;
+  authorIds: number[];
+
+  @ApiProperty()
+  @IsArray()
+  @IsOptional()
+  images: Express.Multer.File[];
 }

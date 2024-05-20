@@ -2,17 +2,21 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   Param,
   ParseIntPipe,
   Patch,
   Post,
   Res,
+  UploadedFiles,
+  UseInterceptors,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Response } from 'express';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors';
 
 @Controller('book')
 @ApiTags('BOOK')
@@ -40,9 +44,15 @@ export class BookController {
   }
 
   @Post()
-  async postBook(@Body() createBookDto: CreateBookDto): Promise<any> {
-    const result = this.bookService.insertBook(createBookDto);
-    return result;
+  @Header('Content-Type', 'multipart/form-data')
+  @UseInterceptors(FilesInterceptor('images', 5))
+  async postBook(
+    @UploadedFiles() images: Array<Express.Multer.File>,
+    @Body() createBookDto: CreateBookDto,
+  ): Promise<any> {
+    images.forEach((image) => console.log(image.originalname));
+    // const result = this.bookService.insertBook(createBookDto);
+    // return result;
   }
 
   @Patch(':id')
