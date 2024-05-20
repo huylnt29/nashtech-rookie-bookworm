@@ -50,9 +50,7 @@ export class BookController {
     @UploadedFiles() images: Array<Express.Multer.File>,
     @Body() createBookDto: CreateBookDto,
   ): Promise<any> {
-    images.forEach((image) => console.log(image.originalname));
-    // const result = this.bookService.insertBook(createBookDto);
-    // return result;
+    return this.bookService.insertBook(images, createBookDto);
   }
 
   @Patch(':id')

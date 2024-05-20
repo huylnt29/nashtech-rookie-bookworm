@@ -25,11 +25,11 @@ export class CreateBookDto {
   @IsOptional()
   description: string;
 
-  @ApiProperty()
-  @IsNumber()
-  @Min(1800)
-  @Max(2024)
-  publishedYear: number;
+  // @ApiProperty()
+  // @IsNumber()
+  // @Min(1800)
+  // @Max(2024)
+  // publishedYear: number;
 
   @ApiProperty()
   @IsNumber()
