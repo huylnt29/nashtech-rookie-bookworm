@@ -1,6 +1,8 @@
 include mixin/announcement.pug
 include mixin/toast.pug
 include mixin/row_text.pug
+include mixin/primary_button.pug
+//- include mixin/dropdown.pug 
 
 doctype html
 html
@@ -43,7 +45,17 @@ html
                          p(class='') About
                     div(class="grow")
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         i(class="material-icons w-8") account_circle
-                         p(class='font-bold') Huy Le Nguyen Truong
+                         img(id="shortcut-profile-picture" class="w-12 h-12 rounded-full")
+                         p(id="shortcut-profile-fullname" class='font-bold max-w-36')
                div(class="pt-6 pl-6 pr-6 grow bg-slate-50 overflow-y-auto")
                     block content
+          script(type='text/javascript').
+               const cookiesArray = document.cookie.split(";").map((cookie) => cookie.trim());
+               const cookieMap = {};
+               for (const cookie of cookiesArray) {
+                    const [name, value] = cookie.split("=");
+                    cookieMap[name] = value;
+               }
+               let user = JSON.parse(decodeURIComponent(cookieMap["user"]))
+               u("#shortcut-profile-picture").nodes[0].src = user.picture
+               u("#shortcut-profile-fullname").html(user.name)

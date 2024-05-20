@@ -9,7 +9,7 @@ block content
      div
           div(class='flex justify-between items-center')
                p(class='font-bold text-xl text-slate-900') BOOK
-               button(class='bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-xl', onclick='openCreateModal()') Create
+               +primary_button("Create", "openCreateModal()", "slate")
           div(class='h-4')
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                if books.length > 0
