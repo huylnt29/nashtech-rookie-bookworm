@@ -14,9 +14,15 @@ export class AuthController {
     const tokens = await this.authService.getAmazonCognitoTokens(
       authorizationCodeGrant,
     );
-    response.cookie('access_token', `${tokens['access_token']}`, {
+    response.cookie('access_token', tokens['access_token'], {
       httpOnly: true,
     });
+
+    const user = await this.authService.getUserInfo(tokens['access_token']);
+    response.cookie('user', JSON.stringify(user), {
+      maxAge: 86400 * 90,
+    });
+
     response.redirect('/');
   }
 }

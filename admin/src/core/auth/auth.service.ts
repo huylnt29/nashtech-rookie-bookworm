@@ -1,6 +1,10 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
+import {
+  CognitoIdentityProviderClient,
+  AdminGetUserCommand,
+} from '@aws-sdk/client-cognito-identity-provider';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +24,19 @@ export class AuthService {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      },
+    );
+    return response.data;
+  }
+
+  async getUserInfo(accessToken: String): Promise<any> {
+    const response = await this.httpService.axiosRef.post(
+      `${process.env.AWS_COGNITO_DOMAIN}/oauth2/userInfo`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
