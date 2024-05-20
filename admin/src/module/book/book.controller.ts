@@ -27,6 +27,18 @@ export class BookController {
     });
   }
 
+  @Get('new')
+  async buildCreateBookPage(@Res() res: Response): Promise<void> {
+    const categories = await this.bookService.selectCategories();
+    const authors = await this.bookService.selectAuthors();
+    const publishers = await this.bookService.selectPublishers();
+    res.render('./create_book/create_book_page', {
+      categories,
+      authors,
+      publishers,
+    });
+  }
+
   @Post()
   async postBook(@Body() createBookDto: CreateBookDto): Promise<any> {
     const result = this.bookService.insertBook(createBookDto);

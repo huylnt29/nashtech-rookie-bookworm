@@ -6,10 +6,13 @@ block content
           const navigateToDetailPage = (id) => {
                location.href = `/book/${id}`
           }
+          const navigateToCreatePage = () => {
+               location.href = '/book/new'
+          }
      div
           div(class='flex justify-between items-center')
                p(class='font-bold text-xl text-slate-900') BOOK
-               +primary_button("Create", "openCreateModal()", "slate")
+               +primary_button("Create", "navigateToCreatePage()", "slate")
           div(class='h-4')
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                if books.length > 0
@@ -37,6 +40,5 @@ block content
                else 
                     +announcement('illustration_no_data.svg', 'You have not created any book')
 
-     include create_book_modal.pug
      include delete_book_modal.pug
           
