@@ -8,9 +8,6 @@ export class AuthService {
   async getAmazonCognitoTokens(
     authorizationCodeGrant: String,
   ): Promise<AxiosResponse<any>> {
-    const clientSecretBasic = btoa(
-      `${process.env.AWS_COGNITO_CLIENT_ID}:${process.env.AWS_COGNITO_CLIENT_SECRET}`,
-    );
     const response = await this.httpService.axiosRef.post(
       `${process.env.AWS_COGNITO_DOMAIN}/oauth2/token`,
       {
@@ -23,7 +20,6 @@ export class AuthService {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          // Authorization: `Basic ${clientSecretBasic}`,
         },
       },
     );

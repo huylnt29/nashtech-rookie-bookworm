@@ -14,9 +14,8 @@ export class AuthController {
     const tokens = await this.authService.getAmazonCognitoTokens(
       authorizationCodeGrant,
     );
-    response.cookie('id_token', `${tokens['id_token']}`, {
+    response.cookie('access_token', `${tokens['access_token']}`, {
       httpOnly: true,
-      maxAge: 60_000,
     });
     response.redirect('/');
   }
