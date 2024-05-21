@@ -20,9 +20,7 @@ export class CategoryService {
 
   async insertCategory(createCategoryDto: CreateCategoryDto) {
     return this.prisma.category.create({
-      data: {
-        name: createCategoryDto.name,
-      },
+      data: createCategoryDto,
       select: {
         id: true,
       },

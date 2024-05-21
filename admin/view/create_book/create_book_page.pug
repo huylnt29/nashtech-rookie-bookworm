@@ -1,0 +1,12 @@
+extends ../global_layout.pug
+
+block content
+     div
+          div(class='flex justify-between items-center')
+               p(class='font-bold text-xl text-slate-900') CREATE BOOK
+               +primary_button("Submit", "", "slate")
+          div.flex.justify-start.items-start.gap-24.my-4
+               div(class='w-3/10')
+                    include upload_images_area.pug
+               div(class='w-max grow')
+                    include create_book_form.pug

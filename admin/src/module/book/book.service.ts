@@ -47,11 +47,7 @@ export class BookService {
     }
     return this.prisma.book.create({
       data: {
-        name: createBookDto.name,
-        description: createBookDto.description,
-        publishedYear: 2024,
-        publisherId: createBookDto.publisherId,
-        categoryId: createBookDto.categoryId,
+        ...createBookDto,
         authors: {
           connect: createBookDto.authorIds?.map((e) => ({
             id: e,
