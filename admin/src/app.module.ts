@@ -15,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
 import { LoggerMiddleware } from './core/logger/logger.middleware';
 import { AuthModule } from './core/auth/auth.module';
 import { PublisherModule } from './module/publisher/publisher.module';
+import { AuthorModule } from './module/author/author.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PublisherModule } from './module/publisher/publisher.module';
     BookModule,
     CategoryModule,
     PublisherModule,
+    AuthorModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
