@@ -4,12 +4,14 @@ block content
      div
           div(class='flex justify-between items-center')
                p(class='font-bold text-xl text-slate-900') CREATE BOOK
-               +primary_button("Submit", "", "slate")
+               +primary_button("Submit", "submitCreateBook()", "slate")
           div.flex.justify-start.items-start.gap-12.my-4.mb-12
                div(class='w-96')
                     include upload_images_area.pug
                div(class='grow')
                     include create_book_form.pug
+                    
+     +toast('danger', 'create-book-toast')
 
      script(type='text/javascript').
           const imageFiles = []
@@ -35,3 +37,30 @@ block content
      
                imagesArea.children[0].style.display = "none"
           })
+
+          const submitCreateBook = () => {
+               const name = u('#name').nodes[0].value;
+               const description = u('#description').nodes[0].value;
+               const publishedYear = parseInt(u('#publishedYear').nodes[0].value)
+               const categoryId = parseInt(u('#category').nodes[0].value)
+               const publisherId = parseInt(u('#publisher').nodes[0].value)
+               const authorIds = Array.from(u('#authors').nodes[0].options).filter(e => e.selected).map(e => parseInt(e.value))
+
+               const formData = new FormData();
+               imageFiles.forEach(file => formData.append('images', file))
+             
+               formData.append('name', name)
+               formData.append('publishedYear', publishedYear)
+               formData.append('description', description)
+               formData.append('categoryId', categoryId)
+               formData.append('publisherId', publisherId)
+               authorIds.forEach(authorId => formData.append('authorIds', authorId))
+               
+               axios.post('/book', formData, {
+                    headers: {
+                         'Content-Type': 'multipart/form-data',
+                    },
+               })
+               .then(() => location.href='/book')
+               .catch((error) => showToast('#create-book-toast', error.response.data.message.toString()));
+          }

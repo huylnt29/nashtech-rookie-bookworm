@@ -1,8 +1,6 @@
 import { Injectable, OnModuleInit, Req, Res } from '@nestjs/common';
 import { S3 } from 'aws-sdk';
 
-import { v4 as uuidv4 } from 'uuid';
-
 @Injectable()
 export class S3Service implements OnModuleInit {
   constructor() {}
@@ -17,7 +15,7 @@ export class S3Service implements OnModuleInit {
   async uploadImage(file: Express.Multer.File) {
     const uploadParams = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `books/${uuidv4()}-${file.originalname}`,
+      Key: `books/${new Date().toISOString()}-${file.originalname}}`,
       Body: file.buffer,
     };
 
