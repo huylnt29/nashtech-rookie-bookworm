@@ -72,31 +72,4 @@ export class BookService {
       },
     });
   }
-
-  async selectAuthors(): Promise<any> {
-    return this.prisma.author.findMany({
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-  }
-
-  async selectCategories(): Promise<any> {
-    return this.prisma.category.findMany({
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-  }
-
-  async selectPublishers(): Promise<any> {
-    return this.prisma.publisher.findMany({
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-  }
 }

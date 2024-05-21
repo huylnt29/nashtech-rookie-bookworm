@@ -7,5 +7,6 @@ import { PublisherController } from './publisher.controller';
   imports: [PrismaModule],
   controllers: [PublisherController],
   providers: [PublisherService],
+  exports: [PublisherService],
 })
 export class PublisherModule {}

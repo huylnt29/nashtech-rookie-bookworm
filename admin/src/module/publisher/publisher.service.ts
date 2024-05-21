@@ -63,4 +63,13 @@ export class PublisherService {
       },
     });
   }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.publisher.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }

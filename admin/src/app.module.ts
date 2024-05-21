@@ -21,10 +21,10 @@ import { AuthorModule } from './module/author/author.module';
   imports: [
     ConfigModule,
     AuthModule,
-    BookModule,
     CategoryModule,
     PublisherModule,
     AuthorModule,
+    BookModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],

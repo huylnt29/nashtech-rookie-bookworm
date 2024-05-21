@@ -63,4 +63,13 @@ export class AuthorService {
       },
     });
   }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.author.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }

@@ -8,7 +8,7 @@ import { UpdateCategoryDto } from './dto/update_category.dto';
 export class CategoryService {
   constructor(private prisma: PrismaService) {}
 
-  async selectCategories(): Promise<Category[]> {
+  async selectMany(): Promise<Category[]> {
     return this.prisma.category.findMany({
       include: {
         _count: {
@@ -18,7 +18,7 @@ export class CategoryService {
     });
   }
 
-  async insertCategory(createCategoryDto: CreateCategoryDto) {
+  async insert(createCategoryDto: CreateCategoryDto) {
     return this.prisma.category.create({
       data: createCategoryDto,
       select: {
@@ -27,7 +27,7 @@ export class CategoryService {
     });
   }
 
-  async deleteCategory(id: number) {
+  async delete(id: number) {
     return this.prisma.category.delete({
       where: {
         id: id,
@@ -35,7 +35,7 @@ export class CategoryService {
     });
   }
 
-  async selectCategoryDetail(id: number) {
+  async selectOne(id: number) {
     return this.prisma.category.findFirst({
       where: {
         id: id,
@@ -52,7 +52,7 @@ export class CategoryService {
     });
   }
 
-  async updateCategory(id: number, updateCategoryDto: UpdateCategoryDto) {
+  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     return this.prisma.category.update({
       where: {
         id: id,
@@ -60,6 +60,15 @@ export class CategoryService {
       data: {
         ...updateCategoryDto,
         id: undefined,
+      },
+    });
+  }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.category.findMany({
+      select: {
+        id: true,
+        name: true,
       },
     });
   }

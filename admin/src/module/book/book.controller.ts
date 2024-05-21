@@ -17,11 +17,19 @@ import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors';
+import { AuthorService } from '../author/author.service';
+import { PublisherService } from '../publisher/publisher.service';
+import { CategoryService } from '../category/category.service';
 
 @Controller('book')
 @ApiTags('BOOK')
 export class BookController {
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private categoryService: CategoryService,
+    private publisherService: PublisherService,
+    private authorService: AuthorService,
+  ) {}
 
   @Get()
   async buildBookListPage(@Res() res: Response): Promise<void> {
@@ -33,10 +41,10 @@ export class BookController {
 
   @Get('new')
   async buildCreateBookPage(@Res() res: Response): Promise<void> {
-    const categories = await this.bookService.selectCategories();
-    const authors = await this.bookService.selectAuthors();
-    const publishers = await this.bookService.selectPublishers();
-    res.render('./create_book/create_book_page', {
+    const categories = await this.categoryService.selectManySimple();
+    const authors = await this.authorService.selectManySimple();
+    const publishers = await this.publisherService.selectManySimple();
+    return res.render('./create_book/create_book_page', {
       categories,
       authors,
       publishers,
