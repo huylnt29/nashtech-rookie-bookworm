@@ -5,8 +5,33 @@ block content
           div(class='flex justify-between items-center')
                p(class='font-bold text-xl text-slate-900') CREATE BOOK
                +primary_button("Submit", "", "slate")
-          div.flex.justify-start.items-start.gap-24.my-4
-               div(class='w-3/10')
+          div.flex.justify-start.items-start.gap-12.my-4.mb-12
+               div(class='w-96')
                     include upload_images_area.pug
-               div(class='w-max grow')
+               div(class='grow')
                     include create_book_form.pug
+
+     script(type='text/javascript').
+          const imageFiles = []
+          const uploadFileInput = u("#upload-file").nodes[0]
+          const imagesArea = u("#images-area").nodes[0]
+          const imageGrid = u("#image-grid").nodes[0]
+
+          const openFileUploader = () => {
+              uploadFileInput.click()
+          }
+
+          uploadFileInput.addEventListener("change", (event) => {
+               const files = event.target.files
+               for (let i = 0; i < files.length; i ++) {
+                    const file = files.item(i)
+                    imageFiles.push(file)
+                    const img = u('<img>').attr({ 
+                         src: URL.createObjectURL(file),
+                         class: "rounded-lg"
+                    })
+                    imageGrid.append(img.nodes[0])
+               }
+     
+               imagesArea.children[0].style.display = "none"
+          })

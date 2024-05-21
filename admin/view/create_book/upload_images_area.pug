@@ -1,10 +1,8 @@
-- var images = []
-
 div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl flex flex-col gap-8')
-     if (images.length == 0)
+     div#images-area
           +announcement('/illustration_no_data.svg', 'You have not uploaded any images')
-     else 
-          p OK! 
-     +primary_button("Upload multiple images", "", "slate")
-
+          div#image-grid.grid.grid-cols-3.gap-4
+     input(type="file", multiple="")#upload-file.hidden
+     +primary_button("Upload multiple images", "openFileUploader()", "slate")
+          
      
