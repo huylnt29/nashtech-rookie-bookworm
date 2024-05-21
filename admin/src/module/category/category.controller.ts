@@ -23,7 +23,7 @@ export class CategoryController {
 
   @Get()
   async buildCategoryListPage(@Res() res: Response): Promise<void> {
-    const categories = await this.categoryService.selectCategories();
+    const categories = await this.categoryService.selectMany();
     res.render('./view_category_list/view_category_list_page', {
       categories,
     });
@@ -34,7 +34,7 @@ export class CategoryController {
     @Param('id', ParseIntPipe) id: number,
     @Res() res: Response,
   ): Promise<void> {
-    const categoryDetail = await this.categoryService.selectCategoryDetail(id);
+    const categoryDetail = await this.categoryService.selectOne(id);
     res.render('./view_category_detail/view_category_detail_page', {
       categoryDetail,
     });
@@ -42,7 +42,7 @@ export class CategoryController {
 
   @Post()
   async postCategory(@Body() createCategoryDto: CreateCategoryDto) {
-    const result = this.categoryService.insertCategory(createCategoryDto);
+    const result = this.categoryService.insert(createCategoryDto);
     return result;
   }
 
@@ -52,7 +52,7 @@ export class CategoryController {
     @Res() res: Response,
   ) {
     try {
-      await this.categoryService.deleteCategory(id);
+      await this.categoryService.delete(id);
       return res.status(HttpStatus.OK).json({
         message: 'The category has been deleted successfully',
       });
@@ -68,6 +68,6 @@ export class CategoryController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ): Promise<any> {
-    return this.categoryService.updateCategory(id, updateCategoryDto);
+    return this.categoryService.update(id, updateCategoryDto);
   }
 }

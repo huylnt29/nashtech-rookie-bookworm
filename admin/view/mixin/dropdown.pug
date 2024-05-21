@@ -1,0 +1,14 @@
+
+mixin dropdown(id, type, options)
+     div.max-w-sm.relative
+          if (type == "multiple")
+               select(id=id, name=id, multiple="", class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full h-fit max-h-56 p-2.5 pr-12 appearance-none") 
+                    each option in options 
+                         option(value=option.id)= option.name
+              
+          else 
+               select(id=id, name=id class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5 pr-12 appearance-none") 
+                    option(selected) Select one 
+                    each option in options 
+                         option(value=option.id)= option.name
+               div.absolute.top-4.right-3.h-3.w-3.bg-slate-500.rounded-full

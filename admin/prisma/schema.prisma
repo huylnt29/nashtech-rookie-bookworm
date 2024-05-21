@@ -45,67 +45,30 @@ model Author {
   books Book[]
 }
 
-model Review {
-  id        Int      @id @default(autoincrement())
-  author    String?
-  content   String?
-  rating    Int?
-  bookId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  state     State    @default(ACTIVE)
-  book      Book     @relation(fields: [bookId], references: [id])
-}
-
 model Batch {
-  id              Int             @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
   initialQuantity Int
-  soldQuantity    Int             @default(0)
+  soldQuantity    Int        @default(0)
   originalPrice   Float
+  price           Float
   bookId          Int
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  state           State           @default(ACTIVE)
-  book            Book            @relation(fields: [bookId], references: [id])
-  promotionLists  PromotionList[]
-  Price           Price[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  state           State      @default(ACTIVE)
+  book            Book       @relation(fields: [bookId], references: [id])
+  discounts       Discount[]
 }
 
-model PromotionList {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  batch     Batch[]
-}
-
-model Price {
-  id                 Int         @id @default(autoincrement())
-  value              Float
-  discountPercentage Float       @default(0)
-  batchId            Int
-  createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @updatedAt
-  state              State       @default(ACTIVE)
-  batch              Batch       @relation(fields: [batchId], references: [id])
-  OrderLine          OrderLine[]
-}
-
-enum State {
-  ACTIVE
-  INACTIVE
-}
-
-model OrderLine {
-  id        Int      @id @default(autoincrement())
-  quantity  Int
-  priceId   Int
-  orderId   Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  state     State    @default(ACTIVE)
-  price     Price    @relation(fields: [priceId], references: [id])
-  order     Order    @relation(fields: [orderId], references: [id])
+model Discount {
+  id          Int      @id @default(autoincrement())
+  minQuantity Int
+  maxQuantity Int
+  percentage  Decimal  @db.Decimal(3, 2)
+  startAt     DateTime
+  endAt       DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  batchs      Batch[]
 }
 
 model Order {
@@ -121,6 +84,18 @@ model Order {
   OrderLine     OrderLine[]
 }
 
+model OrderLine {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  price     Float
+  orderId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  state     State    @default(ACTIVE)
+
+  order Order @relation(fields: [orderId], references: [id])
+}
+
 model Customer {
   id       Int     @id @default(autoincrement())
   name     String
@@ -132,9 +107,26 @@ model Customer {
   Order    Order[]
 }
 
+model Review {
+  id        Int      @id @default(autoincrement())
+  author    String?
+  content   String?
+  rating    Int?
+  bookId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  state     State    @default(ACTIVE)
+  book      Book     @relation(fields: [bookId], references: [id])
+}
+
 enum OrderStatus {
   PLACED
   PROCESSED
   COMPLETED
   CANCELLED
+}
+
+enum State {
+  ACTIVE
+  INACTIVE
 }

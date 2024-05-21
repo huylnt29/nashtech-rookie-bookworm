@@ -6,7 +6,7 @@ export class AppController {
   constructor() {}
 
   @Get()
-  accessInitialRoute(@Req() req: Request, @Res() res: Response): void {
+  getHomePage(@Req() req: Request, @Res() res: Response): void {
     res.redirect('/book');
   }
 }

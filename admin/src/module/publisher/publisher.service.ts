@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { Category } from '@prisma/client';
-import { CreateCategoryDto } from './dto/create_category.dto';
-import { UpdateCategoryDto } from './dto/update_category.dto';
+import { Publisher } from '@prisma/client';
+import { CreatePublisherDto } from './dto/create_publisher.dto';
+import { UpdatePublisherDto } from './dto/update_publisher.dto';
 
 @Injectable()
-export class CategoryService {
+export class PublisherService {
   constructor(private prisma: PrismaService) {}
 
-  async selectMany(): Promise<Category[]> {
-    return this.prisma.category.findMany({
+  async selectMany(): Promise<Publisher[]> {
+    return this.prisma.publisher.findMany({
       include: {
         _count: {
           select: { books: true },
@@ -18,9 +18,9 @@ export class CategoryService {
     });
   }
 
-  async insert(createCategoryDto: CreateCategoryDto) {
-    return this.prisma.category.create({
-      data: createCategoryDto,
+  async insert(createDto: CreatePublisherDto) {
+    return this.prisma.publisher.create({
+      data: createDto,
       select: {
         id: true,
       },
@@ -28,15 +28,15 @@ export class CategoryService {
   }
 
   async delete(id: number) {
-    return this.prisma.category.delete({
+    return this.prisma.publisher.delete({
       where: {
         id: id,
       },
     });
   }
 
-  async selectOne(id: number) {
-    return this.prisma.category.findFirst({
+  async selectDetail(id: number) {
+    return this.prisma.publisher.findFirst({
       where: {
         id: id,
       },
@@ -52,20 +52,20 @@ export class CategoryService {
     });
   }
 
-  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return this.prisma.category.update({
+  async update(id: number, updateDto: UpdatePublisherDto) {
+    return this.prisma.publisher.update({
       where: {
         id: id,
       },
       data: {
-        ...updateCategoryDto,
+        ...updateDto,
         id: undefined,
       },
     });
   }
 
   async selectManySimple(): Promise<any> {
-    return this.prisma.category.findMany({
+    return this.prisma.publisher.findMany({
       select: {
         id: true,
         name: true,

@@ -26,23 +26,23 @@ export class CreateBookDto {
   description: string;
 
   @ApiProperty()
-  @IsNumber()
-  @Min(1800)
-  @Max(2024)
+  @IsOptional()
   publishedYear: number;
 
   @ApiProperty()
-  @IsNumber()
   @IsOptional()
   publisherId: number;
 
   @ApiProperty()
-  @IsNumber()
   @IsOptional()
   categoryId: number;
 
   @ApiProperty()
+  @IsOptional()
+  authorIds: number[];
+
+  @ApiProperty()
   @IsArray()
   @IsOptional()
-  authorIds: Array<number>;
+  images: Express.Multer.File[];
 }

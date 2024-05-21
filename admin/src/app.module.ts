@@ -14,13 +14,17 @@ import { AuthMiddleware } from './core/auth/auth.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerMiddleware } from './core/logger/logger.middleware';
 import { AuthModule } from './core/auth/auth.module';
+import { PublisherModule } from './module/publisher/publisher.module';
+import { AuthorModule } from './module/author/author.module';
 
 @Module({
   imports: [
     ConfigModule,
     AuthModule,
-    BookModule,
     CategoryModule,
+    PublisherModule,
+    AuthorModule,
+    BookModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
@@ -32,6 +36,6 @@ import { AuthModule } from './core/auth/auth.module';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
-    consumer.apply(AuthMiddleware).exclude('/auth/(.*)').forRoutes('*');
+    // consumer.apply(AuthMiddleware).exclude('/auth/(.*)').forRoutes('*');
   }
 }

@@ -3,10 +3,15 @@ import { PrismaService } from 'src/core/prisma/prisma.service';
 import { Book, State } from '@prisma/client';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
+import { S3Service } from 'src/core/s3/s3.service';
+import { parse } from 'path';
 
 @Injectable()
 export class BookService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private s3: S3Service,
+  ) {}
 
   async selectBooks(): Promise<any> {
     return this.prisma.book.findMany({
@@ -32,19 +37,39 @@ export class BookService {
     });
   }
 
-  async insertBook(createBookDto: CreateBookDto) {
+  async insertBook(
+    images: Array<Express.Multer.File>,
+    createBookDto: CreateBookDto,
+  ): Promise<any> {
+    const imageUrls = [];
+    if (images) {
+      for (const image of images) {
+        let res = await this.s3.uploadImage(image);
+        imageUrls.push(res.Location);
+      }
+    }
+    let authors = [];
+    if (Array.isArray(createBookDto.authorIds)) {
+      authors = createBookDto.authorIds?.map((e) => ({
+        id: +e,
+      }));
+    } else if (parseInt(createBookDto.authorIds)) {
+      authors.push({
+        id: +createBookDto.authorIds,
+      });
+    }
+
     return this.prisma.book.create({
       data: {
         name: createBookDto.name,
         description: createBookDto.description,
-        publishedYear: createBookDto.publishedYear,
-        publisherId: createBookDto.publisherId,
-        categoryId: createBookDto.categoryId,
+        publishedYear: +createBookDto.publishedYear,
+        publisherId: +createBookDto.publisherId,
+        categoryId: +createBookDto.categoryId,
         authors: {
-          connect: createBookDto.authorIds.map((e) => ({
-            id: e,
-          })),
+          connect: authors,
         },
+        imageUrls: imageUrls,
       },
       select: {
         id: true,
