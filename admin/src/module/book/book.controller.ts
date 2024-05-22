@@ -147,4 +147,22 @@ export class BookController {
   ) {
     return this.bookService.addImage(id, image);
   }
+
+  @Delete(':id/image')
+  async deleteImage(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('imageUrl') imageUrl: string,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.bookService.deleteImage(id, imageUrl);
+      return res.status(HttpStatus.OK).json({
+        message: 'The image has been deleted successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'It fails to delete the image',
+      });
+    }
+  }
 }

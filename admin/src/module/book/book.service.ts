@@ -163,4 +163,25 @@ export class BookService {
       },
     });
   }
+
+  async deleteImage(id: number, imageUrl: string) {
+    let { imageUrls } = await this.prisma.book.findFirst({
+      where: {
+        id: id,
+      },
+      select: {
+        imageUrls: true,
+      },
+    });
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        imageUrls: {
+          set: imageUrls.filter((e) => e !== imageUrl),
+        },
+      },
+    });
+  }
 }
