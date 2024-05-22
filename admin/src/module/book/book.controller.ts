@@ -69,8 +69,11 @@ export class BookController {
     @Res() res: Response,
   ): Promise<any> {
     const book = await this.bookService.selectOne(id);
+    const otherAuthors =
+      await this.authorService.selectManyNotAssociateBook(id);
     res.render('./view_book_detail/view_book_detail_page', {
       book,
+      otherAuthors,
     });
   }
 
@@ -115,5 +118,13 @@ export class BookController {
         message: 'It fails to remove the author',
       });
     }
+  }
+
+  @Patch(':id/author/:authorId')
+  async addAuthor(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('authorId', ParseIntPipe) authorId: number,
+  ) {
+    return this.bookService.associateAuthor(id, authorId);
   }
 }

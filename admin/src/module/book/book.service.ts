@@ -127,4 +127,23 @@ export class BookService {
       },
     });
   }
+
+  async associateAuthor(id: number, authorId: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        authors: {
+          connect: {
+            id: authorId,
+          },
+        },
+      },
+      select: {
+        id: true,
+        authors: true,
+      },
+    });
+  }
 }
