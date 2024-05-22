@@ -101,4 +101,15 @@ export class BookService {
       },
     });
   }
+
+  async deactivate(id: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        state: State.INACTIVE,
+      },
+    });
+  }
 }

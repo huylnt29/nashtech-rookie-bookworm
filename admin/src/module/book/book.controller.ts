@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Header,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Patch,
@@ -78,5 +80,22 @@ export class BookController {
     @Body() updateBookDto: UpdateBookDto,
   ): Promise<any> {
     return this.bookService.update(id, updateBookDto);
+  }
+
+  @Delete(':id')
+  async deleteBook(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.bookService.deactivate(id);
+      return res.status(HttpStatus.OK).json({
+        message: 'The category has been deleted successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'There is no book contains the provided id',
+      });
+    }
   }
 }

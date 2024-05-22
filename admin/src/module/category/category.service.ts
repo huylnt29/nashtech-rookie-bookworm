@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { Category } from '@prisma/client';
+import { Category, State } from '@prisma/client';
 import { CreateCategoryDto } from './dto/create_category.dto';
 import { UpdateCategoryDto } from './dto/update_category.dto';
 
@@ -12,7 +12,13 @@ export class CategoryService {
     return this.prisma.category.findMany({
       include: {
         _count: {
-          select: { books: true },
+          select: {
+            books: {
+              where: {
+                state: State.ACTIVE,
+              },
+            },
+          },
         },
       },
     });

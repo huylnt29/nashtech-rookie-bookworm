@@ -6,7 +6,7 @@ block content
                div.flex
                     i(class="material-icons w-8") book_5
                     p(class='font-bold text-xl text-slate-900 uppercase') #{book.name}
-               +primary_button("Delete", "", "red")
+               +primary_button("Delete", `openDeleteModal(${book.id})`, "red")
           div.h-4
           p(class='font-bold text-lg text-gray-600 text-center') Images
           div.h-3
