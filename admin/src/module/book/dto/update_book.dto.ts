@@ -41,9 +41,4 @@ export class UpdateBookDto {
   @IsNumber()
   @IsOptional()
   categoryId: number;
-
-  @ApiProperty()
-  @IsArray()
-  @IsOptional()
-  authorIds: number[];
 }

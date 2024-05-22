@@ -97,6 +97,18 @@ export class BookService {
         category: true,
         publisher: true,
         authors: true,
+        reviews: {
+          where: {
+            state: State.ACTIVE,
+          },
+          select: {
+            id: true,
+            author: true,
+            content: true,
+            rating: true,
+            createdAt: true,
+          },
+        },
       },
     });
   }

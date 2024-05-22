@@ -50,7 +50,8 @@ mixin edit_book_modal(elementId, value)
 
                const submitEditBook = async () => {
                     let data;
-                    const value = u(`#${elementId}`).nodes[0].value
+                    let value = u(`#${elementId}`).nodes[0].value
+                    if (parseInt(value)) value = parseInt(value)
                     const id = location.href.split('/').at(-1)
                     axios.patch(`/book/${id}`, {
                          [elementId]: value
