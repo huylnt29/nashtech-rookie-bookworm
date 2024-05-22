@@ -3,11 +3,11 @@ mixin add_author_modal(authors)
           div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
                div.flex.justify-between
                     p.text-xl.font-semibold Add author 
-                    i.material-icons.w-8.cursor-pointer(onclick="closeModal()") close
+                    i.material-icons.w-8.cursor-pointer(onclick="closeAddAuthorModal()") close
                each author in authors 
                     div(
                          class='bg-white px-4 py-3 shadow-lg shadow-slate-200 rounded-2xl cursor-pointer', 
-                         onclick=`submit(${author.id})`
+                         onclick=`submitAddAuthor(${author.id})`
                     ) #{author.name}
 
      script(type="text/javascript").
@@ -15,11 +15,11 @@ mixin add_author_modal(authors)
                u("#add-author-modal").removeClass('hidden')   
           }
 
-          const closeModal = () => {
+          const closeAddAuthorModal = () => {
                u("#add-author-modal").addClass('hidden');   
           }
 
-          const submit = async (authorId) => {
+          const submitAddAuthor = async (authorId) => {
                const id = location.href.split('/').at(-1)
                axios.patch(`/book/${id}/author/${authorId}`)
                .then(() => location.reload(true))
