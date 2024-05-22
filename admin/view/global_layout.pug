@@ -15,19 +15,20 @@ html
      script(src="https://cdn.jsdelivr.net/npm/umbrellajs")
      script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
      link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
-     body(class='overflow-y-hidden text-slate-900 text-base')
-          div(class='flex h-screen')
+
+     body.overflow-y-hidden.text-slate-900.text-base
+          div.flex.h-screen
                aside(class='flex flex-col bg-slate-900 p-4 gap-1')
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         img(src='http://localhost:3000/logo.png', class='w-8')
-                         p(class='font-bold') BookWorm Admin
-                    div(class='h-2')
-                    div(id='sidebar-book', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         img(src='/logo.png', class='w-8')
+                         p.font-bold BookWorm Admin
+                    div.h-2
+                    a(href='/book', id='sidebar-book', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          i(class="material-icons w-8") menu_book
-                         p(class='') Book
-                    div(id='sidebar-category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         p Book
+                    a(href='/category', id='sidebar-category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          i(class="material-icons w-8") category
-                         p(class='') Category
+                         p Category
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          i(class="material-icons w-8") batch_prediction
                          p(class='') Batch
@@ -43,12 +44,13 @@ html
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          i(class="material-icons w-8") info
                          p(class='') About
-                    div(class="grow")
+                    div.grow
                     div(class='flex gap-4 text-gray-50 p-4 items-center')
                          img(id="shortcut-profile-picture" class="w-12 h-12 rounded-full")
                          p(id="shortcut-profile-fullname" class='font-bold max-w-36')
                div(class="pt-6 pl-6 pr-6 grow bg-slate-50 overflow-y-auto")
                     block content
+
           script(type='text/javascript').
                const cookiesArray = document.cookie.split(";").map((cookie) => cookie.trim());
                const cookieMap = {};
