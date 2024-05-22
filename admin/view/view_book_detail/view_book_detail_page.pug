@@ -52,13 +52,18 @@ block content
                     +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
 
           div.h-8
-          p(class='font-bold text-lg text-gray-600 text-center') Description
+          div.flex 
+               div.grow
+               p(class='font-bold text-lg text-gray-600 text-center') Description
+               div.grow
+               +secondary_button("Edit", `openEditModal("description")`, "orange")
           div.h-3
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                p(class='text-slate-900 whitespace-pre-wrap') #{book.description}
           div.h-24
 
           +edit_book_modal("name", book.name)
+          +edit_book_modal("description", book.description)
 
      script(type='text/javascript').
           const removeBook = (id) => {
