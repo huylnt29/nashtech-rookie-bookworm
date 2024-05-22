@@ -20,37 +20,51 @@ html
 
      body.overflow-y-hidden.text-slate-900.text-base
           div.flex.h-screen
-               aside(class='flex flex-col bg-slate-900 p-4 gap-1')
-                    div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         img(src='/logo.png', class='w-8')
+               aside.flex.flex-col.bg-slate-900.p-4.gap-1.overflow-y-auto(class='w-1/6')
+                    div.flex.gap-4.text-gray-50.p-4.items-center
+                         img(src='/logo.png').w-8
                          p.font-bold BookWorm Admin
                     div.h-2
-                    a(href='/book', id='sidebar-book', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") menu_book
+
+                    p.text-white.px-4.py-2.uppercase.font-bold Information
+                    a#sidebar-book(href='/book', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 menu_book
                          p Book
-                    a(href='/category', id='sidebar-category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") category
+                    a#sidebar-category(href='/category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 category
                          p Category
+                    
+                    p.text-white.px-4.py-2.uppercase.font-bold Operation
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") batch_prediction
-                         p(class='') Batch
+                         i.material-icons.w-8 batch_prediction
+                         p Batch
+                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 filter_frames
+                         p Order
+
+                    p.text-white.px-4.py-2.uppercase.font-bold Customer engagement
+                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 diversity_1
+                         p Customer
+                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 reviews
+                         p Review
+                    
+                    p.text-white.px-4.py-2.uppercase.font-bold Marketing
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
                          i(class="material-icons w-8") bolt
                          p(class='') Promotion List
                     div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") filter_frames
-                         p(class='') Order
-                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") diversity_1
-                         p(class='') Customer
-                    div(class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
-                         i(class="material-icons w-8") info
-                         p(class='') About
+                         i.material-icons.w-8 info
+                         p About
+
                     div.grow
-                    div(class='flex gap-4 text-gray-50 p-4 items-center')
-                         img(id="shortcut-profile-picture" class="w-12 h-12 rounded-full")
-                         p(id="shortcut-profile-fullname" class='font-bold max-w-36')
-               div(class="pt-6 pl-6 pr-6 grow bg-slate-50 overflow-y-auto")
+
+                    div.flex.gap-4.text-gray-50.p-4.items-center
+                         img#shortcut-profile-picture.w-12.h-12.rounded-full
+                         p#shortcut-profile-fullname.font-bold.max-w-36
+
+               div.pt-6.pl-6.pr-6.bg-slate-50.overflow-y-auto(class="w-5/6")
                     block content
 
           script(type='text/javascript').
