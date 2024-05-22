@@ -22,18 +22,18 @@ export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
   @Get()
-  async getPublishers() {
+  async getAuthors() {
     return this.authorService.selectMany();
   }
 
   @Post()
-  async postPublisher(@Body() createDto: CreateAuthorDto) {
+  async postAuthor(@Body() createDto: CreateAuthorDto) {
     const result = this.authorService.insert(createDto);
     return result;
   }
 
   @Delete(':id')
-  async deletePublisher(
+  async deleteAuthor(
     @Param('id', ParseIntPipe) id: number,
     @Res() res: Response,
   ) {
@@ -50,7 +50,7 @@ export class AuthorController {
   }
 
   @Patch(':id')
-  async patchPublisher(
+  async patchAuthor(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateDto: UpdateAuthorDto,
   ): Promise<any> {

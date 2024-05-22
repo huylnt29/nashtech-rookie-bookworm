@@ -44,12 +44,18 @@ block content
                          tbody.table-row-group
                               each author in book.authors
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
-                                             td(class="table-cell p-3", onclick=``) #{author.id}
-                                             td(class="table-cell", onclick=``) #{author.name}
-                                             td(class="table-cell")
-                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`removeAuthor(${author.id})`) delete
+                                             td.table-cell.p-3(onclick=``) #{author.id}
+                                             td.table-cell(onclick=``) #{author.name}
+                                             td.table-cell
+                                                  i(
+                                                       class="material-icons hidden group-hover:block w-4", 
+                                                       onclick=`removeAuthor(${author.id})`
+                                                  ) delete
                else 
-                    +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
+                    +announcement(
+                         '../illustration_no_data.svg', 
+                         'You have not associated any authors with this book'
+                    )
 
           div.h-8
           div.flex 
@@ -66,9 +72,8 @@ block content
           +edit_book_modal("description", book.description)
 
      script(type='text/javascript').
-          const removeBook = (id) => {
-               axios.patch(`/book/${id}`, {
-                    categoryId: null
-               })
-               .then(() => location.reload(true))
+          const removeAuthor = (authorId) => {
+               const id = location.href.split('/').at(-1)
+               axios.delete(`/book/${id}/author/${authorId}`)
+               .then(() => location.reload())
           }

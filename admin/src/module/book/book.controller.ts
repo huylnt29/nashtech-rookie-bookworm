@@ -90,11 +90,29 @@ export class BookController {
     try {
       await this.bookService.deactivate(id);
       return res.status(HttpStatus.OK).json({
-        message: 'The category has been deleted successfully',
+        message: 'The book has been deleted successfully',
       });
     } catch (error) {
       return res.status(HttpStatus.NOT_FOUND).json({
         message: 'There is no book contains the provided id',
+      });
+    }
+  }
+
+  @Delete(':id/author/:authorId')
+  async removeAuthor(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('authorId', ParseIntPipe) authorId: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.bookService.disassociateAuthor(id, authorId);
+      return res.status(HttpStatus.OK).json({
+        message: 'The author has been removed successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'It fails to remove the author',
       });
     }
   }

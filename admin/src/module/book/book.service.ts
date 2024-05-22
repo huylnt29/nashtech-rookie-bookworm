@@ -112,4 +112,19 @@ export class BookService {
       },
     });
   }
+
+  async disassociateAuthor(id: number, authorId: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        authors: {
+          disconnect: {
+            id: authorId,
+          },
+        },
+      },
+    });
+  }
 }
