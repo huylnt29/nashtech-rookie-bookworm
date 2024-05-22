@@ -4,7 +4,6 @@ import { Book, State } from '@prisma/client';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { S3Service } from 'src/core/s3/s3.service';
-import { parse } from 'path';
 
 @Injectable()
 export class BookService {
@@ -98,6 +97,90 @@ export class BookService {
         category: true,
         publisher: true,
         authors: true,
+      },
+    });
+  }
+
+  async deactivate(id: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        state: State.INACTIVE,
+      },
+    });
+  }
+
+  async disassociateAuthor(id: number, authorId: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        authors: {
+          disconnect: {
+            id: authorId,
+          },
+        },
+      },
+    });
+  }
+
+  async associateAuthor(id: number, authorId: number) {
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        authors: {
+          connect: {
+            id: authorId,
+          },
+        },
+      },
+      select: {
+        id: true,
+        authors: true,
+      },
+    });
+  }
+
+  async addImage(id: number, image: Express.Multer.File) {
+    let res = await this.s3.uploadImage(image);
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        imageUrls: {
+          push: res.Location,
+        },
+      },
+      select: {
+        id: true,
+        imageUrls: true,
+      },
+    });
+  }
+
+  async deleteImage(id: number, imageUrl: string) {
+    let { imageUrls } = await this.prisma.book.findFirst({
+      where: {
+        id: id,
+      },
+      select: {
+        imageUrls: true,
+      },
+    });
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        imageUrls: {
+          set: imageUrls.filter((e) => e !== imageUrl),
+        },
       },
     });
   }

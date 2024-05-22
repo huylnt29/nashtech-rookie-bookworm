@@ -1,31 +1,60 @@
-div(id="edit-book-modal", class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
-     div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
-          div(class="flex justify-between")
-               p(class="text-xl font-semibold") Edit book 
-               i(class="material-icons w-8 cursor-pointer", onclick="closeEditModal()") close
-          form(class="grid gap-4 mb-4 grid-cols-2")
-               div(class="col-span-2")
-                    label(for="name", class="block mb-2 text-sm font-medium text-slate-900") Name 
-                    input(type="text", name="name", id="name", class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", placeholder="Type category name", required)
-          div(class="flex justify-end")
-               button(id="submit-button", type="submit", class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded", onclick="submitEditCategory()") Submit
-     +toast('danger', 'edit-category-toast')
+mixin edit_book_modal(elementId, value)
+     div(id=`edit-book-${elementId}-modal`, class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
+          div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
+               div.flex.justify-between
+                    p.text-xl.font-semibold Edit book 
+                    i.material-icons.w-8.cursor-pointer(onclick="closeEditModal()") close
+               form.grid.gap-4.mb-4.grid-cols-2
+                    div.col-span-2
+                         label(
+                              for=elementId, 
+                              class="block mb-2 text-sm font-medium text-slate-900 capitalize"
+                         ) #{elementId} 
+                         if (elementId == "description")
+                              textarea(
+                                   type="text", 
+                                   name=elementId, 
+                                   id=elementId, 
+                                   class="min-h-96 bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                                   required
+                              ) #{value}
+                         else
+                              input(
+                                   type="text", 
+                                   name=elementId, 
+                                   id=elementId, 
+                                   class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                                   value=value
+                                   required
+                              )
+               div.flex.justify-end
+                    button(
+                         type="submit", 
+                         id="submit-button", 
+                         class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded", 
+                         onclick="submitEditBook()"
+                    ) Submit
 
-     script(type="text/javascript").
-          const openEditModal = () => {
-               u("#edit-category-modal").removeClass('hidden')   
-          }
+          +toast('danger', 'edit-book-toast')
 
-          const closeEditModal = () => {
-               u("#edit-category-modal").addClass('hidden');   
-          }
+          script(type="text/javascript").
+               var elementId
+               const openEditModal = (id) => {
+                    elementId = id
+                    u(`#edit-book-${elementId}-modal`).removeClass('hidden')   
+               }
 
-          const submitEditCategory = async () => {
-               const name = u("#name").nodes[0].value;
-               const id = location.href.split('/').at(-1)
-               axios.patch(`/category/${id}`, {
-                    name
-               })
-               .then(() => location.reload(true))
-               .catch((error) => showToast('#edit-category-toast', error.response.data.message.toString()));
-          }
+               const closeEditModal = () => {
+                    u(`#edit-book-${elementId}-modal`).addClass('hidden');   
+               }
+
+               const submitEditBook = async () => {
+                    let data;
+                    const value = u(`#${elementId}`).nodes[0].value
+                    const id = location.href.split('/').at(-1)
+                    axios.patch(`/book/${id}`, {
+                         [elementId]: value
+                    })
+                    .then(() => location.reload())
+                    .catch((error) => showToast('#edit-book-toast', error.response.data.message.toString()));
+               }

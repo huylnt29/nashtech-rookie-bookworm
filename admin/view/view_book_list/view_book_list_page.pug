@@ -34,9 +34,9 @@ block content
                                              td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.publishedYear}
                                              td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`)= book.publisher ? book.publisher.name : ''
                                              td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`)= book.category ? book.category.name : ''
-                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.updatedAt}
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.updatedAt.toLocaleString()}
                                              td(class="table-cell")
-                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${book.id})`) delete
+                                                  i(class="material-icons hidden group-hover:block w-4 text-slate-900", onclick=`openDeleteModal(${book.id})`) delete
                else 
                     +announcement('illustration_no_data.svg', 'You have not created any book')
 
