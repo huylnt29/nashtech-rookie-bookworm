@@ -71,9 +71,15 @@ export class BookController {
     const book = await this.bookService.selectOne(id);
     const otherAuthors =
       await this.authorService.selectManyNotAssociateBook(id);
+    const otherCategories =
+      await this.categoryService.selectManyNotAssociateBook(id);
+    const otherPublishers =
+      await this.publisherService.selectManyNotAssociateBook(id);
     res.render('./view_book_detail/view_book_detail_page', {
       book,
       otherAuthors,
+      otherCategories,
+      otherPublishers,
     });
   }
 

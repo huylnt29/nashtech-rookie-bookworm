@@ -78,4 +78,22 @@ export class CategoryService {
       },
     });
   }
+
+  async selectManyNotAssociateBook(bookId: number): Promise<any> {
+    return this.prisma.category.findMany({
+      where: {
+        books: {
+          every: {
+            id: {
+              not: bookId,
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }
