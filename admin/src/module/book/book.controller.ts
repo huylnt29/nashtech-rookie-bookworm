@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Res,
+  UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -18,7 +19,10 @@ import { Response } from 'express';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors';
+import {
+  FilesInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express/multer/interceptors';
 import { AuthorService } from '../author/author.service';
 import { PublisherService } from '../publisher/publisher.service';
 import { CategoryService } from '../category/category.service';
@@ -69,8 +73,17 @@ export class BookController {
     @Res() res: Response,
   ): Promise<any> {
     const book = await this.bookService.selectOne(id);
+    const otherAuthors =
+      await this.authorService.selectManyNotAssociateBook(id);
+    const otherCategories =
+      await this.categoryService.selectManyNotAssociateBook(id);
+    const otherPublishers =
+      await this.publisherService.selectManyNotAssociateBook(id);
     res.render('./view_book_detail/view_book_detail_page', {
       book,
+      otherAuthors,
+      otherCategories,
+      otherPublishers,
     });
   }
 
@@ -90,11 +103,65 @@ export class BookController {
     try {
       await this.bookService.deactivate(id);
       return res.status(HttpStatus.OK).json({
-        message: 'The category has been deleted successfully',
+        message: 'The book has been deleted successfully',
       });
     } catch (error) {
       return res.status(HttpStatus.NOT_FOUND).json({
         message: 'There is no book contains the provided id',
+      });
+    }
+  }
+
+  @Delete(':id/author/:authorId')
+  async removeAuthor(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('authorId', ParseIntPipe) authorId: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.bookService.disassociateAuthor(id, authorId);
+      return res.status(HttpStatus.OK).json({
+        message: 'The author has been removed successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'It fails to remove the author',
+      });
+    }
+  }
+
+  @Patch(':id/author/:authorId')
+  async addAuthor(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('authorId', ParseIntPipe) authorId: number,
+  ) {
+    return this.bookService.associateAuthor(id, authorId);
+  }
+
+  @Patch(':id/image')
+  @Header('Content-Type', 'multipart/form-data')
+  @UseInterceptors(FileInterceptor('image'))
+  async addImage(
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    return this.bookService.addImage(id, image);
+  }
+
+  @Delete(':id/image')
+  async deleteImage(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('imageUrl') imageUrl: string,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.bookService.deleteImage(id, imageUrl);
+      return res.status(HttpStatus.OK).json({
+        message: 'The image has been deleted successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'It fails to delete the image',
       });
     }
   }

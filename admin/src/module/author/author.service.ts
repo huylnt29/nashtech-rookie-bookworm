@@ -72,4 +72,22 @@ export class AuthorService {
       },
     });
   }
+
+  async selectManyNotAssociateBook(bookId: number): Promise<any> {
+    return this.prisma.author.findMany({
+      where: {
+        books: {
+          every: {
+            id: {
+              not: bookId,
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }
