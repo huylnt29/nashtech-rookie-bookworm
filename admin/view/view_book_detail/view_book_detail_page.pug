@@ -1,6 +1,8 @@
 extends ../global_layout.pug
 
 block content   
+     include edit_book_modal.pug
+     include ../view_book_list/delete_book_modal.pug
      div
           div.flex.justify-between.items-center
                div.flex
@@ -16,14 +18,14 @@ block content
                          each imageUrl in book.imageUrls
                               img(src=imageUrl).max-h-48.rounded-xl
                else 
-                    +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
+                    +announcement('../illustration_no_data.svg', 'You have not inserted any image.')
           
           div.h-8
           p(class='font-bold text-lg text-gray-600 text-center') Basic information
           div.h-3
           div(class='bg-white py-3 px-8 shadow-lg shadow-slate-200 rounded-2xl')
                +row_text('id', book.id)
-               +row_text('name', book.name, "openEditModal()")
+               +row_text('name', book.name, `openEditModal("name")`)
                +row_text('publisher', book.publisher.name, "", `/publisher/${book.publisher.id}`)
                +row_text('category', book.category.name, "", `/category/${book.category.id}`)
                +row_text('created at', book.createdAt)
@@ -56,6 +58,8 @@ block content
                p(class='text-slate-900 whitespace-pre-wrap') #{book.description}
           div.h-24
 
+          +edit_book_modal("name", book.name)
+
      script(type='text/javascript').
           const removeBook = (id) => {
                axios.patch(`/book/${id}`, {
@@ -63,6 +67,3 @@ block content
                })
                .then(() => location.reload(true))
           }
-     
-     include edit_book_modal.pug
-     include ../view_book_list/delete_book_modal.pug
