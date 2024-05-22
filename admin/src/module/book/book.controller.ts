@@ -33,7 +33,7 @@ export class BookController {
 
   @Get()
   async buildBookListPage(@Res() res: Response): Promise<void> {
-    const books = await this.bookService.selectBooks();
+    const books = await this.bookService.selectMany();
     res.render('./view_book_list/view_book_list_page', {
       books,
     });
@@ -58,7 +58,18 @@ export class BookController {
     @UploadedFiles() images: Array<Express.Multer.File>,
     @Body() createBookDto: CreateBookDto,
   ): Promise<any> {
-    return this.bookService.insertBook(images, createBookDto);
+    return this.bookService.insert(images, createBookDto);
+  }
+
+  @Get(':id')
+  async buildBookDetailPage(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<any> {
+    const book = await this.bookService.selectOne(id);
+    res.render('./view_book_detail/view_book_detail_page', {
+      book,
+    });
   }
 
   @Patch(':id')
@@ -66,6 +77,6 @@ export class BookController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateBookDto: UpdateBookDto,
   ): Promise<any> {
-    return this.bookService.updateBook(id, updateBookDto);
+    return this.bookService.update(id, updateBookDto);
   }
 }

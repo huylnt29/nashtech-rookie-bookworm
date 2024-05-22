@@ -15,8 +15,9 @@ export class S3Service implements OnModuleInit {
   async uploadImage(file: Express.Multer.File) {
     const uploadParams = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `books/${new Date().toISOString()}-${file.originalname}}`,
+      Key: `books/${new Date().toISOString()}-${file.originalname}`,
       Body: file.buffer,
+      ContentType: 'image/jpeg',
     };
 
     try {

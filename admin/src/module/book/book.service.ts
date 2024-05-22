@@ -13,7 +13,7 @@ export class BookService {
     private s3: S3Service,
   ) {}
 
-  async selectBooks(): Promise<any> {
+  async selectMany(): Promise<any> {
     return this.prisma.book.findMany({
       where: {
         state: State.ACTIVE,
@@ -37,7 +37,7 @@ export class BookService {
     });
   }
 
-  async insertBook(
+  async insert(
     images: Array<Express.Multer.File>,
     createBookDto: CreateBookDto,
   ): Promise<any> {
@@ -77,7 +77,7 @@ export class BookService {
     });
   }
 
-  async updateBook(id: number, updateBookDto: UpdateBookDto) {
+  async update(id: number, updateBookDto: UpdateBookDto) {
     return this.prisma.book.update({
       where: {
         id: id,
@@ -85,6 +85,19 @@ export class BookService {
       data: {
         ...updateBookDto,
         id: undefined,
+      },
+    });
+  }
+
+  async selectOne(id: number) {
+    return this.prisma.book.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        category: true,
+        publisher: true,
+        authors: true,
       },
     });
   }
