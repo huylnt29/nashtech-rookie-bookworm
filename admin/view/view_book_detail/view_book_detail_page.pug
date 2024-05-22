@@ -5,6 +5,7 @@ block content
      include add_author_modal.pug
      include change_category_modal.pug
      include change_publisher_modal.pug
+     include add_image_handler.pug
      include ../view_book_list/delete_book_modal.pug
 
      +edit_book_modal("name", book.name)
@@ -20,7 +21,11 @@ block content
                     p(class='font-bold text-xl text-slate-900 uppercase') #{book.name}
                +primary_button("Delete", `openDeleteModal(${book.id})`, "red")
           div.h-4
-          p(class='font-bold text-lg text-gray-600 text-center') Images
+          div.flex.items-center
+               div.grow
+               p(class='font-bold text-lg text-gray-600 text-center') Images
+               div.grow
+               +secondary_button("Add", `openFileUploader()`, "orange")
           div.h-3
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                if book.imageUrls.length > 0

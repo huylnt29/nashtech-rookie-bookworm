@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Res,
+  UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -18,7 +19,10 @@ import { Response } from 'express';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { FilesInterceptor } from '@nestjs/platform-express/multer/interceptors';
+import {
+  FilesInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express/multer/interceptors';
 import { AuthorService } from '../author/author.service';
 import { PublisherService } from '../publisher/publisher.service';
 import { CategoryService } from '../category/category.service';
@@ -132,5 +136,15 @@ export class BookController {
     @Param('authorId', ParseIntPipe) authorId: number,
   ) {
     return this.bookService.associateAuthor(id, authorId);
+  }
+
+  @Patch(':id/image')
+  @Header('Content-Type', 'multipart/form-data')
+  @UseInterceptors(FileInterceptor('image'))
+  async addImage(
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    return this.bookService.addImage(id, image);
   }
 }

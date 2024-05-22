@@ -4,7 +4,6 @@ import { Book, State } from '@prisma/client';
 import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { S3Service } from 'src/core/s3/s3.service';
-import { parse } from 'path';
 
 @Injectable()
 export class BookService {
@@ -143,6 +142,24 @@ export class BookService {
       select: {
         id: true,
         authors: true,
+      },
+    });
+  }
+
+  async addImage(id: number, image: Express.Multer.File) {
+    let res = await this.s3.uploadImage(image);
+    return this.prisma.book.update({
+      where: {
+        id: id,
+      },
+      data: {
+        imageUrls: {
+          push: res.Location,
+        },
+      },
+      select: {
+        id: true,
+        imageUrls: true,
       },
     });
   }
