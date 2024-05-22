@@ -12,7 +12,7 @@ model Book {
   imageUrls     String[]
   name          String
   description   String?
-  publishedYear Int
+  publishedYear Int?
   publisherId   Int?
   categoryId    Int?
   createdAt     DateTime   @default(now())

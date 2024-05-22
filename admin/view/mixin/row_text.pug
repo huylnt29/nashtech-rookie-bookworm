@@ -3,7 +3,7 @@ mixin row_text(keyName, value, onOpenEditModal, href)
           p(class='text-slate-600 font-bold uppercase')= keyName
           div.grow
           if (href)
-               a(href=href, class='text-slate-900 underline decoration-slate-300 decoration-8')= value
+               a(href=href, class='text-slate-900 underline decoration-slate-300 decoration-8 hover:decoration-slate-500')= value
           else
                p(class='text-slate-900')= value
           if (onOpenEditModal)
