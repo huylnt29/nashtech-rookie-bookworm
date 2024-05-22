@@ -1,6 +1,19 @@
 extends ../global_layout.pug
 
 block content   
+     include edit_book_modal.pug
+     include add_author_modal.pug
+     include change_category_modal.pug
+     include change_publisher_modal.pug
+     include add_image_handler.pug
+     include ../view_book_list/delete_book_modal.pug
+
+     +edit_book_modal("name", book.name)
+     +edit_book_modal("description", book.description)
+     +add_author_modal(otherAuthors)
+     +change_category_modal(otherCategories)
+     +change_publisher_modal(otherPublishers)
+
      div
           div.flex.justify-between.items-center
                div.flex
@@ -8,28 +21,45 @@ block content
                     p(class='font-bold text-xl text-slate-900 uppercase') #{book.name}
                +primary_button("Delete", `openDeleteModal(${book.id})`, "red")
           div.h-4
-          p(class='font-bold text-lg text-gray-600 text-center') Images
+          div.flex.items-center
+               div.grow
+               p.font-bold.text-lg.text-gray-600.text-center Images
+               div.grow
+               +secondary_button("Add", `openFileUploader()`, "orange")
           div.h-3
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                if book.imageUrls.length > 0
-                    div.grid.grid-cols-5.place-items-center
+                    div.grid.grid-cols-5.place-items-center.gap-8
                          each imageUrl in book.imageUrls
-                              img(src=imageUrl).max-h-48.rounded-xl
+                              div.relative.group
+                                   img(src=imageUrl).h-48.rounded-xl
+                                   div(class="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-60 rounded-xl hidden group-hover:block")
+                                   i(
+                                        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden group-hover:block material-icons w-8 cursor-pointer text-gray-300",
+                                        onclick=`removeImage("${imageUrl}")`
+                                   ) delete
                else 
-                    +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
+                    +announcement(
+                         '../illustration_no_data.svg', 
+                         'You have not inserted any image.'
+                    )
           
           div.h-8
-          p(class='font-bold text-lg text-gray-600 text-center') Basic information
+          p.font-bold.text-lg.text-gray-600.text-center Basic information
           div.h-3
           div(class='bg-white py-3 px-8 shadow-lg shadow-slate-200 rounded-2xl')
                +row_text('id', book.id)
-               +row_text('name', book.name, "openEditModal()")
-               +row_text('publisher', book.publisher.name, "", `/publisher/${book.publisher.id}`)
-               +row_text('category', book.category.name, "", `/category/${book.category.id}`)
+               +row_text('name', book.name, `openEditModal("name")`)
+               +row_text('publisher', book.publisher.name, "openChangePublisherModal()", `/publisher/${book.publisher.id}`)
+               +row_text('category', book.category.name, "openChangeCategoryModal()", `/category/${book.category.id}`)
                +row_text('created at', book.createdAt)
                +row_text('updated at', book.updatedAt)
           div.h-8
-          p(class='font-bold text-lg text-gray-600 text-center') Authors
+          div.flex.items-center
+               div.grow
+               p.font-bold.text-lg.text-gray-600.text-center Authors
+               div.grow
+               +secondary_button("Add", `openAddAuthorModal()`, "orange")
           div.h-3
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                if book.authors.length > 0
@@ -42,27 +72,42 @@ block content
                          tbody.table-row-group
                               each author in book.authors
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
-                                             td(class="table-cell p-3", onclick=``) #{author.id}
-                                             td(class="table-cell", onclick=``) #{author.name}
-                                             td(class="table-cell")
-                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`removeAuthor(${author.id})`) delete
+                                             td.table-cell.p-3(onclick=``) #{author.id}
+                                             td.table-cell(onclick=``) #{author.name}
+                                             td.table-cell
+                                                  i(
+                                                       class="material-icons hidden group-hover:block w-4", 
+                                                       onclick=`removeAuthor(${author.id})`
+                                                  ) delete
                else 
-                    +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
+                    +announcement(
+                         '../illustration_no_data.svg', 
+                         'You have not associated any authors with this book'
+                    )
 
           div.h-8
-          p(class='font-bold text-lg text-gray-600 text-center') Description
+          div.flex.items-center
+               div.grow
+               p.font-bold.text-lg.text-gray-600.text-center Description
+               div.grow
+               +secondary_button("Edit", `openEditModal("description")`, "orange")
           div.h-3
           div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
                p(class='text-slate-900 whitespace-pre-wrap') #{book.description}
           div.h-24
 
      script(type='text/javascript').
-          const removeBook = (id) => {
-               axios.patch(`/book/${id}`, {
-                    categoryId: null
-               })
-               .then(() => location.reload(true))
+          const removeAuthor = (authorId) => {
+               const id = location.href.split('/').at(-1)
+               axios.delete(`/book/${id}/author/${authorId}`)
+               .then(() => location.reload())
           }
-     
-     include edit_book_modal.pug
-     include ../view_book_list/delete_book_modal.pug
+          const removeImage = (imageUrl) => {
+               const id = location.href.split('/').at(-1)
+               axios.delete(`/book/${id}/image`, {
+                    data: {
+                         imageUrl
+                    }
+               })
+               .then(() => location.reload())
+          }

@@ -1,0 +1,5 @@
+mixin secondary_button(text, onclick, colorScheme)
+     button(
+          class=`bg-${colorScheme}-50 hover:bg-${colorScheme}-100 text-${colorScheme}-700 font-bold py-2 px-4 rounded-xl`, 
+          onclick=onclick
+     ) #{text}
