@@ -61,11 +61,12 @@ model Batch {
 
 model Discount {
   id          Int      @id @default(autoincrement())
-  minQuantity Int
-  maxQuantity Int
+  minQuantity Int      @default(1)
+  maxQuantity Int?
   percentage  Decimal  @db.Decimal(3, 2)
   startAt     DateTime
   endAt       DateTime
+  isRecurring Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   batchs      Batch[]
