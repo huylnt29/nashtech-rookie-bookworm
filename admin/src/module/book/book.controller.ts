@@ -103,7 +103,7 @@ export class BookController {
     try {
       await this.bookService.deactivate(id);
       return res.status(HttpStatus.OK).json({
-        message: 'The book has been deleted successfully',
+        message: 'The book has been deactivated successfully',
       });
     } catch (error) {
       return res.status(HttpStatus.NOT_FOUND).json({
