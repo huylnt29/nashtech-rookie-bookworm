@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Res,
 } from '@nestjs/common';
@@ -15,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { BookService } from '../book/book.service';
 import { CreateBatchDto } from './dto/create_batch.dto';
 import { DiscountService } from '../discount/discount.service';
+import { UpdateBatchDto } from './dto/update_batch.dto';
 
 @Controller('batch')
 @ApiTags('BATCH')
@@ -76,5 +78,13 @@ export class BatchController {
       batch,
       otherDiscounts,
     });
+  }
+
+  @Patch(':id')
+  async patchBatch(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateBatchDto: UpdateBatchDto,
+  ): Promise<any> {
+    return this.batchService.update(id, updateBatchDto);
   }
 }

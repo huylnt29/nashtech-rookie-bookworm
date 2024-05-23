@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { State } from '@prisma/client';
 import { CreateBatchDto } from './dto/create_batch.dto';
+import { UpdateBatchDto } from './dto/update_batch.dto';
 
 @Injectable()
 export class BatchService {
@@ -77,6 +78,18 @@ export class BatchService {
             isRecurring: true,
           },
         },
+      },
+    });
+  }
+
+  async update(id: number, updateDto: UpdateBatchDto) {
+    return this.prisma.batch.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...updateDto,
+        id: undefined,
       },
     });
   }
