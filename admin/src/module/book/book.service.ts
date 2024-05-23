@@ -109,6 +109,18 @@ export class BookService {
             createdAt: true,
           },
         },
+        batches: {
+          where: {
+            state: State.ACTIVE,
+          },
+          select: {
+            id: true,
+            originalPrice: true,
+            price: true,
+            soldQuantity: true,
+            updatedAt: true,
+          },
+        },
       },
     });
   }

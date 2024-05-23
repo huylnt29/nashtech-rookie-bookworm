@@ -20,7 +20,7 @@ model Book {
   state         State      @default(ACTIVE)
   authors       Author[]
   reviews       Review[]
-  batchs        Batch[]
+  batches       Batch[]
   publisher     Publisher? @relation(fields: [publisherId], references: [id])
   category      Category?  @relation(fields: [categoryId], references: [id])
 }
@@ -69,7 +69,7 @@ model Discount {
   isRecurring Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  batchs      Batch[]
+  batches     Batch[]
 }
 
 model Order {
