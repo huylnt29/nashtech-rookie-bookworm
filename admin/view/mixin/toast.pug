@@ -1,14 +1,14 @@
 mixin toast(type, id)
-     //- - var toastId = id
-     div(id=id, class='hidden fixed bottom-3 right-5 z-100 flex items-center gap-2 w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 bg-red-50')
-          div(class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg")
-               if (type == 'danger')
-                    i(class="material-icons w-8") gpp_bad
-               else if (type == 'success')
-                    i(class="material-icons w-8") task_alt
-               else if (type == 'warning')
-                    i(class="material-icons w-8") feedback
+     div(id=id, class='hidden fixed bottom-3 right-5 z-40 flex items-center gap-3 w-[35vw] p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-lg')
+          if (type == 'danger')
+               i.material-icons.p-2.bg-red-100.rounded-xl.text-red-900 gpp_bad
+          else if (type == 'success')
+               i.material-icons.p-2.bg-green-100.rounded-xl.text-green-900 task_alt
+          else if (type == 'warning')
+               i.material-icons.p-2.bg-orange-100.rounded-xl.text-orange-900 feedback
+               
           div(id=`${id}-content`, class="ms-3 text-sm text-red-900 font-bold")
+
           i(class="material-icons w-8 cursor-pointer", onclick="hideToast()") close
      
      script(type='text/javascript').

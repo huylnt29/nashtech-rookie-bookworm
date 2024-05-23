@@ -17,5 +17,6 @@ import { PublisherModule } from '../publisher/publisher.module';
   ],
   controllers: [BookController],
   providers: [BookService],
+  exports: [BookService],
 })
 export class BookModule {}

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { State } from '@prisma/client';
+import { CreateBatchDto } from './dto/create_batch.dto';
 
 @Injectable()
 export class BatchService {
@@ -27,6 +28,15 @@ export class BatchService {
             discounts: true,
           },
         },
+      },
+    });
+  }
+
+  async insert(createBatchDto: CreateBatchDto) {
+    return this.prisma.batch.create({
+      data: createBatchDto,
+      select: {
+        id: true,
       },
     });
   }
