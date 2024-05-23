@@ -1,7 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsDateString,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   Min,
@@ -31,4 +33,9 @@ export class CreateBatchDto {
   @IsNotEmpty()
   @Min(1)
   price: number;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsDateString()
+  importedAt: Date;
 }
