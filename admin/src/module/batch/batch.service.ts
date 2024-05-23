@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { State } from '@prisma/client';
 import { CreateBatchDto } from './dto/create_batch.dto';
+import { UpdateBatchDto } from './dto/update_batch.dto';
 
 @Injectable()
 export class BatchService {
@@ -23,11 +24,14 @@ export class BatchService {
             name: true,
           },
         },
-        _count: {
+        discount: {
           select: {
-            discounts: true,
+            id: true,
           },
         },
+      },
+      orderBy: {
+        updatedAt: 'desc',
       },
     });
   }
@@ -48,6 +52,44 @@ export class BatchService {
       },
       data: {
         state: State.INACTIVE,
+      },
+    });
+  }
+
+  async selectOne(id: number) {
+    return this.prisma.batch.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        book: {
+          select: {
+            id: true,
+            name: true,
+            imageUrls: true,
+          },
+        },
+        discount: {
+          select: {
+            id: true,
+            minQuantity: true,
+            maxQuantity: true,
+            percentage: true,
+            isRecurring: true,
+          },
+        },
+      },
+    });
+  }
+
+  async update(id: number, updateDto: UpdateBatchDto) {
+    return this.prisma.batch.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...updateDto,
+        id: undefined,
       },
     });
   }

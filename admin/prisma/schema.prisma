@@ -46,17 +46,20 @@ model Author {
 }
 
 model Batch {
-  id              Int        @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   initialQuantity Int
-  soldQuantity    Int        @default(0)
+  soldQuantity    Int      @default(0)
   originalPrice   Float
   price           Float
   bookId          Int
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
-  state           State      @default(ACTIVE)
-  book            Book       @relation(fields: [bookId], references: [id])
-  discounts       Discount[]
+  discountId      Int?
+  importedAt      DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  state           State    @default(ACTIVE)
+  book            Book     @relation(fields: [bookId], references: [id])
+
+  discount Discount? @relation(fields: [discountId], references: [id])
 }
 
 model Discount {
@@ -69,6 +72,7 @@ model Discount {
   isRecurring Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  state       State    @default(ACTIVE)
   batches     Batch[]
 }
 

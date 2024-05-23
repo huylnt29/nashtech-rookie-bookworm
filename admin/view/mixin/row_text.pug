@@ -3,9 +3,9 @@ mixin row_text(keyName, value, onOpenEditModal, href)
           p(class='text-slate-600 font-bold uppercase')= keyName
           div.grow
           if (href)
-               a(href=href, class='text-slate-900 underline decoration-slate-300 decoration-8 hover:decoration-slate-500')= value
+               a(href=href, class='text-slate-900 underline decoration-slate-300 decoration-8 hover:decoration-slate-500 text-right')= value
           else
-               p(class='text-slate-900')= value
+               p(class='text-slate-900 text-right')= value
           if (onOpenEditModal)
                i(class="material-icons w-3 text-orange-200 cursor-pointer hover:text-orange-700", onclick=onOpenEditModal) draw
           else 

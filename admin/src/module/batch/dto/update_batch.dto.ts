@@ -8,4 +8,10 @@ export class UpdateBatchDto {
   @Min(1)
   @IsOptional()
   soldQuantity: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  @IsOptional()
+  discountId: number;
 }

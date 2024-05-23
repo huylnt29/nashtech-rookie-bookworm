@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Res,
 } from '@nestjs/common';
@@ -14,6 +15,8 @@ import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { BookService } from '../book/book.service';
 import { CreateBatchDto } from './dto/create_batch.dto';
+import { DiscountService } from '../discount/discount.service';
+import { UpdateBatchDto } from './dto/update_batch.dto';
 
 @Controller('batch')
 @ApiTags('BATCH')
@@ -21,6 +24,7 @@ export class BatchController {
   constructor(
     private readonly batchService: BatchService,
     private readonly bookService: BookService,
+    private readonly discountService: DiscountService,
   ) {}
 
   @Get()
@@ -59,5 +63,28 @@ export class BatchController {
         message: 'There is no batch contains the provided id',
       });
     }
+  }
+
+  @Get(':id')
+  async buildBatchDetailPage(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    const batch = await this.batchService.selectOne(id);
+    const otherDiscounts =
+      await this.discountService.selectManyNotAssociateBatch(id);
+
+    res.render('./view_batch_detail/view_batch_detail_page', {
+      batch,
+      otherDiscounts,
+    });
+  }
+
+  @Patch(':id')
+  async patchBatch(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateBatchDto: UpdateBatchDto,
+  ): Promise<any> {
+    return this.batchService.update(id, updateBatchDto);
   }
 }
