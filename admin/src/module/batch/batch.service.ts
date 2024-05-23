@@ -29,6 +29,9 @@ export class BatchService {
           },
         },
       },
+      orderBy: {
+        updatedAt: 'desc',
+      },
     });
   }
 

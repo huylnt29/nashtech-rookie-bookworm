@@ -26,7 +26,9 @@ block content
                const initialQuantity = parseInt(u('#initialQuantity').nodes[0].value);
                const originalPrice = parseInt(u('#originalPrice').nodes[0].value);
                const price = parseInt(u('#price').nodes[0].value);
-               const importedAt = new Date(u('#importedAt').nodes[0].value).toISOString();
+               let importedAt = u('#importedAt').nodes[0].value
+               if (importedAt != '') importedAt = new Date(importedAt).toISOString();
+               else importedAt = undefined
                axios.post('/batch', {
                     bookId,
                     initialQuantity,

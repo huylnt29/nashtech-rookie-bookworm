@@ -37,6 +37,7 @@ block content
                               +row_text('price to sell', batch.price)
                               +row_text('original price', batch.originalPrice)
                          div
+                              +row_text('imported at', batch.importedAt.toLocaleString())
                               +row_text('created at', batch.createdAt.toLocaleString())
                               +row_text('updated at', batch.updatedAt.toLocaleString())
                div(class="basis-1/6 flex flex-col")
@@ -55,7 +56,7 @@ block content
                          else 
                               +announcement(
                                    '/illustration_no_data.svg', 
-                                   'You have not applied any discounts.'
+                                   'You have not applied any discount.'
                               )
                
           div.h-24

@@ -36,6 +36,5 @@ export class CreateBatchDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsDateString()
   importedAt: Date;
 }
