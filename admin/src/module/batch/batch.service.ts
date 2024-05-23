@@ -51,4 +51,29 @@ export class BatchService {
       },
     });
   }
+
+  async selectOne(id: number) {
+    return this.prisma.batch.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        book: {
+          select: {
+            id: true,
+            name: true,
+            imageUrls: true,
+          },
+        },
+        discounts: {
+          select: {
+            id: true,
+            minQuantity: true,
+            maxQuantity: true,
+            percentage: true,
+          },
+        },
+      },
+    });
+  }
 }
