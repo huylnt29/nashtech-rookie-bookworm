@@ -23,5 +23,18 @@ block content
                u(`#book-menu-item-${id}`).addClass("bg-slate-100 font-bold")
           }
           const submitCreateBatch = () => {
-               
+               const initialQuantity = parseInt(u('#initialQuantity').nodes[0].value);
+               const originalPrice = parseInt(u('#originalPrice').nodes[0].value);
+               const price = parseInt(u('#price').nodes[0].value);
+               axios.post('/batch', {
+                    bookId,
+                    initialQuantity,
+                    originalPrice,
+                    price
+               })
+               .then(() => location.href = '/batch')
+               .catch((error) => showToast(
+                    '#create-batch-toast', 
+                    error.response.data.message.toString()
+               ));
           }
