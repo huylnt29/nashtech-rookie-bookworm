@@ -16,7 +16,6 @@ export class BatchController {
   @Get()
   async buildBatchListPage(@Res() res: Response): Promise<void> {
     const batches = await this.batchService.selectMany();
-    console.log(batches);
     res.render('./view_batch_list/view_batch_list_page', {
       batches,
     });
@@ -25,6 +24,7 @@ export class BatchController {
   @Get('new')
   async buildCreateBatchPage(@Res() res: Response): Promise<void> {
     const books = await this.bookService.selectManySimple();
+    console.log(books);
     return res.render('./create_batch/create_batch_page', {
       books,
     });

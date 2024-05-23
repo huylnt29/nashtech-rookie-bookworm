@@ -217,6 +217,7 @@ export class BookService {
       select: {
         id: true,
         name: true,
+        imageUrls: true,
       },
     });
   }

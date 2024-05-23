@@ -1,0 +1,21 @@
+extends ../global_layout.pug
+
+block content
+     include pick_book_menu.pug
+
+     div
+          div.flex.justify-between.items-center
+               p.font-bold.text-xl.text-slate-900 CREATE BATCH
+               +primary_button("Submit", "submitCreateBatch()", "slate")
+          div.flex.justify-start.items-start.gap-12.my-4.mb-12
+               div(class='basis-2/3')
+                    +pick_book_menu(books)
+               div(class='basis-1/3')
+                    include create_batch_form.pug
+                    
+     +toast('danger', 'create-batch-toast')
+
+     script(type='text/javascript').
+          const submitCreateBatch = () => {
+               
+          }
