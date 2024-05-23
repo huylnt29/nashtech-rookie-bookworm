@@ -11,7 +11,11 @@ export class BatchService {
       where: {
         state: State.ACTIVE,
       },
-      include: {
+      select: {
+        id: true,
+        soldQuantity: true,
+        price: true,
+        updatedAt: true,
         book: {
           select: {
             id: true,
