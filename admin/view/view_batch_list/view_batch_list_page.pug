@@ -24,7 +24,7 @@ block content
                                    th.table-cell.text-left BOOK
                                    th.table-cell.text-left SOLD QUANTITY
                                    th.table-cell.text-left PRICE
-                                   th.table-cell.text-left DISCOUNTS COUNT
+                                   th.table-cell.text-left DISCOUNT ID
                                    th.table-cell.text-left UPDATED AT
                                    th.table-cell.text-left.w-8        
                          tbody.table-row-group
@@ -34,7 +34,7 @@ block content
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.book.name}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.soldQuantity}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.price}
-                                             td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch._count.discounts}
+                                             td.table-cell(onclick=`navigateToDetailPage(${batch.id})`)= batch.discount ? batch.discount.id : ''
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.updatedAt.toLocaleString()}
                                              td.table-cell
                                                   i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${batch.id})`) delete

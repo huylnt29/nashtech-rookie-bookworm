@@ -23,9 +23,9 @@ export class BatchService {
             name: true,
           },
         },
-        _count: {
+        discount: {
           select: {
-            discounts: true,
+            id: true,
           },
         },
       },
@@ -65,12 +65,13 @@ export class BatchService {
             imageUrls: true,
           },
         },
-        discounts: {
+        discount: {
           select: {
             id: true,
             minQuantity: true,
             maxQuantity: true,
             percentage: true,
+            isRecurring: true,
           },
         },
       },
