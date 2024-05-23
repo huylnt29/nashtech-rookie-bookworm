@@ -18,7 +18,7 @@ div#delete-batch-modal(class="hidden fixed z-40 w-screen h-screen inset-0 bg-gra
                u("#delete-batch-modal").addClass('hidden');   
           }
 
-          const submitDeletebatch = async () => {
+          const submitDeleteBatch = async () => {
                axios.delete(`/batch/${batchId}`)
                .then(() => location.href='/batch')
                .catch(console.log);

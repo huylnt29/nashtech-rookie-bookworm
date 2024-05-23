@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { BatchService } from './batch.service';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
@@ -32,5 +42,22 @@ export class BatchController {
   @Post()
   async postBatch(@Body() createBatchDto: CreateBatchDto): Promise<any> {
     return this.batchService.insert(createBatchDto);
+  }
+
+  @Delete(':id')
+  async deleteBook(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.batchService.deactivate(id);
+      return res.status(HttpStatus.OK).json({
+        message: 'The batch has been deactivated successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'There is no batch contains the provided id',
+      });
+    }
   }
 }

@@ -40,4 +40,15 @@ export class BatchService {
       },
     });
   }
+
+  async deactivate(id: number) {
+    return this.prisma.batch.update({
+      where: {
+        id: id,
+      },
+      data: {
+        state: State.INACTIVE,
+      },
+    });
+  }
 }
