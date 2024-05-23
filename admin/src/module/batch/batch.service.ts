@@ -93,4 +93,15 @@ export class BatchService {
       },
     });
   }
+
+  async associateDiscount(id: number, discountId: number) {
+    return this.prisma.batch.update({
+      where: {
+        id: id,
+      },
+      data: {
+        discountId: discountId,
+      },
+    });
+  }
 }

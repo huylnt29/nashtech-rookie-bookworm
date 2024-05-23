@@ -8,6 +8,17 @@ import { State } from '@prisma/client';
 export class DiscountService {
   constructor(private prisma: PrismaService) {}
 
+  async selectMany(): Promise<any[]> {
+    return this.prisma.discount.findMany({
+      where: {
+        state: State.ACTIVE,
+      },
+      include: {
+        batches: true,
+      },
+    });
+  }
+
   async insert(createDto: CreateDiscountDto) {
     return this.prisma.discount.create({
       data: createDto,

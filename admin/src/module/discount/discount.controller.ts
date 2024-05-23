@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { DiscountService } from './discount.service';
@@ -15,20 +16,41 @@ import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateDiscountDto } from './dto/create_discount.dto';
 import { UpdateDiscountDto } from './dto/update_discount.dto';
+import { BatchService } from '../batch/batch.service';
+import { UpdateBatchDto } from '../batch/dto/update_batch.dto';
 
 @Controller('discount')
 @ApiTags('DISCOUNT')
 export class DiscountController {
-  constructor(private readonly discountService: DiscountService) {}
+  constructor(
+    private readonly discountService: DiscountService,
+    private readonly batchService: BatchService,
+  ) {}
+
+  @Get()
+  async getDiscounts() {
+    return this.discountService.selectMany();
+  }
+
+  @Get('/new')
+  async buildCreateDiscountPage(@Res() res: Response) {
+    res.render('./create_discount/create_discount_page', {});
+  }
 
   @Post()
-  async postAuthor(@Body() createDto: CreateDiscountDto) {
-    const result = this.discountService.insert(createDto);
-    return result;
+  async postDiscount(
+    @Body() createDto: CreateDiscountDto,
+    @Query('batch-id') batchId: number,
+  ) {
+    const newDiscount = await this.discountService.insert(createDto);
+    if (batchId) {
+      await this.batchService.associateDiscount(batchId, newDiscount.id);
+    }
+    return newDiscount;
   }
 
   @Patch(':id')
-  async patchAuthor(
+  async patchDiscount(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateDto: UpdateDiscountDto,
   ): Promise<any> {
