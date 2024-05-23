@@ -48,6 +48,9 @@ export class CategoryService {
       },
       include: {
         books: {
+          where: {
+            state: State.ACTIVE,
+          },
           select: {
             id: true,
             name: true,
