@@ -1,8 +1,9 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { BatchService } from './batch.service';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { BookService } from '../book/book.service';
+import { CreateBatchDto } from './dto/create_batch.dto';
 
 @Controller('batch')
 @ApiTags('BATCH')
@@ -15,6 +16,7 @@ export class BatchController {
   @Get()
   async buildBatchListPage(@Res() res: Response): Promise<void> {
     const batches = await this.batchService.selectMany();
+    console.log(batches);
     res.render('./view_batch_list/view_batch_list_page', {
       batches,
     });
@@ -26,5 +28,10 @@ export class BatchController {
     return res.render('./create_batch/create_batch_page', {
       books,
     });
+  }
+
+  @Post()
+  async postBatch(@Body() createBatchDto: CreateBatchDto): Promise<any> {
+    return this.batchService.insert(createBatchDto);
   }
 }

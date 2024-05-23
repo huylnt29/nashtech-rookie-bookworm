@@ -21,9 +21,9 @@ block content
                          thead.table-header-group.bg-slate-100
                               tr.table-row
                                    th.table-cell.text-left.p-3 ID
+                                   th.table-cell.text-left BOOK
                                    th.table-cell.text-left SOLD QUANTITY
                                    th.table-cell.text-left PRICE
-                                   th.table-cell.text-left BOOK
                                    th.table-cell.text-left DISCOUNTS COUNT
                                    th.table-cell.text-left UPDATED AT
                                    th.table-cell.text-left.w-8        
@@ -31,13 +31,13 @@ block content
                               each batch in batches
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
                                              td.table-cell.p-3(onclick=`navigateToDetailPage(${batch.id})`) #{batch.id}
+                                             td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.book.name}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.soldQuantity}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.price}
-                                             td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.book.name}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch._count.discounts}
                                              td.table-cell(onclick=`navigateToDetailPage(${batch.id})`) #{batch.updatedAt.toLocaleString()}
                                              td.table-cell
-                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${category.id})`) delete
+                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${batch.id})`) delete
                else 
                     +announcement(
                          'illustration_no_data.svg', 
