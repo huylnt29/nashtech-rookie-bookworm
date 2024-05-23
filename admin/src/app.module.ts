@@ -16,6 +16,7 @@ import { LoggerMiddleware } from './core/logger/logger.middleware';
 import { AuthModule } from './core/auth/auth.module';
 import { PublisherModule } from './module/publisher/publisher.module';
 import { AuthorModule } from './module/author/author.module';
+import { BatchModule } from './module/batch/batch.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthorModule } from './module/author/author.module';
     PublisherModule,
     AuthorModule,
     BookModule,
+    BatchModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
