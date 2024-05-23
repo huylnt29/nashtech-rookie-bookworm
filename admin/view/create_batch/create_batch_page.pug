@@ -16,6 +16,12 @@ block content
      +toast('danger', 'create-batch-toast')
 
      script(type='text/javascript').
+          var bookId
+          const pickBook = (id) => {
+               bookId = id
+               u(`.book-menu-item`).removeClass("bg-slate-100 font-bold")
+               u(`#book-menu-item-${id}`).addClass("bg-slate-100 font-bold")
+          }
           const submitCreateBatch = () => {
                
           }
