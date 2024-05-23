@@ -208,4 +208,16 @@ export class BookService {
       },
     });
   }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.book.findMany({
+      where: {
+        state: State.ACTIVE,
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+  }
 }
