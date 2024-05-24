@@ -8,6 +8,7 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     type="number", 
                     name="minQuantity", 
                     id="minQuantity", 
+                    value="1"
                     class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-1/2 p-2.5", 
                     placeholder="Type discount min quantity", 
                     required
@@ -58,11 +59,13 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     placeholder="Type or pick discount end date", 
                )
           div.col-span-2
-               label.flex.justify-between.items-center.cursor-pointer.text-sm.font-medium.text-slate-900 Is it recurring?
+               label.flex.justify-between.items-center.cursor-pointer.text-sm.font-medium.text-slate-900(
+                    for="isRecurring", 
+               ) Is it recurring?
                     input.sr-only.peer(
-                         checked="" 
-                         value="" 
                          type="checkbox"
+                         id="isRecurring"
+                         checked="" 
                     )
                     div(class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-900")
                     

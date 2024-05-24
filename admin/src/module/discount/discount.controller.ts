@@ -53,11 +53,14 @@ export class DiscountController {
   @Post()
   async postDiscount(
     @Body() createDto: CreateDiscountDto,
-    @Query('batch-id', ParseIntPipe) batchId: number,
+    @Query('batch-id') batchId?: string,
   ) {
     const newDiscount = await this.discountService.insert(createDto);
     if (batchId) {
-      await this.batchService.associateDiscount(batchId, newDiscount.id);
+      await this.batchService.associateDiscount(
+        parseInt(batchId),
+        newDiscount.id,
+      );
     }
     return newDiscount;
   }
