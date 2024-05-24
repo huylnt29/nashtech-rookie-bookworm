@@ -73,6 +73,17 @@ export class DiscountController {
     return newDiscount;
   }
 
+  @Get(':id')
+  async buildDiscountDetailPage(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    const discount = await this.discountService.selectOne(id);
+    res.render('./view_discount_detail/view_discount_detail_page', {
+      discount,
+    });
+  }
+
   @Patch(':id')
   async patchDiscount(
     @Param('id', ParseIntPipe) id: number,
