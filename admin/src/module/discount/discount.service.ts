@@ -13,6 +13,24 @@ export class DiscountService {
       where: {
         state: State.ACTIVE,
       },
+      select: {
+        id: true,
+        minQuantity: true,
+        maxQuantity: true,
+        startAt: true,
+        endAt: true,
+        isRecurring: true,
+        _count: {
+          select: {
+            batches: true,
+          },
+        },
+      },
+    });
+  }
+
+  async selectEverything(): Promise<any[]> {
+    return this.prisma.discount.findMany({
       include: {
         batches: true,
       },

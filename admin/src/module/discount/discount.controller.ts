@@ -28,8 +28,16 @@ export class DiscountController {
   ) {}
 
   @Get()
+  async buildDiscountListPage(@Res() res: Response) {
+    const discounts = await this.discountService.selectMany();
+    res.render('./view_discount_list/view_discount_list_page', {
+      discounts,
+    });
+  }
+
+  @Get('/everything')
   async getDiscounts() {
-    return this.discountService.selectMany();
+    return this.discountService.selectEverything();
   }
 
   @Get('/new')
