@@ -15,6 +15,7 @@ export class DiscountService {
       },
       select: {
         id: true,
+        percentage: true,
         minQuantity: true,
         maxQuantity: true,
         startAt: true,
