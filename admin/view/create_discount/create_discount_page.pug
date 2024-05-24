@@ -43,7 +43,14 @@ block content
                     endAt,
                     isRecurring
                })
-               .then(() => history.back())
+               .then(() => {
+                    if ("#{batchId}") {
+                         location.href = `/batch/${"#{batchId}"}`
+                    }
+                    else {
+                         location.href = '/discount'
+                    }
+               })
                .catch((error) => showToast(
                     '#create-discount-toast', 
                     error.response.data.message.toString()
