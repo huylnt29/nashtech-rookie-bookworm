@@ -2,45 +2,48 @@ extends ../global_layout.pug
 
 block content   
      div
-          div(class='flex justify-between items-center')
-               div.flex
-                    i(class="material-icons w-8") category
-                    p(class='font-bold text-xl text-slate-900') #{categoryDetail.name}
+          div.flex.justify-between.items-center
+               i.material-icons.w-8 category
+               p.font-bold.text-xl.text-slate-900 #{categoryDetail.name}
+               div.grow
                +primary_button("Delete", `openDeleteModal(${categoryDetail.id})`, "red")
-          div(class='h-4')
+          div.h-4
           div.flex.items-center
                div.w-2.bg-slate-600.mr-3.rounded-xl ''
-               p(class='font-bold text-lg text-gray-600 text-center') Primary information
-          div(class='h-3')
-          div(class='bg-white py-3 px-8 shadow-lg shadow-slate-200 rounded-2xl')
+               p.font-bold.text-lg.text-gray-600.text-center Primary information
+          div.h-3
+          div.bg-white.py-3.px-8.shadow-lg.shadow-slate-200.rounded-2xl
                +row_text('id', categoryDetail.id)
                +row_text('name', categoryDetail.name, "openEditModal()")
                +row_text('created at', categoryDetail.createdAt.toLocaleString())
                +row_text('updated at', categoryDetail.updatedAt.toLocaleString())
-          div(class='h-8')
+          div.h-8
           div.flex.items-center
                div.w-2.bg-slate-600.mr-3.rounded-xl ''
-               p(class='font-bold text-lg text-gray-600 text-center') Associated books
-          div(class='h-3')
-          div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
+               p.font-bold.text-lg.text-gray-600.text-center Associated books
+          div.h-3
+          div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                if categoryDetail.books.length > 0
-                    table(class='table w-full')
-                         thead(class='table-header-group bg-slate-100')
-                              tr(class='table-row')
-                                   th(class="table-cell text-left p-3") ID
-                                   th(class="table-cell text-left") NAME
-                                   th(class="table-cell text-left") PUBLISHED YEAR
-                                   th(class="table-cell text-left w-8")          
-                         tbody(class="table-row-group")
+                    table.table.w-full
+                         thead.table-header-group.bg-slate-100
+                              tr.table-row
+                                   th.table-cell.text-left.p-3 ID
+                                   th.table-cell.text-left NAME
+                                   th.table-cell.text-left PUBLISHED YEAR
+                                   th.table-cell.text-left.w-8     
+                         tbody.table-row-group
                               each book in categoryDetail.books
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
-                                             td(class="table-cell p-3", onclick=`navigateToBookDetailPage(${book.id})`) #{book.id}
-                                             td(class="table-cell", onclick=`navigateToBookDetailPage(${book.id})`) #{book.name}
-                                             td(class="table-cell", onclick=`navigateToBookDetailPage(${book.id})`) #{book.publishedYear}
-                                             td(class="table-cell")
+                                             td.table-cell.p-3(onclick=`navigateToBookDetailPage(${book.id})`) #{book.id}
+                                             td.table-cell(onclick=`navigateToBookDetailPage(${book.id})`) #{book.name}
+                                             td.table-cell(onclick=`navigateToBookDetailPage(${book.id})`) #{book.publishedYear}
+                                             td.table-cell
                                                   i(class="material-icons hidden group-hover:block w-4", onclick=`removeBook(${book.id})`) delete
                else 
-                    +announcement('../illustration_no_data.svg', 'You have not associated any book with this category')
+                    +announcement(
+                         '/illustration_no_data.svg', 
+                         'You have not associated any book with this category'
+                    )
 
      script(type='text/javascript').
           const navigateToBookDetailPage = (id) => location.href = `/book/${id}`
@@ -53,3 +56,5 @@ block content
      
      include edit_category_modal.pug
      include ../view_category_list/delete_category_modal.pug
+
+     +edit_category_modal(categoryDetail.name)

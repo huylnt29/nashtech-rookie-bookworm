@@ -1,41 +1,46 @@
-div#edit-category-modal(class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
-     div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
-          div.flex.justify-between
-               p.text-xl.font-semibold Edit category 
-               i.material-icons.w-8.cursor-pointer(onclick="closeEditModal()") close
-          form.grid.gap-4.mb-4.grid-cols-2
-               div.col-span-2
-                    label(
-                         for="name", 
-                         class="block mb-2 text-sm font-medium text-slate-900"
-                    ) Name 
-                    input#name(
-                         type="text", 
-                         name="name", 
-                         class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
-                         placeholder="Type category name", 
-                         required
-                    )
-          div.flex.justify-end
-               button#submit-button(type="submit", class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded", onclick="submitEditCategory()") Submit
-     
-     +toast('danger', 'edit-category-toast')
+mixin edit_category_modal(value)
+     div#edit-category-modal(class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
+          div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
+               div.flex.justify-between
+                    p.text-xl.font-semibold Edit category 
+                    i.material-icons.w-8.cursor-pointer(onclick="closeEditModal()") close
+               form.grid.gap-4.mb-4.grid-cols-2
+                    div.col-span-2
+                         label(
+                              for="name", 
+                              class="block mb-2 text-sm font-medium text-slate-900"
+                         ) Name 
+                         input#name(
+                              type="text", 
+                              name="name", 
+                              value=value,
+                              class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                              placeholder="Type category name", 
+                              required
+                         )
+               div.flex.justify-end
+                    button#submit-button(type="submit", class="bg-slate-900 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded", onclick="submitEditCategory()") Submit
+          
+          +toast('danger', 'edit-category-toast')
 
-     script(type="text/javascript").
-          const openEditModal = () => {
-               u("#edit-category-modal").removeClass('hidden')   
-          }
+          script(type="text/javascript").
+               const openEditModal = () => {
+                    u("#edit-category-modal").removeClass('hidden')   
+               }
 
-          const closeEditModal = () => {
-               u("#edit-category-modal").addClass('hidden');   
-          }
+               const closeEditModal = () => {
+                    u("#edit-category-modal").addClass('hidden');   
+               }
 
-          const submitEditCategory = async () => {
-               const name = u("#name").nodes[0].value;
-               const id = location.href.split('/').at(-1)
-               axios.patch(`/category/${id}`, {
-                    name
-               })
-               .then(() => location.reload(true))
-               .catch((error) => showToast('#edit-category-toast', error.response.data.message.toString()));
-          }
+               const submitEditCategory = async () => {
+                    const name = u("#name").nodes[0].value;
+                    const id = location.href.split('/').at(-1)
+                    axios.patch(`/category/${id}`, {
+                         name
+                    })
+                    .then(() => location.reload(true))
+                    .catch((error) => showToast(
+                         '#edit-category-toast', 
+                         error.response.data.message.toString()
+                    ));
+               }

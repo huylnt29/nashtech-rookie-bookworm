@@ -102,4 +102,30 @@ export class DiscountService {
       },
     });
   }
+
+  async selectOne(id: number) {
+    return this.prisma.discount.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        batches: {
+          where: {
+            state: State.ACTIVE,
+          },
+          select: {
+            id: true,
+            soldQuantity: true,
+            price: true,
+            book: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
 }
