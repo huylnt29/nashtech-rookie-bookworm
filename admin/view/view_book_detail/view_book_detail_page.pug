@@ -18,9 +18,9 @@ block content
 
      div
           div.flex.justify-between.items-center
-               div.flex
-                    i.material-icons.w-8 book_5
-                    p.font-bold.text-xl.text-slate-900.uppercase #{book.name}
+               i.material-icons.w-8 book_5
+               p.font-bold.text-xl.text-slate-900.uppercase #{book.name}
+               div.grow
                +primary_button("Delete", `openDeleteModal(${book.id})`, "red")
 
           div.h-4
@@ -43,7 +43,7 @@ block content
                                    ) delete
                else 
                     +announcement(
-                         '../illustration_no_data.svg', 
+                         '/illustration_no_data.svg', 
                          'You have not inserted any image.'
                     )
           
@@ -88,7 +88,7 @@ block content
                                                   ) delete
                else 
                     +announcement(
-                         '../illustration_no_data.svg', 
+                         '/illustration_no_data.svg', 
                          'You have not associated any authors with this book'
                     )
 
