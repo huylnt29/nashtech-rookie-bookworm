@@ -18,6 +18,7 @@ import { PublisherModule } from './module/publisher/publisher.module';
 import { AuthorModule } from './module/author/author.module';
 import { BatchModule } from './module/batch/batch.module';
 import { DiscountModule } from './module/discount/discount.module';
+import { CollectionModule } from './module/collection/collection.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { DiscountModule } from './module/discount/discount.module';
     BookModule,
     BatchModule,
     DiscountModule,
+    CollectionModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
