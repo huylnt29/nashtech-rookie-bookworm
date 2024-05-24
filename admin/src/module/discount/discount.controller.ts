@@ -35,7 +35,7 @@ export class DiscountController {
   @Get('/new')
   async buildCreateDiscountPage(
     @Res() res: Response,
-    @Query('batch-id', ParseIntPipe) batchId: number,
+    @Query('batch-id', ParseIntPipe) batchId?: number,
   ) {
     if (batchId) {
       const batch = await this.batchService.selectOne(batchId);
@@ -43,7 +43,7 @@ export class DiscountController {
         batch,
       });
     } else {
-      const batches = await this.batchService.selectMany();
+      const batches = await this.batchService.selectManySimple();
       res.render('./create_discount/create_discount_page', {
         batches,
       });

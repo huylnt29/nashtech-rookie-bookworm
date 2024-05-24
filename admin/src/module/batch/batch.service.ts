@@ -112,9 +112,13 @@ export class BatchService {
         book: {
           select: {
             id: true,
+            name: true,
             imageUrls: true,
           },
         },
+      },
+      orderBy: {
+        bookId: 'asc',
       },
     });
   }
