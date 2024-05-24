@@ -27,6 +27,7 @@ block content
                                    th.table-cell.text-left START DATE
                                    th.table-cell.text-left END DATE
                                    th.table-cell.text-left IS RECURRING
+                                   th.table-cell.text-left BATCHES COUNT
                                    th.table-cell.text-left.w-8        
                          tbody.table-row-group
                               each discount in discounts
@@ -38,6 +39,7 @@ block content
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.startAt.toLocaleString()}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.endAt.toLocaleString()}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.isRecurring}
+                                             td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount._count.batches}
                                              td.table-cell
                                                   i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${discount.id})`) delete
                else 
