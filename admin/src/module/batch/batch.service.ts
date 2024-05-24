@@ -104,4 +104,18 @@ export class BatchService {
       },
     });
   }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.batch.findMany({
+      select: {
+        id: true,
+        book: {
+          select: {
+            id: true,
+            imageUrls: true,
+          },
+        },
+      },
+    });
+  }
 }

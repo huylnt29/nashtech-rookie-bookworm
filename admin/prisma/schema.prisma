@@ -53,13 +53,15 @@ model Batch {
   price           Float
   bookId          Int
   discountId      Int?
+  collectionId    Int?
   importedAt      DateTime @default(now())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   state           State    @default(ACTIVE)
   book            Book     @relation(fields: [bookId], references: [id])
 
-  discount Discount? @relation(fields: [discountId], references: [id])
+  discount   Discount?   @relation(fields: [discountId], references: [id])
+  Collection Collection? @relation(fields: [collectionId], references: [id])
 }
 
 model Discount {
@@ -124,11 +126,30 @@ model Review {
   book      Book     @relation(fields: [bookId], references: [id])
 }
 
+model Collection {
+  id       Int                @id @default(autoincrement())
+  code     String?
+  name     String
+  layout   CollectionLayout
+  movement CollectionMovement
+  batches  Batch[]
+}
+
 enum OrderStatus {
   PLACED
   PROCESSED
   COMPLETED
   CANCELLED
+}
+
+enum CollectionMovement {
+  MANUAL
+  AUTO
+}
+
+enum CollectionLayout {
+  GRID
+  LIST
 }
 
 enum State {

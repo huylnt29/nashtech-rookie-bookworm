@@ -33,14 +33,27 @@ export class DiscountController {
   }
 
   @Get('/new')
-  async buildCreateDiscountPage(@Res() res: Response) {
-    res.render('./create_discount/create_discount_page', {});
+  async buildCreateDiscountPage(
+    @Res() res: Response,
+    @Query('batch-id', ParseIntPipe) batchId: number,
+  ) {
+    if (batchId) {
+      const batch = await this.batchService.selectOne(batchId);
+      res.render('./create_discount/create_discount_page', {
+        batch,
+      });
+    } else {
+      const batches = await this.batchService.selectMany();
+      res.render('./create_discount/create_discount_page', {
+        batches,
+      });
+    }
   }
 
   @Post()
   async postDiscount(
     @Body() createDto: CreateDiscountDto,
-    @Query('batch-id') batchId: number,
+    @Query('batch-id', ParseIntPipe) batchId: number,
   ) {
     const newDiscount = await this.discountService.insert(createDto);
     if (batchId) {
