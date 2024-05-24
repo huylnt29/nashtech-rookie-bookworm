@@ -1,6 +1,6 @@
 div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
      form.grid.gap-4.mb-2.grid-cols-2
-          div(class="col-span-2")
+          div.col-span-2
                label.block.mb-2.text-sm.font-medium.text-slate-900(
                     for="minQuantity", 
                ) Min quantity 
@@ -12,7 +12,7 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     placeholder="Type discount min quantity", 
                     required
                )
-          div(class="col-span-2")
+          div.col-span-2
                label.block.mb-2.text-sm.font-medium.text-slate-900(
                     for="maxQuantity", 
                ) Max quantity 
@@ -23,7 +23,7 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-1/2 p-2.5", 
                     placeholder="Type discount max quantity", 
                )
-          div(class="col-span-2")
+          div.col-span-2
                label.block.mb-2.text-sm.font-medium.text-slate-900(
                     for="percentage", 
                ) Percentage
@@ -35,7 +35,7 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     placeholder="Type discount percentage", 
                     required
                )
-          div(class="col-span-2")
+          div.col-span-2
                label.block.mb-2.text-sm.font-medium.text-slate-900(
                     for="startAt", 
                ) Start date
@@ -46,7 +46,7 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
                     placeholder="Type or pick discount start date", 
                )
-          div(class="col-span-2")
+          div.col-span-2
                label.block.mb-2.text-sm.font-medium.text-slate-900(
                     for="endAt", 
                ) End date
@@ -57,3 +57,12 @@ div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                     class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
                     placeholder="Type or pick discount end date", 
                )
+          div.col-span-2
+               label.flex.justify-between.items-center.cursor-pointer.text-sm.font-medium.text-slate-900 Is it recurring?
+                    input.sr-only.peer(
+                         checked="" 
+                         value="" 
+                         type="checkbox"
+                    )
+                    div(class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-900")
+                    

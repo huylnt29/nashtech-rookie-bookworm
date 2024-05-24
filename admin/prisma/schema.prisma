@@ -71,7 +71,7 @@ model Discount {
   percentage  Decimal  @db.Decimal(3, 2)
   startAt     DateTime
   endAt       DateTime
-  isRecurring Boolean  @default(false)
+  isRecurring Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   state       State    @default(ACTIVE)

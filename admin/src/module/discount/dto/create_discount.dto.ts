@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsArray,
   IsBoolean,
   IsDate,
   IsDateString,
@@ -40,8 +41,14 @@ export class CreateDiscountDto {
   endAt: Date;
 
   @ApiProperty()
+  @IsOptional()
   @IsBoolean()
   isRecurring: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsArray()
+  batchIds: number[];
 
   postValidate(): boolean {
     return this.minQuantity < this.maxQuantity;

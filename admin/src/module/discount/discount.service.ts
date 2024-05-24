@@ -21,7 +21,14 @@ export class DiscountService {
 
   async insert(createDto: CreateDiscountDto) {
     return this.prisma.discount.create({
-      data: createDto,
+      data: {
+        ...createDto,
+        batches: {
+          connect: createDto.batchIds?.map((e) => ({
+            id: +e,
+          })),
+        },
+      },
       select: {
         id: true,
       },
