@@ -6,7 +6,7 @@ block content
                div.flex
                     i(class="material-icons w-8") category
                     p(class='font-bold text-xl text-slate-900') #{categoryDetail.name}
-               button(class='bg-red-900 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl', onclick=`openDeleteModal(${categoryDetail.id})`) Delete
+               +primary_button("Delete", `openDeleteModal(${categoryDetail.id})`, "red")
           div(class='h-4')
           div.flex.items-center
                div.w-2.bg-slate-600.mr-3.rounded-xl ''

@@ -3,12 +3,12 @@ import { PrismaModule } from 'src/core/prisma/prisma.module';
 import { BatchService } from './batch.service';
 import { BatchController } from './batch.controller';
 import { BookModule } from '../book/book.module';
-import { DiscountModule } from '../discount/discount.module';
+import { DiscountService } from '../discount/discount.service';
 
 @Module({
-  imports: [PrismaModule, BookModule, DiscountModule],
+  imports: [PrismaModule, BookModule],
   controllers: [BatchController],
-  providers: [BatchService],
+  providers: [BatchService, DiscountService],
   exports: [BatchService],
 })
 export class BatchModule {}

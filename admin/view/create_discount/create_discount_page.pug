@@ -1,0 +1,58 @@
+extends ../global_layout.pug
+
+block content
+     - var batchId = batch.id
+
+     include select_batch_menu.pug
+
+     div
+          div.flex.justify-between.items-center
+               p.font-bold.text-xl.text-slate-900 CREATE DISCOUNT
+               +primary_button("Submit", "submitCreateDiscount()", "slate")
+          div.flex.justify-start.items-start.gap-12.my-4.mb-12
+               div(class='basis-1/3')
+                    include create_discount_form.pug
+               div(class='basis-2/3')
+                    +select_batch_menu(batches, batch)
+                    
+     +toast('danger', 'create-discount-toast')
+
+     script(type='text/javascript').
+          var batchIds = []
+          const pickBatch = (id) => {
+               batchIds.push(id)
+               u(`#batch-menu-item-${id}`).addClass("bg-slate-100 font-bold")
+          }
+          const submitCreateDiscount = () => {
+               const minQuantity = parseInt(u('#minQuantity').nodes[0].value);
+               const maxQuantity = parseInt(u('#maxQuantity').nodes[0].value);
+               const percentage = parseInt(u('#percentage').nodes[0].value) / 100;
+               let startAt = u('#startAt').nodes[0].value
+               if (startAt != '') startAt = new Date(startAt).toISOString();
+               else startAt = undefined
+               let endAt = u('#endAt').nodes[0].value
+               if (endAt != '') endAt = new Date(endAt).toISOString();
+               else endAt = undefined
+               const isRecurring = u('#isRecurring').nodes[0].checked;
+  
+               axios.post(`/discount?batch-id=${"#{batchId}"}`, {
+                    minQuantity,
+                    maxQuantity,
+                    percentage,
+                    startAt,
+                    endAt,
+                    isRecurring
+               })
+               .then(() => {
+                    if ("#{batchId}") {
+                         location.href = `/batch/${"#{batchId}"}`
+                    }
+                    else {
+                         location.href = '/discount'
+                    }
+               })
+               .catch((error) => showToast(
+                    '#create-discount-toast', 
+                    error.response.data.message.toString()
+               ));
+          }

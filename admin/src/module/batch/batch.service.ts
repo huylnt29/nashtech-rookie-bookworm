@@ -93,4 +93,33 @@ export class BatchService {
       },
     });
   }
+
+  async associateDiscount(id: number, discountId: number) {
+    return this.prisma.batch.update({
+      where: {
+        id: id,
+      },
+      data: {
+        discountId: discountId,
+      },
+    });
+  }
+
+  async selectManySimple(): Promise<any> {
+    return this.prisma.batch.findMany({
+      select: {
+        id: true,
+        book: {
+          select: {
+            id: true,
+            name: true,
+            imageUrls: true,
+          },
+        },
+      },
+      orderBy: {
+        bookId: 'asc',
+      },
+    });
+  }
 }

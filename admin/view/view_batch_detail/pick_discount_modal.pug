@@ -16,7 +16,13 @@ mixin pick_discount_modal(discounts)
                          div.flex.flex-col 
                               p.text-slate-700= "Start at: " + discount.startAt.toLocaleString()
                               p.text-slate-700= "End at: " + discount.endAt.toLocaleString()
-
+               
+               div.h-4
+               div.relative.border-b.border-dashed.border-gray-400.absolute
+                    p.text-slate-900.font-bold.text-normal.bg-white.rounded-xl.p-2(class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2") Or you can
+               div.flex.justify-center 
+                    +secondary_button('Create new one then pick automatically', `navigateToCreateDiscountPage()`, colorScheme='slate')
+     
      script(type="text/javascript").
           const openPickDiscountModal = () => {
                u("#pick-discount-modal").removeClass('hidden')   
@@ -33,4 +39,9 @@ mixin pick_discount_modal(discounts)
                })
                .then(() => location.reload())
                .catch(console.log);
+          }
+
+          const navigateToCreateDiscountPage = () => {
+               const id = location.href.split('/').at(-1)
+               location.href = `/discount/new?batch-id=${id}`
           }
