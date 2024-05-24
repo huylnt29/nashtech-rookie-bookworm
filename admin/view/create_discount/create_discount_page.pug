@@ -1,7 +1,7 @@
 extends ../global_layout.pug
 
 block content
-     - var batchId = batch.id
+     - var batchId = batch ? batch.id : null
 
      include select_batch_menu.pug
 
