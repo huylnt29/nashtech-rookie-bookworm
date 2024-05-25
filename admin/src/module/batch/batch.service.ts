@@ -15,6 +15,7 @@ export class BatchService {
       },
       select: {
         id: true,
+        index: true,
         soldQuantity: true,
         price: true,
         updatedAt: true,
@@ -37,8 +38,17 @@ export class BatchService {
   }
 
   async insert(createBatchDto: CreateBatchDto) {
+    const batchesCount = await this.prisma.batch.count({
+      where: {
+        bookId: createBatchDto.bookId,
+      },
+    });
+    const newIndex = batchesCount + 1;
     return this.prisma.batch.create({
-      data: createBatchDto,
+      data: {
+        ...createBatchDto,
+        index: newIndex,
+      },
       select: {
         id: true,
       },
@@ -109,6 +119,7 @@ export class BatchService {
     return this.prisma.batch.findMany({
       select: {
         id: true,
+        index: true,
         book: {
           select: {
             id: true,
@@ -119,6 +130,7 @@ export class BatchService {
       },
       orderBy: {
         bookId: 'asc',
+        index: 'desc',
       },
     });
   }
