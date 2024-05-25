@@ -115,6 +115,7 @@ export class BookService {
           },
           select: {
             id: true,
+            index: true,
             originalPrice: true,
             price: true,
             soldQuantity: true,

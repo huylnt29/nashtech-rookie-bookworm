@@ -105,6 +105,7 @@ export class CollectionService {
           },
           select: {
             id: true,
+            index: true,
             soldQuantity: true,
             price: true,
             book: {
