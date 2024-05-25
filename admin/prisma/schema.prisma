@@ -47,21 +47,22 @@ model Author {
 
 model Batch {
   id              Int      @id @default(autoincrement())
+  index           Int
   initialQuantity Int
   soldQuantity    Int      @default(0)
   originalPrice   Float
   price           Float
   bookId          Int
   discountId      Int?
-  collectionId    Int?
   importedAt      DateTime @default(now())
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  state           State    @default(ACTIVE)
-  book            Book     @relation(fields: [bookId], references: [id])
 
-  discount   Discount?   @relation(fields: [discountId], references: [id])
-  Collection Collection? @relation(fields: [collectionId], references: [id])
+  state State @default(ACTIVE)
+
+  book        Book         @relation(fields: [bookId], references: [id])
+  discount    Discount?    @relation(fields: [discountId], references: [id])
+  collections Collection[]
 }
 
 model Discount {
@@ -106,7 +107,8 @@ model OrderLine {
 model Customer {
   id       Int     @id @default(autoincrement())
   name     String
-  phone    String
+  phone    String  @unique
+  email    String? @unique
   address  String?
   city     String?
   district String?
@@ -128,7 +130,7 @@ model Review {
 
 model Collection {
   id        Int                @id @default(autoincrement())
-  code      String?
+  code      String?            @unique
   name      String
   layout    CollectionLayout
   movement  CollectionMovement
