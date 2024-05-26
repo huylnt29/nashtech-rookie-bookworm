@@ -19,6 +19,9 @@ import { AuthorModule } from './module/author/author.module';
 import { BatchModule } from './module/batch/batch.module';
 import { DiscountModule } from './module/discount/discount.module';
 import { CollectionModule } from './module/collection/collection.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { BookResolver } from './module/book/book.resolver';
 
 @Module({
   imports: [
@@ -31,13 +34,19 @@ import { CollectionModule } from './module/collection/collection.module';
     BatchModule,
     DiscountModule,
     CollectionModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      fieldResolverEnhancers: ['guards'],
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      introspection: true,
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, BookResolver],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

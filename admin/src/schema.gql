@@ -1,0 +1,31 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Book {
+  id: Int!
+  state: State!
+  imageUrls: [String!]!
+  name: String!
+  description: String!
+  publishedYear: Float!
+  publisherId: Float!
+  categoryId: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum State {
+  ACTIVE
+  INACTIVE
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  books(skip: Int! = 0, take: Int! = 25): [Book!]!
+  book(id: Float!): Book!
+}
