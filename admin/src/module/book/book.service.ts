@@ -5,6 +5,7 @@ import { CreateBookDto } from './dto/create_book.dto';
 import { UpdateBookDto } from './dto/update_book.dto';
 import { S3Service } from 'src/core/s3/s3.service';
 import { BookArg } from './dto/book.arg';
+import { FindManyBookArgs } from './dto/find.args';
 
 @Injectable()
 export class BookService {
@@ -224,7 +225,7 @@ export class BookService {
     });
   }
 
-  findAll(args: BookArg) {
+  findAll(args: FindManyBookArgs) {
     return this.prisma.book.findMany(args);
   }
 

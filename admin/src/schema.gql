@@ -26,6 +26,47 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  books(skip: Int! = 0, take: Int! = 25): [Book!]!
+  books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, take: Float, skip: Float, distinct: [BookScalarFieldEnum!]): [Book!]!
   book(id: Float!): Book!
+}
+
+input BookWhereInput {
+  id: IntFilter
+  AND: [BookWhereInput!]
+  OR: [BookWhereInput!]
+  NOT: [BookWhereInput!]
+}
+
+input IntFilter {
+  equals: Float
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+}
+
+input BookOrderByWithRelationInput {
+  id: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input BookWhereUniqueInput {
+  id: Float
+}
+
+enum BookScalarFieldEnum {
+  id
+  imageUrls
+  name
+  description
+  publishedYear
+  publisherId
+  categoryId
+  createdAt
+  updatedAt
+  state
 }
