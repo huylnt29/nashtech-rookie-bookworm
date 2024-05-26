@@ -1,7 +1,5 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { $Enums, Prisma } from '@prisma/client';
-import { IntFilter, RestrictProperties } from 'src/core/dto/common.input';
-import { State } from 'src/core/enum/state.enum';
+import { IntFilter } from 'src/core/graphql/common.input';
 
 @InputType()
 export class BookWhereUniqueInput {

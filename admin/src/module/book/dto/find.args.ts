@@ -7,7 +7,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { BookOrderByWithRelationInput } from './order-by.args';
 import { BookWhereInput, BookWhereUniqueInput } from './where.args';
-import { RestrictProperties } from 'src/core/dto/common.input';
+import { RestrictProperties } from 'src/core/graphql/common.input';
 
 registerEnumType(Prisma.BookScalarFieldEnum, {
   name: 'BookScalarFieldEnum',

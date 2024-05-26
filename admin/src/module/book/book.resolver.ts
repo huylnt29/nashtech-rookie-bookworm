@@ -2,20 +2,22 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Book } from './entity/book.entity';
 import { BookService } from './book.service';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { BookArg } from './dto/book.arg';
-import { FindManyBookArgs } from './dto/find.args';
+import { FindManyBookArgs, FindUniqueBookArgs } from './dto/find.args';
 
 @Resolver(() => Book)
 export class BookResolver {
-  constructor(private readonly bookService: BookService) {}
+  constructor(
+    private readonly bookService: BookService,
+    private readonly prismaService: PrismaService,
+  ) {}
 
   @Query(() => [Book], { name: 'books' })
-  findAll(@Args() bookArg: FindManyBookArgs) {
-    return this.bookService.findAll(bookArg);
+  findAll(@Args() args: FindManyBookArgs) {
+    return this.prismaService.book.findMany(args);
   }
 
   @Query(() => Book, { name: 'book' })
-  findOne(@Args('id') id: number) {
-    return this.bookService.findOne(id);
+  findOne(@Args() args: FindUniqueBookArgs) {
+    return this.prismaService.book.findUnique(args);
   }
 }

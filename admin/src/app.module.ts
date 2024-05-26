@@ -22,9 +22,11 @@ import { CollectionModule } from './module/collection/collection.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { BookResolver } from './module/book/book.resolver';
+import { PrismaModule } from './core/prisma/prisma.module';
 
 @Module({
   imports: [
+    PrismaModule,
     ConfigModule,
     AuthModule,
     CategoryModule,

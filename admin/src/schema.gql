@@ -27,7 +27,7 @@ scalar DateTime
 
 type Query {
   books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, take: Float, skip: Float, distinct: [BookScalarFieldEnum!]): [Book!]!
-  book(id: Float!): Book!
+  book(where: BookWhereUniqueInput): Book!
 }
 
 input BookWhereInput {

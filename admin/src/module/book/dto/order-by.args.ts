@@ -1,6 +1,5 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
-import { RestrictProperties } from 'src/core/dto/common.input';
 
 @InputType()
 export class BookOrderByWithRelationInputStrict {
