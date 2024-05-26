@@ -5,7 +5,7 @@ import {
   PartialType,
 } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
-import { BookOrderByWithRelationInput } from './order-by.args';
+import { BookOrderByWithRelationInput } from './order_by.args';
 import { BookWhereInput, BookWhereUniqueInput } from './where.args';
 import { RestrictProperties } from 'src/core/graphql/common.input';
 
