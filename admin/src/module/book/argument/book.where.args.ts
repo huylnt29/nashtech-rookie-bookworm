@@ -11,6 +11,7 @@ import {
   CategoryListRelationFilter,
   CategoryRelationFilter,
 } from 'src/module/category/argument/category.where.args';
+import { ReviewListRelationFilter } from 'src/module/review/argument/review.where.args';
 
 @InputType()
 export class BookWhereUniqueInput {
@@ -26,6 +27,7 @@ export class BookWhereInputStrict {
   category: CategoryRelationFilter;
 
   authors: AuthorListRelationFilter;
+  reviews: ReviewListRelationFilter;
 
   AND: BookWhereInput[];
   OR: BookWhereInput[];

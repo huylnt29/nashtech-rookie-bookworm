@@ -43,6 +43,7 @@ input BookWhereInput {
   id: IntFilter
   category: CategoryRelationFilter
   authors: AuthorListRelationFilter
+  reviews: ReviewListRelationFilter
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
@@ -87,6 +88,20 @@ input AuthorWhereInput {
   AND: [AuthorWhereInput!]
   OR: [AuthorWhereInput!]
   NOT: [AuthorWhereInput!]
+}
+
+input ReviewListRelationFilter {
+  every: ReviewWhereInput
+  some: ReviewWhereInput
+  none: ReviewWhereInput
+}
+
+input ReviewWhereInput {
+  id: Float
+  rating: Float
+  AND: [ReviewWhereInput!]
+  OR: [ReviewWhereInput!]
+  NOT: [ReviewWhereInput!]
 }
 
 input BookOrderByWithRelationInput {
