@@ -9,7 +9,7 @@ import { IntFilter, RestrictProperties } from 'src/core/graphql/common.input';
 import {
   CategoryListRelationFilter,
   CategoryRelationFilter,
-} from 'src/module/category/dto/where.args';
+} from 'src/module/category/argument/category.where.args';
 
 @InputType()
 export class BookWhereUniqueInput {

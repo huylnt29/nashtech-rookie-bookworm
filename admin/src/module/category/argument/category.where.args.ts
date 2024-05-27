@@ -6,7 +6,7 @@ import {
 } from '@nestjs/graphql';
 import { $Enums, Prisma } from '@prisma/client';
 import { IntFilter, RestrictProperties } from 'src/core/graphql/common.input';
-import { BookListRelationFilter } from 'src/module/book/dto/where.args';
+import { BookListRelationFilter } from 'src/module/book/argument/book.where.args';
 
 @InputType()
 export class CategoryWhereUniqueInput {

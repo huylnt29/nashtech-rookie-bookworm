@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { Book, State } from '@prisma/client';
-import { CreateBookDto } from './dto/create.dto';
-import { UpdateBookDto } from './dto/update.dto';
+import { CreateBookDto } from './dto/book.create.dto';
+import { UpdateBookDto } from './dto/book.update.dto';
 import { S3Service } from 'src/core/s3/s3.service';
 
 @Injectable()

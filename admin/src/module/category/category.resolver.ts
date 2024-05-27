@@ -2,7 +2,10 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Category } from './entity/Category.entity';
 import { CategoryService } from './Category.service';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { FindManyCategoryArgs, FindUniqueCategoryArgs } from './dto/find.dto';
+import {
+  FindManyCategoryArgs,
+  FindUniqueCategoryArgs,
+} from './argument/category.find.args';
 
 @Resolver(() => Category)
 export class CategoryResolver {

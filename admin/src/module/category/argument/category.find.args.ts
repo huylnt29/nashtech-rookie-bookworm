@@ -5,8 +5,11 @@ import {
   PartialType,
 } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
-import { CategoryOrderByWithRelationInput } from './order_by.args';
-import { CategoryWhereInput, CategoryWhereUniqueInput } from './where.args';
+import { CategoryOrderByWithRelationInput } from './category.order_by.args';
+import {
+  CategoryWhereInput,
+  CategoryWhereUniqueInput,
+} from './category.where.args';
 import { RestrictProperties } from 'src/core/graphql/common.input';
 
 registerEnumType(Prisma.CategoryScalarFieldEnum, {

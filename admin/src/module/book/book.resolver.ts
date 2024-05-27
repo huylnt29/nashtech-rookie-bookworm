@@ -1,8 +1,10 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Book } from './entity/book.entity';
-import { BookService } from './book.service';
 import { PrismaService } from 'src/core/prisma/prisma.service';
-import { FindManyBookArgs, FindUniqueBookArgs } from './dto/find.dto';
+import {
+  FindManyBookArgs,
+  FindUniqueBookArgs,
+} from './argument/book.find.args';
 
 @Resolver(() => Book)
 export class BookResolver {

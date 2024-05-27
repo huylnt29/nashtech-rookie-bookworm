@@ -12,9 +12,9 @@ import {
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Response } from 'express';
-import { CreateCategoryDto } from './dto/create_category.dto';
+import { CreateCategoryDto } from './dto/category.create.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { UpdateCategoryDto } from './dto/update_category.dto';
+import { UpdateCategoryDto } from './dto/category.update.dto';
 
 @Controller('category')
 @ApiTags('CATEGORY')

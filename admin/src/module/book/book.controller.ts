@@ -16,8 +16,8 @@ import {
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Response } from 'express';
-import { CreateBookDto } from './dto/create.dto';
-import { UpdateBookDto } from './dto/update.dto';
+import { CreateBookDto } from './dto/book.create.dto';
+import { UpdateBookDto } from './dto/book.update.dto';
 import { ApiTags } from '@nestjs/swagger';
 import {
   FilesInterceptor,
