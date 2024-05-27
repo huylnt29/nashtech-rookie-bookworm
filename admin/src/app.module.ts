@@ -26,6 +26,7 @@ import { PrismaModule } from './core/prisma/prisma.module';
 import { CategoryResolver } from './module/category/category.resolver';
 import { BatchResolver } from './module/batch/batch.resolver';
 import { DiscountResolver } from './module/discount/discount.resolver';
+import { PaginationService } from './core/pagination/pagination.service';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { DiscountResolver } from './module/discount/discount.resolver';
   controllers: [AppController],
   providers: [
     AppService,
+    PaginationService,
     BatchResolver,
     BookResolver,
     CategoryResolver,

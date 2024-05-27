@@ -15,13 +15,12 @@ registerEnumType(Prisma.BookScalarFieldEnum, {
 });
 
 @ArgsType()
-class FindManyBookArgsStrict
-  implements
-    RestrictProperties<
-      FindManyBookArgsStrict,
-      Omit<Prisma.BookFindManyArgs, 'include' | 'select'>
-    >
-{
+// implements
+//   RestrictProperties<
+//     FindManyBookArgsStrict,
+//     Omit<Prisma.BookFindManyArgs, 'include' | 'select'>
+//   >
+class FindManyBookArgsStrict {
   @Field(() => BookWhereInput, { nullable: true })
   where: BookWhereInput;
   @Field(() => [BookOrderByWithRelationInput], { nullable: true })
@@ -29,9 +28,9 @@ class FindManyBookArgsStrict
   @Field(() => BookWhereUniqueInput, { nullable: true })
   cursor: BookWhereUniqueInput;
   @Field(() => Number, { nullable: true })
-  take: number;
+  page: number;
   @Field(() => Number, { nullable: true })
-  skip: number;
+  limit: number;
   @Field(() => [Prisma.BookScalarFieldEnum], { nullable: true })
   distinct: Prisma.BookScalarFieldEnum[];
 }

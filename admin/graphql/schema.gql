@@ -26,6 +26,17 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type BookPageResult {
+  data: [Book!]!
+  meta: PageInfo!
+}
+
+type PageInfo {
+  totalItems: Float!
+  page: Float!
+  totalPages: Float!
+}
+
 type Category {
   id: Float!
   name: String!
@@ -65,7 +76,7 @@ type Discount {
 type Query {
   batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, take: Float, skip: Float, distinct: [BatchScalarFieldEnum!]): [Batch!]!
   batch(where: BatchWhereUniqueInput): Batch!
-  books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, take: Float, skip: Float, distinct: [BookScalarFieldEnum!]): [Book!]!
+  books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, page: Float, limit: Float, distinct: [BookScalarFieldEnum!]): BookPageResult!
   book(where: BookWhereUniqueInput): Book!
   categories(where: CategoryWhereInput, orderBy: [CategoryOrderByWithRelationInput!], cursor: CategoryWhereUniqueInput, take: Float, skip: Float, distinct: [CategoryScalarFieldEnum!]): [Category!]!
   category(where: CategoryWhereUniqueInput): Category!

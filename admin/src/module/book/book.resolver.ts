@@ -5,14 +5,22 @@ import {
   FindManyBookArgs,
   FindUniqueBookArgs,
 } from './argument/book.find.args';
+import { PaginationService } from 'src/core/pagination/pagination.service';
+import { BookPageResult } from './entity/book.page_result.entity';
 
 @Resolver(() => Book)
 export class BookResolver {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly paginationService: PaginationService,
+  ) {}
 
-  @Query(() => [Book], { name: 'books' })
+  @Query(() => BookPageResult, { name: 'books' })
   findAll(@Args() args: FindManyBookArgs) {
-    return this.prismaService.book.findMany(args);
+    return this.paginationService.paginate(this.prismaService.book, args, {
+      page: args.page,
+      limit: args.limit,
+    });
   }
 
   @Query(() => Book, { name: 'book' })
