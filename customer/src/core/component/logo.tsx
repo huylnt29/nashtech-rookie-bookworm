@@ -1,13 +1,7 @@
-import { Flex, Image, Text } from '@chakra-ui/react'
-import Favicon from '../../assets/images/favicon.png'
-import { UI } from '../../../reactjs-component'
+import { Avatar } from "@nextui-org/react"
 
 const Logo = () => {
-  return <Flex justify='start' align='end'>
-    <Image src={Favicon} boxSize='40px' />
-    {UI.createHorizontalSpace(18)}
-    <Text fontWeight='bold' fontStyle='italic' fontSize='lg' color='accent' whiteSpace='nowrap'>HCMUS E-Ticket</Text> 
-  </Flex>
+     return <Avatar src="./logo.png" className="w-20 h-20 text-large" />
 }
 
 export default Logo
