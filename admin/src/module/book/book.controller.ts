@@ -16,8 +16,8 @@ import {
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { Response } from 'express';
-import { CreateBookDto } from './dto/create_book.dto';
-import { UpdateBookDto } from './dto/update_book.dto';
+import { CreateBookDto } from './dto/book.create.dto';
+import { UpdateBookDto } from './dto/book.update.dto';
 import { ApiTags } from '@nestjs/swagger';
 import {
   FilesInterceptor,
@@ -36,6 +36,11 @@ export class BookController {
     private publisherService: PublisherService,
     private authorService: AuthorService,
   ) {}
+
+  @Get('/everything')
+  async getBooks() {
+    return this.bookService.selectEverything();
+  }
 
   @Get()
   async buildBookListPage(@Res() res: Response): Promise<void> {

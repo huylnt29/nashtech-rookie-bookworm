@@ -8,21 +8,22 @@ datasource db {
 }
 
 model Book {
-  id            Int        @id @default(autoincrement())
-  imageUrls     String[]
-  name          String
-  description   String?
-  publishedYear Int?
-  publisherId   Int?
-  categoryId    Int?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  state         State      @default(ACTIVE)
-  authors       Author[]
-  reviews       Review[]
-  batches       Batch[]
-  publisher     Publisher? @relation(fields: [publisherId], references: [id])
-  category      Category?  @relation(fields: [categoryId], references: [id])
+  id                Int        @id @default(autoincrement())
+  imageUrls         String[]
+  name              String
+  description       String?
+  publishedYear     Int?
+  publisherId       Int?
+  categoryId        Int?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  totalSoldQuantity Int        @default(0)
+  state             State      @default(ACTIVE)
+  authors           Author[]
+  reviews           Review[]
+  batches           Batch[]
+  publisher         Publisher? @relation(fields: [publisherId], references: [id])
+  category          Category?  @relation(fields: [categoryId], references: [id])
 }
 
 model Publisher {
@@ -69,7 +70,7 @@ model Discount {
   id          Int      @id @default(autoincrement())
   minQuantity Int      @default(1)
   maxQuantity Int?
-  percentage  Decimal  @db.Decimal(3, 2)
+  percentage  Float
   startAt     DateTime
   endAt       DateTime
   isRecurring Boolean  @default(true)

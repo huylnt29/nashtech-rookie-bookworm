@@ -19,9 +19,18 @@ import { AuthorModule } from './module/author/author.module';
 import { BatchModule } from './module/batch/batch.module';
 import { DiscountModule } from './module/discount/discount.module';
 import { CollectionModule } from './module/collection/collection.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { BookResolver } from './module/book/book.resolver';
+import { PrismaModule } from './core/prisma/prisma.module';
+import { CategoryResolver } from './module/category/category.resolver';
+import { BatchResolver } from './module/batch/batch.resolver';
+import { DiscountResolver } from './module/discount/discount.resolver';
+import { PaginationService } from './core/pagination/pagination.service';
 
 @Module({
   imports: [
+    PrismaModule,
     ConfigModule,
     AuthModule,
     CategoryModule,
@@ -31,13 +40,26 @@ import { CollectionModule } from './module/collection/collection.module';
     BatchModule,
     DiscountModule,
     CollectionModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      fieldResolverEnhancers: ['guards'],
+      autoSchemaFile: join(process.cwd(), 'graphql/schema.gql'),
+      introspection: true,
+    }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api*'],
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    PaginationService,
+    BatchResolver,
+    BookResolver,
+    CategoryResolver,
+    DiscountResolver,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
