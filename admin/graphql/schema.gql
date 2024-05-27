@@ -34,6 +34,7 @@ type Category {
 
 type Batch {
   state: State!
+  book: Book
   id: Float!
   index: Float!
   initialQuantity: Float!

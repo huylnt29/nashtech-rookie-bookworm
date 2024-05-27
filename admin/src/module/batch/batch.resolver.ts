@@ -12,7 +12,12 @@ export class BatchResolver {
 
   @Query(() => [Batch], { name: 'batches' })
   findAll(@Args() args: FindManyBatchArgs) {
-    return this.prismaService.batch.findMany(args);
+    return this.prismaService.batch.findMany({
+      ...args,
+      include: {
+        book: true,
+      },
+    });
   }
 
   @Query(() => Batch, { name: 'batch' })

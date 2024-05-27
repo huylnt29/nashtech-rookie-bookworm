@@ -2,9 +2,10 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { $Enums, Batch as BatchType } from '@prisma/client';
 import { RestrictProperties } from 'src/core/graphql/common.input';
 import { State } from 'src/core/graphql/register_enum';
+import { Book } from 'src/module/book/entity/book.entity';
 
 @ObjectType()
-export class Batch implements RestrictProperties<Batch, BatchType> {
+export class Batch {
   id: number;
   index: number;
   initialQuantity: number;
@@ -18,4 +19,6 @@ export class Batch implements RestrictProperties<Batch, BatchType> {
   updatedAt: Date;
   @Field(() => State)
   state: $Enums.State;
+  @Field(() => Book, { nullable: true })
+  book: Book;
 }
