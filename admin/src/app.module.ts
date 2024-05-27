@@ -39,7 +39,7 @@ import { PrismaModule } from './core/prisma/prisma.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       fieldResolverEnhancers: ['guards'],
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(process.cwd(), 'graphql/schema.gql'),
       introspection: true,
     }),
     ServeStaticModule.forRoot({

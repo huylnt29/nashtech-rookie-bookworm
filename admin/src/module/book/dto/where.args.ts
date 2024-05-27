@@ -1,5 +1,6 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { IntFilter } from 'src/core/graphql/common.input';
+import { $Enums, Prisma } from '@prisma/client';
+import { IntFilter, RestrictProperties } from 'src/core/graphql/common.input';
 
 @InputType()
 export class BookWhereUniqueInput {
@@ -8,7 +9,11 @@ export class BookWhereUniqueInput {
 }
 
 @InputType()
+// implements RestrictProperties<BookWhereInput, Prisma.BookWhereInput>
 export class BookWhereInputStrict {
+  @Field(() => Number, { nullable: true })
+  categoryId: number;
+
   @Field(() => IntFilter, { nullable: true })
   id: IntFilter;
 

@@ -6,7 +6,6 @@ import { State } from 'src/core/graphql/register_enum';
 
 @ObjectType()
 export class Book implements RestrictProperties<Book, BookType> {
-  @Field(() => Int)
   id: number;
   imageUrls: string[];
   name: string;

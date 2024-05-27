@@ -3,8 +3,8 @@
 # ------------------------------------------------------
 
 type Book {
-  id: Int!
   state: State!
+  id: Float!
   imageUrls: [String!]!
   name: String!
   description: String!
@@ -31,6 +31,7 @@ type Query {
 }
 
 input BookWhereInput {
+  categoryId: Float
   id: IntFilter
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
