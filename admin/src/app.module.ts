@@ -25,6 +25,7 @@ import { BookResolver } from './module/book/book.resolver';
 import { PrismaModule } from './core/prisma/prisma.module';
 import { CategoryResolver } from './module/category/category.resolver';
 import { BatchResolver } from './module/batch/batch.resolver';
+import { DiscountResolver } from './module/discount/discount.resolver';
 
 @Module({
   imports: [
@@ -50,7 +51,13 @@ import { BatchResolver } from './module/batch/batch.resolver';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, BatchResolver, BookResolver, CategoryResolver],
+  providers: [
+    AppService,
+    BatchResolver,
+    BookResolver,
+    CategoryResolver,
+    DiscountResolver,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

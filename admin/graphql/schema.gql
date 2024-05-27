@@ -13,6 +13,7 @@ type Book {
   categoryId: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
+  totalSoldQuantity: Float!
 }
 
 enum State {
@@ -48,6 +49,19 @@ type Batch {
   book: Book!
 }
 
+type Discount {
+  state: State!
+  id: Float!
+  minQuantity: Float!
+  maxQuantity: Float!
+  percentage: Float!
+  startAt: DateTime!
+  endAt: DateTime!
+  isRecurring: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, take: Float, skip: Float, distinct: [BatchScalarFieldEnum!]): [Batch!]!
   batch(where: BatchWhereUniqueInput): Batch!
@@ -55,11 +69,14 @@ type Query {
   book(where: BookWhereUniqueInput): Book!
   categories(where: CategoryWhereInput, orderBy: [CategoryOrderByWithRelationInput!], cursor: CategoryWhereUniqueInput, take: Float, skip: Float, distinct: [CategoryScalarFieldEnum!]): [Category!]!
   category(where: CategoryWhereUniqueInput): Category!
+  discounts(where: DiscountWhereInput, orderBy: [DiscountOrderByWithRelationInput!], cursor: DiscountWhereUniqueInput, take: Float, skip: Float, distinct: [DiscountScalarFieldEnum!]): [Discount!]!
+  discount(where: DiscountWhereUniqueInput): Discount!
 }
 
 input BatchWhereInput {
   id: Float
   book: BookRelationFilter
+  discount: DiscountRelationFilter
   AND: [BatchWhereInput!]
   OR: [BatchWhereInput!]
   NOT: [BatchWhereInput!]
@@ -135,6 +152,19 @@ input ReviewWhereInput {
   NOT: [ReviewWhereInput!]
 }
 
+input DiscountRelationFilter {
+  is: DiscountWhereInput
+  isNot: DiscountWhereInput
+}
+
+input DiscountWhereInput {
+  id: Float
+  percentage: Float
+  AND: [DiscountWhereInput!]
+  OR: [DiscountWhereInput!]
+  NOT: [DiscountWhereInput!]
+}
+
 input BatchOrderByWithRelationInput {
   price: SortOrder
 }
@@ -181,6 +211,7 @@ enum BookScalarFieldEnum {
   categoryId
   createdAt
   updatedAt
+  totalSoldQuantity
   state
 }
 
@@ -197,4 +228,25 @@ enum CategoryScalarFieldEnum {
   name
   createdAt
   updatedAt
+}
+
+input DiscountOrderByWithRelationInput {
+  percentage: SortOrder
+}
+
+input DiscountWhereUniqueInput {
+  id: Float
+}
+
+enum DiscountScalarFieldEnum {
+  id
+  minQuantity
+  maxQuantity
+  percentage
+  startAt
+  endAt
+  isRecurring
+  createdAt
+  updatedAt
+  state
 }

@@ -1,5 +1,6 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { BookRelationFilter } from 'src/module/book/argument/book.where.args';
+import { DiscountRelationFilter } from 'src/module/discount/argument/discount.where.args';
 
 @InputType()
 export class BatchWhereUniqueInput {
@@ -11,6 +12,7 @@ export class BatchWhereUniqueInput {
 export class BatchWhereInputStrict {
   id: number;
   book: BookRelationFilter;
+  discount: DiscountRelationFilter;
 
   AND: BatchWhereInput[];
   OR: BatchWhereInput[];
