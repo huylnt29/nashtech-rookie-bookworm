@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { Book, State } from '@prisma/client';
-import { CreateBookDto } from './dto/create_book.dto';
-import { UpdateBookDto } from './dto/update_book.dto';
+import { CreateBookDto } from './dto/book.create.dto';
+import { UpdateBookDto } from './dto/book.update.dto';
 import { S3Service } from 'src/core/s3/s3.service';
 
 @Injectable()
@@ -219,6 +219,18 @@ export class BookService {
         id: true,
         name: true,
         imageUrls: true,
+      },
+    });
+  }
+
+  async selectEverything(): Promise<any[]> {
+    return this.prisma.book.findMany({
+      include: {
+        category: true,
+        publisher: true,
+        authors: true,
+        reviews: true,
+        batches: true,
       },
     });
   }
