@@ -42,6 +42,7 @@ type Query {
 input BookWhereInput {
   id: IntFilter
   category: CategoryRelationFilter
+  authors: AuthorListRelationFilter
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
@@ -72,6 +73,20 @@ input BookListRelationFilter {
   every: BookWhereInput
   some: BookWhereInput
   none: BookWhereInput
+}
+
+input AuthorListRelationFilter {
+  every: AuthorWhereInput
+  some: AuthorWhereInput
+  none: AuthorWhereInput
+}
+
+input AuthorWhereInput {
+  id: Float
+  books: BookListRelationFilter
+  AND: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
 }
 
 input BookOrderByWithRelationInput {

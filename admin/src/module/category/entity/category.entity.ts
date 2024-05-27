@@ -1,5 +1,5 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { $Enums, Category as CategoryType } from '@prisma/client';
+import { ObjectType } from '@nestjs/graphql';
+import { Category as CategoryType } from '@prisma/client';
 import { RestrictProperties } from 'src/core/graphql/common.input';
 
 @ObjectType()

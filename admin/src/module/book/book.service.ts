@@ -222,4 +222,16 @@ export class BookService {
       },
     });
   }
+
+  async selectEverything(): Promise<any[]> {
+    return this.prisma.book.findMany({
+      include: {
+        category: true,
+        publisher: true,
+        authors: true,
+        reviews: true,
+        batches: true,
+      },
+    });
+  }
 }

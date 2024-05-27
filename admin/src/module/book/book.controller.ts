@@ -37,6 +37,11 @@ export class BookController {
     private authorService: AuthorService,
   ) {}
 
+  @Get('/everything')
+  async getBooks() {
+    return this.bookService.selectEverything();
+  }
+
   @Get()
   async buildBookListPage(@Res() res: Response): Promise<void> {
     const books = await this.bookService.selectMany();

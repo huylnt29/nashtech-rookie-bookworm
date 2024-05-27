@@ -1,11 +1,4 @@
-import {
-  Field,
-  InputType,
-  PartialType,
-  registerEnumType,
-} from '@nestjs/graphql';
-import { $Enums, Prisma } from '@prisma/client';
-import { IntFilter, RestrictProperties } from 'src/core/graphql/common.input';
+import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { BookListRelationFilter } from 'src/module/book/argument/book.where.args';
 
 @InputType()
