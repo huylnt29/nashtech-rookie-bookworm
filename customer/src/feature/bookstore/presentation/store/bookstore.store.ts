@@ -9,15 +9,27 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
     categories: [],
     authors: [],
     booksResultRequestState: RequestState.IDLE,
+    filteredBooks: [],
     fetchFilter: async () => {
       set(() => ({
         filterDataRequestState: RequestState.LOADING,
       }));
-      const res = await BookstoreRepository.fetchFilterDataForBooks();
+      const res = await BookstoreRepository.fetchBookFilterMenuList();
       set(() => ({
         filterDataRequestState: RequestState.LOADED,
         categories: res.data.categories,
         authors: res.data.authors,
+      }));
+    },
+    filterBooks: async () => {
+      set(() => ({
+        booksResultRequestState: RequestState.LOADING,
+      }));
+      const res = await BookstoreRepository.filterBooks();
+      console.log(res);
+      set(() => ({
+        booksResultRequestState: RequestState.LOADED,
+        filteredBooks: res,
       }));
     },
   };

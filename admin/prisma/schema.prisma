@@ -18,6 +18,7 @@ model Book {
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
   totalSoldQuantity Int        @default(0)
+  averageRating     Float      @default(0)
   state             State      @default(ACTIVE)
   authors           Author[]
   reviews           Review[]

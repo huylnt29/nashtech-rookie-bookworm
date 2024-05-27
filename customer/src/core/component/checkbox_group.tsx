@@ -12,9 +12,11 @@ export type CheckboxOption = {
 
 const AppCheckboxGroup = ({ options }: AppCheckboxGroupProps) => {
   return (
-    <VStack align="start">
+    <VStack align="start" spacing={3}>
       {options.map((option) => (
-        <Checkbox value={option.key}>{option.value}</Checkbox>
+        <Checkbox key={option.key} value={option.key}>
+          {option.value}
+        </Checkbox>
       ))}
     </VStack>
   );

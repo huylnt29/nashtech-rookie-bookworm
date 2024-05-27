@@ -16,6 +16,7 @@ export class Book implements RestrictProperties<Book, BookType> {
   createdAt: Date;
   updatedAt: Date;
   totalSoldQuantity: number;
+  averageRating: number;
   @Field(() => State)
   state: $Enums.State;
 }
