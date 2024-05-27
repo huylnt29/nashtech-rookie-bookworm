@@ -19,6 +19,6 @@ export class Batch {
   updatedAt: Date;
   @Field(() => State)
   state: $Enums.State;
-  @Field(() => Book, { nullable: true })
+
   book: Book;
 }

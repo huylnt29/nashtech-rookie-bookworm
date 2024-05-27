@@ -34,7 +34,6 @@ type Category {
 
 type Batch {
   state: State!
-  book: Book
   id: Float!
   index: Float!
   initialQuantity: Float!
@@ -46,6 +45,7 @@ type Batch {
   importedAt: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
+  book: Book!
 }
 
 type Query {
