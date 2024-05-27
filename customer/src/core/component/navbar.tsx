@@ -1,14 +1,24 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Spacer} from "@nextui-org/react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  Spacer,
+} from "@nextui-org/react";
 import Logo from "./logo";
 import { Text } from "@chakra-ui/react";
 
 export default function AppNavbar() {
   return (
-    <Navbar className="bg-transparent p-8">
-      <NavbarBrand >
+    <Navbar className="bg-transparent p-3">
+      <NavbarBrand>
         <Logo />
         <Spacer x={4} />
-        <Text color='white' fontWeight='bold'>BookWorm</Text>
+        <Text color="white" fontWeight="bold">
+          BookWorm
+        </Text>
       </NavbarBrand>
 
       <NavbarContent className="flex gap-12" justify="center">

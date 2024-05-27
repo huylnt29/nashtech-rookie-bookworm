@@ -16,8 +16,8 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
       const res = await BookstoreRepository.fetchFilterDataForBooks();
       set(() => ({
         filterDataRequestState: RequestState.LOADED,
-        categories: res.categories,
-        authors: res.authors,
+        categories: res.data.categories,
+        authors: res.data.authors,
       }));
     },
   };
