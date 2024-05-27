@@ -1,4 +1,5 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
+import { BookRelationFilter } from 'src/module/book/argument/book.where.args';
 
 @InputType()
 export class BatchWhereUniqueInput {
@@ -9,7 +10,7 @@ export class BatchWhereUniqueInput {
 // implements RestrictProperties<BatchWhereInput, Prisma.BatchWhereInput>
 export class BatchWhereInputStrict {
   id: number;
-  rating: number;
+  book: BookRelationFilter;
 
   AND: BatchWhereInput[];
   OR: BatchWhereInput[];

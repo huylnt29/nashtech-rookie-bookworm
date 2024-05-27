@@ -4,7 +4,7 @@ import { Prisma } from '@prisma/client';
 @InputType()
 export class BatchOrderByWithRelationInputStrict {
   @Field(() => Prisma.SortOrder)
-  id: Prisma.SortOrder;
+  price: Prisma.SortOrder;
 }
 
 @InputType()

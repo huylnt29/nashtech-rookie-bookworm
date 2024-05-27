@@ -24,6 +24,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { BookResolver } from './module/book/book.resolver';
 import { PrismaModule } from './core/prisma/prisma.module';
 import { CategoryResolver } from './module/category/category.resolver';
+import { BatchResolver } from './module/batch/batch.resolver';
 
 @Module({
   imports: [
@@ -49,7 +50,7 @@ import { CategoryResolver } from './module/category/category.resolver';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, BookResolver, CategoryResolver],
+  providers: [AppService, BatchResolver, BookResolver, CategoryResolver],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

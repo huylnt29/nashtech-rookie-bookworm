@@ -32,11 +32,41 @@ type Category {
   updatedAt: DateTime!
 }
 
+type Batch {
+  state: State!
+  id: Float!
+  index: Float!
+  initialQuantity: Float!
+  soldQuantity: Float!
+  originalPrice: Float!
+  price: Float!
+  bookId: Float!
+  discountId: Float!
+  importedAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
+  batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, take: Float, skip: Float, distinct: [BatchScalarFieldEnum!]): [Batch!]!
+  batch(where: BatchWhereUniqueInput): Batch!
   books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, take: Float, skip: Float, distinct: [BookScalarFieldEnum!]): [Book!]!
   book(where: BookWhereUniqueInput): Book!
   categories(where: CategoryWhereInput, orderBy: [CategoryOrderByWithRelationInput!], cursor: CategoryWhereUniqueInput, take: Float, skip: Float, distinct: [CategoryScalarFieldEnum!]): [Category!]!
   category(where: CategoryWhereUniqueInput): Category!
+}
+
+input BatchWhereInput {
+  id: Float
+  book: BookRelationFilter
+  AND: [BatchWhereInput!]
+  OR: [BatchWhereInput!]
+  NOT: [BatchWhereInput!]
+}
+
+input BookRelationFilter {
+  is: BookWhereInput
+  isNot: BookWhereInput
 }
 
 input BookWhereInput {
@@ -104,14 +134,36 @@ input ReviewWhereInput {
   NOT: [ReviewWhereInput!]
 }
 
-input BookOrderByWithRelationInput {
-  id: SortOrder
+input BatchOrderByWithRelationInput {
   price: SortOrder
 }
 
 enum SortOrder {
   asc
   desc
+}
+
+input BatchWhereUniqueInput {
+  id: Float
+}
+
+enum BatchScalarFieldEnum {
+  id
+  index
+  initialQuantity
+  soldQuantity
+  originalPrice
+  price
+  bookId
+  discountId
+  importedAt
+  createdAt
+  updatedAt
+  state
+}
+
+input BookOrderByWithRelationInput {
+  id: SortOrder
 }
 
 input BookWhereUniqueInput {
