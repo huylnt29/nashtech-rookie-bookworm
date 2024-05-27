@@ -6,10 +6,7 @@ import { FindManyBookArgs, FindUniqueBookArgs } from './dto/find.dto';
 
 @Resolver(() => Book)
 export class BookResolver {
-  constructor(
-    private readonly bookService: BookService,
-    private readonly prismaService: PrismaService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @Query(() => [Book], { name: 'books' })
   findAll(@Args() args: FindManyBookArgs) {

@@ -25,14 +25,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Category {
+  id: Float!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, take: Float, skip: Float, distinct: [BookScalarFieldEnum!]): [Book!]!
   book(where: BookWhereUniqueInput): Book!
+  categories(where: CategoryWhereInput, orderBy: [CategoryOrderByWithRelationInput!], cursor: CategoryWhereUniqueInput, take: Float, skip: Float, distinct: [CategoryScalarFieldEnum!]): [Category!]!
+  category(where: CategoryWhereUniqueInput): Category!
 }
 
 input BookWhereInput {
-  categoryId: Float
   id: IntFilter
+  category: CategoryRelationFilter
   AND: [BookWhereInput!]
   OR: [BookWhereInput!]
   NOT: [BookWhereInput!]
@@ -44,6 +53,25 @@ input IntFilter {
   lte: Float
   gt: Float
   gte: Float
+}
+
+input CategoryRelationFilter {
+  is: CategoryWhereInput
+  isNot: CategoryWhereInput
+}
+
+input CategoryWhereInput {
+  id: Float
+  books: BookListRelationFilter
+  AND: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+}
+
+input BookListRelationFilter {
+  every: BookWhereInput
+  some: BookWhereInput
+  none: BookWhereInput
 }
 
 input BookOrderByWithRelationInput {
@@ -70,4 +98,19 @@ enum BookScalarFieldEnum {
   createdAt
   updatedAt
   state
+}
+
+input CategoryOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input CategoryWhereUniqueInput {
+  id: Float
+}
+
+enum CategoryScalarFieldEnum {
+  id
+  name
+  createdAt
+  updatedAt
 }

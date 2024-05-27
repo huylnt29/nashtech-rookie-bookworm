@@ -23,6 +23,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { BookResolver } from './module/book/book.resolver';
 import { PrismaModule } from './core/prisma/prisma.module';
+import { CategoryResolver } from './module/category/category.resolver';
 
 @Module({
   imports: [
@@ -48,7 +49,7 @@ import { PrismaModule } from './core/prisma/prisma.module';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, BookResolver],
+  providers: [AppService, BookResolver, CategoryResolver],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
