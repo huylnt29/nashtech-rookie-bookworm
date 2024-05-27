@@ -27,6 +27,7 @@ import { CategoryResolver } from './module/category/category.resolver';
 import { BatchResolver } from './module/batch/batch.resolver';
 import { DiscountResolver } from './module/discount/discount.resolver';
 import { PaginationService } from './core/pagination/pagination.service';
+import { AuthorResolver } from './module/author/author.resolver';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { PaginationService } from './core/pagination/pagination.service';
     BookResolver,
     CategoryResolver,
     DiscountResolver,
+    AuthorResolver,
   ],
 })
 export class AppModule implements NestModule {

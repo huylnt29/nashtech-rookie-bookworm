@@ -18,7 +18,7 @@ export default function AppNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="#">
+          <Link color="primary" href="/store">
             Store
           </Link>
         </NavbarItem>

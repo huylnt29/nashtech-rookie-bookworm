@@ -73,6 +73,11 @@ type Discount {
   updatedAt: DateTime!
 }
 
+type Author {
+  id: Float!
+  name: String!
+}
+
 type Query {
   batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, take: Float, skip: Float, distinct: [BatchScalarFieldEnum!]): [Batch!]!
   batch(where: BatchWhereUniqueInput): Batch!
@@ -82,6 +87,8 @@ type Query {
   category(where: CategoryWhereUniqueInput): Category!
   discounts(where: DiscountWhereInput, orderBy: [DiscountOrderByWithRelationInput!], cursor: DiscountWhereUniqueInput, take: Float, skip: Float, distinct: [DiscountScalarFieldEnum!]): [Discount!]!
   discount(where: DiscountWhereUniqueInput): Discount!
+  authors(where: AuthorWhereInput, orderBy: [AuthorOrderByWithRelationInput!], cursor: AuthorWhereUniqueInput, take: Float, skip: Float, distinct: [AuthorScalarFieldEnum!]): [Author!]!
+  author(where: AuthorWhereUniqueInput): Author!
 }
 
 input BatchWhereInput {
@@ -260,4 +267,17 @@ enum DiscountScalarFieldEnum {
   createdAt
   updatedAt
   state
+}
+
+input AuthorOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input AuthorWhereUniqueInput {
+  id: Float
+}
+
+enum AuthorScalarFieldEnum {
+  id
+  name
 }

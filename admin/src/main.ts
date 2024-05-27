@@ -25,5 +25,11 @@ import * as cookieParser from 'cookie-parser';
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-ui', app, document);
 
+  app.enableCors({
+    origin: '*',
+    allowedHeaders: '*',
+    methods: '*',
+  });
+
   await app.listen(3000);
 })();
