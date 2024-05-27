@@ -1,5 +1,4 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { BookListRelationFilter } from 'src/module/book/argument/book.where.args';
 
 @InputType()
 export class ReviewWhereUniqueInput {

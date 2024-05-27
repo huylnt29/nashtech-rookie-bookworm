@@ -20,11 +20,15 @@ export class CreateReviewDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(3)
+  @MaxLength(50)
   author: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(2)
+  @MaxLength(500)
   content: string;
 
   @ApiProperty()
