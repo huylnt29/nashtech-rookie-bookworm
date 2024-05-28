@@ -1,6 +1,6 @@
 import BookstoreRemoteDataSource from "../data/bookstore.remote_data_source";
-import { Author } from "../data/model/author.model";
-import { Category } from "../data/model/category.model";
+import { Author } from "../../../core/data/type/author.type";
+import { Category } from "../../../core/data/type/category.type";
 import { BookPaginationResult } from "../data/model/filtered_book.model";
 
 class BookstoreRepository {

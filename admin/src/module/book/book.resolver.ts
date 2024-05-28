@@ -55,8 +55,20 @@ export class BookResolver {
       include: {
         category: true,
         publisher: true,
-        batches: true,
-        reviews: true,
+        authors: true,
+        batches: {
+          where: {
+            state: State.ACTIVE,
+          },
+          orderBy: {
+            importedAt: 'asc',
+          },
+        },
+        reviews: {
+          where: {
+            state: State.ACTIVE,
+          },
+        },
       },
     });
   }

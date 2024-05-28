@@ -2,9 +2,10 @@ import { Center, Flex, Text } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import { Image } from "@nextui-org/image";
 import { Spacer } from "@nextui-org/react";
-import ReactStars from "react-rating-star-with-type";
 import RatingStar from "../../../core/component/rating_star";
 import { UI } from "../../../core/util/ui.util";
+import { RouteBuilder } from "../../../core/router/route_path";
+import { useLocation } from "react-router";
 
 type FilteredBookCardProps = {
   id: number;
@@ -44,7 +45,10 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
     }
   };
   return (
-    <AppContainer className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out">
+    <AppContainer
+      onClick={() => (location.href = RouteBuilder.buildBookPath(props.id))}
+      className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
+    >
       <Flex direction="column" width="100%">
         <Center>
           <Image
