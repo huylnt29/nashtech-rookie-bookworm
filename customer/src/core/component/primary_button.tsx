@@ -15,6 +15,7 @@ const PrimaryButton = (props: PrimaryButtonProps) => {
       startContent={props.leftIcon}
       radius="lg"
       color={props.color}
+      className="font-bold"
     >
       {props.text}
     </Button>

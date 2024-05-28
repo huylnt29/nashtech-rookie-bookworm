@@ -16,6 +16,7 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
       radius="lg"
       variant="flat"
       color={props.color}
+      className="font-bold"
     >
       {props.text}
     </Button>
