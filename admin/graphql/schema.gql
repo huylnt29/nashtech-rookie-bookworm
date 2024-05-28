@@ -2,6 +2,28 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  id: Float!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Publisher {
+  id: Float!
+  name: String!
+}
+
+type Author {
+  id: Float!
+  name: String!
+}
+
 type Discount {
   state: State!
   id: Float!
@@ -20,11 +42,6 @@ enum State {
   INACTIVE
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Batch {
   state: State!
   discount: Discount
@@ -42,18 +59,28 @@ type Batch {
   book: Book!
 }
 
-type Book {
+type Review {
   state: State!
+  id: Float!
+  author: String!
+  content: String!
+  rating: Float!
+  bookId: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Book {
+  category: Category
+  publisher: Publisher
+  authors: [Author!]
   batches: [Batch!]
+  reviews: [Review!]
   id: Float!
   imageUrls: [String!]!
   name: String!
   description: String!
   publishedYear: Float!
-  publisherId: Float!
-  categoryId: Float!
-  createdAt: DateTime!
-  updatedAt: DateTime!
   totalSoldQuantity: Float!
   averageRating: Float!
 }
@@ -67,18 +94,6 @@ type PageInfo {
   totalItems: Float!
   page: Float!
   totalPages: Float!
-}
-
-type Category {
-  id: Float!
-  name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Author {
-  id: Float!
-  name: String!
 }
 
 type Query {

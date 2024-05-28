@@ -50,6 +50,14 @@ export class BookResolver {
 
   @Query(() => Book, { name: 'book' })
   findOne(@Args() args: FindUniqueBookArgs) {
-    return this.prismaService.book.findUnique(args);
+    return this.prismaService.book.findUnique({
+      ...args,
+      include: {
+        category: true,
+        publisher: true,
+        batches: true,
+        reviews: true,
+      },
+    });
   }
 }
