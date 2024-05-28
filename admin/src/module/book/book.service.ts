@@ -21,6 +21,7 @@ export class BookService {
         id: true,
         name: true,
         publishedYear: true,
+        status: true,
         updatedAt: true,
         category: {
           select: {
@@ -119,7 +120,7 @@ export class BookService {
             originalPrice: true,
             price: true,
             soldQuantity: true,
-            updatedAt: true,
+            importedAt: true,
           },
         },
       },

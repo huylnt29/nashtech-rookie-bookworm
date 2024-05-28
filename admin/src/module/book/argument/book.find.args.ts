@@ -5,8 +5,6 @@ import {
   PartialType,
 } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
-
-import { RestrictProperties } from 'src/core/graphql/common.input';
 import { BookOrderByWithRelationInput } from './book.order_by.args';
 import { BookWhereInput, BookWhereUniqueInput } from './book.where.args';
 
@@ -15,11 +13,6 @@ registerEnumType(Prisma.BookScalarFieldEnum, {
 });
 
 @ArgsType()
-// implements
-//   RestrictProperties<
-//     FindManyBookArgsStrict,
-//     Omit<Prisma.BookFindManyArgs, 'include' | 'select'>
-//   >
 class FindManyBookArgsStrict {
   @Field(() => BookWhereInput, { nullable: true })
   where: BookWhereInput;

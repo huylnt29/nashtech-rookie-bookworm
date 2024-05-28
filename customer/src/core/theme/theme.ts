@@ -1,6 +1,7 @@
 const Color = {
-  primary: "rgb(248 250 252)",
-  secondary: "#030718",
+  primary: "#f8fafc",
+  secondary: "#ffffff",
+  accent: "#010720",
 };
 
 export default Color;

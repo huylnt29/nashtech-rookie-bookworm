@@ -54,10 +54,11 @@ block content
           div.h-3
           div.bg-white.py-3.px-8.shadow-lg.shadow-slate-200.rounded-2xl
                +row_text('id', book.id)
+               +row_text('status', book.status)
                +row_text('name', book.name, `openEditModal("name")`)
                +row_text('published year', book.publishedYear, `openEditModal("publishedYear")`)
-               +row_text('publisher', book.publisher.name, "openChangePublisherModal()", `/publisher/${book.publisher.id}`)
-               +row_text('category', book.category.name, "openChangeCategoryModal()", `/category/${book.category.id}`)
+               +row_text('publisher', (book.publisher) ? book.publisher.name: '', "openChangePublisherModal()", (book.publisher) ? `/publisher/${book.publisher.id}` : null)
+               +row_text('category', (book.category) ? book.category.name: '', "openChangeCategoryModal()", (book.category) ? `/category/${book.category.id}` : null)
                +row_text('created at', book.createdAt.toLocaleString())
                +row_text('updated at', book.updatedAt.toLocaleString())
 
@@ -118,7 +119,7 @@ block content
                                    th(class="table-cell text-left") ORIGINAL PRICE
                                    th(class="table-cell text-left") PRICE
                                    th(class="table-cell text-left") SOLD QUANTITY
-                                   th(class="table-cell text-left") UPDATED AT
+                                   th(class="table-cell text-left") IMPORTED AT
                                    th(class="table-cell text-left w-8")          
                          tbody.table-row-group
                               each batch in book.batches
@@ -128,7 +129,7 @@ block content
                                              td.table-cell(onclick=``) #{batch.originalPrice}
                                              td.table-cell(onclick=``) #{batch.price}
                                              td.table-cell(onclick=``) #{batch.soldQuantity}
-                                             td.table-cell(onclick=``) #{batch.updatedAt.toLocaleString()}
+                                             td.table-cell(onclick=``) #{batch.importedAt.toLocaleString()}
                                              td.table-cell
                                                   i(
                                                        class="material-icons hidden group-hover:block w-4", 
