@@ -7,14 +7,16 @@ export type ImageCarouselProps = {
 
 const ImageCarousel = (props: ImageCarouselProps) => {
   return (
-    <Flex bg="transparent" gap={8}>
-      {props.imageUrls.map((imageUrl) => (
-        <Image
-          key={imageUrl}
-          src={imageUrl}
-          className="w-96 h-48 object-cover"
-        />
-      ))}
+    <Flex bg="transparent" gap={8} flexWrap="wrap">
+      {props.imageUrls.map((imageUrl) => {
+        return (
+          <Image
+            key={imageUrl}
+            src={imageUrl}
+            className="w-48 h-72 object-cover object-center border"
+          />
+        );
+      })}
     </Flex>
   );
 };

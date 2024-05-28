@@ -5,6 +5,7 @@ import { UI } from "../../../core/util/ui.util";
 import PrimaryButton from "../../../core/component/primary_button";
 import RequestState from "../../../core/data/enum/request_state.enum";
 import { Spacer } from "@nextui-org/react";
+import { ClockIcon } from "@heroicons/react/24/solid";
 
 const AddBookToCart = () => {
   const { book, requestState } = useBookDetailStore();
@@ -41,15 +42,19 @@ const AddBookToCart = () => {
 
   return (
     <AppContainer>
-      <Flex direction="column" gap={3}>
+      <Flex direction="column" gap={1}>
         {buildPrice()}
-        <Text fontSize="lg" textDecoration="slategray">
+        <Spacer y={1} />
+        <Text fontSize="lg" className="text-gray-500">
           This discount expires at
-          <span className="text-red-900 font-bold">
-            {" "}
-            {new Date(book!.discount.endAt).toLocaleString()}
-          </span>
         </Text>
+        <HStack>
+          <ClockIcon className="text-red-700 w-6 h-6" />
+          <Text className="text-red-700 font-bold text-lg">
+            {new Date(book!.discount.endAt).toLocaleString()}
+          </Text>
+        </HStack>
+        <Spacer y={1} />
         <Text fontSize="xl" fontWeight="bold">
           {book?.remainingQuantity}
           <span className="font-normal"> remaining</span>
