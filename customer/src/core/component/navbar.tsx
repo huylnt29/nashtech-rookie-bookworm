@@ -7,12 +7,13 @@ import {
   Spacer,
 } from "@nextui-org/react";
 import Logo from "./logo";
-import { Button, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { CiShoppingCart } from "react-icons/ci";
 import AppInput from "./input";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Color from "../theme/theme";
 import SecondaryButton from "./secondary_button";
+import { RouteBuilder } from "../router/route_path";
 
 export default function AppNavbar() {
   return (
@@ -38,12 +39,12 @@ export default function AppNavbar() {
         </NavbarItem>
         <Spacer x={12} />
         <NavbarItem>
-          <Link color="primary" href="#">
+          <Link color="primary" href="/">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="/store">
+          <Link color="primary" href={RouteBuilder.buildStorePath(1)}>
             Store
           </Link>
         </NavbarItem>
