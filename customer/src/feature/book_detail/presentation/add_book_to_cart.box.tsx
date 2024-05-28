@@ -1,9 +1,10 @@
-import { Flex, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import useBookDetailStore from "./store/book_detail.store";
 import { UI } from "../../../core/util/ui.util";
 import PrimaryButton from "../../../core/component/primary_button";
 import RequestState from "../../../core/data/enum/request_state.enum";
+import { Spacer } from "@nextui-org/react";
 
 const AddBookToCart = () => {
   const { book, requestState } = useBookDetailStore();
@@ -12,7 +13,7 @@ const AddBookToCart = () => {
     if (requestState != RequestState.LOADED) return <></>;
     if (book?.discount?.percentage) {
       return (
-        <VStack align="start">
+        <HStack>
           <Text fontSize="xl" fontWeight="semibold">
             {UI.formatNumberWithDots(
               Math.round(book.price * book?.discount?.percentage)
@@ -27,7 +28,7 @@ const AddBookToCart = () => {
           >
             {UI.formatNumberWithDots(book.price)} VND
           </Text>
-        </VStack>
+        </HStack>
       );
     } else {
       return (
@@ -40,8 +41,20 @@ const AddBookToCart = () => {
 
   return (
     <AppContainer>
-      <Flex direction="column" gap={4}>
+      <Flex direction="column" gap={3}>
         {buildPrice()}
+        <Text fontSize="lg" textDecoration="slategray">
+          This discount expires at
+          <span className="text-red-900 font-bold">
+            {" "}
+            {new Date(book!.discount.endAt).toLocaleString()}
+          </span>
+        </Text>
+        <Text fontSize="xl" fontWeight="bold">
+          {book?.remainingQuantity}
+          <span className="font-normal"> remaining</span>
+        </Text>
+        <Spacer y={1} />
         <PrimaryButton
           text={"Add to cart"}
           onClick={undefined}

@@ -24,7 +24,7 @@ const BookDetailScreen = () => {
   if (requestState != RequestState.LOADED) return;
 
   return (
-    <Flex marginX="21%" justify="space-between" gap="7%">
+    <Flex marginX="15%" justify="space-between" gap="7%">
       <VStack width="70%" spacing={8}>
         <BookPrimaryInformation />
         <BookReviewListBox />

@@ -19,7 +19,8 @@ const BookPrimaryInformation = () => {
           {book?.averageRating}
         </Text>
         <Spacer x={3} />
-        <Text fontSize="xl" className="text-slate-500">
+        <Box className="p-1 bg-gray-600 mr-3 rounded"> </Box>
+        <Text fontSize="xl" className="text-slate-700 font-semibold">
           {UI.formatNumberWithDots(book?.totalSoldQuantity!)} sold
         </Text>
       </Flex>
