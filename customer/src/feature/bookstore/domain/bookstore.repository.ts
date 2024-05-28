@@ -1,14 +1,17 @@
 import BookstoreRemoteDataSource from "../data/bookstore.remote_data_source";
+import { Author } from "../data/model/author.model";
+import { Category } from "../data/model/category.model";
 import { BookPaginationResult } from "../data/model/filtered_book.model";
 
 class BookstoreRepository {
-  static async fetchBookFilterMenuList(): Promise<any> {
-    return BookstoreRemoteDataSource.fetchFilterDataForBooks();
+  static async fetchBookFilterMenu(): Promise<any> {
+    return BookstoreRemoteDataSource.fetchCategoriesAndAuthors();
   }
-  static async filterBooks(): Promise<BookPaginationResult> {
-    let res = await BookstoreRemoteDataSource.fetchFilteredBooks();
-    res.data = res.data.filter((book) => book.batches.length > 0);
-    return res;
+  static async filterBooks(
+    categories: Category[],
+    authors: Author[]
+  ): Promise<BookPaginationResult> {
+    return BookstoreRemoteDataSource.fetchFilteredBooks(categories, authors);
   }
 }
 

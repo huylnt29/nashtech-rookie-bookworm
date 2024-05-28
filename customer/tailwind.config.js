@@ -19,15 +19,15 @@ module.exports = {
           foreground: '#18181B',
           primary: {
             foreground: '#18181B',
-            DEFAULT: 'rgb(248 250 252)'
+            DEFAULT: '#f8fafc'
           },
           secondary: {
-            foreground: 'rgb(255 255 255)',
-            DEFAULT: 'rgb(15 23 42)'
+            foreground: '#00072c',
+            DEFAULT: '#ffffff'
           },
           default: {
-            foreground: 'rgb(255 255 255)',
-            DEFAULT: 'rgb(15 23 42)'
+            foreground: '#ffffff',
+            DEFAULT: '#00072c'
           },
         },
       }

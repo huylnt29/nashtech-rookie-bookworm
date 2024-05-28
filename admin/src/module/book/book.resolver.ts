@@ -23,6 +23,7 @@ export class BookResolver {
       {
         ...args,
         where: {
+          ...args.where,
           status: BookStatus.PUBLISHED,
         },
         include: {

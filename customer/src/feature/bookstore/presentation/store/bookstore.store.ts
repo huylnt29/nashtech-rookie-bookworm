@@ -7,14 +7,16 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
   return {
     filterDataRequestState: RequestState.IDLE,
     categories: [],
+    selectedCategories: [],
     authors: [],
+    selectedAuthors: [],
     booksResultRequestState: RequestState.IDLE,
     filteredBooks: [],
     fetchFilter: async () => {
       set(() => ({
         filterDataRequestState: RequestState.LOADING,
       }));
-      const res = await BookstoreRepository.fetchBookFilterMenuList();
+      const res = await BookstoreRepository.fetchBookFilterMenu();
       set(() => ({
         filterDataRequestState: RequestState.LOADED,
         categories: res.categories,
@@ -25,7 +27,10 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
       set(() => ({
         booksResultRequestState: RequestState.LOADING,
       }));
-      const res = await BookstoreRepository.filterBooks();
+      const res = await BookstoreRepository.filterBooks(
+        get().selectedCategories,
+        get().selectedAuthors
+      );
 
       set(() => ({
         booksResultRequestState: RequestState.LOADED,

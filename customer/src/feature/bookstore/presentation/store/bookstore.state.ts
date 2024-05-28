@@ -6,7 +6,9 @@ import { FilteredBook } from "../../data/model/filtered_book.model";
 interface BookstoreState {
   filterDataRequestState: RequestState;
   categories: Array<Category>;
+  selectedCategories: Array<Category>;
   authors: Array<Author>;
+  selectedAuthors: Array<Author>;
   booksResultRequestState: RequestState;
   filteredBooks: Array<FilteredBook>;
   fetchFilter: () => Promise<void>;

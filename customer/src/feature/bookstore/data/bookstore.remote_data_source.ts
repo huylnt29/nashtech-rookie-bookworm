@@ -1,8 +1,10 @@
 import ApiClient from "../../../core/network/remote/api_client";
+import { Author } from "./model/author.model";
+import { Category } from "./model/category.model";
 import { BookPaginationResult } from "./model/filtered_book.model";
 
 class BookstoreRemoteDataSource {
-  static async fetchFilterDataForBooks(): Promise<any> {
+  static async fetchCategoriesAndAuthors(): Promise<any> {
     const query = `
       query {
         categories {
@@ -17,7 +19,10 @@ class BookstoreRemoteDataSource {
     `;
     return (await ApiClient.postGraphQL(query)).data;
   }
-  static async fetchFilteredBooks(): Promise<BookPaginationResult> {
+  static async fetchFilteredBooks(
+    categories: Category[],
+    authors: Author[]
+  ): Promise<BookPaginationResult> {
     const query = `
       query {
         books {

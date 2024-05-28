@@ -7,10 +7,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <NextUIProvider>
-      <ChakraProvider>
+    <ChakraProvider>
+      <NextUIProvider>
         <App />
-      </ChakraProvider>
-    </NextUIProvider>
+      </NextUIProvider>
+    </ChakraProvider>
   </BrowserRouter>
 );

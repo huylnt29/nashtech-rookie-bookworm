@@ -9,7 +9,7 @@ const GlobalLayout = ({ children }: PropsWithChildren) => {
       width="100vw"
       height="100vh"
       direction="column"
-      backgroundColor={Color.secondary}
+      backgroundColor={Color.accent}
     >
       <AppNavbar />
       <Box
