@@ -21,6 +21,7 @@ export class BookService {
         id: true,
         name: true,
         publishedYear: true,
+        status: true,
         updatedAt: true,
         category: {
           select: {

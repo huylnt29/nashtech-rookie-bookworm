@@ -7,7 +7,7 @@ import {
 } from './argument/book.find.args';
 import { PaginationService } from 'src/core/pagination/pagination.service';
 import { BookPageResult } from './entity/book.page_result.entity';
-import { State } from '@prisma/client';
+import { BookStatus, State } from '@prisma/client';
 
 @Resolver(() => Book)
 export class BookResolver {
@@ -22,6 +22,9 @@ export class BookResolver {
       this.prismaService.book,
       {
         ...args,
+        where: {
+          status: BookStatus.PUBLISHED,
+        },
         include: {
           batches: {
             where: {
