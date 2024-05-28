@@ -5,7 +5,6 @@ import { Spacer } from "@nextui-org/react";
 import RatingStar from "../../../core/component/rating_star";
 import { UI } from "../../../core/util/ui.util";
 import { RouteBuilder } from "../../../core/router/route_path";
-import { useLocation } from "react-router";
 
 type FilteredBookCardProps = {
   id: number;
@@ -22,14 +21,14 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
     if (props.discountPercentage) {
       return (
         <Flex gap={3} align="center">
-          <Text fontSize="xl" fontWeight="semibold">
+          <Text fontSize="lg" fontWeight="semibold">
             {UI.formatNumberWithDots(
               Math.round(props.price * props.discountPercentage)
             )}{" "}
             VND
           </Text>
           <Text
-            fontSize="lg"
+            fontSize="md"
             className="text-slate-300"
             fontWeight="semibold"
             textDecoration="line-through"
@@ -40,7 +39,7 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
       );
     } else {
       return (
-        <Text fontSize="xl" fontWeight="semibold" textDecoration="slategray">
+        <Text fontSize="lg" fontWeight="semibold" textDecoration="slategray">
           {UI.formatNumberWithDots(props.price)} VND
         </Text>
       );

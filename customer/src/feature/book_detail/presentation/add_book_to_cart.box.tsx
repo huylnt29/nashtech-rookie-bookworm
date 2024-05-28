@@ -3,19 +3,19 @@ import AppContainer from "../../../core/component/container";
 import useBookDetailStore from "./store/book_detail.store";
 import { UI } from "../../../core/util/ui.util";
 import PrimaryButton from "../../../core/component/primary_button";
+import RequestState from "../../../core/data/enum/request_state.enum";
 
 const AddBookToCart = () => {
-  const { book } = useBookDetailStore();
+  const { book, requestState } = useBookDetailStore();
 
   const buildPrice = () => {
-    if (book?.batches[0]!.discount?.percentage) {
+    if (requestState != RequestState.LOADED) return <></>;
+    if (book?.discount?.percentage) {
       return (
         <VStack align="start">
           <Text fontSize="xl" fontWeight="semibold">
             {UI.formatNumberWithDots(
-              Math.round(
-                book.batches[0].price * book?.batches[0]!.discount?.percentage
-              )
+              Math.round(book.price * book?.discount?.percentage)
             )}{" "}
             VND
           </Text>
@@ -25,14 +25,14 @@ const AddBookToCart = () => {
             fontWeight="semibold"
             textDecoration="line-through"
           >
-            {UI.formatNumberWithDots(book.batches[0].price)} VND
+            {UI.formatNumberWithDots(book.price)} VND
           </Text>
         </VStack>
       );
     } else {
       return (
         <Text fontSize="xl" fontWeight="semibold" textDecoration="slategray">
-          {UI.formatNumberWithDots(book!.batches[0].price)} VND
+          {UI.formatNumberWithDots(book!.price)} VND
         </Text>
       );
     }

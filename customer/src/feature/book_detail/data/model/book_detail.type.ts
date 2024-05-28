@@ -3,30 +3,24 @@ import { Category } from "../../../../core/data/type/category.type";
 
 export type BookDetail = {
   id: number;
-  imageUrls: string[];
   name: string;
+  imageUrls: string[];
   description: string;
   publishedYear: number;
   totalSoldQuantity: number;
   averageRating: number;
-  category: Category;
+  remainingQuantity: number;
+  price: number;
   publisher: Publisher;
+  category: Category;
   authors: Author[];
-  batches: Batch[];
+  discount: Discount;
   reviews: Review[];
 };
 
 export type Publisher = {
   id: number;
   name: string;
-};
-
-export type Batch = {
-  id: number;
-  price: number;
-  initialQuantity: number;
-  soldQuantity: number;
-  discount?: Discount;
 };
 
 export type Review = {

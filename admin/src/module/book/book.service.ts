@@ -4,6 +4,7 @@ import { Book, State } from '@prisma/client';
 import { CreateBookDto } from './dto/book.create.dto';
 import { UpdateBookDto } from './dto/book.update.dto';
 import { S3Service } from 'src/core/s3/s3.service';
+import { ReadPublicBookDto } from './dto/book.public.read.dto';
 
 @Injectable()
 export class BookService {
@@ -114,13 +115,19 @@ export class BookService {
           where: {
             state: State.ACTIVE,
           },
-          select: {
-            id: true,
-            index: true,
-            originalPrice: true,
-            price: true,
-            soldQuantity: true,
-            importedAt: true,
+          include: {
+            discount: {
+              where: {
+                state: State.ACTIVE,
+              },
+              select: {
+                id: true,
+                minQuantity: true,
+                maxQuantity: true,
+                percentage: true,
+                endAt: true,
+              },
+            },
           },
         },
       },
