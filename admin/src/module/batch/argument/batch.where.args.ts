@@ -1,4 +1,6 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
+import { State } from 'src/core/graphql/register_enum';
 import { BookRelationFilter } from 'src/module/book/argument/book.where.args';
 import { DiscountRelationFilter } from 'src/module/discount/argument/discount.where.args';
 
@@ -11,6 +13,8 @@ export class BatchWhereUniqueInput {
 // implements RestrictProperties<BatchWhereInput, Prisma.BatchWhereInput>
 export class BatchWhereInputStrict {
   id: number;
+  @Field(() => State)
+  state: $Enums.State;
   book: BookRelationFilter;
   discount: DiscountRelationFilter;
 

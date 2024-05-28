@@ -7,7 +7,7 @@ import AppCheckboxGroup, {
 import RequestState from "../../../core/data/enum/request_state.enum";
 import AppContainer from "../../../core/component/container";
 
-const FilterCriteriaArea = () => {
+const FilterMenu = () => {
   const { fetchFilter, filterDataRequestState, categories, authors } =
     useBookstoreStore();
 
@@ -57,4 +57,4 @@ const FilterCriteriaArea = () => {
   );
 };
 
-export default FilterCriteriaArea;
+export default FilterMenu;

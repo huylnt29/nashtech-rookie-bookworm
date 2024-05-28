@@ -16,6 +16,7 @@ export class BatchResolver {
       ...args,
       include: {
         book: true,
+        discount: true,
       },
     });
   }

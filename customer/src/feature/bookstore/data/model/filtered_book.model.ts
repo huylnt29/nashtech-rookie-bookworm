@@ -1,4 +1,12 @@
-interface FilteredBookData {
+export interface Batch {
+  id: number;
+  index: number;
+  price: number;
+  book: FilteredBook;
+  discount: Discount | null;
+}
+
+export interface FilteredBook {
   id: number;
   imageUrls: string[];
   name: string;
@@ -6,18 +14,7 @@ interface FilteredBookData {
   averageRating: number;
 }
 
-class FilteredBook {
+export interface Discount {
   id: number;
-  imageUrls: string[];
-  name: string;
-  totalSoldQuantity: number;
-  averageRating: number;
-
-  constructor(data: FilteredBookData) {
-    this.id = data.id;
-    this.imageUrls = data.imageUrls;
-    this.name = data.name;
-    this.totalSoldQuantity = data.totalSoldQuantity;
-    this.averageRating = data.averageRating;
-  }
+  percentage: number;
 }

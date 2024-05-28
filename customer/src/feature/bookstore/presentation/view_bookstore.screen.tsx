@@ -1,15 +1,15 @@
 import { Box, Flex } from "@chakra-ui/react";
-import FilterCriteriaArea from "./filter_criteria.area";
-import BookResultArea from "./book_result.area";
+import FilterMenu from "./filter_menu.box";
+import FilterResultGrid from "./filter_result.grid";
 
 const ViewBookstoreScreen = () => {
   return (
     <Flex justify="center" mx="10%" gap={8}>
       <Box width="30%">
-        <FilterCriteriaArea />
+        <FilterMenu />
       </Box>
       <Box width="70%">
-        <BookResultArea />
+        <FilterResultGrid />
       </Box>
     </Flex>
   );

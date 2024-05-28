@@ -45,8 +45,22 @@ type Category {
   updatedAt: DateTime!
 }
 
+type Discount {
+  state: State!
+  id: Float!
+  minQuantity: Float!
+  maxQuantity: Float!
+  percentage: Float!
+  startAt: DateTime!
+  endAt: DateTime!
+  isRecurring: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Batch {
   state: State!
+  discount: Discount
   id: Float!
   index: Float!
   initialQuantity: Float!
@@ -59,19 +73,6 @@ type Batch {
   createdAt: DateTime!
   updatedAt: DateTime!
   book: Book!
-}
-
-type Discount {
-  state: State!
-  id: Float!
-  minQuantity: Float!
-  maxQuantity: Float!
-  percentage: Float!
-  startAt: DateTime!
-  endAt: DateTime!
-  isRecurring: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type Author {
@@ -93,6 +94,7 @@ type Query {
 }
 
 input BatchWhereInput {
+  state: State
   id: Float
   book: BookRelationFilter
   discount: DiscountRelationFilter

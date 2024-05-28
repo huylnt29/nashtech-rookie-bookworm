@@ -15,7 +15,7 @@ const GlobalLayout = ({ children }: PropsWithChildren) => {
       <Box
         flexGrow={1}
         backgroundColor={Color.primary}
-        p={12}
+        paddingY={8}
         className="rounded-xl"
       >
         {children}

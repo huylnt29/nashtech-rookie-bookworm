@@ -4,11 +4,11 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
   Spacer,
 } from "@nextui-org/react";
 import Logo from "./logo";
-import { Text } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
+import { CiShoppingCart } from "react-icons/ci";
 
 export default function AppNavbar() {
   return (
@@ -41,9 +41,7 @@ export default function AppNavbar() {
 
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="bordered">
-            Cart
-          </Button>
+          <Button leftIcon={<CiShoppingCart />}>Cart</Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

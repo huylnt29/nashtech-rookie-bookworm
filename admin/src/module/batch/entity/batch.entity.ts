@@ -3,6 +3,7 @@ import { $Enums, Batch as BatchType } from '@prisma/client';
 import { RestrictProperties } from 'src/core/graphql/common.input';
 import { State } from 'src/core/graphql/register_enum';
 import { Book } from 'src/module/book/entity/book.entity';
+import { Discount } from 'src/module/discount/entity/discount.entity';
 
 @ObjectType()
 export class Batch {
@@ -21,4 +22,6 @@ export class Batch {
   state: $Enums.State;
 
   book: Book;
+  @Field({ nullable: true })
+  discount: Discount;
 }
