@@ -23,7 +23,9 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
       return (
         <Flex gap={3} align="center">
           <Text fontSize="xl" fontWeight="semibold">
-            {UI.formatNumberWithDots(props.price * props.discountPercentage)}{" "}
+            {UI.formatNumberWithDots(
+              Math.round(props.price * props.discountPercentage)
+            )}{" "}
             VND
           </Text>
           <Text

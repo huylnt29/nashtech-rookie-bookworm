@@ -63,6 +63,13 @@ export class BookResolver {
           orderBy: {
             importedAt: 'asc',
           },
+          include: {
+            discount: {
+              where: {
+                state: State.ACTIVE,
+              },
+            },
+          },
         },
         reviews: {
           where: {

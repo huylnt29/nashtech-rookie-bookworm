@@ -23,9 +23,10 @@ export type Publisher = {
 
 export type Batch = {
   id: number;
+  price: number;
   initialQuantity: number;
   soldQuantity: number;
-  discount: null;
+  discount?: Discount;
 };
 
 export type Review = {
@@ -33,4 +34,12 @@ export type Review = {
   author: string;
   rating: number;
   content: string;
+  updatedAt: Date;
+};
+
+export type Discount = {
+  id: number;
+  percentage: number;
+  minQuantity: number;
+  maxQuantity: string;
 };

@@ -29,6 +29,7 @@ class BookDetailRemoteDataSourcce {
           }
           batches {
             id
+            price
             initialQuantity
             soldQuantity
             discount {
@@ -43,6 +44,7 @@ class BookDetailRemoteDataSourcce {
             author
             rating
             content
+            updatedAt
           }
         }
       }
