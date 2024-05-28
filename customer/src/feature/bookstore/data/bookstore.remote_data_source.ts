@@ -14,7 +14,7 @@ class BookstoreRemoteDataSource {
         }
       }
     `;
-    return ApiClient.postGraphQL(query);
+    return (await ApiClient.postGraphQL(query)).data;
   }
   static async fetchFilteredBooks(): Promise<FilteredBook[]> {
     const query = `

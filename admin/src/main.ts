@@ -7,7 +7,9 @@ import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 
 (async () => {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
 
   app.use(cookieParser());
 
@@ -25,11 +27,11 @@ import * as cookieParser from 'cookie-parser';
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger-ui', app, document);
 
-  app.enableCors({
-    origin: '*',
-    allowedHeaders: '*',
-    methods: '*',
-  });
+  // app.enableCors({
+  //   origin: '*',
+  //   allowedHeaders: '*',
+  //   methods: '*',
+  // });
 
   await app.listen(3000);
 })();

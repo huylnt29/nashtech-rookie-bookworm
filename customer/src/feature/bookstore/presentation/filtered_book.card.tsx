@@ -15,7 +15,7 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
   return (
     <AppContainer height={96}>
       <Image
-        className="h-56 object-cover object-center"
+        className="h-56 object-cover object-center rounded-xl"
         alt={props.name}
         src={props.imageUrls?.[0]}
         fallbackSrc="https://via.placeholder.com/300x200"
