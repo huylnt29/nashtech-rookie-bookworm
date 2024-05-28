@@ -29,7 +29,7 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
 
       set(() => ({
         booksResultRequestState: RequestState.LOADED,
-        filteredBooks: res,
+        filteredBooks: res.data,
       }));
     },
   };

@@ -1,5 +1,5 @@
 import ApiClient from "../../../core/network/remote/api_client";
-import { FilteredBook } from "./model/filtered_book.model";
+import { BookPaginationResult } from "./model/filtered_book.model";
 
 class BookstoreRemoteDataSource {
   static async fetchFilterDataForBooks(): Promise<any> {
@@ -17,30 +17,33 @@ class BookstoreRemoteDataSource {
     `;
     return (await ApiClient.postGraphQL(query)).data;
   }
-  static async fetchFilteredBooks(): Promise<FilteredBook[]> {
+  static async fetchFilteredBooks(): Promise<BookPaginationResult> {
     const query = `
       query {
-        batches(where: {
-          state: ACTIVE
-        }) {
-          id
-          index 
-          price
-          book {
+        books {
+          data {
             id
             imageUrls
             name
             totalSoldQuantity
             averageRating
+            batches {
+              id 
+              price
+              discount {
+                percentage
+              }
+            }
           }
-          discount {
-            id
-            percentage
+          meta {
+            page
+            totalItems
+            totalPages
           }
         }
       }
     `;
-    return (await ApiClient.postGraphQL(query)).data.batches;
+    return (await ApiClient.postGraphQL(query)).data.books;
   }
 }
 

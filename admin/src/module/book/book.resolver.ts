@@ -7,6 +7,7 @@ import {
 } from './argument/book.find.args';
 import { PaginationService } from 'src/core/pagination/pagination.service';
 import { BookPageResult } from './entity/book.page_result.entity';
+import { State } from '@prisma/client';
 
 @Resolver(() => Book)
 export class BookResolver {
@@ -17,10 +18,30 @@ export class BookResolver {
 
   @Query(() => BookPageResult, { name: 'books' })
   findAll(@Args() args: FindManyBookArgs) {
-    return this.paginationService.paginate(this.prismaService.book, args, {
-      page: args.page,
-      limit: args.limit,
-    });
+    return this.paginationService.paginate(
+      this.prismaService.book,
+      {
+        ...args,
+        include: {
+          batches: {
+            where: {
+              state: State.ACTIVE,
+            },
+            include: {
+              discount: {
+                where: {
+                  state: State.ACTIVE,
+                },
+              },
+            },
+          },
+        },
+      },
+      {
+        page: args.page,
+        limit: args.limit,
+      },
+    );
   }
 
   @Query(() => Book, { name: 'book' })

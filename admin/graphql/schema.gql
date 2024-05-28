@@ -2,8 +2,49 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Discount {
+  state: State!
+  id: Float!
+  minQuantity: Float!
+  maxQuantity: Float!
+  percentage: Float!
+  startAt: DateTime!
+  endAt: DateTime!
+  isRecurring: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum State {
+  ACTIVE
+  INACTIVE
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Batch {
+  state: State!
+  discount: Discount
+  id: Float!
+  index: Float!
+  initialQuantity: Float!
+  soldQuantity: Float!
+  originalPrice: Float!
+  price: Float!
+  bookId: Float!
+  discountId: Float!
+  importedAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  book: Book!
+}
+
 type Book {
   state: State!
+  batches: [Batch!]
   id: Float!
   imageUrls: [String!]!
   name: String!
@@ -16,16 +57,6 @@ type Book {
   totalSoldQuantity: Float!
   averageRating: Float!
 }
-
-enum State {
-  ACTIVE
-  INACTIVE
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type BookPageResult {
   data: [Book!]!
@@ -43,36 +74,6 @@ type Category {
   name: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-type Discount {
-  state: State!
-  id: Float!
-  minQuantity: Float!
-  maxQuantity: Float!
-  percentage: Float!
-  startAt: DateTime!
-  endAt: DateTime!
-  isRecurring: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Batch {
-  state: State!
-  discount: Discount
-  id: Float!
-  index: Float!
-  initialQuantity: Float!
-  soldQuantity: Float!
-  originalPrice: Float!
-  price: Float!
-  bookId: Float!
-  discountId: Float!
-  importedAt: DateTime!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  book: Book!
 }
 
 type Author {

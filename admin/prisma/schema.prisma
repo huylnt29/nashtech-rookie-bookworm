@@ -19,6 +19,7 @@ model Book {
   updatedAt         DateTime   @updatedAt
   totalSoldQuantity Int        @default(0)
   averageRating     Float      @default(0)
+  status            BookStatus @default(DRAFT)
   state             State      @default(ACTIVE)
   authors           Author[]
   reviews           Review[]
@@ -142,6 +143,11 @@ model Collection {
   updatedAt DateTime           @updatedAt
   state     State              @default(ACTIVE)
   batches   Batch[]
+}
+
+enum BookStatus {
+  DRAFT
+  PUBLISHED
 }
 
 enum OrderStatus {

@@ -1,4 +1,4 @@
-export interface Author {
+export type Author = {
   id: number;
   name: string;
-}
+};

@@ -16,16 +16,16 @@ const FilterResultGrid = () => {
   if (booksResultRequestState != RequestState.LOADED) return;
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-      {filteredBooks.map((batch) => (
-        <GridItem key={batch.id}>
+      {filteredBooks.map((book) => (
+        <GridItem key={book.id}>
           <FilteredBookCard
-            id={batch.id}
-            imageUrls={batch.book.imageUrls}
-            name={batch.book.name}
-            price={batch.price}
-            discountPercentage={batch.discount?.percentage}
-            totalSoldQuantity={batch.book.totalSoldQuantity}
-            averageRating={batch.book.averageRating}
+            id={book.id}
+            imageUrls={book.imageUrls}
+            name={book.name}
+            price={book.batches[0].price}
+            discountPercentage={book.batches[0].discount?.percentage}
+            totalSoldQuantity={book.totalSoldQuantity}
+            averageRating={book.averageRating}
           />
         </GridItem>
       ))}
