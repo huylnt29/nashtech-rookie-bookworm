@@ -120,7 +120,7 @@ export class BookService {
             originalPrice: true,
             price: true,
             soldQuantity: true,
-            updatedAt: true,
+            importedAt: true,
           },
         },
       },
