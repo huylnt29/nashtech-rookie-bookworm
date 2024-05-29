@@ -1,17 +1,17 @@
-import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Text } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import useBookDetailStore from "./store/book_detail.store";
 import { UI } from "../../../core/util/ui.util";
 import PrimaryButton from "../../../core/component/primary_button";
-import RequestState from "../../../core/data/enum/request_state.enum";
 import { Spacer } from "@nextui-org/react";
 import { ClockIcon } from "@heroicons/react/24/solid";
+import SecondaryButton from "../../../core/component/secondary_button";
+import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
 
 const BookCart = () => {
-  const { book, requestState } = useBookDetailStore();
+  const { book } = useBookDetailStore();
 
   const buildPrice = () => {
-    if (requestState != RequestState.LOADED) return <></>;
     if (book?.discount?.percentage) {
       return (
         <HStack>
@@ -40,6 +40,34 @@ const BookCart = () => {
     }
   };
 
+  const buildButtons = () => {
+    return (
+      <HStack spacing={5}>
+        <SecondaryButton
+          text={"Add to cart"}
+          onClick={undefined}
+          color={"default"}
+        />
+        <PrimaryButton text={"Buy now"} onClick={undefined} color={"default"} />
+      </HStack>
+    );
+  };
+
+  const buildSetQuantity = () => {
+    return (
+      <HStack spacing={8} justify="space-between">
+        <Text fontSize="lg" className="text-gray-500">
+          Quantity:
+        </Text>
+        <IncrementDecrementFormField
+          onIncrement={undefined}
+          value={"1"}
+          onDecrement={undefined}
+        />
+      </HStack>
+    );
+  };
+
   return (
     <AppContainer>
       <Flex direction="column" gap={1}>
@@ -49,8 +77,8 @@ const BookCart = () => {
           This discount expires at
         </Text>
         <HStack>
-          <ClockIcon className="text-red-700 w-6 h-6" />
-          <Text className="text-red-700 font-bold text-lg">
+          <ClockIcon className="text-red-900 w-6 h-6" />
+          <Text className="text-red-900 font-bold text-lg">
             {new Date(book!.discount.endAt).toLocaleString()}
           </Text>
         </HStack>
@@ -59,13 +87,10 @@ const BookCart = () => {
           {book?.remainingQuantity}
           <span className="font-normal"> remaining</span>
         </Text>
+        <Spacer y={3} />
+        {buildSetQuantity()}
         <Spacer y={1} />
-        <PrimaryButton
-          text={"Add to cart"}
-          onClick={undefined}
-          colorScheme={""}
-          color={"default"}
-        />
+        {buildButtons()}
       </Flex>
     </AppContainer>
   );
