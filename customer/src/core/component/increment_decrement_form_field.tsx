@@ -1,12 +1,10 @@
 import { HStack, Text } from "@chakra-ui/react";
-import SecondaryButton from "./secondary_button";
-import AppInput from "./input";
 import PrimaryButton from "./primary_button";
 
 export type IncrementDecrementFormFieldProps = {
-  onIncrement: void;
-  value: string;
-  onDecrement: void;
+  onIncrement: () => void;
+  value: number;
+  onDecrement: () => void;
 };
 
 const IncrementDecrementFormField = (
@@ -16,7 +14,7 @@ const IncrementDecrementFormField = (
     <HStack spacing={8}>
       <PrimaryButton
         text={"-"}
-        onClick={props.onDecrement}
+        onClick={() => (props.value > 0 ? props.onDecrement() : undefined)}
         color={"primary"}
         fitContent
         isIconOnly

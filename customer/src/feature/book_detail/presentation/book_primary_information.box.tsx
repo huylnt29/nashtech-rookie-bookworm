@@ -14,8 +14,8 @@ const BookPrimaryInformation = () => {
         {book?.name}
       </Text>
       <Flex align="center" gap={3}>
-        <StarIcon className="text-orange-500 w-6 h-6" />
-        <Text fontSize="xl" fontWeight="bold" className="text-orange-500">
+        <StarIcon className="text-orange-900 w-6 h-6" />
+        <Text fontSize="xl" fontWeight="bold" className="text-orange-900">
           {book?.averageRating}
         </Text>
         <Spacer x={3} />
