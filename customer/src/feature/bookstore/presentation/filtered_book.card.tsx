@@ -36,7 +36,7 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
           />
         </Center>
         <Spacer y={3} />
-        <Text fontSize="lg" fontWeight="semibold">
+        <Text fontSize="lg" fontWeight="semibold" className="h-14">
           {props.name}
         </Text>
         <Spacer y={1} />

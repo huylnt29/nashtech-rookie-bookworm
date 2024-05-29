@@ -1,6 +1,6 @@
-import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text, VStack, Spacer } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
-import { Image, Spacer } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import useCartStore from "./store/cart.store";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
@@ -42,7 +42,7 @@ const BookLineCard = ({ bookLine }: any) => {
             initialPrice={book!.price}
             discountPercentage={book!.discount.percentage}
           />
-          <Spacer y={3} />
+          <Spacer />
           <IncrementDecrementFormField
             onIncrement={() => undefined}
             value={quantity!}
