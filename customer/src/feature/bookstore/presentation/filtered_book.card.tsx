@@ -5,6 +5,7 @@ import { Spacer } from "@nextui-org/react";
 import RatingStar from "../../../core/component/rating_star";
 import { UI } from "../../../core/util/ui.util";
 import { RouteBuilder } from "../../../core/router/route_path";
+import { useNavigate } from "react-router";
 
 type FilteredBookCardProps = {
   id: number;
@@ -17,6 +18,8 @@ type FilteredBookCardProps = {
 };
 
 const FilteredBookCard = (props: FilteredBookCardProps) => {
+  const navigate = useNavigate();
+
   const buildPrice = () => {
     if (props.discountPercentage) {
       return (
@@ -47,7 +50,7 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
   };
   return (
     <AppContainer
-      onClick={() => (location.href = RouteBuilder.buildBookPath(props.id))}
+      onClick={() => navigate(RouteBuilder.buildBookPath(props.id))}
       className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
     >
       <Flex direction="column" width="100%">

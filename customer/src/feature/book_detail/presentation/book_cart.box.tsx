@@ -45,15 +45,23 @@ const BookCart = () => {
     }
   };
 
+  const handleBuyNow = () => {
+    addBookLine(book!, quantity);
+  };
+
   const buildButtons = () => {
     return (
       <HStack spacing={5}>
         <SecondaryButton
           text={"Add to cart"}
-          onClick={undefined}
+          onClick={() => addBookLine(book!, quantity)}
           color={"default"}
         />
-        <PrimaryButton text={"Buy now"} onClick={undefined} color={"default"} />
+        <PrimaryButton
+          text={"Buy now"}
+          onClick={handleBuyNow}
+          color={"default"}
+        />
       </HStack>
     );
   };
