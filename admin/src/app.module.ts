@@ -28,17 +28,19 @@ import { BatchResolver } from './module/batch/batch.resolver';
 import { DiscountResolver } from './module/discount/discount.resolver';
 import { PaginationService } from './core/pagination/pagination.service';
 import { AuthorResolver } from './module/author/author.resolver';
+import { OrderModule } from './module/order/order.module';
 
 @Module({
   imports: [
     PrismaModule,
     ConfigModule,
     AuthModule,
-    CategoryModule,
-    PublisherModule,
     AuthorModule,
-    BookModule,
+    PublisherModule,
+    CategoryModule,
     BatchModule,
+    BookModule,
+    OrderModule,
     DiscountModule,
     CollectionModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({

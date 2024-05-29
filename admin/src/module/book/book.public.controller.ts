@@ -16,6 +16,7 @@ export class BookPublicController {
     const batch = book.batches.at(0);
     const res: ReadPublicBookDto = {
       id: book.id,
+      batchId: batch.id,
       name: book.name,
       imageUrls: book.imageUrls,
       description: book.description,

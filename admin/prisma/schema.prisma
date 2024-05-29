@@ -66,6 +66,7 @@ model Batch {
   book        Book         @relation(fields: [bookId], references: [id])
   discount    Discount?    @relation(fields: [discountId], references: [id])
   collections Collection[]
+  orderLines  OrderLine[]
 }
 
 model Discount {
@@ -92,19 +93,20 @@ model Order {
   state         State       @default(ACTIVE)
   status        OrderStatus @default(PLACED)
   customer      Customer    @relation(fields: [customerId], references: [id])
-  OrderLine     OrderLine[]
+  orderLines    OrderLine[]
 }
 
 model OrderLine {
   id        Int      @id @default(autoincrement())
+  batchId   Int
   quantity  Int
   price     Float
   orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   state     State    @default(ACTIVE)
-
-  order Order @relation(fields: [orderId], references: [id])
+  batch     Batch    @relation(fields: [batchId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
 }
 
 model Customer {
@@ -116,7 +118,7 @@ model Customer {
   city     String?
   district String?
   state    State   @default(ACTIVE)
-  Order    Order[]
+  orders   Order[]
 }
 
 model Review {

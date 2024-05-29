@@ -108,6 +108,7 @@ export class BookService {
             author: true,
             content: true,
             rating: true,
+            createdAt: true,
             updatedAt: true,
           },
         },
