@@ -2,7 +2,7 @@ import { Box, HStack, VStack, Text } from "@chakra-ui/react";
 import ReviewCard from "./review.card";
 import useBookDetailStore from "./store/book_detail.store";
 
-const BookReviewListBox = () => {
+const BookReviewListView = () => {
   const { book } = useBookDetailStore();
   return (
     <VStack align="start">
@@ -19,4 +19,4 @@ const BookReviewListBox = () => {
   );
 };
 
-export default BookReviewListBox;
+export default BookReviewListView;

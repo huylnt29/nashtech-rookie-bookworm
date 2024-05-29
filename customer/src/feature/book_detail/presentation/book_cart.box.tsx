@@ -7,7 +7,7 @@ import RequestState from "../../../core/data/enum/request_state.enum";
 import { Spacer } from "@nextui-org/react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 
-const AddBookToCart = () => {
+const BookCart = () => {
   const { book, requestState } = useBookDetailStore();
 
   const buildPrice = () => {
@@ -71,4 +71,4 @@ const AddBookToCart = () => {
   );
 };
 
-export default AddBookToCart;
+export default BookCart;
