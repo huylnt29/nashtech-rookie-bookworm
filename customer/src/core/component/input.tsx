@@ -2,12 +2,12 @@ import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 
 export type AppInputProps = {
   type: string;
-  label: string;
   placeholder: string;
   value: string | undefined;
   leftIcon: any;
   width?: string | undefined;
   textColor?: string | undefined;
+  focusBorderColor: string;
 };
 
 const AppInput = (props: AppInputProps) => {
@@ -19,7 +19,7 @@ const AppInput = (props: AppInputProps) => {
       <Input
         type={props.type}
         placeholder={props.placeholder}
-        focusBorderColor="white"
+        focusBorderColor={props.focusBorderColor}
         width={props.width}
         color={props.textColor}
       />

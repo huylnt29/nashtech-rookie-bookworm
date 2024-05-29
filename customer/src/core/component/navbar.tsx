@@ -33,11 +33,11 @@ export default function AppNavbar() {
         <NavbarItem>
           <AppInput
             type="text"
-            label="Search for books"
             value={undefined}
-            placeholder="Type book name here"
+            placeholder="Search for books"
             leftIcon={<MagnifyingGlassIcon className="text-white font-bold" />}
             textColor={Color.primary}
+            focusBorderColor={"white"}
           />
         </NavbarItem>
         <Spacer x={12} />
