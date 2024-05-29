@@ -1,5 +1,5 @@
 import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
-import { BookLine, Cart } from "../../data/model/cart.class";
+import { Cart } from "../../data/model/cart.class";
 
 interface CartState {
   cart: Cart;

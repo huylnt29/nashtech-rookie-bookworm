@@ -1,25 +1,31 @@
 import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
 
 export class Cart {
-  constructor(obj: any) {
-    Object.assign(this, obj);
+  constructor(obj?: any) {
+    if (obj) Object.assign(this, obj);
+    else {
+      this.lines = [];
+      this.subtotal = 0;
+      this.final = 0;
+      this.booksCount = 0;
+      this.discounted = 0;
+    }
   }
 
   copyWith = (obj: Object) => new Cart(Object.assign(this, obj));
 
   addLine(newLine: BookLine) {
-    if (!this.lines) this.lines = [];
-    this.lines.push(newLine);
+    this.lines!.push(newLine);
     return this.copyWith(this);
   }
   setPrice() {
     const booksCount = this.lines?.reduce(
-      (accumulator, currentBookLine) => accumulator + currentBookLine.quantity,
+      (accumulator, currentBookLine) => accumulator + currentBookLine.quantity!,
       0
     );
     const subtotal = this.lines!.reduce(
       (accumulator, currentBookLine) =>
-        accumulator + currentBookLine.book.price * currentBookLine.quantity,
+        accumulator + currentBookLine.book!.price * currentBookLine.quantity!,
       0
     );
     const discounted = 0;
@@ -40,7 +46,13 @@ export class Cart {
   final?: number;
 }
 
-export type BookLine = {
-  book: BookDetail;
-  quantity: number;
-};
+export class BookLine {
+  constructor(obj: any) {
+    Object.assign(this, obj);
+  }
+
+  copyWith = (obj: Object) => new BookLine(Object.assign(this, obj));
+
+  book?: BookDetail;
+  quantity?: number;
+}
