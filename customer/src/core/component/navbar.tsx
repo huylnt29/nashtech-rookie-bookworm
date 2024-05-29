@@ -33,7 +33,7 @@ export default function AppNavbar() {
             label="Search for books"
             value={undefined}
             placeholder="Type book name here"
-            leftIcon={<MagnifyingGlassIcon className="text-white" />}
+            leftIcon={<MagnifyingGlassIcon className="text-white font-bold" />}
             textColor={Color.primary}
           />
         </NavbarItem>
@@ -60,8 +60,7 @@ export default function AppNavbar() {
           <SecondaryButton
             text="Cart"
             onClick={undefined}
-            colorScheme="gray"
-            leftIcon={<CiShoppingCart />}
+            leftIcon={<CiShoppingCart className="text-white font-bold" />}
             color={"secondary"}
           />
         </NavbarItem>

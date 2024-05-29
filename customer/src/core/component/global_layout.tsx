@@ -10,13 +10,14 @@ const GlobalLayout = ({ children }: PropsWithChildren) => {
       height="100vh"
       direction="column"
       backgroundColor={Color.accent}
+      className="overflow-y-hidden"
     >
       <AppNavbar />
       <Box
         flexGrow={1}
         backgroundColor={Color.primary}
         paddingY={8}
-        className="rounded-xl"
+        className="rounded-xl overflow-y-auto"
       >
         {children}
       </Box>

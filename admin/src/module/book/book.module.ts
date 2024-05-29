@@ -6,6 +6,7 @@ import { S3Module } from 'src/core/s3/s3.module';
 import { CategoryModule } from '../category/category.module';
 import { AuthorModule } from '../author/author.module';
 import { PublisherModule } from '../publisher/publisher.module';
+import { BookPublicController } from './book.public.controller';
 @Module({
   imports: [
     PrismaModule,
@@ -14,7 +15,7 @@ import { PublisherModule } from '../publisher/publisher.module';
     AuthorModule,
     PublisherModule,
   ],
-  controllers: [BookController],
+  controllers: [BookController, BookPublicController],
   providers: [BookService],
   exports: [BookService],
 })

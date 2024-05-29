@@ -1,6 +1,6 @@
 import ApiClient from "../../../core/network/remote/api_client";
-import { Author } from "./model/author.model";
-import { Category } from "./model/category.model";
+import { Author } from "../../../core/data/type/author.type";
+import { Category } from "../../../core/data/type/category.type";
 import { BookPaginationResult } from "./model/filtered_book.model";
 
 class BookstoreRemoteDataSource {

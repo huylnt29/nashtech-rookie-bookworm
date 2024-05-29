@@ -1,6 +1,8 @@
+import { PaginationMeta } from "../../../../core/data/type/pagination_meta.type";
+
 export type BookPaginationResult = {
   data: FilteredBook[];
-  meta: Meta;
+  meta: PaginationMeta;
 };
 
 export type FilteredBook = {
@@ -20,10 +22,4 @@ export type Batch = {
 
 export type Discount = {
   percentage: number;
-};
-
-export type Meta = {
-  page: number;
-  totalItems: number;
-  totalPages: number;
 };
