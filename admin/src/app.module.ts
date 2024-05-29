@@ -29,6 +29,7 @@ import { DiscountResolver } from './module/discount/discount.resolver';
 import { PaginationService } from './core/pagination/pagination.service';
 import { AuthorResolver } from './module/author/author.resolver';
 import { OrderModule } from './module/order/order.module';
+import { CustomerModule } from './module/customer/customer.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { OrderModule } from './module/order/order.module';
     BatchModule,
     BookModule,
     OrderModule,
+    CustomerModule,
     DiscountModule,
     CollectionModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
