@@ -55,4 +55,10 @@ export class BookLine {
 
   book?: BookDetail;
   quantity?: number;
+
+  getTotal() {
+    return Math.round(
+      this.book!.price * this.book!.discount.percentage * this.quantity!
+    );
+  }
 }

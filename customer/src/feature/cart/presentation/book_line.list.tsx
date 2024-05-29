@@ -1,11 +1,11 @@
-import { Box, Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
+import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
-import { BookLine } from "../data/model/cart.class";
-import { Image } from "@nextui-org/react";
+import { Image, Spacer } from "@nextui-org/react";
 import useCartStore from "./store/cart.store";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
 import BookPrice from "../../../core/component/book_price";
+import { UI } from "../../../core/util/ui.util";
 
 const BookLineList = () => {
   const { cart } = useCartStore();
@@ -19,13 +19,14 @@ const BookLineList = () => {
       </HStack>
 
       {cart.lines?.map((line) => (
-        <BookLineCard key={line.book!.id} {...line} />
+        <BookLineCard key={line.book!.id} bookLine={line} />
       ))}
     </VStack>
   );
 };
 
-const BookLineCard = ({ book, quantity }: BookLine) => {
+const BookLineCard = ({ bookLine }: any) => {
+  const { book, quantity } = bookLine;
   return (
     <AppContainer width="100%">
       <Flex gap={8} align="center">
@@ -33,7 +34,7 @@ const BookLineCard = ({ book, quantity }: BookLine) => {
           src={book!.imageUrls[0]}
           className="w-32 h-44 object-cover object-center"
         />
-        <VStack align="start">
+        <VStack align="start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">
             {book!.name}
           </Text>
@@ -41,16 +42,23 @@ const BookLineCard = ({ book, quantity }: BookLine) => {
             initialPrice={book!.price}
             discountPercentage={book!.discount.percentage}
           />
+          <Spacer y={3} />
           <IncrementDecrementFormField
             onIncrement={() => undefined}
             value={quantity!}
             onDecrement={() => undefined}
           />
+          <Text>
+            Line total:{" "}
+            <span className="font-bold">
+              {UI.formatNumberWithDots(bookLine!.getTotal!())} VND
+            </span>
+          </Text>
         </VStack>
         <Spacer />
         <TrashIcon
           onClick={undefined}
-          className="w-8 h-8 text-red-900 cursor-pointer hover:animate-wiggle transition ease-in-out"
+          className="w-8 h-8 text-red-900 cursor-pointer hover:animate-wiggle hover:text-red-700 transition ease-in-out"
         />
       </Flex>
     </AppContainer>
