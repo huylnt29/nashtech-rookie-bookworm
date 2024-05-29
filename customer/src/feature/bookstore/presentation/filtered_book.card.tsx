@@ -6,6 +6,7 @@ import RatingStar from "../../../core/component/rating_star";
 import { UI } from "../../../core/util/ui.util";
 import { RouteBuilder } from "../../../core/router/route_path";
 import { useNavigate } from "react-router";
+import BookPrice from "../../../core/component/book_price";
 
 type FilteredBookCardProps = {
   id: number;
@@ -20,34 +21,6 @@ type FilteredBookCardProps = {
 const FilteredBookCard = (props: FilteredBookCardProps) => {
   const navigate = useNavigate();
 
-  const buildPrice = () => {
-    if (props.discountPercentage) {
-      return (
-        <Flex gap={3} align="center">
-          <Text fontSize="lg" fontWeight="semibold">
-            {UI.formatNumberWithDots(
-              Math.round(props.price * props.discountPercentage)
-            )}{" "}
-            VND
-          </Text>
-          <Text
-            fontSize="md"
-            className="text-slate-300"
-            fontWeight="semibold"
-            textDecoration="line-through"
-          >
-            {UI.formatNumberWithDots(props.price)} VND
-          </Text>
-        </Flex>
-      );
-    } else {
-      return (
-        <Text fontSize="lg" fontWeight="semibold" textDecoration="slategray">
-          {UI.formatNumberWithDots(props.price)} VND
-        </Text>
-      );
-    }
-  };
   return (
     <AppContainer
       onClick={() => navigate(RouteBuilder.buildBookPath(props.id))}
@@ -71,7 +44,10 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
         <Spacer y={1} />
         <RatingStar value={0} />
         <Spacer y={5} />
-        {buildPrice()}
+        <BookPrice
+          initialPrice={props!.price}
+          discountPercentage={props!.discountPercentage}
+        />
       </Flex>
     </AppContainer>
   );

@@ -4,6 +4,7 @@ export const RoutePath = {
   HOME: "/",
   STORE: "/store",
   BOOK: "/book/:id",
+  CHECK_OUT: "/check-out",
 };
 
 export const RouteBuilder = {

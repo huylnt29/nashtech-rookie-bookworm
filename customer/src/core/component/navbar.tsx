@@ -77,6 +77,7 @@ export default function AppNavbar() {
 
 const NavbarCart = () => {
   const { cart } = useCartStore();
+  const navigate = useNavigate();
 
   const buildText = () => {
     if (!cart.booksCount || cart.booksCount == 0) return "Cart";
@@ -86,7 +87,7 @@ const NavbarCart = () => {
   return (
     <SecondaryButton
       text={buildText()}
-      onClick={undefined}
+      onClick={() => navigate(RoutePath.CHECK_OUT)}
       leftIcon={<CiShoppingCart className="text-white font-bold" />}
       color={"secondary"}
     />
