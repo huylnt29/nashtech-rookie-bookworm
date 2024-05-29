@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import useBookstoreStore from "./store/bookstore.store";
 import { Grid, GridItem } from "@chakra-ui/react";
-import AppContainer from "../../../core/component/container";
 import RequestState from "../../../core/data/enum/request_state.enum";
 import FilteredBookCard from "./filtered_book.card";
 
