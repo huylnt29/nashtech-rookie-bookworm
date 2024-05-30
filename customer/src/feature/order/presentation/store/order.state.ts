@@ -19,7 +19,7 @@ interface OrderState {
   submitRequestState: RequestState;
   saveCart(): void;
   retrieveCart(): void;
-  removeCart(): void;
+  finishOrder(): void;
 }
 
 export default OrderState;

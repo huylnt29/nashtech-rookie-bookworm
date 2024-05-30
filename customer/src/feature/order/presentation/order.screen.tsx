@@ -12,11 +12,7 @@ import { Spacer } from "@nextui-org/react";
 import { useEffect } from "react";
 
 const CartScreen = () => {
-  const { submit, submitRequestState, retrieveCart } = useOrderStore();
-
-  useEffect(() => {
-    retrieveCart();
-  }, []);
+  const { submit, submitRequestState } = useOrderStore();
 
   const buildSubmitButton = () => {
     return <PrimaryButton text={"Submit"} onClick={submit} color={"default"} />;

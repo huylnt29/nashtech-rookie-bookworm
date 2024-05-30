@@ -61,7 +61,9 @@ const useOrderStore = create<OrderState>()((set, get) => {
     saveCart() {
       OrderRepository.saveCartLocal(get().cart);
     },
-    removeCart() {},
+    finishOrder() {
+      OrderRepository.removeCartLocal();
+    },
     retrieveCart() {
       const cart = OrderRepository.getCartLocal();
       set(() => ({
