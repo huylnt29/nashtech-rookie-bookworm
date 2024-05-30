@@ -111,15 +111,17 @@ model OrderLine {
 }
 
 model Customer {
-  id       Int     @id @default(autoincrement())
-  name     String
-  phone    String  @unique
-  email    String? @unique
-  address  String
-  city     String?
-  district String?
-  state    State   @default(ACTIVE)
-  orders   Order[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String   @unique
+  email     String?  @unique
+  address   String
+  city      String?
+  district  String?
+  state     State    @default(ACTIVE)
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Review {

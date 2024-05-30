@@ -25,7 +25,7 @@ export class CustomerService {
     });
   }
 
-  async selectMany(): Promise<Customer[]> {
+  async selectMany(): Promise<any> {
     return this.prisma.customer.findMany({
       where: {
         state: State.ACTIVE,
