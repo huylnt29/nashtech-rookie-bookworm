@@ -27,7 +27,8 @@ const BookLineList = () => {
 
 const BookLineCard = ({ bookLine }: any) => {
   const { book, quantity } = bookLine;
-  const { deleteBookLine } = useOrderStore();
+  const { deleteBookLine, incrementBookByLine, decrementBookByLine } =
+    useOrderStore();
 
   return (
     <AppContainer width="100%">
@@ -48,9 +49,13 @@ const BookLineCard = ({ bookLine }: any) => {
           />
           <Spacer />
           <IncrementDecrementFormField
-            onIncrement={() => undefined}
+            onIncrement={() => incrementBookByLine(book.id)}
             value={quantity!}
-            onDecrement={() => undefined}
+            onDecrement={() =>
+              quantity! > 1
+                ? decrementBookByLine(book.id)
+                : deleteBookLine(book.id)
+            }
           />
           <Text>
             Line total:{" "}

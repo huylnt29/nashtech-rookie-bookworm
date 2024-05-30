@@ -33,17 +33,44 @@ export class Cart {
     }
     return this.copyWith(this);
   }
+  incrementBookByLine(bookId: number) {
+    for (let i = 0; i < this.lines!.length; i++) {
+      if (this.lines![i].book!.id == bookId) {
+        this.lines![i].quantity! += 1;
+      }
+    }
+    return this.copyWith(this);
+  }
+  decrementBookByLine(bookId: number) {
+    for (let i = 0; i < this.lines!.length; i++) {
+      if (this.lines![i].book!.id == bookId) {
+        this.lines![i].quantity! -= 1;
+      }
+    }
+    return this.copyWith(this);
+  }
   setPrice() {
     const booksCount = this.lines?.reduce(
       (accumulator, currentBookLine) => accumulator + currentBookLine.quantity!,
       0
     );
-    const subtotal = this.lines!.reduce(
-      (accumulator, currentBookLine) =>
-        accumulator + currentBookLine.book!.price * currentBookLine.quantity!,
-      0
+    const subtotal = Math.round(
+      this.lines!.reduce(
+        (accumulator, currentBookLine) =>
+          accumulator + currentBookLine.book!.price * currentBookLine.quantity!,
+        0
+      )
     );
-    const discounted = 0;
+    const discounted = Math.round(
+      this.lines!.reduce(
+        (accumulator, currentBookLine) =>
+          accumulator +
+          currentBookLine.book!.price *
+            currentBookLine.book?.discount.percentage! *
+            currentBookLine.quantity!,
+        0
+      )
+    );
     const final = subtotal - discounted;
 
     return this.copyWith({
@@ -56,7 +83,7 @@ export class Cart {
   }
 
   isEmpty() {
-    return !(this.booksCount || this.booksCount! > 0);
+    return !(this.booksCount && this.booksCount! > 0);
   }
   lines?: BookLine[];
   booksCount?: number;

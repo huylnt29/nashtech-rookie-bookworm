@@ -14,7 +14,7 @@ const useOrderStore = create<OrderState>()((set, get) => {
     customer: new Customer(),
     paymentMethod: PaymentMethod.CASH,
     submitRequestState: RequestState.IDLE,
-    addBookLine(book: BookDetail, quantity: number) {
+    addBookLine(book, quantity) {
       set((state) => {
         if (state.cart) {
           return {
@@ -37,14 +37,24 @@ const useOrderStore = create<OrderState>()((set, get) => {
       });
       get().calculatePrice();
     },
-    deleteBookLine(bookId: number) {
+    deleteBookLine(bookId) {
       set((state) => ({
         cart: state.cart.deleteLine(bookId),
       }));
       get().calculatePrice();
     },
-    incrementBookByLine(bookId) {},
-    decrementBookByLine(bookId) {},
+    incrementBookByLine(bookId) {
+      set((state) => ({
+        cart: state.cart.incrementBookByLine(bookId),
+      }));
+      get().calculatePrice();
+    },
+    decrementBookByLine(bookId) {
+      set((state) => ({
+        cart: state.cart.decrementBookByLine(bookId),
+      }));
+      get().calculatePrice();
+    },
     calculatePrice() {
       set((state) => ({
         cart: state.cart.setPrice(),
@@ -78,10 +88,11 @@ const useOrderStore = create<OrderState>()((set, get) => {
     },
     saveCart() {
       if (
-        this.submitRequestState != RequestState.LOADED &&
+        get().submitRequestState != RequestState.LOADED &&
         !get().cart.isEmpty()
-      )
+      ) {
         OrderRepository.saveCartLocal(get().cart);
+      }
     },
     retrieveCart() {
       const cart = OrderRepository.getCartLocal();
