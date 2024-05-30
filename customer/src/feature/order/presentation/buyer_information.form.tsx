@@ -10,8 +10,10 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { Spacer } from "@nextui-org/react";
+import useOrderStore from "./store/order.store";
 
 const BuyerInformationForm = () => {
+  const { customer, updateCustomer } = useOrderStore();
   return (
     <VStack align="start" width="100%">
       <HStack>
@@ -31,6 +33,7 @@ const BuyerInformationForm = () => {
             value={undefined}
             leftIcon={<UserIcon />}
             focusBorderColor={"black"}
+            onChange={(event) => updateCustomer("name", event.target.value)}
           />
           <Text fontSize="sm" fontWeight="bold">
             Phone *
@@ -41,6 +44,7 @@ const BuyerInformationForm = () => {
             value={undefined}
             leftIcon={<PhoneIcon />}
             focusBorderColor={"black"}
+            onChange={(event) => updateCustomer("phone", event.target.value)}
           />
           <Text fontSize="sm" fontWeight="bold">
             Email
@@ -51,6 +55,7 @@ const BuyerInformationForm = () => {
             value={undefined}
             leftIcon={<InboxIcon />}
             focusBorderColor={"black"}
+            onChange={(event) => updateCustomer("email", event.target.value)}
           />
           <Text fontSize="sm" fontWeight="bold">
             Address *
@@ -61,6 +66,7 @@ const BuyerInformationForm = () => {
             value={undefined}
             leftIcon={<GlobeEuropeAfricaIcon />}
             focusBorderColor={"black"}
+            onChange={(event) => updateCustomer("address", event.target.value)}
           />
           <HStack>
             <VStack align="start">
@@ -73,6 +79,7 @@ const BuyerInformationForm = () => {
                 value={undefined}
                 leftIcon={<HomeModernIcon />}
                 focusBorderColor={"black"}
+                onChange={(event) => updateCustomer("city", event.target.value)}
               />
             </VStack>
             <Spacer />
@@ -86,6 +93,9 @@ const BuyerInformationForm = () => {
                 value={undefined}
                 leftIcon={<HomeIcon />}
                 focusBorderColor={"black"}
+                onChange={(event) =>
+                  updateCustomer("district", event.target.value)
+                }
               />
             </VStack>
           </HStack>

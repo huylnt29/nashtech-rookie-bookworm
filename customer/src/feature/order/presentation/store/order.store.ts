@@ -35,6 +35,16 @@ const useOrderStore = create<OrderState>()((set, get) => {
         paymentMethod: paymentMethod,
       }));
     },
+    updateCustomer(property, value) {
+      set((state) => ({
+        customer: state.customer.copyWith({
+          [property]: value,
+        }),
+      }));
+    },
+    submit() {
+      console.log(get().customer);
+    },
   };
 });
 

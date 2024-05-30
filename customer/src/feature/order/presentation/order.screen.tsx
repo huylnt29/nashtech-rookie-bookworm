@@ -4,12 +4,12 @@ import PriceCalculationBox from "./price_calculation.box";
 import BuyerInformationForm from "./buyer_information.form";
 import PaymentMethodBox from "./payment_method.box";
 import PrimaryButton from "../../../core/component/primary_button";
+import useOrderStore from "./store/order.store";
 
 const CartScreen = () => {
+  const { submit } = useOrderStore();
   const buildSubmitButton = () => {
-    return (
-      <PrimaryButton text={"Submit"} onClick={undefined} color={"default"} />
-    );
+    return <PrimaryButton text={"Submit"} onClick={submit} color={"default"} />;
   };
   return (
     <Flex marginX="15%" justify="space-between" gap="7%">

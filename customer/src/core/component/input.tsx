@@ -8,6 +8,7 @@ export type AppInputProps = {
   width?: string | undefined;
   textColor?: string | undefined;
   focusBorderColor: string;
+  onChange?: (event: any) => void;
 };
 
 const AppInput = (props: AppInputProps) => {
@@ -22,6 +23,7 @@ const AppInput = (props: AppInputProps) => {
         focusBorderColor={props.focusBorderColor}
         width={props.width}
         color={props.textColor}
+        onChange={props.onChange}
       />
     </InputGroup>
   );

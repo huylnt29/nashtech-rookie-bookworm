@@ -12,7 +12,15 @@ export class Customer {
   city?: string;
   district?: string;
 
-  validate() {
+  validate = () => {
     return this.name && this.phone && this.address;
-  }
+  };
 }
+
+export type CustomerProperty =
+  | "name"
+  | "phone"
+  | "email"
+  | "address"
+  | "city"
+  | "district";
