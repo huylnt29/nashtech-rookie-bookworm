@@ -13,13 +13,13 @@ const CartScreen = () => {
   };
   return (
     <Flex marginX="15%" justify="space-between" gap="7%">
-      <VStack width="45%" spacing={8}>
+      <VStack width="55%" spacing={8}>
         <PriceCalculationBox />
         <BuyerInformationForm />
         <PaymentMethodBox />
         {buildSubmitButton()}
       </VStack>
-      <VStack width="55%" spacing={8}>
+      <VStack width="45%" spacing={8}>
         <BookLineList />
       </VStack>
     </Flex>

@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react";
 
 export type PrimaryButtonProps = {
-  text: string;
+  text?: string;
   onClick: any;
   leftIcon?: any;
   isIconOnly?: boolean;

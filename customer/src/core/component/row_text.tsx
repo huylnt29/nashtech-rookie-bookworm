@@ -5,10 +5,11 @@ export type RowTextProps = {
   leftText: string;
   rightText: string;
 };
+
 const RowText = (props: RowTextProps) => {
   return (
     <HStack width="100%" justify="space-between">
-      <Text fontSize="md" fontWeight="semibold" className="text-slate-400">
+      <Text fontSize="md" fontWeight="semibold" className="text-slate-700">
         {props.leftText}
       </Text>
       <Spacer />

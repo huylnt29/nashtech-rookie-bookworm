@@ -15,21 +15,27 @@ const PaymentMethodBox = () => {
         </Text>
       </HStack>
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        <PaymentMethodItem imagePath="/payment_method_cash.png" text="Cash" />
+        <PaymentMethodItem
+          imagePath="/payment_method_cash.png"
+          text="Cash"
+          description="Settle your bill at the doorstep"
+        />
         <PaymentMethodItem
           imagePath="/payment_method_zalopay.png"
           text="Zalo Pay"
+          description="Have your phone with Zalo/Zalo Pay account ready"
         />
         <PaymentMethodItem
           imagePath="/payment_method_vnpay.webp"
           text="VN Pay"
+          description="Have your phone with VN Pay account ready"
         />
       </Grid>
     </VStack>
   );
 };
 
-const PaymentMethodItem = ({ imagePath, text }: any) => {
+const PaymentMethodItem = ({ imagePath, text, description }: any) => {
   return (
     <AppContainer>
       <VStack marginX={4}>
@@ -38,6 +44,14 @@ const PaymentMethodItem = ({ imagePath, text }: any) => {
           className="w-12 h-12 object-cover object-center"
         />
         <Text fontWeight="bold">{text}</Text>
+        <Text
+          fontSize="sm"
+          fontWeight="semibold"
+          textAlign="center"
+          className="text-slate-600"
+        >
+          {description}
+        </Text>
       </VStack>
     </AppContainer>
   );

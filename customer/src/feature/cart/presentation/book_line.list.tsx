@@ -30,11 +30,13 @@ const BookLineCard = ({ bookLine }: any) => {
   return (
     <AppContainer width="100%">
       <Flex gap={8} align="center">
-        <Image
-          src={book!.imageUrls[0]}
-          className="w-32 h-44 object-cover object-center"
-        />
-        <VStack align="start" spacing={2}>
+        <Box width="30%">
+          <Image
+            src={book!.imageUrls[0]}
+            className="w-32 h-44 object-cover object-center"
+          />
+        </Box>
+        <VStack width="60%" align="start" spacing={2}>
           <Text fontSize="lg" fontWeight="bold">
             {book!.name}
           </Text>
@@ -55,11 +57,13 @@ const BookLineCard = ({ bookLine }: any) => {
             </span>
           </Text>
         </VStack>
-        <Spacer />
-        <TrashIcon
-          onClick={undefined}
-          className="w-8 h-8 text-red-900 cursor-pointer hover:animate-wiggle hover:text-red-700 transition ease-in-out"
-        />
+
+        <Box width="10%">
+          <TrashIcon
+            onClick={undefined}
+            className="w-8 h-8 text-red-900 cursor-pointer hover:animate-wiggle hover:text-red-700 transition ease-in-out"
+          />
+        </Box>
       </Flex>
     </AppContainer>
   );

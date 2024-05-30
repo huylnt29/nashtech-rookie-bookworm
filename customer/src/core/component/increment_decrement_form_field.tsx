@@ -1,5 +1,6 @@
 import { HStack, Text } from "@chakra-ui/react";
 import PrimaryButton from "./primary_button";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 export type IncrementDecrementFormFieldProps = {
   onIncrement: () => void;
@@ -13,19 +14,19 @@ const IncrementDecrementFormField = (
   return (
     <HStack spacing={8}>
       <PrimaryButton
-        text={"-"}
         onClick={() => (props.value > 0 ? props.onDecrement() : undefined)}
         color={"primary"}
         fitContent
         isIconOnly
+        leftIcon={<MinusIcon className="w-4 h-4" />}
       />
       <Text>{props.value}</Text>
       <PrimaryButton
-        text={"+"}
         onClick={props.onIncrement}
         color={"primary"}
         fitContent
         isIconOnly
+        leftIcon={<PlusIcon className="w-4 h-4" />}
       />
     </HStack>
   );
