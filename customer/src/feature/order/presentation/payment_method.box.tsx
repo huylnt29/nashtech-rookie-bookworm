@@ -1,7 +1,10 @@
 import { Box, HStack, VStack, Text, Grid } from "@chakra-ui/react";
 import { Image } from "@nextui-org/react";
-import AppContainer from "../../../core/component/container";
+import AppContainer, {
+  ContainerState,
+} from "../../../core/component/container";
 import useOrderStore from "./store/order.store";
+import { PaymentMethod } from "../data/model/payment_method.enum";
 
 const PaymentMethodBox = () => {
   const { cart } = useOrderStore();
@@ -14,18 +17,21 @@ const PaymentMethodBox = () => {
           Payment method
         </Text>
       </HStack>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6} height={48}>
         <PaymentMethodItem
+          _paymentMethod={PaymentMethod.CASH}
           imagePath="/payment_method_cash.png"
           text="Cash"
           description="Settle your bill at the doorstep"
         />
         <PaymentMethodItem
+          _paymentMethod={PaymentMethod.ZALOPAY}
           imagePath="/payment_method_zalopay.png"
           text="Zalo Pay"
           description="Have your phone with Zalo/Zalo Pay account ready"
         />
         <PaymentMethodItem
+          _paymentMethod={PaymentMethod.VNPAY}
           imagePath="/payment_method_vnpay.webp"
           text="VN Pay"
           description="Have your phone with VN Pay account ready"
@@ -35,9 +41,23 @@ const PaymentMethodBox = () => {
   );
 };
 
-const PaymentMethodItem = ({ imagePath, text, description }: any) => {
+const PaymentMethodItem = ({
+  _paymentMethod,
+  imagePath,
+  text,
+  description,
+}: any) => {
+  const { paymentMethod, selectPaymentMethod } = useOrderStore();
   return (
-    <AppContainer>
+    <AppContainer
+      onClick={() => selectPaymentMethod(_paymentMethod)}
+      state={
+        _paymentMethod == paymentMethod
+          ? ContainerState.ACTIVE
+          : ContainerState.DEFAULT
+      }
+      className="cursor-pointer"
+    >
       <VStack marginX={4}>
         <Image
           src={imagePath}

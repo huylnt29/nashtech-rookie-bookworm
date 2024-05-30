@@ -16,9 +16,9 @@ export type ContainerProps = {
 const AppContainer = (props: ContainerProps) => {
   const setClassName = () => {
     if (!props.state) {
-      return `bg-white p-6 shadow-lg shadow-slate-200 rounded-2xl ${props.className}`;
+      return `bg-white p-6 shadow-lg shadow-slate-200 rounded-2xl border border-2 ${props.className} border-transparent`;
     } else {
-      return `text-white bg-slate-900 p-6 shadow-lg shadow-slate-200 rounded-2xl ${props.className}`;
+      return `bg-white p-6 shadow-lg shadow-slate-200 rounded-2xl border border-2 ${props.className} border-slate-900`;
     }
   };
 

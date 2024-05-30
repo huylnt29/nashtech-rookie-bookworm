@@ -53,7 +53,7 @@ const BuyerInformationForm = () => {
             focusBorderColor={"black"}
           />
           <Text fontSize="sm" fontWeight="bold">
-            Address
+            Address *
           </Text>
           <AppInput
             type={"text"}

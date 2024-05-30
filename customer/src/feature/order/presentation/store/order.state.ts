@@ -3,7 +3,7 @@ import { Cart } from "../../data/model/cart.class";
 import { Customer } from "../../data/model/customer.class";
 import { PaymentMethod } from "../../data/model/payment_method.enum";
 
-interface CartState {
+interface OrderState {
   cart: Cart;
   customer: Customer;
   paymentMethod: PaymentMethod;
@@ -12,6 +12,7 @@ interface CartState {
   incrementBookByLine(bookId: number): void;
   decrementBookByLine(bookId: number): void;
   calculatePrice(): void;
+  selectPaymentMethod(paymentMethod: PaymentMethod): void;
 }
 
-export default CartState;
+export default OrderState;
