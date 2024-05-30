@@ -15,6 +15,13 @@ export class Cart {
   copyWith = (obj: Object) => new Cart(Object.assign(this, obj));
 
   addLine(newLine: BookLine) {
+    for (let line of this.lines!) {
+      if (line.book!.id != newLine.book!.id) continue;
+      else {
+        line.quantity! += newLine.quantity!;
+        return this.copyWith(this);
+      }
+    }
     this.lines!.push(newLine);
     return this.copyWith(this);
   }
