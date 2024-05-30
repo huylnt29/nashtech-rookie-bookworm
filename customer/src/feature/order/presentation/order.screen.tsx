@@ -8,9 +8,16 @@ import useOrderStore from "./store/order.store";
 import RequestState from "../../../core/data/enum/request_state.enum";
 import LoadingModal from "../../../core/component/loading_modal";
 import OrderSuccessDialog from "./order_success.dialog";
+import { Spacer } from "@nextui-org/react";
+import { useEffect } from "react";
 
 const CartScreen = () => {
-  const { submit, submitRequestState } = useOrderStore();
+  const { submit, submitRequestState, retrieveCart } = useOrderStore();
+
+  useEffect(() => {
+    retrieveCart();
+  }, []);
+
   const buildSubmitButton = () => {
     return <PrimaryButton text={"Submit"} onClick={submit} color={"default"} />;
   };
@@ -32,6 +39,7 @@ const CartScreen = () => {
         <PriceCalculationBox />
         <BuyerInformationForm />
         <PaymentMethodBox />
+        <Spacer y={1} />
         {buildSubmitButton()}
       </VStack>
       <VStack width="45%" spacing={8}>

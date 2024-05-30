@@ -17,6 +17,9 @@ interface OrderState {
   updateCustomer(property: CustomerProperty, value: string): void;
   submit(): Promise<void>;
   submitRequestState: RequestState;
+  saveCart(): void;
+  retrieveCart(): void;
+  removeCart(): void;
 }
 
 export default OrderState;

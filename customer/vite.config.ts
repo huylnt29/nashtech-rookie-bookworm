@@ -4,12 +4,12 @@ import { esbuildDecorators } from "@anatine/esbuild-decorators";
 
 export default defineConfig({
   plugins: [react(), esbuildDecorators()],
-  // server: {
-  //   host: true,
-  //   port: 8000,
-  //   strictPort: true,
-  //   watch: {
-  //     usePolling: true,
-  //   },
-  // },
+  server: {
+    host: true,
+    port: 2901,
+    strictPort: true,
+    watch: {
+      usePolling: true,
+    },
+  },
 });
