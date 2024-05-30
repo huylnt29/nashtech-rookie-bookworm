@@ -7,6 +7,7 @@ import PrimaryButton from "../../../core/component/primary_button";
 import useOrderStore from "./store/order.store";
 import RequestState from "../../../core/data/enum/request_state.enum";
 import LoadingModal from "../../../core/component/loading_modal";
+import OrderSuccessDialog from "./order_success.dialog";
 
 const CartScreen = () => {
   const { submit, submitRequestState } = useOrderStore();
@@ -20,7 +21,7 @@ const CartScreen = () => {
       case RequestState.LOADING:
         return <LoadingModal />;
       case RequestState.LOADED:
-        return <>OK</>;
+        return <OrderSuccessDialog />;
       case RequestState.ERROR:
         return <>Not ok</>;
     }

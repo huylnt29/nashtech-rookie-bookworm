@@ -15,7 +15,7 @@ interface OrderState {
   calculatePrice(): void;
   selectPaymentMethod(paymentMethod: PaymentMethod): void;
   updateCustomer(property: CustomerProperty, value: string): void;
-  submit(): void;
+  submit(): Promise<void>;
   submitRequestState: RequestState;
 }
 

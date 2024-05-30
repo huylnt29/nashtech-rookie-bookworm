@@ -1,16 +1,7 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalBody } from "@chakra-ui/react";
 import { CircularProgress } from "@nextui-org/react";
 
-const LoadingModal = ({ onClose }: any) => {
+const LoadingModal = () => {
   return (
     <Modal
       closeOnOverlayClick={false}

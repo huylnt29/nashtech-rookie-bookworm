@@ -6,6 +6,7 @@ import { Customer } from "../../data/model/customer.class";
 import { PaymentMethod } from "../../data/model/payment_method.enum";
 import OrderState from "./order.state";
 import RequestState from "../../../../core/data/enum/request_state.enum";
+import { OrderRepository } from "../../domain/order.repository";
 
 const useOrderStore = create<OrderState>()((set, get) => {
   return {
@@ -44,9 +45,17 @@ const useOrderStore = create<OrderState>()((set, get) => {
         }),
       }));
     },
-    submit() {
+    async submit() {
       set(() => ({
         submitRequestState: RequestState.LOADING,
+      }));
+      // await OrderRepository.createOrderRemote(
+      //   get().cart,
+      //   get().customer,
+      //   get().paymentMethod
+      // );
+      set(() => ({
+        submitRequestState: RequestState.LOADED,
       }));
     },
   };
