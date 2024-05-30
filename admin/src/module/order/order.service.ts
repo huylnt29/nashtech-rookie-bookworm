@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { CreateOrderDto, CreateOrderLineDto } from './dto/order.create.dto';
+import { Order, State } from '@prisma/client';
 
 @Injectable()
 export class OrderService {
@@ -33,6 +34,26 @@ export class OrderService {
       },
       select: {
         id: true,
+      },
+    });
+  }
+
+  async selectMany(): Promise<Order[]> {
+    return this.prisma.order.findMany({
+      where: {
+        state: State.ACTIVE,
+      },
+      include: {
+        _count: {
+          select: {
+            orderLines: true,
+          },
+        },
+        customer: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
   }
