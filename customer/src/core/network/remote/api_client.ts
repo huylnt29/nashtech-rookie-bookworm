@@ -10,9 +10,7 @@ class ApiClient {
   static getBookDetail = async (id: string) =>
     await apiClient.get(Endpoint.BOOK_DETAIL(id));
   static postOrder = async (body: Order) =>
-    await apiClient.post(Endpoint.NEW_ORDER, {
-      body,
-    });
+    await apiClient.post(Endpoint.NEW_ORDER, body);
 }
 
 export default ApiClient;

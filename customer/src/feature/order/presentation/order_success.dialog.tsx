@@ -5,15 +5,13 @@ import {
   ModalBody,
   ModalHeader,
   Text,
-  Center,
   VStack,
   ModalFooter,
 } from "@chakra-ui/react";
 import { Image } from "@nextui-org/react";
 import PrimaryButton from "../../../core/component/primary_button";
 import { RoutePath } from "../../../core/router/route_path";
-import { useNavigate } from "react-router";
-import { BuildingStorefrontIcon, HomeIcon } from "@heroicons/react/24/outline";
+import { BuildingStorefrontIcon } from "@heroicons/react/24/outline";
 
 const OrderSuccessDialog = () => {
   return (

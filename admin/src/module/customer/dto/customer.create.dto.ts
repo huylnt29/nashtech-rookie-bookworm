@@ -46,7 +46,7 @@ export class CreateCustomerDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(30)
+  @MinLength(1)
+  @MaxLength(15)
   district: string;
 }

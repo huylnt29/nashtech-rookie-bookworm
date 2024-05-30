@@ -49,11 +49,11 @@ const useOrderStore = create<OrderState>()((set, get) => {
       set(() => ({
         submitRequestState: RequestState.LOADING,
       }));
-      // await OrderRepository.createOrderRemote(
-      //   get().cart,
-      //   get().customer,
-      //   get().paymentMethod
-      // );
+      const res = await OrderRepository.createOrderRemote(
+        get().cart,
+        get().customer,
+        get().paymentMethod
+      );
       set(() => ({
         submitRequestState: RequestState.LOADED,
       }));

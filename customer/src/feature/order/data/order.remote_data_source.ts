@@ -14,7 +14,7 @@ export class OrderRemoteDataSource {
     const order: Order = {
       lines: cart.lines!.map((bookLine) => {
         const orderLine: OrderLine = {
-          batchId: 0,
+          batchId: bookLine.book!.batchId,
           quantity: bookLine.quantity!,
           price: Math.round(
             bookLine.book!.price * bookLine.book!.discount.percentage
@@ -22,8 +22,10 @@ export class OrderRemoteDataSource {
         };
         return orderLine;
       }),
-      customer: customer,
+      customer: customer.toServerData(),
       paymentMethod: paymentMethod,
+      totalQuantity: cart.booksCount!,
+      totalPrice: cart.final!,
     };
     return ApiClient.postOrder(order);
   };

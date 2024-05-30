@@ -15,6 +15,15 @@ export class Customer {
   validate = () => {
     return this.name && this.phone && this.address;
   };
+
+  toServerData = () => ({
+    name: this.name,
+    phone: this.phone,
+    email: this.email,
+    address: this.address,
+    city: this.city,
+    district: this.district,
+  });
 }
 
 export type CustomerProperty =
