@@ -22,8 +22,11 @@ export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
   @Get()
-  async getAuthors() {
-    return this.authorService.selectMany();
+  async buildAuthorListPage(@Res() res: Response): Promise<void> {
+    const authors = await this.authorService.selectMany();
+    res.render('./view_author_list/view_author_list_page', {
+      authors,
+    });
   }
 
   @Post()
@@ -40,11 +43,11 @@ export class AuthorController {
     try {
       await this.authorService.delete(id);
       return res.status(HttpStatus.OK).json({
-        message: 'The category has been deleted successfully',
+        message: 'The author has been deleted successfully',
       });
     } catch (error) {
       return res.status(HttpStatus.NOT_FOUND).json({
-        message: 'There is no category contains the provided id',
+        message: 'There is no author contains the provided id',
       });
     }
   }
