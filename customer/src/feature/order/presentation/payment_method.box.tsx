@@ -1,10 +1,10 @@
 import { Box, HStack, VStack, Text, Grid } from "@chakra-ui/react";
 import { Image } from "@nextui-org/react";
 import AppContainer from "../../../core/component/container";
-import useCartStore from "./store/cart.store";
+import useOrderStore from "./store/order.store";
 
 const PaymentMethodBox = () => {
-  const { cart } = useCartStore();
+  const { cart } = useOrderStore();
 
   return (
     <VStack align="start" width="100%">

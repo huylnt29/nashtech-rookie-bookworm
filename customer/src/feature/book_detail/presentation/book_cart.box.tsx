@@ -7,7 +7,7 @@ import { Spacer } from "@nextui-org/react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import SecondaryButton from "../../../core/component/secondary_button";
 import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
-import useCartStore from "../../cart/presentation/store/cart.store";
+import useOrderStore from "../../order/presentation/store/order.store";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { RoutePath } from "../../../core/router/route_path";
@@ -15,7 +15,7 @@ import BookPrice from "../../../core/component/book_price";
 
 const BookCart = () => {
   const { book } = useBookDetailStore();
-  const { addBookLine } = useCartStore();
+  const { addBookLine } = useOrderStore();
   const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(0);

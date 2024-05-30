@@ -1,11 +1,16 @@
 import { create } from "zustand";
 import CartState from "./cart.state";
-import { BookLine, Cart } from "../../data/model/cart.class";
+import { Cart } from "../../data/model/cart.class";
 import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
+import { BookLine } from "../../data/model/book_line.class";
+import { Customer } from "../../data/model/customer.class";
+import { PaymentMethod } from "../../data/model/payment_method.enum";
 
-const useCartStore = create<CartState>()((set, get) => {
+const useOrderStore = create<CartState>()((set, get) => {
   return {
     cart: new Cart(),
+    customer: new Customer(),
+    paymentMethod: PaymentMethod.CASH,
     addBookLine(book: BookDetail, quantity: number) {
       set((state) => ({
         cart: state.cart.addLine(
@@ -28,4 +33,4 @@ const useCartStore = create<CartState>()((set, get) => {
   };
 });
 
-export default useCartStore;
+export default useOrderStore;

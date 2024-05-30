@@ -14,7 +14,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Color from "../theme/theme";
 import SecondaryButton from "./secondary_button";
 import { RouteBuilder, RoutePath } from "../router/route_path";
-import useCartStore from "../../feature/cart/presentation/store/cart.store";
+import useOrderStore from "../../feature/order/presentation/store/order.store";
 import { useNavigate } from "react-router";
 
 export default function AppNavbar() {
@@ -76,7 +76,7 @@ export default function AppNavbar() {
 }
 
 const NavbarCart = () => {
-  const { cart } = useCartStore();
+  const { cart } = useOrderStore();
   const navigate = useNavigate();
 
   const buildText = () => {

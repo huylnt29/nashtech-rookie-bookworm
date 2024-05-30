@@ -1,8 +1,12 @@
 import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
 import { Cart } from "../../data/model/cart.class";
+import { Customer } from "../../data/model/customer.class";
+import { PaymentMethod } from "../../data/model/payment_method.enum";
 
 interface CartState {
   cart: Cart;
+  customer: Customer;
+  paymentMethod: PaymentMethod;
   addBookLine(book: BookDetail, quantity: number): void;
   deleteBookLine(bookId: number): void;
   incrementBookByLine(bookId: number): void;

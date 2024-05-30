@@ -1,4 +1,4 @@
-import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
+import { BookLine } from "./book_line.class";
 
 export class Cart {
   constructor(obj?: any) {
@@ -44,21 +44,4 @@ export class Cart {
   subtotal?: number;
   discounted?: number;
   final?: number;
-}
-
-export class BookLine {
-  constructor(obj: any) {
-    Object.assign(this, obj);
-  }
-
-  copyWith = (obj: Object) => new BookLine(Object.assign(this, obj));
-
-  book?: BookDetail;
-  quantity?: number;
-
-  getTotal() {
-    return Math.round(
-      this.book!.price * this.book!.discount.percentage * this.quantity!
-    );
-  }
 }

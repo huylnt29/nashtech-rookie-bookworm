@@ -1,14 +1,14 @@
 import { Box, Flex, HStack, Text, VStack, Spacer } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import { Image } from "@nextui-org/react";
-import useCartStore from "./store/cart.store";
+import useOrderStore from "./store/order.store";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
 import BookPrice from "../../../core/component/book_price";
 import { UI } from "../../../core/util/ui.util";
 
 const BookLineList = () => {
-  const { cart } = useCartStore();
+  const { cart } = useOrderStore();
   return (
     <VStack align="start" width="100%">
       <HStack>

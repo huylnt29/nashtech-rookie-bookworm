@@ -115,7 +115,7 @@ model Customer {
   name     String
   phone    String  @unique
   email    String? @unique
-  address  String?
+  address  String
   city     String?
   district String?
   state    State   @default(ACTIVE)

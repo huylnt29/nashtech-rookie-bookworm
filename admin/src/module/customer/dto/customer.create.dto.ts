@@ -30,7 +30,7 @@ export class CreateCustomerDto {
   email: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(100)

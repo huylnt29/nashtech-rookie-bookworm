@@ -1,12 +1,12 @@
 import { Box, HStack, VStack, Text } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
-import useCartStore from "./store/cart.store";
+import useOrderStore from "./store/order.store";
 import { UI } from "../../../core/util/ui.util";
 import RowText from "../../../core/component/row_text";
 import { Divider } from "@nextui-org/react";
 
 const PriceCalculationBox = () => {
-  const { cart } = useCartStore();
+  const { cart } = useOrderStore();
 
   return (
     <VStack align="start" width="100%">

@@ -4,7 +4,7 @@ import HomeScreen from "../../feature/home/presentation/home.screen";
 import ViewBookstoreScreen from "../../feature/bookstore/presentation/view_bookstore.screen";
 import GlobalLayout from "../component/global_layout";
 import BookDetailScreen from "../../feature/book_detail/presentation/book_detail.screen";
-import CartScreen from "../../feature/cart/presentation/cart.screen";
+import CartScreen from "../../feature/order/presentation/order.screen";
 
 const AppRouter = () => {
   return (
