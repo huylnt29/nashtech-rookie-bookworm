@@ -31,14 +31,14 @@ export class OrderController {
     });
   }
 
-  // @Get(':id')
-  // async buildOrderDetailPage(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Res() res: Response,
-  // ): Promise<void> {
-  //   const order = await this.orderService.selectOne(id);
-  //   res.render('./view_order_detail/view_order_detail_page', {
-  //     order,
-  //   });
-  // }
+  @Get(':id')
+  async buildOrderDetailPage(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    const order = await this.orderService.selectOne(id);
+    res.render('./view_order_detail/view_order_detail_page', {
+      order,
+    });
+  }
 }

@@ -58,6 +58,31 @@ export class OrderService {
     });
   }
 
+  async selectOne(id: number): Promise<Order> {
+    return this.prisma.order.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        customer: true,
+        orderLines: {
+          include: {
+            batch: {
+              include: {
+                book: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   async selectEverything(): Promise<any[]> {
     return this.prisma.order.findMany({
       include: {
