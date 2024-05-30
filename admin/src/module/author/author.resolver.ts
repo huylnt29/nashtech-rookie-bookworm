@@ -1,7 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Author } from './entity/Author.entity';
 
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import {
   FindManyAuthorArgs,
   FindUniqueAuthorArgs,

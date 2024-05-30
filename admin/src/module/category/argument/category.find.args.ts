@@ -10,7 +10,7 @@ import {
   CategoryWhereInput,
   CategoryWhereUniqueInput,
 } from './category.where.args';
-import { RestrictProperties } from 'src/core/graphql/common.input';
+import { RestrictProperties } from 'src/core/service/graphql/common.input';
 
 registerEnumType(Prisma.CategoryScalarFieldEnum, {
   name: 'CategoryScalarFieldEnum',

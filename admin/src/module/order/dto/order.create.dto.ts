@@ -3,6 +3,7 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -13,6 +14,7 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
+import { PaymentMethod } from 'src/core/data/payment_method.enum';
 import { CreateCustomerDto } from 'src/module/customer/dto/customer.create.dto';
 
 export class CreateOrderDto {
@@ -41,6 +43,11 @@ export class CreateOrderDto {
   @ValidateNested()
   @Type(() => CreateCustomerDto)
   customer: CreateCustomerDto;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(PaymentMethod)
+  paymentMethod: PaymentMethod;
 }
 
 export class CreateOrderLineDto {

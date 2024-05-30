@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { CreateDiscountDto } from './dto/create_discount.dto';
 import { UpdateDiscountDto } from './dto/update_discount.dto';
 import { State } from '@prisma/client';

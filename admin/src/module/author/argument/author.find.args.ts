@@ -7,7 +7,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { AuthorOrderByWithRelationInput } from './author.order_by.args';
 import { AuthorWhereInput, AuthorWhereUniqueInput } from './author.where.args';
-import { RestrictProperties } from 'src/core/graphql/common.input';
+import { RestrictProperties } from 'src/core/service/graphql/common.input';
 
 registerEnumType(Prisma.AuthorScalarFieldEnum, {
   name: 'AuthorScalarFieldEnum',

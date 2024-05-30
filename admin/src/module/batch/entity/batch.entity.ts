@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { $Enums, Batch as BatchType } from '@prisma/client';
-import { RestrictProperties } from 'src/core/graphql/common.input';
-import { State } from 'src/core/graphql/register_enum';
+import { RestrictProperties } from 'src/core/service/graphql/common.input';
+import { State } from 'src/core/service/graphql/register_enum';
 import { Book } from 'src/module/book/entity/book.entity';
 import { Discount } from 'src/module/discount/entity/discount.entity';
 

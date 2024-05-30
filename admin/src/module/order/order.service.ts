@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { CreateOrderDto, CreateOrderLineDto } from './dto/order.create.dto';
 
 @Injectable()
