@@ -3,6 +3,7 @@ import { Category } from "../../../../core/data/type/category.type";
 
 export type BookDetail = {
   id: number;
+  batchId: number;
   name: string;
   imageUrls: string[];
   description: string;

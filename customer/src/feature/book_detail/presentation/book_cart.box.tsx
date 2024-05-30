@@ -7,37 +7,22 @@ import { Spacer } from "@nextui-org/react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import SecondaryButton from "../../../core/component/secondary_button";
 import IncrementDecrementFormField from "../../../core/component/increment_decrement_form_field";
+import useOrderStore from "../../order/presentation/store/order.store";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+import { RoutePath } from "../../../core/router/route_path";
+import BookPrice from "../../../core/component/book_price";
 
 const BookCart = () => {
   const { book } = useBookDetailStore();
+  const { addBookLine } = useOrderStore();
+  const navigate = useNavigate();
 
-  const buildPrice = () => {
-    if (book?.discount?.percentage) {
-      return (
-        <HStack>
-          <Text fontSize="xl" fontWeight="semibold">
-            {UI.formatNumberWithDots(
-              Math.round(book.price * book?.discount?.percentage)
-            )}{" "}
-            VND
-          </Text>
-          <Text
-            fontSize="md"
-            className="text-slate-300"
-            fontWeight="semibold"
-            textDecoration="line-through"
-          >
-            {UI.formatNumberWithDots(book.price)} VND
-          </Text>
-        </HStack>
-      );
-    } else {
-      return (
-        <Text fontSize="xl" fontWeight="semibold" textDecoration="slategray">
-          {UI.formatNumberWithDots(book!.price)} VND
-        </Text>
-      );
-    }
+  const [quantity, setQuantity] = useState(0);
+
+  const handleBuyNow = () => {
+    addBookLine(book!, quantity);
+    navigate(RoutePath.CHECK_OUT);
   };
 
   const buildButtons = () => {
@@ -45,10 +30,14 @@ const BookCart = () => {
       <HStack spacing={5}>
         <SecondaryButton
           text={"Add to cart"}
-          onClick={undefined}
+          onClick={() => addBookLine(book!, quantity)}
           color={"default"}
         />
-        <PrimaryButton text={"Buy now"} onClick={undefined} color={"default"} />
+        <PrimaryButton
+          text={"Buy now"}
+          onClick={handleBuyNow}
+          color={"default"}
+        />
       </HStack>
     );
   };
@@ -60,9 +49,9 @@ const BookCart = () => {
           Quantity:
         </Text>
         <IncrementDecrementFormField
-          onIncrement={undefined}
-          value={"1"}
-          onDecrement={undefined}
+          onIncrement={() => setQuantity(quantity + 1)}
+          value={quantity}
+          onDecrement={() => setQuantity(quantity - 1)}
         />
       </HStack>
     );
@@ -71,7 +60,10 @@ const BookCart = () => {
   return (
     <AppContainer>
       <Flex direction="column" gap={1}>
-        {buildPrice()}
+        <BookPrice
+          initialPrice={book!.price}
+          discountPercentage={book!.discount.percentage}
+        />
         <Spacer y={1} />
         <Text fontSize="lg" className="text-gray-500">
           This discount expires at

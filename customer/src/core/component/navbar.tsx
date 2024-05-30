@@ -13,9 +13,12 @@ import AppInput from "./input";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Color from "../theme/theme";
 import SecondaryButton from "./secondary_button";
-import { RouteBuilder } from "../router/route_path";
+import { RouteBuilder, RoutePath } from "../router/route_path";
+import useOrderStore from "../../feature/order/presentation/store/order.store";
+import { useNavigate } from "react-router";
 
 export default function AppNavbar() {
+  const navigate = useNavigate();
   return (
     <Navbar className="bg-transparent p-3">
       <NavbarBrand>
@@ -30,26 +33,34 @@ export default function AppNavbar() {
         <NavbarItem>
           <AppInput
             type="text"
-            label="Search for books"
             value={undefined}
-            placeholder="Type book name here"
+            placeholder="Search for books"
             leftIcon={<MagnifyingGlassIcon className="text-white font-bold" />}
             textColor={Color.primary}
+            focusBorderColor={"white"}
           />
         </NavbarItem>
         <Spacer x={12} />
         <NavbarItem>
-          <Link color="primary" href="/">
+          <Link
+            color="primary"
+            onClick={() => navigate(RoutePath.HOME)}
+            className="cursor-pointer"
+          >
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href={RouteBuilder.buildStorePath(1)}>
+          <Link
+            color="primary"
+            onClick={() => navigate(RouteBuilder.buildStorePath(1))}
+            className="cursor-pointer"
+          >
             Store
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="#">
+          <Link color="primary" href="#" className="cursor-pointer">
             About
           </Link>
         </NavbarItem>
@@ -57,14 +68,28 @@ export default function AppNavbar() {
 
       <NavbarContent justify="end">
         <NavbarItem>
-          <SecondaryButton
-            text="Cart"
-            onClick={undefined}
-            leftIcon={<CiShoppingCart className="text-white font-bold" />}
-            color={"secondary"}
-          />
+          <NavbarCart />
         </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
 }
+
+const NavbarCart = () => {
+  const { cart } = useOrderStore();
+  const navigate = useNavigate();
+
+  const buildText = () => {
+    if (!cart?.booksCount || cart?.booksCount == 0) return "Cart";
+    else return `Cart (${cart.booksCount})`;
+  };
+
+  return (
+    <SecondaryButton
+      text={buildText()}
+      onClick={() => navigate(RoutePath.CHECK_OUT)}
+      leftIcon={<CiShoppingCart className="text-white font-bold" />}
+      color={"secondary"}
+    />
+  );
+};

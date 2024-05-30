@@ -66,6 +66,7 @@ model Batch {
   book        Book         @relation(fields: [bookId], references: [id])
   discount    Discount?    @relation(fields: [discountId], references: [id])
   collections Collection[]
+  orderLines  OrderLine[]
 }
 
 model Discount {
@@ -83,28 +84,30 @@ model Discount {
 }
 
 model Order {
-  id            Int         @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   customerId    Int
   totalQuantity Int
   totalPrice    Float
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  state         State       @default(ACTIVE)
-  status        OrderStatus @default(PLACED)
-  customer      Customer    @relation(fields: [customerId], references: [id])
-  OrderLine     OrderLine[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  state         State         @default(ACTIVE)
+  status        OrderStatus   @default(PLACED)
+  customer      Customer      @relation(fields: [customerId], references: [id])
+  orderLines    OrderLine[]
+  paymentMethod PaymentMethod @default(CASH)
 }
 
 model OrderLine {
   id        Int      @id @default(autoincrement())
+  batchId   Int
   quantity  Int
   price     Float
   orderId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   state     State    @default(ACTIVE)
-
-  order Order @relation(fields: [orderId], references: [id])
+  batch     Batch    @relation(fields: [batchId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
 }
 
 model Customer {
@@ -112,11 +115,11 @@ model Customer {
   name     String
   phone    String  @unique
   email    String? @unique
-  address  String?
+  address  String
   city     String?
   district String?
   state    State   @default(ACTIVE)
-  Order    Order[]
+  orders   Order[]
 }
 
 model Review {
@@ -175,4 +178,11 @@ enum CollectionType {
 enum State {
   ACTIVE
   INACTIVE
+}
+
+enum PaymentMethod {
+  CASH
+  ZALOPAY
+  VNPAY
+  MOMO
 }

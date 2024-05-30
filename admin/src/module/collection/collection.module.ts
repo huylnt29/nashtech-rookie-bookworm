@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'src/core/prisma/prisma.module';
+import { PrismaModule } from 'src/core/service/prisma/prisma.module';
 import { BatchService } from '../batch/batch.service';
 import { CollectionController } from './collection.controller';
 import { CollectionService } from './collection.service';

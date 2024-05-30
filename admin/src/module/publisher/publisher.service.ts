@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { Publisher } from '@prisma/client';
 import { CreatePublisherDto } from './dto/create_publisher.dto';
 import { UpdatePublisherDto } from './dto/update_publisher.dto';

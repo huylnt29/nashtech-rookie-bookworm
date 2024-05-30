@@ -7,7 +7,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { ReviewOrderByWithRelationInput } from './review.order_by.args';
 import { ReviewWhereInput, ReviewWhereUniqueInput } from './review.where.args';
-import { RestrictProperties } from 'src/core/graphql/common.input';
+import { RestrictProperties } from 'src/core/service/graphql/common.input';
 
 registerEnumType(Prisma.ReviewScalarFieldEnum, {
   name: 'ReviewScalarFieldEnum',

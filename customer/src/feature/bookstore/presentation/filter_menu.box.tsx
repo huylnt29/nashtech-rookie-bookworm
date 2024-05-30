@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import useBookstoreStore from "./store/bookstore.store";
-import { Flex, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
+import { Flex, Spacer, Text, VStack } from "@chakra-ui/react";
 import AppCheckboxGroup, {
   CheckboxOption,
 } from "../../../core/component/checkbox_group";
 import RequestState from "../../../core/data/enum/request_state.enum";
 import AppContainer from "../../../core/component/container";
 import PrimaryButton from "../../../core/component/primary_button";
-import { CiAirportSign1 } from "react-icons/ci";
 
 const FilterMenu = () => {
   const { fetchFilter, filterDataRequestState, categories, authors } =
@@ -57,8 +56,8 @@ const FilterMenu = () => {
         <PrimaryButton
           text="Apply"
           onClick={undefined}
-          colorScheme="slate"
           color={"default"}
+          fitContent
         />
       </Flex>
       <AppContainer>

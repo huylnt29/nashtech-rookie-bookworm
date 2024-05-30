@@ -5,7 +5,10 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { $Enums, Prisma } from '@prisma/client';
-import { IntFilter, RestrictProperties } from 'src/core/graphql/common.input';
+import {
+  IntFilter,
+  RestrictProperties,
+} from 'src/core/service/graphql/common.input';
 import { AuthorListRelationFilter } from 'src/module/author/argument/author.where.args';
 import {
   CategoryListRelationFilter,

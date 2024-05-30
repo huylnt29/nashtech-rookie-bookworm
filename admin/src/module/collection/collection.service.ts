@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/core/prisma/prisma.service';
+import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { CreateCollectionDto } from './dto/create_collection.dto';
 import { UpdateCollectionDto } from './dto/update_collection.dto';
 import { CollectionType, State } from '@prisma/client';

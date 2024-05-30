@@ -1,5 +1,6 @@
 export type ReadPublicBookDto = {
   id: number;
+  batchId: number;
   name: string;
   imageUrls: string[];
   description: string;

@@ -1,6 +1,6 @@
 import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
-import { State } from 'src/core/graphql/register_enum';
+import { State } from 'src/core/service/graphql/register_enum';
 import { BookRelationFilter } from 'src/module/book/argument/book.where.args';
 import { DiscountRelationFilter } from 'src/module/discount/argument/discount.where.args';
 

@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), esbuildDecorators()],
   server: {
     host: true,
-    port: 8000,
+    port: 2901,
     strictPort: true,
     watch: {
       usePolling: true,
