@@ -80,7 +80,7 @@ const NavbarCart = () => {
   const navigate = useNavigate();
 
   const buildText = () => {
-    if (!cart.booksCount || cart.booksCount == 0) return "Cart";
+    if (!cart?.booksCount || cart?.booksCount == 0) return "Cart";
     else return `Cart (${cart.booksCount})`;
   };
 

@@ -9,14 +9,15 @@ import RequestState from "../../../core/data/enum/request_state.enum";
 import LoadingModal from "../../../core/component/loading_modal";
 import OrderSuccessDialog from "./order_success.dialog";
 import { Spacer } from "@nextui-org/react";
-import { useEffect } from "react";
+import Announcement from "../../../core/component/announcement";
 
 const CartScreen = () => {
-  const { submit, submitRequestState } = useOrderStore();
+  const { cart, submit, submitRequestState } = useOrderStore();
 
   const buildSubmitButton = () => {
     return <PrimaryButton text={"Submit"} onClick={submit} color={"default"} />;
   };
+
   const buildSubmissionResult = () => {
     switch (submitRequestState) {
       case RequestState.IDLE:
@@ -29,6 +30,14 @@ const CartScreen = () => {
         return <>Not ok</>;
     }
   };
+
+  if (!cart)
+    return (
+      <Announcement
+        imagePath="/illustration_empty_cart.svg"
+        text="There's nothing in your cart. Let's come back and find something great"
+      />
+    );
   return (
     <Flex marginX="15%" justify="space-between" gap="7%">
       <VStack width="55%" spacing={8}>

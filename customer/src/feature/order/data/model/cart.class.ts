@@ -46,6 +46,10 @@ export class Cart {
       final,
     });
   }
+
+  isEmpty() {
+    return !(this.booksCount || this.booksCount! > 0);
+  }
   lines?: BookLine[];
   booksCount?: number;
   subtotal?: number;

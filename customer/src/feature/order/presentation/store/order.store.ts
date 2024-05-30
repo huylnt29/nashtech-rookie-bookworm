@@ -15,14 +15,26 @@ const useOrderStore = create<OrderState>()((set, get) => {
     paymentMethod: PaymentMethod.CASH,
     submitRequestState: RequestState.IDLE,
     addBookLine(book: BookDetail, quantity: number) {
-      set((state) => ({
-        cart: state.cart.addLine(
-          new BookLine({
-            book,
-            quantity,
-          })
-        ),
-      }));
+      set((state) => {
+        if (state.cart) {
+          return {
+            cart: state.cart.addLine(
+              new BookLine({
+                book,
+                quantity,
+              })
+            ),
+          };
+        } else
+          return {
+            cart: new Cart().addLine(
+              new BookLine({
+                book,
+                quantity,
+              })
+            ),
+          };
+      });
       get().calculatePrice();
     },
     deleteBookLine(bookId: number) {},
@@ -65,7 +77,7 @@ const useOrderStore = create<OrderState>()((set, get) => {
     },
     finishOrder() {
       set(() => ({
-        cart: undefined,
+        cart: new Cart(),
       }));
       OrderRepository.removeCartLocal();
     },

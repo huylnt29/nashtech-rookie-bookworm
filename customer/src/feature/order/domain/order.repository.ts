@@ -21,7 +21,9 @@ export class OrderRepository {
   static removeCartLocal = () => {
     return OrderLocalDataSource.remove();
   };
-  static getCartLocal = (): Cart => {
-    return OrderLocalDataSource.retrieve();
+  static getCartLocal = (): Cart | undefined => {
+    const cart = OrderLocalDataSource.retrieve();
+    if (cart?.isEmpty()) return undefined;
+    return cart;
   };
 }
