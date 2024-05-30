@@ -17,7 +17,7 @@ const PaymentMethodBox = () => {
           Payment method
         </Text>
       </HStack>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6} height={48}>
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         <PaymentMethodItem
           _paymentMethod={PaymentMethod.CASH}
           imagePath="/payment_method_cash.png"
@@ -28,13 +28,13 @@ const PaymentMethodBox = () => {
           _paymentMethod={PaymentMethod.ZALOPAY}
           imagePath="/payment_method_zalopay.png"
           text="Zalo Pay"
-          description="Have your phone with Zalo/Zalo Pay account ready"
+          description="Have your phone with Zalo Pay ready"
         />
         <PaymentMethodItem
           _paymentMethod={PaymentMethod.VNPAY}
           imagePath="/payment_method_vnpay.webp"
           text="VN Pay"
-          description="Have your phone with VN Pay account ready"
+          description="Have your phone with VN Pay ready"
         />
       </Grid>
     </VStack>

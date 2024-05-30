@@ -54,14 +54,19 @@ const useOrderStore = create<OrderState>()((set, get) => {
         get().customer,
         get().paymentMethod
       );
+
       set(() => ({
         submitRequestState: RequestState.LOADED,
       }));
+      get().finishOrder();
     },
     saveCart() {
       OrderRepository.saveCartLocal(get().cart);
     },
     finishOrder() {
+      set(() => ({
+        cart: undefined,
+      }));
       OrderRepository.removeCartLocal();
     },
     retrieveCart() {

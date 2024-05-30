@@ -14,7 +14,9 @@ export class OrderPublicController {
 
   @Post()
   async postOrder(@Body() createDto: CreateOrderDto) {
-    const { id } = await this.customerService.insert(createDto.customer);
+    const { id } = await this.customerService.insertOrUpdate(
+      createDto.customer,
+    );
     const result = this.orderService.insert(createDto, id);
     return result;
   }

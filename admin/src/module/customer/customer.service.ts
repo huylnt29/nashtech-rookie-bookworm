@@ -6,11 +6,20 @@ import { CreateCustomerDto } from './dto/customer.create.dto';
 export class CustomerService {
   constructor(private prisma: PrismaService) {}
 
-  async insert(createDto: CreateCustomerDto) {
-    return this.prisma.customer.create({
-      data: createDto,
+  async insertOrUpdate(createDto: CreateCustomerDto) {
+    return this.prisma.customer.upsert({
+      where: {
+        phone: createDto.phone,
+      },
+      create: createDto,
+      update: {
+        ...createDto,
+        phone: undefined,
+        email: undefined,
+      },
       select: {
         id: true,
+        phone: true,
       },
     });
   }
