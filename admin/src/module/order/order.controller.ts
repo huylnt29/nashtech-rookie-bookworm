@@ -1,16 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Res,
-} from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Res } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { CreateOrderDto } from './dto/order.create.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { CustomerService } from '../customer/customer.service';
 import { Response } from 'express';
 
 @Controller('/order')
