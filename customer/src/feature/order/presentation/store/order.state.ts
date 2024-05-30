@@ -1,3 +1,4 @@
+import RequestState from "../../../../core/data/enum/request_state.enum";
 import { BookDetail } from "../../../book_detail/data/model/book_detail.type";
 import { Cart } from "../../data/model/cart.class";
 import { Customer, CustomerProperty } from "../../data/model/customer.class";
@@ -15,6 +16,7 @@ interface OrderState {
   selectPaymentMethod(paymentMethod: PaymentMethod): void;
   updateCustomer(property: CustomerProperty, value: string): void;
   submit(): void;
+  submitRequestState: RequestState;
 }
 
 export default OrderState;

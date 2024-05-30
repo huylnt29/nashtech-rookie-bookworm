@@ -5,12 +5,14 @@ import { BookLine } from "../../data/model/book_line.class";
 import { Customer } from "../../data/model/customer.class";
 import { PaymentMethod } from "../../data/model/payment_method.enum";
 import OrderState from "./order.state";
+import RequestState from "../../../../core/data/enum/request_state.enum";
 
 const useOrderStore = create<OrderState>()((set, get) => {
   return {
     cart: new Cart(),
     customer: new Customer(),
     paymentMethod: PaymentMethod.CASH,
+    submitRequestState: RequestState.IDLE,
     addBookLine(book: BookDetail, quantity: number) {
       set((state) => ({
         cart: state.cart.addLine(
@@ -43,7 +45,9 @@ const useOrderStore = create<OrderState>()((set, get) => {
       }));
     },
     submit() {
-      console.log(get().customer);
+      set(() => ({
+        submitRequestState: RequestState.LOADING,
+      }));
     },
   };
 });
