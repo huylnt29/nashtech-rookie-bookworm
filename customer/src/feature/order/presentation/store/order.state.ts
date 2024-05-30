@@ -19,7 +19,6 @@ interface OrderState {
   submitRequestState: RequestState;
   saveCart(): void;
   retrieveCart(): void;
-  finishOrder(): void;
 }
 
 export default OrderState;

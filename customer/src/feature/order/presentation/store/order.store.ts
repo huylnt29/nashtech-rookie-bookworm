@@ -37,7 +37,12 @@ const useOrderStore = create<OrderState>()((set, get) => {
       });
       get().calculatePrice();
     },
-    deleteBookLine(bookId: number) {},
+    deleteBookLine(bookId: number) {
+      set((state) => ({
+        cart: state.cart.deleteLine(bookId),
+      }));
+      get().calculatePrice();
+    },
     incrementBookByLine(bookId) {},
     decrementBookByLine(bookId) {},
     calculatePrice() {
@@ -70,16 +75,13 @@ const useOrderStore = create<OrderState>()((set, get) => {
       set(() => ({
         submitRequestState: RequestState.LOADED,
       }));
-      get().finishOrder();
     },
     saveCart() {
-      OrderRepository.saveCartLocal(get().cart);
-    },
-    finishOrder() {
-      set(() => ({
-        cart: new Cart(),
-      }));
-      OrderRepository.removeCartLocal();
+      if (
+        this.submitRequestState != RequestState.LOADED &&
+        !get().cart.isEmpty()
+      )
+        OrderRepository.saveCartLocal(get().cart);
     },
     retrieveCart() {
       const cart = OrderRepository.getCartLocal();

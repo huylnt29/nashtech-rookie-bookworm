@@ -25,6 +25,14 @@ export class Cart {
     this.lines!.push(newLine);
     return this.copyWith(this);
   }
+  deleteLine(bookId: number) {
+    for (let i = 0; i < this.lines!.length; i++) {
+      if (this.lines![i].book!.id == bookId) {
+        this.lines?.splice(i, 1);
+      }
+    }
+    return this.copyWith(this);
+  }
   setPrice() {
     const booksCount = this.lines?.reduce(
       (accumulator, currentBookLine) => accumulator + currentBookLine.quantity!,

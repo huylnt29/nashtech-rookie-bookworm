@@ -23,7 +23,7 @@ export class OrderRepository {
   };
   static getCartLocal = (): Cart | undefined => {
     const cart = OrderLocalDataSource.retrieve();
-    if (cart?.isEmpty()) return undefined;
+    OrderLocalDataSource.remove();
     return cart;
   };
 }

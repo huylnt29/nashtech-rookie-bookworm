@@ -31,7 +31,7 @@ const CartScreen = () => {
     }
   };
 
-  if (!cart)
+  if (!cart || cart.isEmpty())
     return (
       <Announcement
         imagePath="/illustration_empty_cart.svg"

@@ -27,6 +27,8 @@ const BookLineList = () => {
 
 const BookLineCard = ({ bookLine }: any) => {
   const { book, quantity } = bookLine;
+  const { deleteBookLine } = useOrderStore();
+
   return (
     <AppContainer width="100%">
       <Flex gap={8} align="center">
@@ -60,7 +62,7 @@ const BookLineCard = ({ bookLine }: any) => {
 
         <Box width="10%">
           <TrashIcon
-            onClick={undefined}
+            onClick={() => deleteBookLine(book.id)}
             className="w-8 h-8 text-red-900 cursor-pointer hover:animate-wiggle hover:text-red-700 transition ease-in-out"
           />
         </Box>
