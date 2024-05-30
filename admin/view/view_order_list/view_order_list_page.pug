@@ -8,7 +8,7 @@ block content
           }
      div
           p.font-bold.text-xl.text-slate-900 ORDER
-               
+
           div.h-4
           div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                if orders.length > 0
@@ -25,15 +25,15 @@ block content
                                    th.table-cell.text-left UPDATED AT   
                          tbody.table-row-group
                               each order in orders
-                                        tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
-                                             td.table-cell.p-3(onclick=`navigateToDetailPage(${order.id})`) #{order.id}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.totalPrice}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.totalQuantity}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order._count.orderLines}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.customer.name} 
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.paymentMethod}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.status}
-                                             td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.updatedAt.toLocaleString()}
+                                   tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                        td.table-cell.p-3(onclick=`navigateToDetailPage(${order.id})`) #{order.id}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.totalPrice}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.totalQuantity}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order._count.orderLines}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.customer.name} 
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.paymentMethod}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.status}
+                                        td.table-cel(onclick=`navigateToDetailPage(${order.id})`) #{order.updatedAt.toLocaleString()}
                else 
                     +announcement(
                          'illustration_no_data.svg', 

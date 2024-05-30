@@ -10,7 +10,7 @@ block content
           div.flex.justify-between.items-center
                p.font-bold.text-xl.text-slate-900 CATEGORY
                +primary_button('Create', 'openCreateModal()', colorScheme='slate')
-               
+
           div.h-4
           div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
                if categories.length > 0
@@ -24,16 +24,15 @@ block content
                                    th.table-cell.text-left.w-8         
                          tbody.table-row-group
                               each category in categories
-                                        tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
-                                             td.table-cell.p-3(onclick=`navigateToDetailPage(${category.id})`) #{category.id}
-                                             td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.name}
-                                             td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category._count.books}
-                                             td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.updatedAt.toLocaleString()}
-                                             td.table-cel
-                                                  i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${category.id})`) delete
+                                   tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                        td.table-cell.p-3(onclick=`navigateToDetailPage(${category.id})`) #{category.id}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.name}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category._count.books}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.updatedAt.toLocaleString()}
+                                        td.table-cel
+                                             i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${category.id})`) delete
                else 
                     +announcement('illustration_no_data.svg', 'You have not created any category')
 
      include create_category_modal.pug
      include delete_category_modal.pug
-          
