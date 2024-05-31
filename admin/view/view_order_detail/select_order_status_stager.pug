@@ -1,0 +1,12 @@
+div.bg-white.shadow-md.shadow-orange-200.rounded-2xl.flex.items-center.gap-8
+     each status in statuses 
+          if (status.isSelected)
+               div.bg-white.py-3.px-8.shadow-sm.shadow-orange-900.rounded-2xl.cursor-no-drop
+                    p.font-bold.text-orange-900 #{status.value}
+          else 
+               if (status.isSelectable)
+                    div.bg-white.py-3.px-8.rounded-2xl.cursor-pointer
+                         p(class="hover:font-semibold") #{status.value}
+               else 
+                    div.bg-white.py-3.px-8.rounded-2xl.cursor-no-drop
+                         p #{status.value}

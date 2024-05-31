@@ -2,6 +2,8 @@ import { Controller, Get, Param, ParseIntPipe, Res } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { OrderStatus } from '@prisma/client';
+import { OrderStatusDto } from './dto/order.status.dto';
 
 @Controller('/order')
 @ApiTags('ORDER')
@@ -27,8 +29,11 @@ export class OrderController {
     @Res() res: Response,
   ): Promise<void> {
     const order = await this.orderService.selectOne(id);
+    const statuses = this.orderService.generateStatuses(order.status);
+    console.log(statuses);
     res.render('./view_order_detail/view_order_detail_page', {
       order,
+      statuses,
     });
   }
 }
