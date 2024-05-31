@@ -1,4 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Res,
+} from '@nestjs/common';
 import { OrderService } from './order.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
@@ -30,10 +37,17 @@ export class OrderController {
   ): Promise<void> {
     const order = await this.orderService.selectOne(id);
     const statuses = this.orderService.generateStatuses(order.status);
-    console.log(statuses);
     res.render('./view_order_detail/view_order_detail_page', {
       order,
       statuses,
     });
+  }
+
+  @Patch(':id/status/:value')
+  async patchOrderStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('value') status: OrderStatus,
+  ) {
+    return this.orderService.updateStatus(id, status);
   }
 }

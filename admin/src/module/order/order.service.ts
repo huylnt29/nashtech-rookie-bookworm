@@ -108,6 +108,56 @@ export class OrderService {
     return result;
   }
 
+  async updateStatus(id: number, status: OrderStatus) {
+    const updatedOrder = await this.prisma.order.update({
+      where: {
+        id: id,
+      },
+      data: {
+        status: status,
+      },
+      include: {
+        orderLines: {
+          include: {
+            batch: {
+              select: {
+                id: true,
+                bookId: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    switch (updatedOrder.status) {
+      case 'COMPLETED':
+        for (const line of updatedOrder.orderLines) {
+          await this.prisma.batch.update({
+            where: {
+              id: line.batchId,
+            },
+            data: {
+              soldQuantity: {
+                increment: line.quantity,
+              },
+            },
+          });
+          await this.prisma.book.update({
+            where: {
+              id: line.batch.bookId,
+            },
+            data: {
+              totalSoldQuantity: {
+                increment: line.quantity,
+              },
+            },
+          });
+        }
+        break;
+    }
+    return updatedOrder;
+  }
+
   async selectEverything(): Promise<any[]> {
     return this.prisma.order.findMany({
       include: {
