@@ -1,0 +1,20 @@
+div.bg-white.shadow-md.shadow-orange-200.rounded-2xl.flex.items-center.gap-8
+     each status in statuses 
+          if (status.isSelected)
+               div.bg-orange-900.py-3.px-8.shadow-sm.shadow-orange-900.rounded-2xl.cursor-no-drop
+                    p.font-bold.text-orange-50 #{status.value}
+          else 
+               if (status.isSelectable)
+                    div.bg-white.py-3.px-8.rounded-2xl.cursor-pointer(onclick=`patchOrderStatus("${status.value}")`)
+                         p(class="hover:font-semibold") #{status.value}
+               else 
+                    div.bg-white.py-3.px-8.rounded-2xl.cursor-no-drop
+                         p #{status.value}
+
+     script(type='text/javascript').
+          const patchOrderStatus = (value) => {
+               const id = location.href.split('/').at(-1)
+               axios.patch(`/order/${id}/status/${value}`)
+                    .then(() => location.reload())
+                    .catch(console.log);
+          }

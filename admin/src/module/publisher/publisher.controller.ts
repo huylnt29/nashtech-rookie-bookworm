@@ -22,8 +22,11 @@ export class PublisherController {
   constructor(private readonly publisherService: PublisherService) {}
 
   @Get()
-  async getPublishers() {
-    return this.publisherService.selectMany();
+  async buildPublisherListPage(@Res() res: Response): Promise<void> {
+    const publishers = await this.publisherService.selectMany();
+    res.render('./view_publisher_list/view_publisher_list_page', {
+      publishers,
+    });
   }
 
   @Post()

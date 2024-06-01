@@ -1,0 +1,30 @@
+div(id="create-publisher-modal", class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
+     div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
+          div(class="flex justify-between")
+               p(class="text-xl font-semibold") Create new publisher 
+               i(class="material-icons w-8 cursor-pointer", onclick="closeCreateModal()") close
+          form(class="grid gap-4 mb-4 grid-cols-2")
+               div(class="col-span-2")
+                    label(for="name", class="block mb-2 text-sm font-medium text-slate-900") Name 
+                    input(type="text", name="name", id="name", class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", placeholder="Type publisher name", required)
+          div(class="flex justify-end")
+               +primary_button('Submit', 'submitCreateAuthor()', colorScheme='slate')
+     +toast('danger', 'create-publisher-toast')
+
+     script(type="text/javascript").
+          const openCreateModal = () => {
+               u("#create-publisher-modal").removeClass('hidden')   
+          }
+
+          const closeCreateModal = () => {
+               u("#create-publisher-modal").addClass('hidden');   
+          }
+
+          const submitCreateAuthor = async () => {
+               const publisherName = u('#name').nodes[0].value;
+               axios.post('/publisher', {
+                    name: publisherName
+               })
+               .then(() => location.reload(true))
+               .catch((error) => showToast('#create-publisher-toast', error.response.data.message.toString()));
+          }
