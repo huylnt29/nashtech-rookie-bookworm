@@ -12,10 +12,7 @@ export class ReviewService {
       where: {
         state: State.ACTIVE,
       },
-      select: {
-        id: true,
-        author: true,
-        rating: true,
+      include: {
         book: {
           select: {
             id: true,

@@ -30,6 +30,7 @@ import { PaginationService } from './core/service/pagination/pagination.service'
 import { AuthorResolver } from './module/author/author.resolver';
 import { OrderModule } from './module/order/order.module';
 import { CustomerModule } from './module/customer/customer.module';
+import { ReviewModule } from './module/review/review.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { CustomerModule } from './module/customer/customer.module';
     CustomerModule,
     DiscountModule,
     CollectionModule,
+    ReviewModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       fieldResolverEnhancers: ['guards'],
