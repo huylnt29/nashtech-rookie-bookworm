@@ -9,9 +9,6 @@ export class ReviewService {
 
   async selectMany(): Promise<any> {
     return this.prisma.review.findMany({
-      where: {
-        state: State.ACTIVE,
-      },
       include: {
         book: {
           select: {
@@ -35,15 +32,17 @@ export class ReviewService {
     });
   }
 
-  async deactivate(id: number) {
-    return this.prisma.review.update({
-      where: {
-        id: id,
-      },
-      data: {
-        state: State.INACTIVE,
-      },
-    });
+  async updateState(id: number) {
+    return this.prisma.$executeRawUnsafe(
+      `UPDATE public."Review"
+      SET state =
+        CASE
+          WHEN state = 'ACTIVE' THEN 'INACTIVE'::"State"
+          ELSE 'ACTIVE'::"State"
+        END
+      WHERE id = ${id};
+      `,
+    );
   }
 
   async selectOne(id: number) {

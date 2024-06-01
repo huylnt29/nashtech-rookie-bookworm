@@ -32,10 +32,17 @@ block content
                                         td.table-cel #{review.content.slice(0,48).concat("...")}
                                         td.table-cel #{review.state}
                                         td.table-cel #{review.updatedAt.toLocaleString()}
-                                        td.table-cel
-                                             i(class="material-icons hidden group-hover:block w-4", onclick=`openHideModal(${review.id})`) visibility_off
+                                        td.table-cel(onclick=`patchReviewState(${review.id})`)
+                                             i(class="material-icons hidden group-hover:block w-4")= (review.state == "ACTIVE") ? "visibility_off" : "visibility"
                else 
                     +announcement(
                          'illustration_no_data.svg', 
                          'There has not been any review'
                     )
+
+     script(type='text/javascript').
+          const patchReviewState = async (id) => {
+               axios.patch(`/review/${id}`)
+               .then(() => location.reload())
+               .catch(console.log);
+          }
