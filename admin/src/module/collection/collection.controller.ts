@@ -14,8 +14,8 @@ import { CollectionService } from './collection.service';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { BatchService } from '../batch/batch.service';
-import { CreateCollectionDto } from './dto/create_collection.dto';
-import { UpdateCollectionDto } from './dto/update_collection.dto';
+import { CreateCollectionDto } from './dto/collection.create.dto';
+import { UpdateCollectionDto } from './dto/collection.update.dto';
 
 @Controller('collection')
 @ApiTags('COLLECTION')

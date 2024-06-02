@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
-import { CreateCollectionDto } from './dto/create_collection.dto';
-import { UpdateCollectionDto } from './dto/update_collection.dto';
+import { CreateCollectionDto } from './dto/collection.create.dto';
+import { UpdateCollectionDto } from './dto/collection.update.dto';
 import { CollectionType, State } from '@prisma/client';
 
 @Injectable()
@@ -37,7 +37,7 @@ export class CollectionService {
     return this.prisma.collection.create({
       data: {
         ...createDto,
-        type: CollectionType.NORMAL,
+        type: CollectionType.DYNAMIC,
         batches: {
           connect: createDto.batchIds?.map((e) => ({
             id: +e,

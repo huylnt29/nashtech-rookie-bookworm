@@ -137,17 +137,18 @@ model Review {
 }
 
 model Collection {
-  id        Int                @id @default(autoincrement())
-  code      String?            @unique
-  name      String
-  layout    CollectionLayout
-  movement  CollectionMovement
-  type      CollectionType
-  expiredAt DateTime?
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
-  state     State              @default(ACTIVE)
-  batches   Batch[]
+  id          Int                @id @default(autoincrement())
+  code        String?            @unique
+  name        String
+  description String?
+  layout      CollectionLayout
+  movement    CollectionMovement
+  type        CollectionType
+  expiredAt   DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  state       State              @default(ACTIVE)
+  batches     Batch[]
 }
 
 enum BookStatus {
@@ -173,8 +174,8 @@ enum CollectionLayout {
 }
 
 enum CollectionType {
-  DEFAULT
-  NORMAL
+  SYSTEM
+  DYNAMIC
 }
 
 enum State {

@@ -16,6 +16,11 @@ export class CreateCollectionDto {
   @IsString()
   name: string;
 
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  description: string;
+
   @ApiProperty({ enum: CollectionLayout })
   @IsString()
   layout: CollectionLayout;
