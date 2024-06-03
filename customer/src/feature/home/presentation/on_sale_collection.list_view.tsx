@@ -11,7 +11,7 @@ const OnSaleCollectionListView = () => {
         <Text paddingX="18%" className="font-bold text-xl">
           On Sale
         </Text>
-        <div className="flex flex-no-wrap w-full overflow-x-scroll scrolling-touch items-start mb-8 scrollbar scrollbar-thumb-transparent scrollbar-track-transparent">
+        <div className="flex flex-no-wrap w-full overflow-x-scroll scrolling-touch items-start mb-8 scrollbar-none">
           {onSaleCollection!.batches.map((batch) => (
             <OnSaleCollectionCard key={batch.id} {...batch} />
           ))}
