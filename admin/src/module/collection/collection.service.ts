@@ -120,4 +120,23 @@ export class CollectionService {
       },
     });
   }
+
+  async associateBatch(id: number, batchId: number) {
+    return this.prisma.collection.update({
+      where: {
+        id: id,
+      },
+      data: {
+        batches: {
+          connect: {
+            id: batchId,
+          },
+        },
+      },
+      select: {
+        id: true,
+        batches: true,
+      },
+    });
+  }
 }

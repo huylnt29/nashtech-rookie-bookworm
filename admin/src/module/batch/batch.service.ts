@@ -130,7 +130,6 @@ export class BatchService {
       },
       orderBy: {
         bookId: 'asc',
-        index: 'desc',
       },
     });
   }

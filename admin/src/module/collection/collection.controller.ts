@@ -58,8 +58,10 @@ export class CollectionController {
     @Res() res: Response,
   ): Promise<void> {
     const collection = await this.collectionService.selectOne(id);
+    const batches = await this.batchService.selectManySimple();
     res.render('./view_collection_detail/view_collection_detail_page', {
       collection,
+      batches,
     });
   }
 
@@ -69,5 +71,13 @@ export class CollectionController {
     @Body() updateDto: UpdateCollectionDto,
   ): Promise<any> {
     return this.collectionService.update(id, updateDto);
+  }
+
+  @Patch(':id/batch/:batchId')
+  async addBatch(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('batchId', ParseIntPipe) batchId: number,
+  ) {
+    return this.collectionService.associateBatch(id, batchId);
   }
 }
