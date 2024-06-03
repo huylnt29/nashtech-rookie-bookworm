@@ -23,7 +23,7 @@ export class ReviewPublicController {
     if (result != null) return response.status(200).json(result);
     else {
       return response.status(403).json({
-        message: 'At least the content or the rating must not be empty.',
+        message: 'The content or the rating must not be empty.',
       });
     }
   }

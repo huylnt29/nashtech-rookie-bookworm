@@ -18,7 +18,6 @@ export class CreateReviewDto {
   bookId: number;
 
   @ApiProperty()
-  @IsOptional()
   @IsString()
   @MinLength(3)
   @MaxLength(50)

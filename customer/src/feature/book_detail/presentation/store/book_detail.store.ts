@@ -9,6 +9,7 @@ const useBookDetailStore = create<BookDetailState>()((set, get) => {
     getRequestState: RequestState.IDLE,
     book: null,
     review: new CreateReviewRequest(),
+    createReviewError: null,
     fetch: async (id: string) => {
       set(() => ({
         getRequestState: RequestState.LOADING,
@@ -27,10 +28,16 @@ const useBookDetailStore = create<BookDetailState>()((set, get) => {
       }));
     },
     async submitReview() {
-      await BookDetailRepository.postReview(
+      const res = await BookDetailRepository.postReview(
         get().review.copyWith({ bookId: get().book!.id })
       );
-      get().fetch(get().book!.id.toString());
+      if (res.id) {
+        get().fetch(get().book!.id.toString());
+      } else {
+        set(() => ({
+          createReviewError: res.message,
+        }));
+      }
     },
   };
 });

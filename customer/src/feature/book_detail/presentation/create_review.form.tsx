@@ -7,7 +7,8 @@ import PrimaryButton from "../../../core/component/primary_button";
 import useBookDetailStore from "./store/book_detail.store";
 
 const CreateReviewForm = () => {
-  const { review, updateReview, submitReview } = useBookDetailStore();
+  const { review, updateReview, submitReview, createReviewError } =
+    useBookDetailStore();
   return (
     <AppContainer width="100%">
       <VStack align="start" spacing={3}>
@@ -44,6 +45,7 @@ const CreateReviewForm = () => {
           placeholder="How do you think about this book?"
           onChange={(event) => updateReview("content", event.target.value)}
         />
+        <Text className="text-red-700 font-semibold">{createReviewError}</Text>
       </VStack>
     </AppContainer>
   );
