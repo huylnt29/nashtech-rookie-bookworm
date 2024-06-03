@@ -6,7 +6,7 @@ import RatingStar from "../../../core/component/rating_star";
 
 const ReviewCard = (review: Review) => {
   return (
-    <AppContainer>
+    <AppContainer width="100%">
       <VStack align="start" spacing={3}>
         <HStack spacing={3}>
           <Avatar

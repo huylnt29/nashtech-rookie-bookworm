@@ -1,6 +1,7 @@
 import { Box, HStack, VStack, Text } from "@chakra-ui/react";
 import ReviewCard from "./review.card";
 import useBookDetailStore from "./store/book_detail.store";
+import CreateReviewForm from "./create_review.form";
 
 const BookReviewListView = () => {
   const { book } = useBookDetailStore();
@@ -12,6 +13,7 @@ const BookReviewListView = () => {
           Reviews
         </Text>
       </HStack>
+      <CreateReviewForm />
       {book?.reviews.map((review) => (
         <ReviewCard key={review.id} {...review} />
       ))}
