@@ -28,8 +28,8 @@ block content
                                         td.table-cell.p-3 #{review.id}
                                         td.table-cel #{review.book.name}
                                         td.table-cel #{review.author}
-                                        td.table-cel #{review.rating}
-                                        td.table-cel #{review.content.slice(0,48).concat("...")}
+                                        td.table-cel= (review.rating) ? review.rating : ''
+                                        td.table-cel= (review.content) ? review.content.slice(0,48).concat("...") : ''
                                         td.table-cel #{review.state}
                                         td.table-cel #{review.updatedAt.toLocaleString()}
                                         td.table-cel(onclick=`patchReviewState(${review.id})`)

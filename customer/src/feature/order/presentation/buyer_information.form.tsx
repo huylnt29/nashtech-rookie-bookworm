@@ -13,7 +13,7 @@ import { Spacer } from "@nextui-org/react";
 import useOrderStore from "./store/order.store";
 
 const BuyerInformationForm = () => {
-  const { customer, updateCustomer } = useOrderStore();
+  const { updateCustomer } = useOrderStore();
   return (
     <VStack align="start" width="100%">
       <HStack>

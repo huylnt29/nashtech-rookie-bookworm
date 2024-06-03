@@ -111,6 +111,9 @@ export class BookService {
             createdAt: true,
             updatedAt: true,
           },
+          orderBy: {
+            updatedAt: 'desc',
+          },
         },
         batches: {
           where: {

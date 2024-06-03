@@ -169,14 +169,11 @@ block content
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
                                              td.table-cell.p-3(onclick=``) #{review.id}
                                              td.table-cell(onclick=``) #{review.author}
-                                             td.table-cell(onclick=``) #{review.content.slice(0, 54).concat('...')}
-                                             td.table-cell(onclick=``) #{review.rating}
+                                             td.table-cell(onclick=``)= (review.content) ? review.content.slice(0,48).concat("...") : ''
+                                             td.table-cell(onclick=``)= (review.rating) ? review.rating : ''
                                              td.table-cell(onclick=``) #{review.createdAt.toLocaleString()}
-                                             td.table-cell
-                                                  i(
-                                                       class="material-icons hidden group-hover:block w-4", 
-                                                       onclick=``
-                                                  ) delete
+                                             td.table-cel(onclick=`patchReviewState(${review.id})`)
+                                                  i(class="material-icons hidden group-hover:block w-4") visibility_off
                else 
                     +announcement(
                          '/illustration_no_data.svg', 
@@ -199,4 +196,9 @@ block content
                     }
                })
                .then(() => location.reload())
+          }
+          const patchReviewState = async (id) => {
+               axios.patch(`/review/${id}`)
+               .then(() => location.reload())
+               .catch(console.log);
           }

@@ -1,11 +1,13 @@
-import { VStack, HStack, Avatar, Text, Textarea, Box } from "@chakra-ui/react";
+import { VStack, HStack, Text, Textarea, Box } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import RatingStar from "../../../core/component/rating_star";
 import AppInput from "../../../core/component/input";
 import { UserIcon } from "@heroicons/react/24/outline";
 import PrimaryButton from "../../../core/component/primary_button";
+import useBookDetailStore from "./store/book_detail.store";
 
 const CreateReviewForm = () => {
+  const { review, updateReview, submitReview } = useBookDetailStore();
   return (
     <AppContainer width="100%">
       <VStack align="start" spacing={3}>
@@ -17,11 +19,12 @@ const CreateReviewForm = () => {
               value={undefined}
               leftIcon={<UserIcon />}
               focusBorderColor={"black"}
+              onChange={(event) => updateReview("author", event.target.value)}
             />
           </Box>
           <Box flex={1}>
             <PrimaryButton
-              onClick={undefined}
+              onClick={submitReview}
               text="Submit"
               color={"default"}
             />
@@ -31,11 +34,15 @@ const CreateReviewForm = () => {
           <Text className="text-slate-300 font-semibold">
             How would you rate this book out of 5?
           </Text>
-          <RatingStar value={0} />
+          <RatingStar
+            value={review.rating ?? 0}
+            onChange={(event) => updateReview("rating", event)}
+          />
         </HStack>
         <Textarea
           focusBorderColor="black"
           placeholder="How do you think about this book?"
+          onChange={(event) => updateReview("content", event.target.value)}
         />
       </VStack>
     </AppContainer>

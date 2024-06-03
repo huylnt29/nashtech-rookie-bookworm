@@ -42,7 +42,7 @@ const FilteredBookCard = (props: FilteredBookCardProps) => {
         <Spacer y={1} />
         <Text fontSize="md">{props.totalSoldQuantity} sold</Text>
         <Spacer y={1} />
-        <RatingStar value={0} />
+        <RatingStar value={0} onChange={() => {}} />
         <Spacer y={5} />
         <BookPrice
           initialPrice={props!.price}
