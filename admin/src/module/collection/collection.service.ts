@@ -139,4 +139,19 @@ export class CollectionService {
       },
     });
   }
+
+  async disassociateBatch(id: number, batchId: number) {
+    return this.prisma.collection.update({
+      where: {
+        id: id,
+      },
+      data: {
+        batches: {
+          disconnect: {
+            id: batchId,
+          },
+        },
+      },
+    });
+  }
 }

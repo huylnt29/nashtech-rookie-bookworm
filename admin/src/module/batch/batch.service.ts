@@ -117,6 +117,9 @@ export class BatchService {
 
   async selectManySimple(): Promise<any> {
     return this.prisma.batch.findMany({
+      where: {
+        state: State.ACTIVE,
+      },
       select: {
         id: true,
         index: true,

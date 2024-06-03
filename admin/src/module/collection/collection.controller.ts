@@ -80,4 +80,22 @@ export class CollectionController {
   ) {
     return this.collectionService.associateBatch(id, batchId);
   }
+
+  @Delete(':id/batch/:batchId')
+  async removeBatch(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('batchId', ParseIntPipe) batchId: number,
+    @Res() res: Response,
+  ) {
+    try {
+      await this.collectionService.disassociateBatch(id, batchId);
+      return res.status(HttpStatus.OK).json({
+        message: 'The batch has been removed successfully',
+      });
+    } catch (error) {
+      return res.status(HttpStatus.NOT_FOUND).json({
+        message: 'It fails to remove the batch',
+      });
+    }
+  }
 }

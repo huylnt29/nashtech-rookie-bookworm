@@ -8,7 +8,7 @@ mixin toast(type, id)
                i.material-icons.p-2.bg-orange-100.rounded-xl.text-orange-900 feedback
                
           div(id=`${id}-content`, class="ms-3 text-sm text-red-900 font-bold")
-
+          div.grow
           i(class="material-icons w-8 cursor-pointer", onclick="hideToast()") close
      
      script(type='text/javascript').
