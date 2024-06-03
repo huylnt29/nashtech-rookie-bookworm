@@ -14,6 +14,7 @@ const useOrderStore = create<OrderState>()((set, get) => {
     customer: new Customer(),
     paymentMethod: PaymentMethod.CASH,
     submitRequestState: RequestState.IDLE,
+    createCustomerError: null,
     addBookLine(book, quantity) {
       set((state) => {
         if (state.cart) {
@@ -81,10 +82,16 @@ const useOrderStore = create<OrderState>()((set, get) => {
         get().customer,
         get().paymentMethod
       );
-
-      set(() => ({
-        submitRequestState: RequestState.LOADED,
-      }));
+      if (res.id) {
+        set(() => ({
+          submitRequestState: RequestState.LOADED,
+        }));
+      } else {
+        set(() => ({
+          submitRequestState: RequestState.ERROR,
+          createCustomerError: res.message,
+        }));
+      }
     },
     saveCart() {
       if (

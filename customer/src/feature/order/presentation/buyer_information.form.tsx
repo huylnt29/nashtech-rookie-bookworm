@@ -13,7 +13,7 @@ import { Spacer } from "@nextui-org/react";
 import useOrderStore from "./store/order.store";
 
 const BuyerInformationForm = () => {
-  const { updateCustomer } = useOrderStore();
+  const { updateCustomer, createCustomerError } = useOrderStore();
   return (
     <VStack align="start" width="100%">
       <HStack>
@@ -99,6 +99,9 @@ const BuyerInformationForm = () => {
               />
             </VStack>
           </HStack>
+          <Text className="text-red-700 font-semibold">
+            {createCustomerError}
+          </Text>
         </VStack>
       </AppContainer>
     </VStack>

@@ -1,8 +1,5 @@
-import ApiClient from "../../../core/network/remote/api_client";
 import { Cart } from "../data/model/cart.class";
 import { Customer } from "../data/model/customer.class";
-import { Order } from "../data/model/order.type";
-import { OrderLine } from "../data/model/order_line.type";
 import { PaymentMethod } from "../data/model/payment_method.enum";
 import { OrderLocalDataSource } from "../data/order.local_data_source";
 import { OrderRemoteDataSource } from "../data/order.remote_data_source";
@@ -12,7 +9,7 @@ export class OrderRepository {
     cart: Cart,
     customer: Customer,
     paymentMethod: PaymentMethod
-  ) => {
+  ): Promise<any> => {
     return OrderRemoteDataSource.createOrder(cart, customer, paymentMethod);
   };
   static saveCartLocal = (cart: Cart) => {

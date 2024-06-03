@@ -19,6 +19,7 @@ interface OrderState {
   submitRequestState: RequestState;
   saveCart(): void;
   retrieveCart(): void;
+  createCustomerError?: string | null;
 }
 
 export default OrderState;
