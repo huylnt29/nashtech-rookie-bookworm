@@ -1,17 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { $Enums, Review as ReviewType } from '@prisma/client';
-import { RestrictProperties } from 'src/core/service/graphql/common.input';
-import { State } from 'src/core/service/graphql/register_enum';
 
 @ObjectType()
-export class Review implements RestrictProperties<Review, ReviewType> {
+export class Review {
   id: number;
   author: string;
+  @Field({ nullable: true })
   content: string;
+  @Field({ nullable: true })
   rating: number;
   bookId: number;
   createdAt: Date;
   updatedAt: Date;
-  @Field(() => State)
-  state: $Enums.State;
 }

@@ -60,11 +60,10 @@ type Batch {
 }
 
 type Review {
-  state: State!
+  content: String
+  rating: Float
   id: Float!
   author: String!
-  content: String!
-  rating: Float!
   bookId: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -96,6 +95,28 @@ type PageInfo {
   totalPages: Float!
 }
 
+type Collection {
+  code: String
+  description: String
+  layout: CollectionLayout!
+  movement: CollectionMovement!
+  batches: [Batch!]
+  id: Float!
+  name: String!
+  expiredAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum CollectionLayout {
+  GRID
+  LIST
+}
+
+enum CollectionMovement {
+  AUTO
+  MANUAL
+}
+
 type Query {
   batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, take: Float, skip: Float, distinct: [BatchScalarFieldEnum!]): [Batch!]!
   batch(where: BatchWhereUniqueInput): Batch!
@@ -107,6 +128,8 @@ type Query {
   discount(where: DiscountWhereUniqueInput): Discount!
   authors(where: AuthorWhereInput, orderBy: [AuthorOrderByWithRelationInput!], cursor: AuthorWhereUniqueInput, take: Float, skip: Float, distinct: [AuthorScalarFieldEnum!]): [Author!]!
   author(where: AuthorWhereUniqueInput): Author!
+  collections(where: CollectionWhereInput, orderBy: [CollectionOrderByWithRelationInput!], cursor: CollectionWhereUniqueInput, take: Float, skip: Float, distinct: [CollectionScalarFieldEnum!]): [Collection!]!
+  collection(where: CollectionWhereUniqueInput): Collection!
 }
 
 input BatchWhereInput {
@@ -301,4 +324,41 @@ input AuthorWhereUniqueInput {
 enum AuthorScalarFieldEnum {
   id
   name
+}
+
+input CollectionWhereInput {
+  id: Float
+  batches: BatchListRelationFilter
+  AND: [CollectionWhereInput!]
+  OR: [CollectionWhereInput!]
+  NOT: [CollectionWhereInput!]
+}
+
+input BatchListRelationFilter {
+  every: BatchWhereInput
+  some: BatchWhereInput
+  none: BatchWhereInput
+}
+
+input CollectionOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input CollectionWhereUniqueInput {
+  id: Float
+  code: String
+}
+
+enum CollectionScalarFieldEnum {
+  id
+  code
+  name
+  description
+  layout
+  movement
+  type
+  expiredAt
+  createdAt
+  updatedAt
+  state
 }

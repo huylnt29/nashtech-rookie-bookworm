@@ -31,6 +31,7 @@ import { AuthorResolver } from './module/author/author.resolver';
 import { OrderModule } from './module/order/order.module';
 import { CustomerModule } from './module/customer/customer.module';
 import { ReviewModule } from './module/review/review.module';
+import { CollectionResolver } from './module/collection/collection.resolver';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { ReviewModule } from './module/review/review.module';
     CategoryResolver,
     DiscountResolver,
     AuthorResolver,
+    CollectionResolver,
   ],
 })
 export class AppModule implements NestModule {
