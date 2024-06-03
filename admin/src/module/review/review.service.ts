@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import { State } from '@prisma/client';
 import { CreateReviewDto } from './dto/review.create.dto';
+import { log } from 'console';
 
 @Injectable()
 export class ReviewService {
@@ -24,6 +25,9 @@ export class ReviewService {
   }
 
   async insert(createDto: CreateReviewDto) {
+    console.log(createDto);
+
+    if (!createDto.content && !createDto.rating) return null;
     return this.prisma.review.create({
       data: createDto,
       select: {

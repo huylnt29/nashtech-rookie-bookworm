@@ -25,16 +25,16 @@ export class CreateReviewDto {
   author: string;
 
   @ApiProperty()
-  @IsOptional()
   @IsString()
   @MinLength(2)
   @MaxLength(500)
+  @IsOptional()
   content: string;
 
   @ApiProperty()
-  @IsOptional()
   @IsNumber()
   @Min(1)
   @Max(5)
+  @IsOptional()
   rating: number;
 }
