@@ -35,9 +35,10 @@ export class CollectionService {
   }
 
   async insert(createDto: CreateCollectionDto) {
+    const validCreateDto = { ...createDto, batchIds: undefined };
     return this.prisma.collection.create({
       data: {
-        ...createDto,
+        ...validCreateDto,
         type: CollectionType.DYNAMIC,
         batches: {
           connect: createDto.batchIds?.map((e) => ({

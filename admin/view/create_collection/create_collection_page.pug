@@ -1,0 +1,47 @@
+extends ../global_layout.pug
+
+block content
+     include pick_batch_menu.pug
+
+     div
+          div.flex.justify-between.items-center
+               p.font-bold.text-xl.text-slate-900 CREATE PROMOTION LIST
+               +primary_button("Submit", "submitCreateCollection()", "slate")
+          div.flex.justify-start.items-start.gap-12.my-4.mb-12
+               div(class='basis-2/3')
+                    +pick_batch_menu(batches)
+               div(class='basis-1/3')
+                    include create_collection_form.pug
+                    
+     +toast('danger', 'create-collection-toast')
+
+     script(type='text/javascript').
+          var batchIds = []
+          const pickBatch = (id) => {
+               batchIds.push(id)
+               u(`#batch-menu-item-${id}`).addClass("bg-slate-100 font-bold")
+          }
+          const submitCreateCollection = () => {
+               const name = u('#name').nodes[0].value;
+               const code = u('#code').nodes[0].value;
+               const description = u('#description').nodes[0].value;
+               const layout = u('#layout').nodes[0].value
+               const movement = u('#movement').nodes[0].value
+               let expiredAt = u('#expiredAt').nodes[0].value
+               if (expiredAt != '') expiredAt = new Date(expiredAt).toISOString();
+               else expiredAt = undefined
+               axios.post('/collection', {
+                    name,
+                    code,
+                    description,
+                    layout,
+                    movement,
+                    expiredAt,
+                    batchIds,
+               })
+               .then(() => location.href = '/collection')
+               .catch((error) => showToast(
+                    '#create-collection-toast', 
+                    error.response.data.message.toString()
+               ));
+          }

@@ -1,0 +1,60 @@
+div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+     form.grid.gap-4.mb-2.grid-cols-2
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="name", 
+               ) Name
+               input(
+                    type="text", 
+                    name="name", 
+                    id="name", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="What is the name of this collection?", 
+                    required
+               )
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="code", 
+               ) Code
+               input(
+                    type="text", 
+                    name="code", 
+                    id="code", 
+                    value="#",
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="The collection code is unique"
+               )
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="description", 
+               ) Description
+               input(
+                    type="text", 
+                    name="description", 
+                    id="description", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="It's great to describe this collection", 
+               )
+          div(class="col-span-1")
+               label(
+                    for="layout", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Layout 
+               +dropdown("layout", type="single", [{id: "GRID", name: "GRID"}, {id: "LIST", name: "LIST"}])
+          div(class="col-span-1")
+               label(
+                    for="movement", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Movement 
+               +dropdown("movement", type="single", [{id: "AUTO", name: "AUTO"}, {id: "MANUAL", name: "MANUAL"}])
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="price", 
+               ) Expired date
+               input(
+                    type="datetime-local", 
+                    name="expiredAt", 
+                    id="expiredAt", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="Type or pick collection expired date", 
+               )
