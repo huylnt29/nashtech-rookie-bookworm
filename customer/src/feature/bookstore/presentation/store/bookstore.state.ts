@@ -1,7 +1,7 @@
 import RequestState from "../../../../core/data/enum/request_state.enum";
 import { Author } from "../../../../core/data/type/author.type";
 import { Category } from "../../../../core/data/type/category.type";
-import { FilteredBook } from "../../data/model/filtered_book.model";
+import { FilteredBook } from "../../data/model/filtered_book.type";
 
 interface BookstoreState {
   filterDataRequestState: RequestState;

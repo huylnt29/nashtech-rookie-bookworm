@@ -23,6 +23,7 @@ export class CollectionResolver {
         batches: {
           include: {
             book: true,
+            discount: true,
           },
         },
       },
@@ -31,6 +32,19 @@ export class CollectionResolver {
 
   @Query(() => Collection, { name: 'collection' })
   findOne(@Args() args: FindUniqueCollectionArgs) {
-    return this.prismaService.collection.findUnique(args);
+    return this.prismaService.collection.findFirst({
+      ...args,
+      where: {
+        state: State.ACTIVE,
+      },
+      include: {
+        batches: {
+          include: {
+            book: true,
+            discount: true,
+          },
+        },
+      },
+    });
   }
 }

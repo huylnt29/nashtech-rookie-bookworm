@@ -16,7 +16,7 @@ const useBookDetailStore = create<BookDetailState>()((set, get) => {
       }));
       const res = await BookDetailRepository.get(id);
       set(() => ({
-        requestState: RequestState.LOADED,
+        getRequestState: RequestState.LOADED,
         book: res,
       }));
     },

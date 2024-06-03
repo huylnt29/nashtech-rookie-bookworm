@@ -1,7 +1,7 @@
 import ApiClient from "../../../core/network/remote/api_client";
 import { Author } from "../../../core/data/type/author.type";
 import { Category } from "../../../core/data/type/category.type";
-import { BookPaginationResult } from "./model/filtered_book.model";
+import { BookPaginationResult } from "./model/filtered_book.type";
 
 class BookstoreRemoteDataSource {
   static async fetchCategoriesAndAuthors(): Promise<any> {

@@ -1,7 +1,7 @@
 import BookstoreRemoteDataSource from "../data/bookstore.remote_data_source";
 import { Author } from "../../../core/data/type/author.type";
 import { Category } from "../../../core/data/type/category.type";
-import { BookPaginationResult } from "../data/model/filtered_book.model";
+import { BookPaginationResult } from "../data/model/filtered_book.type";
 
 class BookstoreRepository {
   static async fetchBookFilterMenu(): Promise<any> {

@@ -6,17 +6,17 @@ import RequestState from "../../../core/data/enum/request_state.enum";
 import { Spacer } from "@nextui-org/react";
 import BookPrimaryInformation from "./book_primary_information.box";
 import BookCart from "./book_cart.box";
-import BookReviewListView from "./book_review.listview";
+import BookReviewListView from "./book_review.list_view";
 
 const BookDetailScreen = () => {
-  const { book, fetch, requestState } = useBookDetailStore();
+  const { book, fetch, getRequestState } = useBookDetailStore();
   const { id } = useParams();
 
   useEffect(() => {
     fetch(id!);
   }, []);
 
-  if (requestState != RequestState.LOADED) return;
+  if (getRequestState != RequestState.LOADED) return;
 
   return (
     <Flex marginX="15%" justify="space-between" gap="7%">
