@@ -16,6 +16,7 @@ export class CollectionService {
         expiredAt: true,
         updatedAt: true,
         state: true,
+        type: true,
         _count: {
           select: {
             batches: true,
