@@ -1,4 +1,4 @@
-import { registerEnumType } from '@nestjs/graphql';
+import { ObjectType, registerEnumType } from '@nestjs/graphql';
 
 export enum State {
   ACTIVE = 'ACTIVE',

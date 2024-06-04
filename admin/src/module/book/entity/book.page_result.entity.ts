@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
 import { Book } from 'src/module/book/entity/book.entity';
 
 @ObjectType()

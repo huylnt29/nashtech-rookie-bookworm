@@ -11,6 +11,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Paginator from "../../../core/component/paginator";
 import { Spacer } from "@nextui-org/react";
 import { RouteBuilder } from "../../../core/router/route_path";
+import SortBookBox from "./sort_book.box";
 
 const BookstoreScreen = () => {
   const { filterBooks, paginationMeta, filterRequest } = useBookstoreStore();
@@ -50,6 +51,8 @@ const BookstoreScreen = () => {
         <FilterMenu />
       </Box>
       <Box width="70%">
+        <SortBookBox />
+        <Spacer y={5} />
         <FilterResultGrid />
         <Spacer y={12} />
         <Paginator

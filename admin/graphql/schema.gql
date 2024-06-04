@@ -256,6 +256,7 @@ enum BatchScalarFieldEnum {
 
 input BookOrderByWithRelationInput {
   id: SortOrder
+  totalSoldQuantity: SortOrder
 }
 
 input BookWhereUniqueInput {

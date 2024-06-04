@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PageResult } from './page_result.interface';
-
-export type PaginationOptions = {
-  page?: number | string;
-  limit?: number | string;
-};
+import { PaginationOptions } from './pagination_options.type';
 
 export interface ConditionArgs {
   where: any;
@@ -21,7 +17,7 @@ export class PaginationService {
     options: PaginationOptions,
   ): Promise<PageResult<T>> {
     const page = options.page ? parseInt(options.page as string) : 1;
-    const limit = options.limit ? parseInt(options.limit as string) : 1;
+    const limit = options.limit ? parseInt(options.limit as string) : 5;
 
     const condition = args.include
       ? {

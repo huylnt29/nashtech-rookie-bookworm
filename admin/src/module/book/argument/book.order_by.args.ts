@@ -5,6 +5,8 @@ import { Prisma } from '@prisma/client';
 export class BookOrderByWithRelationInputStrict {
   @Field(() => Prisma.SortOrder)
   id: Prisma.SortOrder;
+  @Field(() => Prisma.SortOrder)
+  totalSoldQuantity: Prisma.SortOrder;
 }
 
 @InputType()
