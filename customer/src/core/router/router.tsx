@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { RoutePath } from "./route_path";
-import HomeScreen from "../../feature/home/presentation/home.screen";
-import ViewBookstoreScreen from "../../feature/bookstore/presentation/view_bookstore.screen";
 import GlobalLayout from "../component/global_layout";
+import HomeScreen from "../../feature/home/presentation/home.screen";
+import BookstoreScreen from "../../feature/bookstore/presentation/bookstore.screen";
 import BookDetailScreen from "../../feature/book_detail/presentation/book_detail.screen";
 import CartScreen from "../../feature/order/presentation/order.screen";
 
@@ -21,7 +21,7 @@ const AppRouter = () => {
         path={RoutePath.STORE}
         element={
           <GlobalLayout>
-            <ViewBookstoreScreen />
+            <BookstoreScreen />
           </GlobalLayout>
         }
       />

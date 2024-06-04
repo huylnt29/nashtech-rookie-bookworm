@@ -7,6 +7,7 @@ import AppCheckboxGroup, {
 import RequestState from "../../../core/data/enum/request_state.enum";
 import AppContainer from "../../../core/component/container";
 import PrimaryButton from "../../../core/component/primary_button";
+import RatingStar from "../../../core/component/rating_star";
 
 const FilterMenu = () => {
   const { fetchFilter, filterDataRequestState, categories, authors } =
@@ -15,6 +16,10 @@ const FilterMenu = () => {
   useEffect(() => {
     fetchFilter();
   }, []);
+
+  const buildQueryString = () => {
+    return "";
+  };
 
   const buildCategoryMenu = () => {
     if (filterDataRequestState != RequestState.LOADED) return <></>;
@@ -48,6 +53,17 @@ const FilterMenu = () => {
     );
   };
 
+  const buildRatingMenu = () => {
+    return (
+      <VStack align="start" spacing={3}>
+        <Text fontSize="xl" fontWeight="semibold">
+          Rating
+        </Text>
+        <RatingStar value={0} size={8} onChange={() => {}} />
+      </VStack>
+    );
+  };
+
   return (
     <Flex direction="column" width="100%" gap={4}>
       <Flex align="center">
@@ -64,6 +80,7 @@ const FilterMenu = () => {
         <VStack align="start" spacing={5}>
           {buildCategoryMenu()}
           {buildAuthorMenu()}
+          {buildRatingMenu()}
         </VStack>
       </AppContainer>
     </Flex>
