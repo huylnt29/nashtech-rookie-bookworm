@@ -9,7 +9,7 @@ import BookCart from "./book_cart.box";
 import BookReviewListView from "./book_review.list_view";
 
 const BookDetailScreen = () => {
-  const { book, fetch, getRequestState } = useBookDetailStore();
+  const { fetch, getRequestState } = useBookDetailStore();
   const { id } = useParams();
 
   useEffect(() => {

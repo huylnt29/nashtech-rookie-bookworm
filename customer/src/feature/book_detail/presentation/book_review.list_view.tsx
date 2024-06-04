@@ -6,7 +6,7 @@ import CreateReviewForm from "./create_review.form";
 const BookReviewListView = () => {
   const { book } = useBookDetailStore();
   return (
-    <VStack align="start">
+    <VStack align="start" width="100%">
       <HStack>
         <Box className="px-1 py-3 bg-slate-600 mr-3 rounded"> </Box>
         <Text fontSize="xl" fontWeight="bold">

@@ -4,6 +4,7 @@ import { StarIcon as SolidStar } from "@heroicons/react/24/solid";
 
 export interface RatingStarProps {
   value: number;
+  size: number;
   onChange: (value: number) => void;
 }
 
@@ -15,7 +16,7 @@ const RatingStar = (props: RatingStarProps) => {
           return (
             <SolidStar
               key={i + 1}
-              className="text-orange-200 w-8 h-8"
+              className={`text-orange-200 w-${props.size} h-${props.size}`}
               onClick={() => props.onChange(i + 1)}
             />
           );
@@ -23,7 +24,7 @@ const RatingStar = (props: RatingStarProps) => {
           return (
             <OutlineStar
               key={i + 1}
-              className="text-slate-300 w-8 h-8"
+              className={`text-slate-300 w-${props.size} h-${props.size}`}
               onClick={() => props.onChange(i + 1)}
             />
           );

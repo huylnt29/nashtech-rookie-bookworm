@@ -2,7 +2,10 @@ import { CollectionRemoteDataSource } from "../data/collection.remote_data_sourc
 import { Collection } from "../data/model/collection.type";
 
 export class CollectionRepository {
-  static async getOnSale(): Promise<Collection> {
-    return CollectionRemoteDataSource.getOnSale();
+  static async getFeature(): Promise<Collection[]> {
+    return CollectionRemoteDataSource.getFeature();
+  }
+  static async getOthers(): Promise<Collection[]> {
+    return CollectionRemoteDataSource.getOthers();
   }
 }

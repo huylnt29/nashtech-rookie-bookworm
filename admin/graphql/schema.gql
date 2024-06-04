@@ -328,6 +328,7 @@ enum AuthorScalarFieldEnum {
 
 input CollectionWhereInput {
   id: Float
+  code: String
   batches: BatchListRelationFilter
   AND: [CollectionWhereInput!]
   OR: [CollectionWhereInput!]

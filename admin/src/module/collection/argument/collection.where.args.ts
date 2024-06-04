@@ -13,7 +13,7 @@ export class CollectionWhereUniqueInput {
 // implements RestrictProperties<CollectionWhereInput, Prisma.CollectionWhereInput>
 export class CollectionWhereInputStrict {
   id: number;
-
+  code: string;
   batches: BatchListRelationFilter;
 
   AND: CollectionWhereInput[];

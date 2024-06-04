@@ -4,6 +4,9 @@ import { Collection } from "../../data/model/collection.type";
 interface HomeState {
   requestState: RequestState;
   onSaleCollection?: Collection | null;
+  popularCollection?: Collection | null;
+  recommendedCollection?: Collection | null;
+  otherCollections?: Collection[] | null;
   fetch: () => Promise<void>;
 }
 

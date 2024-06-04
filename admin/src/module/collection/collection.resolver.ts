@@ -17,6 +17,7 @@ export class CollectionResolver {
     return this.prismaService.collection.findMany({
       ...args,
       where: {
+        ...args.where,
         state: State.ACTIVE,
       },
       include: {
@@ -35,6 +36,7 @@ export class CollectionResolver {
     return this.prismaService.collection.findFirst({
       ...args,
       where: {
+        ...args.where,
         state: State.ACTIVE,
       },
       include: {
