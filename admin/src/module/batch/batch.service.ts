@@ -136,4 +136,29 @@ export class BatchService {
       },
     });
   }
+
+  async selectPromotable(): Promise<any> {
+    return this.prisma.batch.findMany({
+      where: {
+        state: State.ACTIVE,
+        discountId: {
+          not: null,
+        },
+      },
+      select: {
+        id: true,
+        index: true,
+        book: {
+          select: {
+            id: true,
+            name: true,
+            imageUrls: true,
+          },
+        },
+      },
+      orderBy: {
+        bookId: 'asc',
+      },
+    });
+  }
 }
