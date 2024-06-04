@@ -21,7 +21,7 @@ export class PaginationService {
     options: PaginationOptions,
   ): Promise<PageResult<T>> {
     const page = options.page ? parseInt(options.page as string) : 1;
-    const limit = options.limit ? parseInt(options.limit as string) : 12;
+    const limit = options.limit ? parseInt(options.limit as string) : 1;
 
     const condition = args.include
       ? {

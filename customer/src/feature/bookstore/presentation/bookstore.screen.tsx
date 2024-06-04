@@ -7,11 +7,15 @@ import {
   FilterBookRequestProperty,
 } from "../data/model/filter_book_request.class";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Paginator from "../../../core/component/paginator";
+import { Spacer } from "@nextui-org/react";
+import { RouteBuilder } from "../../../core/router/route_path";
 
 const BookstoreScreen = () => {
-  const { filterBooks } = useBookstoreStore();
+  const { filterBooks, paginationMeta, filterRequest } = useBookstoreStore();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const buildFilterBookRequest = () => {
     let filterRequest = new FilterBookRequest();
@@ -47,6 +51,20 @@ const BookstoreScreen = () => {
       </Box>
       <Box width="70%">
         <FilterResultGrid />
+        <Spacer y={12} />
+        <Paginator
+          currentPage={paginationMeta?.page ?? 1}
+          totalPage={paginationMeta?.totalPages ?? 1}
+          onChange={(value) => {
+            let newFilterRequest = filterRequest.copyWith({
+              page: value,
+            });
+            navigate(RouteBuilder.buildStorePath(newFilterRequest), {
+              replace: true,
+            });
+            filterBooks(newFilterRequest);
+          }}
+        />
       </Box>
     </Flex>
   );

@@ -36,6 +36,7 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
           newFilterRequest = get().filterRequest.copyWith({
             [property]: value,
           });
+          get().filterBooks(newFilterRequest);
           break;
       }
       set(() => ({
@@ -50,6 +51,7 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
       set(() => ({
         booksResultRequestState: RequestState.LOADED,
         filteredBooks: res.data,
+        paginationMeta: res.meta,
         filterRequest: filterRequest,
       }));
     },

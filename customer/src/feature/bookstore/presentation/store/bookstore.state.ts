@@ -1,6 +1,7 @@
 import RequestState from "../../../../core/data/enum/request_state.enum";
 import { Author } from "../../../../core/data/type/author.type";
 import { Category } from "../../../../core/data/type/category.type";
+import { PaginationMeta } from "../../../../core/data/type/pagination_meta.type";
 import {
   FilterBookRequest,
   FilterBookRequestProperty,
@@ -12,6 +13,7 @@ interface BookstoreState {
   categories: Array<Category>;
   authors: Array<Author>;
   booksResultRequestState: RequestState;
+  paginationMeta?: PaginationMeta | null;
   filteredBooks: Array<FilteredBook>;
   filterRequest: FilterBookRequest;
   fetchFilter: () => Promise<void>;
