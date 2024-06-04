@@ -12,7 +12,7 @@ const Announcement = (props: AnnouncementProps) => {
     <VStack spacing={8}>
       <Image
         src={props.imagePath}
-        className={`object-cover object-center h-${props.height}`}
+        className={`object-cover object-center h-96`}
       />
       <Text fontWeight="semibold" textAlign="center">
         {props.text}

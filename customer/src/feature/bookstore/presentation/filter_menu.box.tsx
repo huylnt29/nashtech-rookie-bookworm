@@ -18,7 +18,9 @@ const FilterMenu = () => {
     categories,
     authors,
     filterRequest,
+    booksResultRequestState,
     updateFilterRequest,
+    filterBooks,
   } = useBookstoreStore();
   const navigate = useNavigate();
 
@@ -27,11 +29,12 @@ const FilterMenu = () => {
   }, []);
 
   const buildCategoryMenu = () => {
-    if (filterDataRequestState != RequestState.LOADED) return <></>;
     const options: CheckboxOption[] = categories.map((e) => ({
       key: e.id.toString(),
       value: e.name,
+      isSelected: filterRequest.categoryIds?.includes(e.id),
     }));
+
     return (
       <VStack align="start" spacing={3}>
         <Text fontSize="xl" fontWeight="semibold">
@@ -39,7 +42,7 @@ const FilterMenu = () => {
         </Text>
         <AppCheckboxGroup
           options={options}
-          onItemSelected={(value) => updateFilterRequest("categoryIds", value)}
+          onItemSelected={(value) => updateFilterRequest("categoryIds", +value)}
         />
       </VStack>
     );
@@ -50,6 +53,7 @@ const FilterMenu = () => {
     const options: CheckboxOption[] = authors.map((e) => ({
       key: e.id.toString(),
       value: e.name,
+      isSelected: filterRequest.authorIds?.includes(e.id),
     }));
     return (
       <VStack align="start" spacing={3}>
@@ -58,7 +62,7 @@ const FilterMenu = () => {
         </Text>
         <AppCheckboxGroup
           options={options}
-          onItemSelected={(value) => updateFilterRequest("authorIds", value)}
+          onItemSelected={(value) => updateFilterRequest("authorIds", +value)}
         />
       </VStack>
     );
@@ -70,7 +74,11 @@ const FilterMenu = () => {
         <Text fontSize="xl" fontWeight="semibold">
           Rating
         </Text>
-        <RatingStar value={0} size={8} onChange={() => {}} />
+        <RatingStar
+          value={filterRequest.rating ?? 0}
+          size={8}
+          onChange={(value) => updateFilterRequest("rating", +value)}
+        />
       </VStack>
     );
   };
@@ -82,22 +90,27 @@ const FilterMenu = () => {
         <Spacer />
         <PrimaryButton
           text="Apply"
-          onClick={() =>
+          onClick={() => {
             navigate(RouteBuilder.buildStorePath(filterRequest), {
               replace: true,
-            })
-          }
+            });
+            filterBooks(filterRequest);
+          }}
           color={"default"}
           fitContent
         />
       </Flex>
-      <AppContainer>
-        <VStack align="start" spacing={5}>
-          {buildCategoryMenu()}
-          {buildAuthorMenu()}
-          {buildRatingMenu()}
-        </VStack>
-      </AppContainer>
+      {booksResultRequestState == RequestState.LOADED ? (
+        <AppContainer>
+          <VStack align="start" spacing={5}>
+            {buildCategoryMenu()}
+            {buildAuthorMenu()}
+            {buildRatingMenu()}
+          </VStack>
+        </AppContainer>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };

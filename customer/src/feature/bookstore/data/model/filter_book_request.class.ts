@@ -14,10 +14,15 @@ export class FilterBookRequest {
 
   toggleCategory(categoryId: number) {
     const foundIndex = this.categoryIds!.indexOf(categoryId);
-    console.log(foundIndex);
-
     if (foundIndex != -1) this.categoryIds!.splice(foundIndex, 1);
     else this.categoryIds!.push(categoryId);
+    return this.copyWith(this);
+  }
+
+  toggleAuthor(authorId: number) {
+    const foundIndex = this.authorIds!.indexOf(authorId);
+    if (foundIndex != -1) this.categoryIds!.splice(foundIndex, 1);
+    else this.authorIds!.push(authorId);
     return this.copyWith(this);
   }
 
@@ -58,11 +63,11 @@ export class FilterBookRequest {
       where = where.concat(categorySubWhere).concat(",");
     }
     if (authorSubWhere) {
-      if (!where) where = "where {";
+      if (!where) where = "where: {";
       where = where.concat(authorSubWhere).concat(",");
     }
     if (ratingSubWhere) {
-      if (!where) where = "where {";
+      if (!where) where = "where: {";
       where = where.concat(ratingSubWhere).concat(",");
     }
     if (where) {

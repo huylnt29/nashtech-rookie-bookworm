@@ -29,6 +29,9 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
         case "categoryIds":
           newFilterRequest = get().filterRequest.toggleCategory(value);
           break;
+        case "authorIds":
+          newFilterRequest = get().filterRequest.toggleAuthor(value);
+          break;
         default:
           newFilterRequest = get().filterRequest.copyWith({
             [property]: value,

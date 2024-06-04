@@ -55,7 +55,7 @@ export default function AppNavbar() {
           <Link
             color="primary"
             onClick={() =>
-              navigate(
+              location.assign(
                 RouteBuilder.buildStorePath(new FilterBookRequest({ page: 1 }))
               )
             }

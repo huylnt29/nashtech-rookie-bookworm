@@ -9,6 +9,7 @@ type AppCheckboxGroupProps = {
 export type CheckboxOption = {
   key: string;
   value: string;
+  isSelected?: boolean | null;
 };
 
 const AppCheckboxGroup = ({
@@ -21,6 +22,7 @@ const AppCheckboxGroup = ({
         <Checkbox
           key={option.key}
           value={option.key}
+          isSelected={option?.isSelected ?? false}
           onChange={(event) => onItemSelected(event?.target.value)}
         >
           {option.value}

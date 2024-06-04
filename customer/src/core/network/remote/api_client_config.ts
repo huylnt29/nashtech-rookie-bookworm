@@ -11,10 +11,10 @@ apiClient.defaults.headers.post["Content-Type"] = "application/json";
 
 apiClient.interceptors.request.use(
   (request) => {
-    if (import.meta.env.DEV) {
-      console.info(`[Request] Endpoint: ${request.url} (${new Date()})`);
-      console.info(request.data);
-    }
+    // if (import.meta.env.DEV) {
+    //   console.info(`[Request] Endpoint: ${request.url} (${new Date()})`);
+    //   console.info(request.data);
+    // }
     return request;
   },
   (error) => {
@@ -24,10 +24,10 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   (response) => {
-    if (import.meta.env.DEV) {
-      console.info(`[Response] Status: ${response.status} (${new Date()})`);
-      console.info(response.data);
-    }
+    // if (import.meta.env.DEV) {
+    //   console.info(`[Response] Status: ${response.status} (${new Date()})`);
+    //   console.info(response.data);
+    // }
     return response.data;
   },
   async (error) => {

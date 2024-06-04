@@ -23,6 +23,10 @@ const BookstoreScreen = () => {
           let categoryIds = entry[1].split(",").map((e) => +e);
           filterRequest.categoryIds = categoryIds;
           break;
+        case "authorIds":
+          let authorIds = entry[1].split(",").map((e) => +e);
+          filterRequest.authorIds = authorIds;
+          break;
         case "page":
           filterRequest.page = +entry[1];
           break;
@@ -34,7 +38,7 @@ const BookstoreScreen = () => {
 
   useEffect(() => {
     buildFilterBookRequest();
-  }, [searchParams]);
+  }, []);
 
   return (
     <Flex justify="center" mx="10%" gap={8}>
