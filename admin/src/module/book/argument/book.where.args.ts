@@ -27,6 +27,8 @@ export class BookWhereInputStrict {
   @Field({ nullable: true })
   id: IntFilter;
   @Field({ nullable: true })
+  averageRating: IntFilter;
+  @Field({ nullable: true })
   category: CategoryRelationFilter;
 
   authors: AuthorListRelationFilter;

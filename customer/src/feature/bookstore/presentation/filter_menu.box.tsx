@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import useBookstoreStore from "./store/bookstore.store";
+import { useNavigate } from "react-router";
 import { Flex, Spacer, Text, VStack } from "@chakra-ui/react";
+import useBookstoreStore from "./store/bookstore.store";
 import AppCheckboxGroup, {
   CheckboxOption,
 } from "../../../core/component/checkbox_group";
@@ -8,18 +9,22 @@ import RequestState from "../../../core/data/enum/request_state.enum";
 import AppContainer from "../../../core/component/container";
 import PrimaryButton from "../../../core/component/primary_button";
 import RatingStar from "../../../core/component/rating_star";
+import { RouteBuilder } from "../../../core/router/route_path";
 
 const FilterMenu = () => {
-  const { fetchFilter, filterDataRequestState, categories, authors } =
-    useBookstoreStore();
+  const {
+    fetchFilter,
+    filterDataRequestState,
+    categories,
+    authors,
+    filterRequest,
+    updateFilterRequest,
+  } = useBookstoreStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFilter();
   }, []);
-
-  const buildQueryString = () => {
-    return "";
-  };
 
   const buildCategoryMenu = () => {
     if (filterDataRequestState != RequestState.LOADED) return <></>;
@@ -32,7 +37,10 @@ const FilterMenu = () => {
         <Text fontSize="xl" fontWeight="semibold">
           Category
         </Text>
-        <AppCheckboxGroup options={options} />
+        <AppCheckboxGroup
+          options={options}
+          onItemSelected={(value) => updateFilterRequest("categoryIds", value)}
+        />
       </VStack>
     );
   };
@@ -48,7 +56,10 @@ const FilterMenu = () => {
         <Text fontSize="xl" fontWeight="semibold">
           Author
         </Text>
-        <AppCheckboxGroup options={options} />
+        <AppCheckboxGroup
+          options={options}
+          onItemSelected={(value) => updateFilterRequest("authorIds", value)}
+        />
       </VStack>
     );
   };
@@ -71,7 +82,11 @@ const FilterMenu = () => {
         <Spacer />
         <PrimaryButton
           text="Apply"
-          onClick={undefined}
+          onClick={() =>
+            navigate(RouteBuilder.buildStorePath(filterRequest), {
+              replace: true,
+            })
+          }
           color={"default"}
           fitContent
         />

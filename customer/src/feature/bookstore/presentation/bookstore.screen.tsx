@@ -17,7 +17,7 @@ const BookstoreScreen = () => {
     let filterRequest = new FilterBookRequest();
     for (let entry of searchParams.entries()) {
       let property = entry[0] as FilterBookRequestProperty;
-      if (entry[1] === "undefined") continue;
+      if (entry[1] === "undefined" || entry[1] === "") continue;
       switch (property) {
         case "categoryIds":
           let categoryIds = entry[1].split(",").map((e) => +e);
@@ -34,7 +34,7 @@ const BookstoreScreen = () => {
 
   useEffect(() => {
     buildFilterBookRequest();
-  }, []);
+  }, [searchParams]);
 
   return (
     <Flex justify="center" mx="10%" gap={8}>

@@ -16,6 +16,7 @@ import SecondaryButton from "./secondary_button";
 import { RouteBuilder, RoutePath } from "../router/route_path";
 import useOrderStore from "../../feature/order/presentation/store/order.store";
 import { useNavigate } from "react-router";
+import { FilterBookRequest } from "../../feature/bookstore/data/model/filter_book_request.class";
 
 export default function AppNavbar() {
   const navigate = useNavigate();
@@ -53,7 +54,11 @@ export default function AppNavbar() {
         <NavbarItem>
           <Link
             color="primary"
-            onClick={() => navigate(RouteBuilder.buildStorePath(1))}
+            onClick={() =>
+              navigate(
+                RouteBuilder.buildStorePath(new FilterBookRequest({ page: 1 }))
+              )
+            }
             className="cursor-pointer"
           >
             Store

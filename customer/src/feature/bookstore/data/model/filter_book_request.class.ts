@@ -1,3 +1,5 @@
+import { SortDirection } from "../../../../core/data/enum/sort_direction.enum";
+
 export class FilterBookRequest {
   constructor(obj?: any) {
     if (!obj)
@@ -12,6 +14,8 @@ export class FilterBookRequest {
 
   toggleCategory(categoryId: number) {
     const foundIndex = this.categoryIds!.indexOf(categoryId);
+    console.log(foundIndex);
+
     if (foundIndex != -1) this.categoryIds!.splice(foundIndex, 1);
     else this.categoryIds!.push(categoryId);
     return this.copyWith(this);
@@ -21,7 +25,7 @@ export class FilterBookRequest {
   authorIds?: number[] | null;
   rating?: number | null;
   sortBy?: string | null;
-  sortDirection?: string | null;
+  sortDirection?: SortDirection | null;
   page?: number;
 
   toGraphQLQuery = () => {
@@ -43,11 +47,27 @@ export class FilterBookRequest {
       authorSubWhere = `authors: {some: {OR: [${authorQueryObjs}]}}`;
     }
 
+    let ratingSubWhere;
+    if (this.rating) {
+      ratingSubWhere = `reviews: {some: {OR: [{rating: ${this.rating}}]}}`;
+    }
+
     let where;
-    if (categorySubWhere && authorSubWhere)
-      where = `where: {${categorySubWhere}, ${authorSubWhere}}`;
-    else if (categorySubWhere) where = `where: {${categorySubWhere}}`;
-    else if (authorSubWhere) where = `where: {${authorSubWhere}}`;
+    if (categorySubWhere) {
+      where = "where: {";
+      where = where.concat(categorySubWhere).concat(",");
+    }
+    if (authorSubWhere) {
+      if (!where) where = "where {";
+      where = where.concat(authorSubWhere).concat(",");
+    }
+    if (ratingSubWhere) {
+      if (!where) where = "where {";
+      where = where.concat(ratingSubWhere).concat(",");
+    }
+    if (where) {
+      where = where.concat("}");
+    }
 
     const query = `
       query {

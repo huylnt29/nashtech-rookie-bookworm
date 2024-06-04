@@ -149,6 +149,7 @@ input BookRelationFilter {
 
 input BookWhereInput {
   id: IntFilter
+  averageRating: IntFilter
   category: CategoryRelationFilter
   authors: AuthorListRelationFilter
   reviews: ReviewListRelationFilter

@@ -1,4 +1,4 @@
-import { SortDirection } from "../data/enum/sort_direction.enum";
+import { FilterBookRequest } from "../../feature/bookstore/data/model/filter_book_request.class";
 
 export const RoutePath = {
   HOME: "/",
@@ -8,13 +8,11 @@ export const RoutePath = {
 };
 
 export const RouteBuilder = {
-  buildStorePath: (
-    page: number,
-    categoryIds?: number[],
-    authorIds?: number[],
-    sortBy?: string,
-    sortDirection?: SortDirection
-  ) =>
-    `/store?categoryIds=${categoryIds?.toString()}&authorIds=${authorIds?.toString()}&sortBy=${sortBy}&sortDirection=${sortDirection}&page=${page}`,
+  buildStorePath: (filterBookRequest: FilterBookRequest) =>
+    `/store?categoryIds=${filterBookRequest.categoryIds?.toString()}&authorIds=${filterBookRequest.authorIds?.toString()}&rating=${
+      filterBookRequest.rating
+    }&sortBy=${filterBookRequest.sortBy}&sortDirection=${
+      filterBookRequest.sortDirection
+    }&page=${filterBookRequest.page}`,
   buildBookPath: (id: number) => `/book/${id}`,
 };
