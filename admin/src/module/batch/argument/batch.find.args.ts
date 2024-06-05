@@ -14,13 +14,7 @@ registerEnumType(Prisma.BatchScalarFieldEnum, {
 });
 
 @ArgsType()
-class FindManyBatchArgsStrict
-  implements
-    RestrictProperties<
-      FindManyBatchArgsStrict,
-      Omit<Prisma.BatchFindManyArgs, 'include' | 'select'>
-    >
-{
+class FindManyBatchArgsStrict {
   @Field(() => BatchWhereInput, { nullable: true })
   where: BatchWhereInput;
   @Field(() => [BatchOrderByWithRelationInput], { nullable: true })
@@ -28,9 +22,9 @@ class FindManyBatchArgsStrict
   @Field(() => BatchWhereUniqueInput, { nullable: true })
   cursor: BatchWhereUniqueInput;
   @Field(() => Number, { nullable: true })
-  take: number;
+  page: number;
   @Field(() => Number, { nullable: true })
-  skip: number;
+  limit: number;
   @Field(() => [Prisma.BatchScalarFieldEnum], { nullable: true })
   distinct: Prisma.BatchScalarFieldEnum[];
 }

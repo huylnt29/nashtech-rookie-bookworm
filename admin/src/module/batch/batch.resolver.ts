@@ -5,20 +5,32 @@ import {
   FindManyBatchArgs,
   FindUniqueBatchArgs,
 } from './argument/batch.find.args';
+import { PaginationService } from 'src/core/service/pagination/pagination.service';
+import { BatchPageResult } from './entity/batch.page_result.entity';
 
 @Resolver(() => Batch)
 export class BatchResolver {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly paginationService: PaginationService,
+  ) {}
 
-  @Query(() => [Batch], { name: 'batches' })
+  @Query(() => BatchPageResult, { name: 'batches' })
   findAll(@Args() args: FindManyBatchArgs) {
-    return this.prismaService.batch.findMany({
-      ...args,
-      include: {
-        book: true,
-        discount: true,
+    return this.paginationService.paginate(
+      this.prismaService.batch,
+      {
+        ...args,
+        include: {
+          book: true,
+          discount: true,
+        },
       },
-    });
+      {
+        page: args.page,
+        limit: args.limit,
+      },
+    );
   }
 
   @Query(() => Batch, { name: 'batch' })
