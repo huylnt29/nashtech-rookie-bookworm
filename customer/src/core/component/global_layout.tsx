@@ -1,9 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
 import AppNavbar from "./navbar";
-import { PropsWithChildren } from "react";
 import Color from "../theme/theme";
 
-const GlobalLayout = ({ children }: PropsWithChildren) => {
+const GlobalLayout = ({ children, padding }: any) => {
   return (
     <Flex
       width="100vw"
@@ -16,7 +15,7 @@ const GlobalLayout = ({ children }: PropsWithChildren) => {
       <Box
         flexGrow={1}
         backgroundColor={Color.primary}
-        paddingY={8}
+        padding={padding ?? "18px 0"}
         className="rounded-xl overflow-y-auto"
       >
         {children}
