@@ -27,4 +27,12 @@ export class AuthController {
 
     response.redirect('/');
   }
+
+  @Get('log-out')
+  async logOut(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('access_token');
+    response.redirect(
+      `${process.env.AWS_COGNITO_DOMAIN}/logout?client_id=${process.env.AWS_COGNITO_CLIENT_ID}&logout_uri=http://localhost:3000/`,
+    );
+  }
 }

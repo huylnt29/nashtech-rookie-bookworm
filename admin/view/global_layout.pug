@@ -69,9 +69,9 @@ html
 
                     div.grow
 
-                    div.flex.gap-4.text-gray-50.p-4.items-center
+                    div.flex.gap-4.text-gray-50.p-4.items-center(onclick='location.href="/auth/log-out"')
                          img#shortcut-profile-picture.w-12.h-12.rounded-full
-                         p#shortcut-profile-fullname.font-bold.max-w-36
+                         p#shortcut-profile-fullname.font-bold.max-w-36.text-sm
 
                div.pt-6.pl-6.pr-6.bg-slate-50.overflow-y-auto(class="w-5/6")
                     block content
