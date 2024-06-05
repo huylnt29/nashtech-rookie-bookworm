@@ -6,7 +6,7 @@ import {
   FilterBookRequest,
   FilterBookRequestProperty,
 } from "../../data/model/filter_book_request.class";
-import { FilteredBook } from "../../data/model/filtered_book.type";
+import { FilteredBatch } from "../../data/model/filtered_book.type";
 
 interface BookstoreState {
   filterDataRequestState: RequestState;
@@ -14,7 +14,7 @@ interface BookstoreState {
   authors: Array<Author>;
   booksResultRequestState: RequestState;
   paginationMeta?: PaginationMeta | null;
-  filteredBooks: Array<FilteredBook>;
+  filteredBooks: Array<FilteredBatch>;
   filterRequest: FilterBookRequest;
   fetchFilter: () => Promise<void>;
   updateFilterRequest: (

@@ -29,7 +29,7 @@ const PopularCollectionGrid = () => {
         </HStack>
         <Grid className="grid-cols-3" rowGap={8} columnGap={8}>
           {popularCollection!.batches.map((batch) => (
-            <PopularCollectionItemCard key={batch.id} {...batch} />
+            <PopularCollectionItemCard key={crypto.randomUUID()} {...batch} />
           ))}
         </Grid>
       </VStack>

@@ -21,7 +21,7 @@ export class FilterBookRequest {
 
   toggleAuthor(authorId: number) {
     const foundIndex = this.authorIds!.indexOf(authorId);
-    if (foundIndex != -1) this.categoryIds!.splice(foundIndex, 1);
+    if (foundIndex != -1) this.authorIds!.splice(foundIndex, 1);
     else this.authorIds!.push(authorId);
     return this.copyWith(this);
   }
@@ -59,36 +59,38 @@ export class FilterBookRequest {
 
     let where;
     if (categorySubWhere) {
-      where = "where: {";
+      where = "where: { book: { is: {";
       where = where.concat(categorySubWhere).concat(",");
     }
     if (authorSubWhere) {
-      if (!where) where = "where: {";
+      if (!where) where = "where: { book: { is: {";
       where = where.concat(authorSubWhere).concat(",");
     }
     if (ratingSubWhere) {
-      if (!where) where = "where: {";
+      if (!where) where = "where: { book: { is: {";
       where = where.concat(ratingSubWhere).concat(",");
     }
     if (where) {
-      where = where.concat("}");
+      where = where.concat("}}}");
     }
 
     const query = `
       query {
-        books(page: ${this.page}, ${where ?? ""}) {
+        batches(page: ${this.page}, ${where ?? ""}) {
           data {
             id
-            imageUrls
-            name
-            totalSoldQuantity
-            averageRating
-            batches {
+            index
+            price
+            book {
               id 
-              price
-              discount {
-                percentage
-              }
+              imageUrls
+              name
+              totalSoldQuantity
+              averageRating
+            }
+            discount {
+              id 
+              percentage
             }
           }
           meta {

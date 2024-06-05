@@ -1,6 +1,4 @@
 import ApiClient from "../../../core/network/remote/api_client";
-import { Author } from "../../../core/data/type/author.type";
-import { Category } from "../../../core/data/type/category.type";
 import { BookPaginationResult } from "./model/filtered_book.type";
 import { FilterBookRequest } from "./model/filter_book_request.class";
 
@@ -24,7 +22,7 @@ class BookstoreRemoteDataSource {
     filterBookRequest: FilterBookRequest
   ): Promise<BookPaginationResult> {
     return (await ApiClient.postGraphQL(filterBookRequest.toGraphQLQuery()))
-      .data.books;
+      .data.batches;
   }
 }
 

@@ -49,7 +49,6 @@ const FilterMenu = () => {
   };
 
   const buildAuthorMenu = () => {
-    if (filterDataRequestState != RequestState.LOADED) return <></>;
     const options: CheckboxOption[] = authors.map((e) => ({
       key: e.id.toString(),
       value: e.name,

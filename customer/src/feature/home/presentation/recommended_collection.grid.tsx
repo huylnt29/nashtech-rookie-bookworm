@@ -33,7 +33,10 @@ const RecommendedCollectionGrid = () => {
         </HStack>
         <Grid className="grid-cols-3" rowGap={8} columnGap={8}>
           {recommendedCollection!.batches.map((batch) => (
-            <RecommendedCollectionItemCard key={batch.id} {...batch} />
+            <RecommendedCollectionItemCard
+              key={crypto.randomUUID()}
+              {...batch}
+            />
           ))}
         </Grid>
       </VStack>

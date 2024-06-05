@@ -23,7 +23,7 @@ const OnSaleCollectionListView = () => {
         </HStack>
         <div className="flex flex-no-wrap w-full overflow-x-scroll scrolling-touch items-start mb-8 scrollbar-none">
           {onSaleCollection!.batches.map((batch) => (
-            <OnSaleCollectionItemCard key={batch.id} {...batch} />
+            <OnSaleCollectionItemCard key={crypto.randomUUID()} {...batch} />
           ))}
         </div>
       </VStack>

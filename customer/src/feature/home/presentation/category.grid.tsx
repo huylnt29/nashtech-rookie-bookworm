@@ -46,7 +46,7 @@ const categories: IllustrativeCategory[] = [
       "https://www.svgrepo.com/show/454730/education-laboratory-school.svg",
   },
   {
-    id: 7,
+    id: 8,
     name: "Du lịch",
     imagePath: "https://cdn-icons-png.flaticon.com/512/854/854894.png",
   },

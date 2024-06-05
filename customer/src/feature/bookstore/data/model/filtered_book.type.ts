@@ -1,25 +1,27 @@
 import { PaginationMeta } from "../../../../core/data/type/pagination_meta.type";
 
 export type BookPaginationResult = {
-  data: FilteredBook[];
+  data: FilteredBatch[];
   meta: PaginationMeta;
 };
 
-export type FilteredBook = {
+export type FilteredBatch = {
+  id: number;
+  index: number;
+  price: number;
+  book: FilteredBatchBook;
+  discount: Discount | null;
+};
+
+export type FilteredBatchBook = {
   id: number;
   imageUrls: string[];
   name: string;
   totalSoldQuantity: number;
   averageRating: number;
-  batches: Batch[];
-};
-
-export type Batch = {
-  id: number;
-  price: number;
-  discount: Discount | null;
 };
 
 export type Discount = {
+  id: number;
   percentage: number;
 };

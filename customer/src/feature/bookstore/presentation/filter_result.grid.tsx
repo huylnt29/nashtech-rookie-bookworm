@@ -17,17 +17,9 @@ const FilterResultGrid = () => {
     );
   return (
     <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-      {filteredBooks.map((book) => (
-        <GridItem key={book.id}>
-          <FilteredBookCard
-            id={book.id}
-            imageUrls={book.imageUrls}
-            name={book.name}
-            price={book.batches[0].price}
-            discountPercentage={book.batches[0].discount?.percentage}
-            totalSoldQuantity={book.totalSoldQuantity}
-            averageRating={book.averageRating}
-          />
+      {filteredBooks.map((batch) => (
+        <GridItem key={batch.id}>
+          <FilteredBookCard {...batch} />
         </GridItem>
       ))}
     </Grid>

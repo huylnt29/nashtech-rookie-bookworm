@@ -32,6 +32,11 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
         case "authorIds":
           newFilterRequest = get().filterRequest.toggleAuthor(value);
           break;
+        case "rating":
+          newFilterRequest = get().filterRequest.copyWith({
+            rating: value,
+          });
+          break;
         default:
           newFilterRequest = get().filterRequest.copyWith({
             [property]: value,
