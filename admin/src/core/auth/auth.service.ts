@@ -1,10 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
-import {
-  CognitoIdentityProviderClient,
-  AdminGetUserCommand,
-} from '@aws-sdk/client-cognito-identity-provider';
 
 @Injectable()
 export class AuthService {
