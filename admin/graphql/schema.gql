@@ -228,11 +228,22 @@ input DiscountWhereInput {
 
 input BatchOrderByWithRelationInput {
   price: SortOrder
+  discount: DiscountOrderByWithRelationInput
+  book: BookOrderByWithRelationInput
 }
 
 enum SortOrder {
   asc
   desc
+}
+
+input DiscountOrderByWithRelationInput {
+  percentage: SortOrder
+}
+
+input BookOrderByWithRelationInput {
+  id: SortOrder
+  totalSoldQuantity: SortOrder
 }
 
 input BatchWhereUniqueInput {
@@ -252,11 +263,6 @@ enum BatchScalarFieldEnum {
   createdAt
   updatedAt
   state
-}
-
-input BookOrderByWithRelationInput {
-  id: SortOrder
-  totalSoldQuantity: SortOrder
 }
 
 input BookWhereUniqueInput {
@@ -292,10 +298,6 @@ enum CategoryScalarFieldEnum {
   name
   createdAt
   updatedAt
-}
-
-input DiscountOrderByWithRelationInput {
-  percentage: SortOrder
 }
 
 input DiscountWhereUniqueInput {
