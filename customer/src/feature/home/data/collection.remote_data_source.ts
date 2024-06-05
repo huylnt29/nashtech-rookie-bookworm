@@ -19,6 +19,8 @@ export class CollectionRemoteDataSource {
        batches {
          id 
          price
+         initialQuantity
+         soldQuantity
          book {
            id
            name

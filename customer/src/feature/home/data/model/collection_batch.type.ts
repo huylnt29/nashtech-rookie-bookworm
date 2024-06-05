@@ -1,6 +1,8 @@
 export type CollectionBatch = {
   id: number;
   price: number;
+  initialQuantity: number;
+  soldQuantity: number;
   discount: Discount | null;
   book: CollectionBook;
 };

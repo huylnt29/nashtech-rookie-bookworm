@@ -55,6 +55,15 @@ const OnSaleCollectionItemCard = (collectionBatch: CollectionBatch) => {
             initialPrice={collectionBatch!.price}
             discountPercentage={collectionBatch.discount?.percentage}
           />
+          <Text
+            fontWeight="semibold"
+            maxWidth="15vw"
+            className="text-orange-900"
+          >
+            Only{" "}
+            {collectionBatch.initialQuantity - collectionBatch.soldQuantity}{" "}
+            remaining
+          </Text>
         </VStack>
       </HStack>
     </AppContainer>
