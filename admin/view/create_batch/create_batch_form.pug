@@ -1,0 +1,49 @@
+div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+     form.grid.gap-4.mb-2.grid-cols-2
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="initialQuantity", 
+               ) Initial quantity 
+               input(
+                    type="number", 
+                    name="initialQuantity", 
+                    id="initialQuantity", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-1/2 p-2.5", 
+                    placeholder="Type batch initial quantity", 
+                    required
+               )
+          div(class="col-span-1")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="originalPrice", 
+               ) Original price 
+               input(
+                    type="number", 
+                    name="originalPrice", 
+                    id="originalPrice", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="Type batch original price", 
+                    required
+               )
+          div(class="col-span-1")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="price", 
+               ) Price to sell
+               input(
+                    type="number", 
+                    name="price", 
+                    id="price", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="Type batch price", 
+                    required
+               )
+          div(class="col-span-2")
+               label.block.mb-2.text-sm.font-medium.text-slate-900(
+                    for="price", 
+               ) Import date
+               input(
+                    type="datetime-local", 
+                    name="importedAt", 
+                    id="importedAt", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full p-2.5", 
+                    placeholder="Type or pick batch import date", 
+               )

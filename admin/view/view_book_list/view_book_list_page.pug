@@ -1,0 +1,46 @@
+extends ../global_layout.pug
+
+block content   
+     script(type='text/javascript').
+          u("#sidebar-book").addClass("bg-slate-700")
+          const navigateToDetailPage = (id) => {
+               location.href = `/book/${id}`
+          }
+          const navigateToCreatePage = () => {
+               location.href = '/book/new'
+          }
+     div
+          div(class='flex justify-between items-center')
+               p(class='font-bold text-xl text-slate-900') BOOK
+               +primary_button("Create", "navigateToCreatePage()", "slate")
+          div.h-4
+          div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+               if books.length > 0
+                    table(class='table w-full')
+                         thead(class='table-header-group bg-slate-100')
+                              tr(class='table-row')
+                                   th(class="table-cell text-left p-3") ID
+                                   th(class="table-cell text-left") NAME
+                                   th(class="table-cell text-left") PUBLISHED YEAR
+                                   th(class="table-cell text-left") PUBLISHER
+                                   th(class="table-cell text-left") CATEGORY 
+                                   th(class="table-cell text-left") STATUS
+                                   th(class="table-cell text-left") UPDATED AT
+                                   th(class="table-cell text-left w-8")          
+                         tbody(class="table-row-group")
+                              each book in books
+                                        tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                             td(class="table-cell p-3", onclick=`navigateToDetailPage(${book.id})`) #{book.id}
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.name}
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.publishedYear}
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`)= book.publisher ? book.publisher.name : ''
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`)= book.category ? book.category.name : ''
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.status}
+                                             td(class="table-cell", onclick=`navigateToDetailPage(${book.id})`) #{book.updatedAt.toLocaleString()}
+                                             td(class="table-cell")
+                                                  i(class="material-icons hidden group-hover:block w-4 text-slate-900", onclick=`openDeleteModal(${book.id})`) delete
+               else 
+                    +announcement('illustration_no_data.svg', 'You have not created any book')
+
+     include delete_book_modal.pug
+          

@@ -1,0 +1,374 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: Float!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Publisher {
+  id: Float!
+  name: String!
+}
+
+type Author {
+  id: Float!
+  name: String!
+}
+
+type Discount {
+  state: State!
+  id: Float!
+  minQuantity: Float!
+  maxQuantity: Float!
+  percentage: Float!
+  startAt: DateTime!
+  endAt: DateTime!
+  isRecurring: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum State {
+  ACTIVE
+  INACTIVE
+}
+
+type Batch {
+  state: State!
+  discount: Discount
+  id: Float!
+  index: Float!
+  initialQuantity: Float!
+  soldQuantity: Float!
+  originalPrice: Float!
+  price: Float!
+  bookId: Float!
+  discountId: Float!
+  importedAt: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  book: Book!
+}
+
+type Review {
+  content: String
+  rating: Float
+  id: Float!
+  author: String!
+  bookId: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Book {
+  category: Category
+  publisher: Publisher
+  authors: [Author!]
+  batches: [Batch!]
+  reviews: [Review!]
+  id: Float!
+  imageUrls: [String!]!
+  name: String!
+  description: String!
+  publishedYear: Float!
+  totalSoldQuantity: Float!
+  averageRating: Float!
+}
+
+type BookPageResult {
+  data: [Book!]!
+  meta: PageInfo!
+}
+
+type PageInfo {
+  totalItems: Float!
+  page: Float!
+  totalPages: Float!
+}
+
+type BatchPageResult {
+  data: [Batch!]!
+  meta: PageInfo!
+}
+
+type Collection {
+  code: String
+  description: String
+  layout: CollectionLayout!
+  movement: CollectionMovement!
+  batches: [Batch!]
+  id: Float!
+  name: String!
+  expiredAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum CollectionLayout {
+  GRID
+  LIST
+}
+
+enum CollectionMovement {
+  AUTO
+  MANUAL
+}
+
+type Query {
+  batches(where: BatchWhereInput, orderBy: [BatchOrderByWithRelationInput!], cursor: BatchWhereUniqueInput, page: Float, limit: Float, distinct: [BatchScalarFieldEnum!]): BatchPageResult!
+  batch(where: BatchWhereUniqueInput): Batch!
+  books(where: BookWhereInput, orderBy: [BookOrderByWithRelationInput!], cursor: BookWhereUniqueInput, page: Float, limit: Float, distinct: [BookScalarFieldEnum!]): BookPageResult!
+  book(where: BookWhereUniqueInput): Book!
+  categories(where: CategoryWhereInput, orderBy: [CategoryOrderByWithRelationInput!], cursor: CategoryWhereUniqueInput, take: Float, skip: Float, distinct: [CategoryScalarFieldEnum!]): [Category!]!
+  category(where: CategoryWhereUniqueInput): Category!
+  discounts(where: DiscountWhereInput, orderBy: [DiscountOrderByWithRelationInput!], cursor: DiscountWhereUniqueInput, take: Float, skip: Float, distinct: [DiscountScalarFieldEnum!]): [Discount!]!
+  discount(where: DiscountWhereUniqueInput): Discount!
+  authors(where: AuthorWhereInput, orderBy: [AuthorOrderByWithRelationInput!], cursor: AuthorWhereUniqueInput, take: Float, skip: Float, distinct: [AuthorScalarFieldEnum!]): [Author!]!
+  author(where: AuthorWhereUniqueInput): Author!
+  collections(where: CollectionWhereInput, orderBy: [CollectionOrderByWithRelationInput!], cursor: CollectionWhereUniqueInput, take: Float, skip: Float, distinct: [CollectionScalarFieldEnum!]): [Collection!]!
+  collection(where: CollectionWhereUniqueInput): Collection!
+}
+
+input BatchWhereInput {
+  state: State
+  id: Float
+  book: BookRelationFilter
+  discount: DiscountRelationFilter
+  AND: [BatchWhereInput!]
+  OR: [BatchWhereInput!]
+  NOT: [BatchWhereInput!]
+}
+
+input BookRelationFilter {
+  is: BookWhereInput
+  isNot: BookWhereInput
+}
+
+input BookWhereInput {
+  id: IntFilter
+  averageRating: IntFilter
+  category: CategoryRelationFilter
+  authors: AuthorListRelationFilter
+  reviews: ReviewListRelationFilter
+  AND: [BookWhereInput!]
+  OR: [BookWhereInput!]
+  NOT: [BookWhereInput!]
+}
+
+input IntFilter {
+  equals: Float
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+}
+
+input CategoryRelationFilter {
+  is: CategoryWhereInput
+  isNot: CategoryWhereInput
+}
+
+input CategoryWhereInput {
+  id: Float
+  books: BookListRelationFilter
+  AND: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+}
+
+input BookListRelationFilter {
+  every: BookWhereInput
+  some: BookWhereInput
+  none: BookWhereInput
+}
+
+input AuthorListRelationFilter {
+  every: AuthorWhereInput
+  some: AuthorWhereInput
+  none: AuthorWhereInput
+}
+
+input AuthorWhereInput {
+  id: Float
+  books: BookListRelationFilter
+  AND: [AuthorWhereInput!]
+  OR: [AuthorWhereInput!]
+  NOT: [AuthorWhereInput!]
+}
+
+input ReviewListRelationFilter {
+  every: ReviewWhereInput
+  some: ReviewWhereInput
+  none: ReviewWhereInput
+}
+
+input ReviewWhereInput {
+  id: Float
+  rating: Float
+  AND: [ReviewWhereInput!]
+  OR: [ReviewWhereInput!]
+  NOT: [ReviewWhereInput!]
+}
+
+input DiscountRelationFilter {
+  is: DiscountWhereInput
+  isNot: DiscountWhereInput
+}
+
+input DiscountWhereInput {
+  id: Float
+  percentage: Float
+  AND: [DiscountWhereInput!]
+  OR: [DiscountWhereInput!]
+  NOT: [DiscountWhereInput!]
+}
+
+input BatchOrderByWithRelationInput {
+  price: SortOrder
+  discount: DiscountOrderByWithRelationInput
+  book: BookOrderByWithRelationInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input DiscountOrderByWithRelationInput {
+  percentage: SortOrder
+}
+
+input BookOrderByWithRelationInput {
+  id: SortOrder
+  totalSoldQuantity: SortOrder
+}
+
+input BatchWhereUniqueInput {
+  id: Float
+}
+
+enum BatchScalarFieldEnum {
+  id
+  index
+  initialQuantity
+  soldQuantity
+  originalPrice
+  price
+  bookId
+  discountId
+  importedAt
+  createdAt
+  updatedAt
+  state
+}
+
+input BookWhereUniqueInput {
+  id: Float
+}
+
+enum BookScalarFieldEnum {
+  id
+  imageUrls
+  name
+  description
+  publishedYear
+  publisherId
+  categoryId
+  createdAt
+  updatedAt
+  totalSoldQuantity
+  averageRating
+  status
+  state
+}
+
+input CategoryOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input CategoryWhereUniqueInput {
+  id: Float
+}
+
+enum CategoryScalarFieldEnum {
+  id
+  name
+  createdAt
+  updatedAt
+}
+
+input DiscountWhereUniqueInput {
+  id: Float
+}
+
+enum DiscountScalarFieldEnum {
+  id
+  minQuantity
+  maxQuantity
+  percentage
+  startAt
+  endAt
+  isRecurring
+  createdAt
+  updatedAt
+  state
+}
+
+input AuthorOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input AuthorWhereUniqueInput {
+  id: Float
+}
+
+enum AuthorScalarFieldEnum {
+  id
+  name
+}
+
+input CollectionWhereInput {
+  id: Float
+  code: String
+  batches: BatchListRelationFilter
+  AND: [CollectionWhereInput!]
+  OR: [CollectionWhereInput!]
+  NOT: [CollectionWhereInput!]
+}
+
+input BatchListRelationFilter {
+  every: BatchWhereInput
+  some: BatchWhereInput
+  none: BatchWhereInput
+}
+
+input CollectionOrderByWithRelationInput {
+  id: SortOrder
+}
+
+input CollectionWhereUniqueInput {
+  id: Float
+  code: String
+}
+
+enum CollectionScalarFieldEnum {
+  id
+  code
+  name
+  description
+  layout
+  movement
+  type
+  expiredAt
+  createdAt
+  updatedAt
+  state
+}

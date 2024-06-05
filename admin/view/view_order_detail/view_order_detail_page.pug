@@ -1,0 +1,56 @@
+extends ../global_layout.pug
+
+block content   
+     div
+          div.flex.justify-between.items-center
+               i.material-icons.w-8 filter_frames
+               p.font-bold.text-xl.text-slate-900 Order #{order.id}
+               div.grow
+               include ./select_order_status_stager.pug
+          div.h-4
+          div.flex.items-center
+               div.w-2.bg-slate-600.mr-3.rounded-xl ''
+               p.font-bold.text-lg.text-gray-600.text-center Primary information
+          div.h-3
+          div.bg-white.py-3.px-8.shadow-lg.shadow-slate-200.rounded-2xl
+               +row_text('id', order.id)
+               +row_text('total price', order.totalPrice)
+               +row_text('line quantity', order.totalQuantity)
+               +row_text('placed at', order.createdAt.toLocaleString())
+               +row_text('updated at', order.updatedAt.toLocaleString())
+          div.h-8
+          div.flex.items-center
+               div.w-2.bg-slate-600.mr-3.rounded-xl ''
+               p.font-bold.text-lg.text-gray-600.text-center Lines
+          div.h-3
+          div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+               table.table.w-full
+                    thead.table-header-group.bg-slate-100
+                         tr.table-row
+                              th.table-cell.text-left.p-3 ID
+                              th.table-cell.text-left BOOK
+                              th.table-cell.text-left QUANTITY
+                              th.table-cell.text-left BATCH   
+                    tbody.table-row-group
+                         each line in order.orderLines
+                              tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                   td.table-cell.p-3(onclick=`navigateToOrderLineDetailPage(${line.id})`) #{line.id}
+                                   td.table-cell(onclick=`navigateToOrderLineDetailPage(${line.id})`) #{line.batch.book.name}
+                                   td.table-cell(onclick=`navigateToOrderLineDetailPage(${line.id})`) #{line.quantity}
+                                   td.table-cell(onclick=`navigateToOrderLineDetailPage(${line.id})`) #{line.batch.index}
+          div.h-8
+          div.flex.items-center
+               div.w-2.bg-slate-600.mr-3.rounded-xl ''
+               p.font-bold.text-lg.text-gray-600.text-center Customer
+          div.h-3
+          div.bg-white.py-3.px-8.shadow-lg.shadow-slate-200.rounded-2xl
+               +row_text('id', order.customer.id)
+               +row_text('name', order.customer.name)
+               +row_text('phone', order.customer.phone)
+               +row_text('address', order.customer.address)
+               +row_text('city', order.customer.city)
+               +row_text('district', order.customer.district)
+               +row_text('email', order.customer.email)
+
+     script(type='text/javascript').
+          const navigateToOrderLineDetailPage = (id) => location.href = `/line/${id}`

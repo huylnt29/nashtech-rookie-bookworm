@@ -1,0 +1,38 @@
+extends ../global_layout.pug
+
+block content   
+     script(type='text/javascript').
+          u("#sidebar-category").addClass("bg-slate-700")
+          const navigateToDetailPage = (id) => {
+               location.href = `/category/${id}`
+          }
+     div
+          div.flex.justify-between.items-center
+               p.font-bold.text-xl.text-slate-900 CATEGORY
+               +primary_button('Create', 'openCreateModal()', colorScheme='slate')
+
+          div.h-4
+          div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+               if categories.length > 0
+                    table.table.w-full
+                         thead.table-header-group.bg-slate-100
+                              tr.table-row
+                                   th.table-cell.text-left.p-3 ID
+                                   th.table-cell.text-left NAME
+                                   th.table-cell.text-left BOOKS COUNT
+                                   th.table-cell.text-left UPDATED AT
+                                   th.table-cell.text-left.w-8         
+                         tbody.table-row-group
+                              each category in categories
+                                   tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                        td.table-cell.p-3(onclick=`navigateToDetailPage(${category.id})`) #{category.id}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.name}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category._count.books}
+                                        td.table-cel(onclick=`navigateToDetailPage(${category.id})`) #{category.updatedAt.toLocaleString()}
+                                        td.table-cel
+                                             i(class="material-icons hidden group-hover:block w-4", onclick=`openDeleteModal(${category.id})`) delete
+               else 
+                    +announcement('illustration_no_data.svg', 'You have not created any category')
+
+     include create_category_modal.pug
+     include delete_category_modal.pug

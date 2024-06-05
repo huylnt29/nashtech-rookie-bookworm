@@ -8,18 +8,24 @@ datasource db {
 }
 
 model Book {
-  id            Int       @id @default(autoincrement())
-  imageUrls     String[]
-  name          String
-  description   String?
-  publishedYear Int
-  publisherId   Int
-  categoryId    Int
-  authors       Author[]
-  reviews       Review[]
-  batchs        Batch[]
-  publisher     Publisher @relation(fields: [publisherId], references: [id])
-  category      Category  @relation(fields: [categoryId], references: [id])
+  id                Int        @id @default(autoincrement())
+  imageUrls         String[]
+  name              String
+  description       String?
+  publishedYear     Int?
+  publisherId       Int?
+  categoryId        Int?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  totalSoldQuantity Int        @default(0)
+  averageRating     Float      @default(0)
+  status            BookStatus @default(DRAFT)
+  state             State      @default(ACTIVE)
+  authors           Author[]
+  reviews           Review[]
+  batches           Batch[]
+  publisher         Publisher? @relation(fields: [publisherId], references: [id])
+  category          Category?  @relation(fields: [categoryId], references: [id])
 }
 
 model Publisher {
@@ -29,9 +35,11 @@ model Publisher {
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  books Book[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  books     Book[]
 }
 
 model Author {
@@ -40,78 +48,144 @@ model Author {
   books Book[]
 }
 
-model Review {
-  id      Int     @id @default(autoincrement())
-  author  String
-  content String?
-  rating  Int
-  bookId  Int
-  book    Book    @relation(fields: [bookId], references: [id])
-}
-
 model Batch {
-  id              Int             @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
+  index           Int      @default(-1)
   initialQuantity Int
-  soldQuantity    Int             @default(0)
+  soldQuantity    Int      @default(0)
   originalPrice   Float
+  price           Float
   bookId          Int
-  book            Book            @relation(fields: [bookId], references: [id])
-  promotionLists  PromotionList[]
-  Price           Price[]
+  discountId      Int?
+  importedAt      DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  state State @default(ACTIVE)
+
+  book        Book         @relation(fields: [bookId], references: [id])
+  discount    Discount?    @relation(fields: [discountId], references: [id])
+  collections Collection[]
+  orderLines  OrderLine[]
 }
 
-model PromotionList {
-  id      Int    @id @default(autoincrement())
-  name    String
-  batchId Int
-  batch   Batch  @relation(fields: [batchId], references: [id])
-}
-
-model Price {
-  id                 Int         @id @default(autoincrement())
-  value              Float
-  discountPercentage Float
-  state              PriceState
-  batchId            Int
-  batch              Batch       @relation(fields: [batchId], references: [id])
-  OrderLine          OrderLine[]
-}
-
-enum PriceState {
-  ACTIVE
-  INACTIVE
-}
-
-model OrderLine {
-  id       Int   @id @default(autoincrement())
-  quantity Int
-  priceId  Int
-  orderId  Int
-  price    Price @relation(fields: [priceId], references: [id])
-  order    Order @relation(fields: [orderId], references: [id])
+model Discount {
+  id          Int      @id @default(autoincrement())
+  minQuantity Int      @default(1)
+  maxQuantity Int?
+  percentage  Float
+  startAt     DateTime
+  endAt       DateTime
+  isRecurring Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  state       State    @default(ACTIVE)
+  batches     Batch[]
 }
 
 model Order {
-  id         Int         @id @default(autoincrement())
-  customerId Int
-  state      OrderState
-  customer   Customer    @relation(fields: [customerId], references: [id])
-  OrderLine  OrderLine[]
+  id            Int           @id @default(autoincrement())
+  customerId    Int
+  totalQuantity Int
+  totalPrice    Float
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  state         State         @default(ACTIVE)
+  status        OrderStatus   @default(PLACED)
+  customer      Customer      @relation(fields: [customerId], references: [id])
+  orderLines    OrderLine[]
+  paymentMethod PaymentMethod @default(CASH)
+}
+
+model OrderLine {
+  id        Int      @id @default(autoincrement())
+  batchId   Int
+  quantity  Int
+  price     Float
+  orderId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  state     State    @default(ACTIVE)
+  batch     Batch    @relation(fields: [batchId], references: [id])
+  order     Order    @relation(fields: [orderId], references: [id])
 }
 
 model Customer {
-  id       Int     @id @default(autoincrement())
-  name     String
-  phone    String
-  address  String
-  city     String
-  district String
-  Order    Order[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String   @unique
+  email     String?  @unique
+  address   String
+  city      String?
+  district  String?
+  state     State    @default(ACTIVE)
+  orders    Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-enum OrderState {
+model Review {
+  id        Int      @id @default(autoincrement())
+  author    String?
+  content   String?
+  rating    Int?
+  bookId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  state     State    @default(ACTIVE)
+  book      Book     @relation(fields: [bookId], references: [id])
+}
+
+model Collection {
+  id          Int                @id @default(autoincrement())
+  code        String?            @unique
+  name        String
+  description String?
+  layout      CollectionLayout
+  movement    CollectionMovement
+  type        CollectionType
+  expiredAt   DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  state       State              @default(ACTIVE)
+  batches     Batch[]
+}
+
+enum BookStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum OrderStatus {
   PLACED
   PROCESSED
   COMPLETED
   CANCELLED
+}
+
+enum CollectionMovement {
+  MANUAL
+  AUTO
+}
+
+enum CollectionLayout {
+  GRID
+  LIST
+}
+
+enum CollectionType {
+  SYSTEM
+  DYNAMIC
+}
+
+enum State {
+  ACTIVE
+  INACTIVE
+}
+
+enum PaymentMethod {
+  CASH
+  ZALOPAY
+  VNPAY
+  MOMO
 }

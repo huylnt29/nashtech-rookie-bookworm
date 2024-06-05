@@ -1,0 +1,48 @@
+extends ../global_layout.pug
+
+block content   
+     script(type='text/javascript').
+          u("#sidebar-review").addClass("bg-slate-700")
+
+     div
+          div.flex.justify-between.items-center
+               p.font-bold.text-xl.text-slate-900 REVIEW
+
+          div.h-4
+          div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl
+               if reviews.length > 0
+                    table.table.w-full
+                         thead.table-header-group.bg-slate-100
+                              tr.table-row
+                                   th.table-cell.text-left.p-3 ID
+                                   th.table-cell.text-left BOOK
+                                   th.table-cell.text-left AUTHOR
+                                   th.table-cell.text-left RATING
+                                   th.table-cell.text-left CONTENT
+                                   th.table-cell.text-left STATE
+                                   th.table-cell.text-left UPDATED AT   
+                                   th.table-cell.text-left.w-8         
+                         tbody.table-row-group
+                              each review in reviews
+                                   tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
+                                        td.table-cell.p-3 #{review.id}
+                                        td.table-cel #{review.book.name}
+                                        td.table-cel #{review.author}
+                                        td.table-cel= (review.rating) ? review.rating : ''
+                                        td.table-cel= (review.content) ? review.content.slice(0,48).concat("...") : ''
+                                        td.table-cel #{review.state}
+                                        td.table-cel #{review.updatedAt.toLocaleString()}
+                                        td.table-cel(onclick=`patchReviewState(${review.id})`)
+                                             i(class="material-icons hidden group-hover:block w-4")= (review.state == "ACTIVE") ? "visibility_off" : "visibility"
+               else 
+                    +announcement(
+                         'illustration_no_data.svg', 
+                         'There has not been any review'
+                    )
+
+     script(type='text/javascript').
+          const patchReviewState = async (id) => {
+               axios.patch(`/review/${id}`)
+               .then(() => location.reload())
+               .catch(console.log);
+          }

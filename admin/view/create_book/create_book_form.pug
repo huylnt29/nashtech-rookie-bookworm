@@ -1,0 +1,57 @@
+div(class='bg-white p-8 shadow-lg shadow-slate-200 rounded-2xl')
+     form(class="grid gap-4 mb-4 grid-cols-2")
+          div(class="col-span-2")
+               label(
+                    for="name", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Name 
+               input(
+                    type="text", 
+                    name="name", 
+                    id="name", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-4/12 p-2.5", 
+                    placeholder="Type book name", 
+                    required
+               )
+          div(class="col-span-2")
+               label(
+                    for="publishedYear", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Published Year 
+               input(
+                    type="number", 
+                    name="publishedYear", 
+                    id="publishedYear", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-4/12 p-2.5", 
+                    placeholder="Fill book published year", 
+                    required
+               )
+          div(class="col-span-1")
+               label(
+                    for="publisher", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Publisher 
+               +dropdown("publisher", type="single", publishers)
+          div(class="col-span-1")
+               label(
+                    for="category", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Category 
+               +dropdown("category", type="single", categories)
+          div(class="col-span-1")
+               label(
+                    for="authors", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Authors 
+               +dropdown("authors", type="multiple", authors)
+          div(class="col-span-2")
+               label(
+                    for="description", 
+                    class="block mb-2 text-sm font-medium text-slate-900"
+               ) Description 
+               textarea(
+                    name="description", 
+                    id="description", 
+                    class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:bg-transparent focus:border-primary-600 block w-full h-36 p-2.5", 
+                    placeholder="Type book description", 
+               )

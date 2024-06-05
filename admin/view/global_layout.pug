@@ -1,0 +1,88 @@
+include mixin/announcement.pug
+include mixin/toast.pug
+include mixin/row_text.pug
+include mixin/primary_button.pug
+include mixin/secondary_button.pug
+include mixin/dropdown.pug 
+
+doctype html
+html
+     head
+     title BookWorm Admin
+     meta(charset="utf-8")
+     script(src="https://cdn.tailwindcss.com")
+     link(rel="icon" type="image/jpeg" href="/logo.png")
+     script(src="https://cdn.jsdelivr.net/npm/umbrellajs")
+     meta(http-equiv="X-UA-Compatible", content="IE=edge")
+     script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+     link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+
+     body.overflow-y-hidden.text-slate-900.text-base
+          div.flex.h-screen
+               aside.flex.flex-col.bg-slate-900.p-4.gap-1.overflow-y-auto(class='w-1/6')
+                    div.flex.gap-4.text-gray-50.p-4.items-center
+                         img(src='/logo.png').w-8
+                         p.font-bold BookWorm Admin
+                    div.h-2
+
+                    p.text-white.px-4.py-2.uppercase.font-bold Information
+                    a#sidebar-book(href='/book', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 menu_book
+                         p Book
+                    a#sidebar-category(href='/category', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 category
+                         p Category
+                    a#sidebar-author(href='/author', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 person_play
+                         p Author
+                    a#sidebar-publisher(href='/publisher', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 factory
+                         p Publisher
+                    
+                    p.text-white.px-4.py-2.uppercase.font-bold Operation
+                    a#sidebar-batch(href='/batch', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 batch_prediction
+                         p Batch
+                    a#sidebar-order(href='/order', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 filter_frames
+                         p Order
+
+                    p.text-white.px-4.py-2.uppercase.font-bold Customer engagement
+                    a#sidebar-customer(href='/customer', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 diversity_1
+                         p Customer
+                    a#sidebar-review(href='/review', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 reviews
+                         p Review
+                    
+                    p.text-white.px-4.py-2.uppercase.font-bold Marketing
+                    a#sidebar-collection(href='/collection', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 collections_bookmark
+                         p Promotion List
+                    a#sidebar-discount(href='/discount', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 keyboard_double_arrow_down
+                         p Discount
+                    a#sidebar-about(href='https://wordpress.com/post/nashtechrookiebookwormhuylnt.wordpress.com/7', class='flex gap-4 text-gray-50 hover:bg-slate-700 p-4 rounded-lg cursor-pointer items-center')
+                         i.material-icons.w-8 info
+                         p About
+
+                    div.grow
+
+                    div.flex.gap-4.text-gray-50.p-4.items-center(onclick='location.href="/auth/log-out"')
+                         img#shortcut-profile-picture.w-12.h-12.rounded-full
+                         p#shortcut-profile-fullname.font-bold.max-w-36.text-sm
+
+               div.pt-6.pl-6.pr-6.bg-slate-50.overflow-y-auto(class="w-5/6")
+                    block content
+
+          script(type='text/javascript').
+               const cookiesArray = document.cookie.split(";").map((cookie) => cookie.trim());
+               const cookieMap = {};
+               for (const cookie of cookiesArray) {
+                    const [name, value] = cookie.split("=");
+                    cookieMap[name] = value;
+               }
+               let user = JSON.parse(decodeURIComponent(cookieMap["user"]))
+               u("#shortcut-profile-picture").nodes[0].src = user.picture
+               u("#shortcut-profile-fullname").html(user.name)

@@ -24,14 +24,14 @@ services:
     depends_on:
       - database
 
-  customer:
-    build:
-      context: ./customer
-      dockerfile: Dockerfile
-    container_name: bookworm-customer-client
-    environment:
-      - PORT=${PORT}
-    ports:
-      - "8000:8000"
-    depends_on:
-      - server
+  # customer:
+  #   build:
+  #     context: ./customer
+  #     dockerfile: Dockerfile
+  #   container_name: bookworm-customer-client
+  #   environment:
+  #     - PORT=${PORT}
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - server

@@ -1,0 +1,25 @@
+div(id="delete-category-modal", class="hidden fixed z-40 w-screen h-screen inset-0 bg-gray-900 bg-opacity-60")
+     div(class="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 w-96 bg-white rounded-md px-8 py-6 space-y-5 drop-shadow-lg")
+          div(class="flex justify-between")
+               p(class="text-xl font-semibold") Delete category?
+               i(class="material-icons w-8 cursor-pointer", onclick="closeDeleteModal()") close
+          p All the associated books will be disassociate from this category. This action cannot be undone!
+          div(class="flex justify-end")
+               +primary_button("Confirm", "submitDeleteCategory()", "red")
+
+     script(type="text/javascript").
+          var categoryId 
+          const openDeleteModal = (id) => {
+               categoryId = id
+               u("#delete-category-modal").removeClass('hidden')   
+          }
+
+          const closeDeleteModal = () => {
+               u("#delete-category-modal").addClass('hidden');   
+          }
+
+          const submitDeleteCategory = async () => {
+               axios.delete(`/category/${categoryId}`)
+               .then(() => location.href='/category')
+               .catch(console.log);
+          }

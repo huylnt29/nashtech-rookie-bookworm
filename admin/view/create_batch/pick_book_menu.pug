@@ -1,0 +1,9 @@
+mixin pick_book_menu(books)
+     div.bg-white.p-8.shadow-lg.shadow-slate-200.rounded-2xl.grid.grid-cols-3.gap-12
+          each book in books 
+               div.book-menu-item.flex.flex-col.gap-3.cursor-pointer.p-4.rounded-xl.text-slate-700.group(id=`book-menu-item-${book.id}`, onclick=`pickBook(${book.id})`)
+                    img(
+                         src=book.imageUrls[0],
+                         class="h-48 rounded-xl object-cover object-center group-hover:contrast-125"
+                    )
+                    p(class="group-hover:font-bold") #{book.name}
