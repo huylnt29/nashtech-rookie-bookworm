@@ -17,6 +17,7 @@ import { RouteBuilder, RoutePath } from "../router/route_path";
 import useOrderStore from "../../feature/order/presentation/store/order.store";
 import { useNavigate } from "react-router";
 import { FilterBookRequest } from "../../feature/bookstore/data/model/filter_book_request.class";
+import { SortDirection } from "../data/enum/sort_direction.enum";
 
 export default function AppNavbar() {
   const navigate = useNavigate();
@@ -56,7 +57,12 @@ export default function AppNavbar() {
             color="primary"
             onClick={() =>
               location.assign(
-                RouteBuilder.buildStorePath(new FilterBookRequest({ page: 1 }))
+                RouteBuilder.buildStorePath(
+                  new FilterBookRequest({
+                    page: 1,
+                    sortDirection: SortDirection.ASC,
+                  })
+                )
               )
             }
             className="cursor-pointer"

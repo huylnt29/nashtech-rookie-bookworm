@@ -37,6 +37,22 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
             rating: value,
           });
           break;
+        case "sortDirection":
+          newFilterRequest = get().filterRequest.copyWith({
+            sortDirection: value,
+          });
+          if (get().filterRequest.sortBy) {
+            get().filterBooks(newFilterRequest);
+          }
+          break;
+        case "sortBy":
+          newFilterRequest = get().filterRequest.copyWith({
+            sortBy: value,
+          });
+          if (get().filterRequest.sortDirection) {
+            get().filterBooks(newFilterRequest);
+          }
+          break;
         default:
           newFilterRequest = get().filterRequest.copyWith({
             [property]: value,

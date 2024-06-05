@@ -30,7 +30,7 @@ export class FilterBookRequest {
   authorIds?: number[] | null;
   rating?: number | null;
   sortBy?: string | null;
-  sortDirection?: SortDirection | null;
+  sortDirection?: "asc" | "desc";
   page?: number;
 
   toGraphQLQuery = () => {
@@ -74,9 +74,32 @@ export class FilterBookRequest {
       where = where.concat("}}}");
     }
 
+    let orderBy;
+    if (this.sortBy && this.sortDirection) {
+      orderBy = "orderBy: { ";
+      switch (this.sortBy) {
+        case "sale":
+          orderBy = orderBy.concat(
+            `discount: {percentage: ${this.sortDirection}}`
+          );
+          break;
+        case "popular":
+          orderBy = orderBy.concat(
+            `book: {totalSoldQuantity: ${this.sortDirection}}`
+          );
+          break;
+        case "price":
+          orderBy = orderBy.concat(`price: ${this.sortDirection}`);
+          break;
+        default:
+          break;
+      }
+      orderBy = orderBy.concat("}");
+    }
+
     const query = `
       query {
-        batches(page: ${this.page}, ${where ?? ""}) {
+        batches(page: ${this.page}, ${where ?? ""}, ${orderBy ?? ""}) {
           data {
             id
             index

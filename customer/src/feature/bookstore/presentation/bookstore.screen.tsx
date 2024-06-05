@@ -12,6 +12,7 @@ import Paginator from "../../../core/component/paginator";
 import { Spacer } from "@nextui-org/react";
 import { RouteBuilder } from "../../../core/router/route_path";
 import SortBookBox from "./sort_book.box";
+import { SortDirection } from "../../../core/data/enum/sort_direction.enum";
 
 const BookstoreScreen = () => {
   const { filterBooks, paginationMeta, filterRequest } = useBookstoreStore();
@@ -32,6 +33,13 @@ const BookstoreScreen = () => {
           let authorIds = entry[1].split(",").map((e) => +e);
           filterRequest.authorIds = authorIds;
           break;
+        case "sortBy":
+          filterRequest.sortBy = entry[1];
+          break;
+        case "sortDirection":
+          filterRequest.sortDirection = +entry[1] == 0 ? "asc" : "desc";
+          break;
+
         case "page":
           filterRequest.page = +entry[1];
           break;

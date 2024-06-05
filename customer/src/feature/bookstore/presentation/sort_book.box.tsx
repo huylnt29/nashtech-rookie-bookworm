@@ -1,8 +1,15 @@
 import { HStack } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import { cn, Radio, RadioGroup } from "@nextui-org/react";
+import useBookstoreStore from "./store/bookstore.store";
+import RequestState from "../../../core/data/enum/request_state.enum";
 
 const SortBookBox = () => {
+  const { filterRequest, booksResultRequestState, updateFilterRequest } =
+    useBookstoreStore();
+  if (booksResultRequestState != RequestState.LOADED) return <></>;
+  console.log(filterRequest.sortBy);
+
   return (
     <AppContainer>
       <HStack justify="space-between">
@@ -12,9 +19,13 @@ const SortBookBox = () => {
           classNames={{
             label: "font-bold",
           }}
+          defaultValue={filterRequest.sortBy}
+          onChange={(event) =>
+            updateFilterRequest("sortBy", event.target.value)
+          }
         >
           <Radio
-            value="buenos-aires"
+            value="sale"
             classNames={{
               control: cn("bg-slate-900 border border-slate-900"),
             }}
@@ -22,7 +33,7 @@ const SortBookBox = () => {
             On sale
           </Radio>
           <Radio
-            value="sydney"
+            value="popular"
             classNames={{
               control: cn("bg-slate-900 border border-slate-900"),
             }}
@@ -30,7 +41,7 @@ const SortBookBox = () => {
             Popular
           </Radio>
           <Radio
-            value="san-francisco"
+            value="price"
             classNames={{
               control: cn("bg-slate-900 border border-slate-900"),
             }}
@@ -41,20 +52,25 @@ const SortBookBox = () => {
         <RadioGroup
           label="Order"
           orientation="horizontal"
+          defaultValue={filterRequest.sortDirection}
           classNames={{
             label: "font-bold",
           }}
+          onChange={(event) =>
+            updateFilterRequest("sortDirection", event.target.value)
+          }
         >
           <Radio
-            value="buenos-aires"
+            value="asc"
             classNames={{
               control: cn("bg-slate-900 border border-slate-900"),
             }}
+            defaultChecked
           >
             Ascending
           </Radio>
           <Radio
-            value="sydney"
+            value="desc"
             classNames={{
               control: cn("bg-slate-900 border border-slate-900"),
             }}
