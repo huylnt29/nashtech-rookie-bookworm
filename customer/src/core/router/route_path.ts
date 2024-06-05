@@ -5,6 +5,7 @@ export const RoutePath = {
   STORE: "/store",
   BOOK: "/book/:id",
   CHECK_OUT: "/check-out",
+  ABOUT: "/about",
 };
 
 export const RouteBuilder = {

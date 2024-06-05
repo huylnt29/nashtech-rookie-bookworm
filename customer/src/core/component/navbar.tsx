@@ -71,7 +71,11 @@ export default function AppNavbar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="primary" href="#" className="cursor-pointer">
+          <Link
+            color="primary"
+            onClick={() => navigate(RoutePath.ABOUT)}
+            className="cursor-pointer"
+          >
             About
           </Link>
         </NavbarItem>

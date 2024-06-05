@@ -5,6 +5,7 @@ import HomeScreen from "../../feature/home/presentation/home.screen";
 import BookstoreScreen from "../../feature/bookstore/presentation/bookstore.screen";
 import BookDetailScreen from "../../feature/book_detail/presentation/book_detail.screen";
 import CartScreen from "../../feature/order/presentation/order.screen";
+import AboutScreen from "../../feature/about/about.screen";
 
 const AppRouter = () => {
   return (
@@ -38,6 +39,14 @@ const AppRouter = () => {
         element={
           <GlobalLayout>
             <CartScreen />
+          </GlobalLayout>
+        }
+      />
+      <Route
+        path={RoutePath.ABOUT}
+        element={
+          <GlobalLayout padding={0}>
+            <AboutScreen />
           </GlobalLayout>
         }
       />
