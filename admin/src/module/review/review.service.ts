@@ -25,8 +25,6 @@ export class ReviewService {
   }
 
   async insert(createDto: CreateReviewDto) {
-    console.log(createDto);
-
     if (!createDto.content && !createDto.rating) return null;
     return this.prisma.review.create({
       data: createDto,

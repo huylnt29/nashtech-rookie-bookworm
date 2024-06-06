@@ -17,8 +17,6 @@ export class BatchResolver {
 
   @Query(() => BatchPageResult, { name: 'batches' })
   findAll(@Args() args: FindManyBatchArgs) {
-    console.log(args.where.book);
-
     return this.paginationService.paginate(
       this.prismaService.batch,
       {
