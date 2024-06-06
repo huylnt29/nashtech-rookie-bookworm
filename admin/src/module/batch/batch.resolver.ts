@@ -21,6 +21,15 @@ export class BatchResolver {
       this.prismaService.batch,
       {
         ...args,
+        where: {
+          ...args.where,
+          book: {
+            name: {
+              contains: args.where.book.is.search.contains,
+              mode: 'insensitive',
+            },
+          },
+        },
         include: {
           book: true,
           discount: true,

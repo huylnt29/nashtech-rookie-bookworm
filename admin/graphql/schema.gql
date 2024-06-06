@@ -156,6 +156,7 @@ input BookWhereInput {
   id: IntFilter
   averageRating: IntFilter
   category: CategoryRelationFilter
+  search: StringFilter
   authors: AuthorListRelationFilter
   reviews: ReviewListRelationFilter
   AND: [BookWhereInput!]
@@ -188,6 +189,26 @@ input BookListRelationFilter {
   every: BookWhereInput
   some: BookWhereInput
   none: BookWhereInput
+}
+
+input StringFilter {
+  mode: QueryMode
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: String
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input AuthorListRelationFilter {

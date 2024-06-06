@@ -8,6 +8,7 @@ import { $Enums, Prisma } from '@prisma/client';
 import {
   IntFilter,
   RestrictProperties,
+  StringFilter,
 } from 'src/core/service/graphql/common.input';
 import { AuthorListRelationFilter } from 'src/module/author/argument/author.where.args';
 import {
@@ -33,6 +34,9 @@ export class BookWhereInputStrict {
 
   authors: AuthorListRelationFilter;
   reviews: ReviewListRelationFilter;
+
+  @Field({ nullable: true })
+  search: StringFilter;
 
   AND: BookWhereInput[];
   OR: BookWhereInput[];
