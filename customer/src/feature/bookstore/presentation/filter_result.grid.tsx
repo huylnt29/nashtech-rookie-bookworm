@@ -16,7 +16,7 @@ const FilterResultGrid = () => {
       />
     );
   return (
-    <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+    <Grid gap={6} className="md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
       {filteredBooks.map((batch) => (
         <GridItem key={batch.id}>
           <FilteredBookCard {...batch} />

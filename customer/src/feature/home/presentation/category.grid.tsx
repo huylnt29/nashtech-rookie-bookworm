@@ -65,7 +65,11 @@ export const CategoryGrid = () => {
         You may be interested in...
       </Text>
       <AppContainer width="100%">
-        <Grid className="grid-cols-5" rowGap={8} columnGap={8}>
+        <Grid
+          className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+          rowGap={8}
+          columnGap={8}
+        >
           {categories.map((category) => (
             <CategoryItem key={category.id} {...category} />
           ))}
@@ -78,7 +82,10 @@ export const CategoryGrid = () => {
 const CategoryItem = (category: IllustrativeCategory) => {
   return (
     <VStack cursor="pointer">
-      <Image src={category.imagePath} className="w-16 h-16" />
+      <Image
+        src={category.imagePath}
+        className="xl:w-16 xl:h-16 lg:w-12 lg:h-12 md:w-8 md:h-8 sm:w-8 sm:h-8"
+      />
       <Text>{category.name}</Text>
     </VStack>
   );

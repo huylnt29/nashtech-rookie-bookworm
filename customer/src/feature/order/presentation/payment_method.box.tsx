@@ -61,14 +61,13 @@ const PaymentMethodItem = ({
       <VStack marginX={4}>
         <Image
           src={imagePath}
-          className="w-12 h-12 object-cover object-center"
+          className="xl:w-12 xl:h-12 md:w-8 md:h-8 object-cover object-center"
         />
         <Text fontWeight="bold">{text}</Text>
         <Text
-          fontSize="sm"
           fontWeight="semibold"
           textAlign="center"
-          className="text-slate-600"
+          className="text-slate-600 xl:text-md lg:text-sm md:text-sm"
         >
           {description}
         </Text>

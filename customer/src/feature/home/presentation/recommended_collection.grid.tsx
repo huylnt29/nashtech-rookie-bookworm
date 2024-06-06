@@ -31,7 +31,11 @@ const RecommendedCollectionGrid = () => {
           </Text>
           <HandThumbUpIcon className="w-8 h-8 text-orange-900" />
         </HStack>
-        <Grid className="grid-cols-3" rowGap={8} columnGap={8}>
+        <Grid
+          className="md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
+          rowGap={8}
+          columnGap={8}
+        >
           {recommendedCollection!.batches.map((batch) => (
             <RecommendedCollectionItemCard
               key={crypto.randomUUID()}
@@ -51,8 +55,8 @@ const RecommendedCollectionItemCard = (collectionBatch: CollectionBatch) => {
   const navigate = useNavigate();
   return (
     <AppContainer
-      width="21vw"
-      className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
+      width="295px"
+      className="min-w-[250px] cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
       onClick={() => navigate(RouteBuilder.buildBookPath(book.id))}
     >
       <HStack spacing={8}>

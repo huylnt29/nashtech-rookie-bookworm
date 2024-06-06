@@ -31,12 +31,12 @@ const BookLineCard = ({ bookLine }: any) => {
     useOrderStore();
 
   return (
-    <AppContainer width="100%">
+    <AppContainer width="fit-content">
       <Flex gap={8} align="center">
         <Box width="30%">
           <Image
             src={book!.imageUrls[0]}
-            className="w-32 h-44 object-cover object-center"
+            className="min-w-[100px] h-44 object-cover object-center"
           />
         </Box>
         <VStack width="60%" align="start" spacing={2}>

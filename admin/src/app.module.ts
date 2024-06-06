@@ -78,6 +78,7 @@ export class AppModule implements NestModule {
       .apply(AuthMiddleware)
       .exclude(
         { path: '/auth/(.*)', method: RequestMethod.ALL },
+        { path: '/public/(.*)', method: RequestMethod.ALL },
         { path: '/graphql', method: RequestMethod.ALL },
         { path: '/swagger-ui', method: RequestMethod.ALL },
       )

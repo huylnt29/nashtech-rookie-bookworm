@@ -27,7 +27,7 @@ const FilteredBookCard = (filteredBatch: FilteredBatch) => {
         </Center>
         <Spacer y={3} />
         <Text fontSize="lg" fontWeight="semibold" className="h-14">
-          {book.name}
+          {book.name.slice(0, 30).concat("...")}
         </Text>
         <Spacer y={1} />
         <Text fontSize="md">{book.totalSoldQuantity} sold</Text>

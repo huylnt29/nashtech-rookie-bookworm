@@ -58,7 +58,7 @@ const BookCart = () => {
   };
 
   return (
-    <AppContainer>
+    <AppContainer width="fit-content">
       <Flex direction="column" gap={1}>
         <BookPrice
           initialPrice={book!.price}
