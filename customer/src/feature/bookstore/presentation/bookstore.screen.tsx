@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { Spacer } from "@nextui-org/react";
 import { Box, Flex } from "@chakra-ui/react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import FilterMenu from "./filter_menu.box";
 import FilterResultGrid from "./filter_result.grid";
 import useBookstoreStore from "./store/bookstore.store";
@@ -6,13 +9,9 @@ import {
   FilterBookRequest,
   FilterBookRequestProperty,
 } from "../data/model/filter_book_request.class";
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import Paginator from "../../../core/component/paginator";
-import { Spacer } from "@nextui-org/react";
 import { RouteBuilder } from "../../../core/router/route_path";
 import SortBookBox from "./sort_book.box";
-import { SortDirection } from "../../../core/data/enum/sort_direction.enum";
 
 const BookstoreScreen = () => {
   const { filterBooks, paginationMeta, filterRequest } = useBookstoreStore();
@@ -54,11 +53,11 @@ const BookstoreScreen = () => {
   }, []);
 
   return (
-    <Flex justify="center" mx="10%" gap={8}>
-      <Box width="30%">
+    <Flex justify="center" mx="10%" gap={8} className="flex-wrap">
+      <Box className="min-w-[300px]">
         <FilterMenu />
       </Box>
-      <Box width="70%">
+      <Box className="flex-1">
         <SortBookBox />
         <Spacer y={5} />
         <FilterResultGrid />
