@@ -1,12 +1,12 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Book } from './entity/book.entity';
+import { Book } from './entity/Book.entity';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import {
   FindManyBookArgs,
   FindUniqueBookArgs,
 } from './argument/book.find.args';
 import { PaginationService } from 'src/core/service/pagination/pagination.service';
-import { BookPageResult } from './entity/book.page_result.entity';
+import { BookPageResult } from './entity/Book.page_result.entity';
 import { BookStatus, State } from '@prisma/client';
 
 @Resolver(() => Book)

@@ -1,7 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 
-import { Discount } from './entity/discount.entity';
+import { Discount } from './entity/Discount.entity';
 import {
   FindManyDiscountArgs,
   FindUniqueDiscountArgs,

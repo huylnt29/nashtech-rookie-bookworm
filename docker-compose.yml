@@ -5,8 +5,9 @@ services:
     image: postgres
     restart: always
     environment:
-      - POSTGRES_PASSWORD=postgres
-    container_name: bookworm-database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+    container_name: bookworm-database-server
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     ports:

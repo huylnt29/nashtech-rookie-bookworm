@@ -1,6 +1,6 @@
 import { ObjectType } from '@nestjs/graphql';
-import { Batch } from './batch.entity';
-import { PageInfo } from 'src/module/book/entity/book.page_result.entity';
+import { Batch } from './Batch.entity';
+import { PageInfo } from 'src/module/book/entity/Book.page_result.entity';
 
 @ObjectType()
 export class BatchPageResult {

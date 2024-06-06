@@ -1,11 +1,11 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Author } from './entity/Author.entity';
 
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import {
   FindManyAuthorArgs,
   FindUniqueAuthorArgs,
 } from './argument/author.find.args';
+import { Author } from './entity/Author.entity';
 
 @Resolver(() => Author)
 export class AuthorResolver {

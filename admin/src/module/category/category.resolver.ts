@@ -1,6 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { Category } from './entity/Category.entity';
-import { CategoryService } from './Category.service';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import {
   FindManyCategoryArgs,

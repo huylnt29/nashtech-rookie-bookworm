@@ -4,10 +4,10 @@ import { RestrictProperties } from 'src/core/service/graphql/common.input';
 
 import { State } from 'src/core/service/graphql/register_enum';
 import { Author } from 'src/module/author/entity/Author.entity';
-import { Batch } from 'src/module/batch/entity/batch.entity';
+import { Batch } from 'src/module/batch/entity/Batch.entity';
 import { Category } from 'src/module/category/entity/Category.entity';
-import { Publisher } from 'src/module/publisher/entity/publisher.entity';
-import { Review } from 'src/module/review/entity/review.entity';
+import { Publisher } from 'src/module/publisher/entity/Publisher.entity';
+import { Review } from 'src/module/review/entity/Review.entity';
 
 @ObjectType()
 export class Book {

@@ -1,5 +1,5 @@
 import { ObjectType } from '@nestjs/graphql';
-import { Book } from 'src/module/book/entity/book.entity';
+import { Book } from 'src/module/book/entity/Book.entity';
 
 @ObjectType()
 export class BookPageResult {

@@ -1,12 +1,12 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
-import { Batch } from './entity/batch.entity';
+import { Batch } from './entity/Batch.entity';
 import {
   FindManyBatchArgs,
   FindUniqueBatchArgs,
 } from './argument/batch.find.args';
 import { PaginationService } from 'src/core/service/pagination/pagination.service';
-import { BatchPageResult } from './entity/batch.page_result.entity';
+import { BatchPageResult } from './entity/Batch.page_result.entity';
 
 @Resolver(() => Batch)
 export class BatchResolver {

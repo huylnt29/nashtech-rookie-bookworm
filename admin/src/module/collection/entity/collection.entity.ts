@@ -4,7 +4,7 @@ import {
   CollectionLayout,
   CollectionMovement,
 } from 'src/core/service/graphql/register_enum';
-import { Batch } from 'src/module/batch/entity/batch.entity';
+import { Batch } from 'src/module/batch/entity/Batch.entity';
 
 @ObjectType()
 export class Collection {

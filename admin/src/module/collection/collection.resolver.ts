@@ -1,6 +1,5 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Collection } from './entity/collection.entity';
-import { CollectionService } from './Collection.service';
+import { Collection } from './entity/Collection.entity';
 import { PrismaService } from 'src/core/service/prisma/prisma.service';
 import {
   FindManyCollectionArgs,
