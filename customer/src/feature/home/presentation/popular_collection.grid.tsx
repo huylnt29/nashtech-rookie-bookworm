@@ -5,10 +5,9 @@ import RequestState from "../../../core/data/enum/request_state.enum";
 import AppContainer from "../../../core/component/container";
 import { CollectionBatch } from "../data/model/collection_batch.type";
 import RatingStar from "../../../core/component/rating_star";
-import BookPrice from "../../../core/component/book_price";
 import { RouteBuilder } from "../../../core/router/route_path";
 import { useNavigate } from "react-router";
-import { ArrowTrendingUpIcon, FireIcon } from "@heroicons/react/24/solid";
+import { ArrowTrendingUpIcon } from "@heroicons/react/24/solid";
 
 const PopularCollectionGrid = () => {
   const { popularCollection, requestState } = useHomeStore();
@@ -27,7 +26,11 @@ const PopularCollectionGrid = () => {
           </Text>
           <ArrowTrendingUpIcon className="w-8 h-8 text-purple-900" />
         </HStack>
-        <Grid className="grid-cols-3" rowGap={8} columnGap={8}>
+        <Grid
+          className="md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3"
+          rowGap={8}
+          columnGap={8}
+        >
           {popularCollection!.batches.map((batch) => (
             <PopularCollectionItemCard key={crypto.randomUUID()} {...batch} />
           ))}
@@ -44,8 +47,8 @@ const PopularCollectionItemCard = (collectionBatch: CollectionBatch) => {
   const navigate = useNavigate();
   return (
     <AppContainer
-      width="21vw"
-      className="cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
+      width="295px"
+      className="min-w-[250px] cursor-pointer hover:-translate-y-1 hover:shadow-2xl transition ease-in-out"
       onClick={() => navigate(RouteBuilder.buildBookPath(book.id))}
     >
       <HStack spacing={8}>

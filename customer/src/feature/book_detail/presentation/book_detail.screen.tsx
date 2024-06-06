@@ -19,8 +19,8 @@ const BookDetailScreen = () => {
   if (getRequestState != RequestState.LOADED) return;
 
   return (
-    <Flex marginX="15%" justify="space-between" gap="7%">
-      <VStack width="70%" spacing={8}>
+    <Flex marginX="15%" justify="space-between" gap={3} flexWrap="wrap-reverse">
+      <VStack flex={1} spacing={8}>
         <BookPrimaryInformation />
         <BookReviewListView />
         <Spacer y={72} />
