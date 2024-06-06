@@ -53,6 +53,11 @@ const useBookstoreStore = create<BookstoreState>()((set, get) => {
             get().filterBooks(newFilterRequest);
           }
           break;
+        case "search":
+          newFilterRequest = get().filterRequest.copyWith({
+            search: value,
+          });
+          break;
         default:
           newFilterRequest = get().filterRequest.copyWith({
             [property]: value,

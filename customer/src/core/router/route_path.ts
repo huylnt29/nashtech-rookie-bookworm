@@ -10,10 +10,12 @@ export const RoutePath = {
 
 export const RouteBuilder = {
   buildStorePath: (filterBookRequest: FilterBookRequest) =>
-    `/store?categoryIds=${filterBookRequest.categoryIds?.toString()}&authorIds=${filterBookRequest.authorIds?.toString()}&rating=${
+    `/store?search=${
+      filterBookRequest.search
+    }&categoryIds=${filterBookRequest.categoryIds?.toString()}&authorIds=${filterBookRequest.authorIds?.toString()}&rating=${
       filterBookRequest.rating
     }&sortBy=${filterBookRequest.sortBy}&sortDirection=${
       filterBookRequest.sortDirection
-    }&page=${filterBookRequest.page}`,
+    }&page=${filterBookRequest.page ?? 1}`,
   buildBookPath: (id: number) => `/book/${id}`,
 };

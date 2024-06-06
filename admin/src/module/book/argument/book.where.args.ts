@@ -36,7 +36,7 @@ export class BookWhereInputStrict {
   reviews: ReviewListRelationFilter;
 
   @Field({ nullable: true })
-  search: StringFilter;
+  search?: string | undefined;
 
   AND: BookWhereInput[];
   OR: BookWhereInput[];

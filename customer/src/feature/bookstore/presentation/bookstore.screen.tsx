@@ -24,6 +24,10 @@ const BookstoreScreen = () => {
       let property = entry[0] as FilterBookRequestProperty;
       if (entry[1] === "undefined" || entry[1] === "") continue;
       switch (property) {
+        case "search":
+          let search = entry[1];
+          filterRequest.search = search;
+          break;
         case "categoryIds":
           let categoryIds = entry[1].split(",").map((e) => +e);
           filterRequest.categoryIds = categoryIds;

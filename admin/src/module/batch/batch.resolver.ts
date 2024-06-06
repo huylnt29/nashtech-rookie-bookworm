@@ -7,7 +7,7 @@ import {
 } from './argument/batch.find.args';
 import { PaginationService } from 'src/core/service/pagination/pagination.service';
 import { BatchPageResult } from './entity/Batch.page_result.entity';
-
+import { omit } from 'lodash';
 @Resolver(() => Batch)
 export class BatchResolver {
   constructor(
@@ -17,6 +17,8 @@ export class BatchResolver {
 
   @Query(() => BatchPageResult, { name: 'batches' })
   findAll(@Args() args: FindManyBatchArgs) {
+    console.log(args.where.book);
+
     return this.paginationService.paginate(
       this.prismaService.batch,
       {
@@ -24,8 +26,9 @@ export class BatchResolver {
         where: {
           ...args.where,
           book: {
+            ...omit(args.where.book, 'search'),
             name: {
-              contains: args.where.book.is.search.contains,
+              contains: args.where.book.search ?? '',
               mode: 'insensitive',
             },
           },

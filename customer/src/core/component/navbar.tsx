@@ -18,8 +18,10 @@ import useOrderStore from "../../feature/order/presentation/store/order.store";
 import { useNavigate } from "react-router";
 import { FilterBookRequest } from "../../feature/bookstore/data/model/filter_book_request.class";
 import { SortDirection } from "../data/enum/sort_direction.enum";
+import useBookstoreStore from "../../feature/bookstore/presentation/store/bookstore.store";
 
 export default function AppNavbar() {
+  const { updateFilterRequest, filterRequest } = useBookstoreStore();
   const navigate = useNavigate();
   return (
     <Navbar className="bg-transparent p-3">
@@ -40,6 +42,12 @@ export default function AppNavbar() {
             leftIcon={<MagnifyingGlassIcon className="text-white font-bold" />}
             textColor={Color.primary}
             focusBorderColor={"white"}
+            onChange={(event) =>
+              updateFilterRequest("search", event.target.value)
+            }
+            onEnter={() =>
+              location.assign(RouteBuilder.buildStorePath(filterRequest))
+            }
           />
         </NavbarItem>
         <Spacer x={12} />

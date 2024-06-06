@@ -1,5 +1,3 @@
-import { SortDirection } from "../../../../core/data/enum/sort_direction.enum";
-
 export class FilterBookRequest {
   constructor(obj?: any) {
     if (!obj)
@@ -26,6 +24,7 @@ export class FilterBookRequest {
     return this.copyWith(this);
   }
 
+  search?: string | null;
   categoryIds?: number[] | null;
   authorIds?: number[] | null;
   rating?: number | null;
@@ -57,21 +56,30 @@ export class FilterBookRequest {
       ratingSubWhere = `reviews: {some: {OR: [{rating: ${this.rating}}]}}`;
     }
 
+    let searchSubWhere;
+    if (this.search) {
+      searchSubWhere = `search: "${this.search}"`;
+    }
+
     let where;
     if (categorySubWhere) {
-      where = "where: { book: { is: {";
+      where = "where: { book: {";
       where = where.concat(categorySubWhere).concat(",");
     }
     if (authorSubWhere) {
-      if (!where) where = "where: { book: { is: {";
+      if (!where) where = "where: { book: {";
       where = where.concat(authorSubWhere).concat(",");
     }
     if (ratingSubWhere) {
-      if (!where) where = "where: { book: { is: {";
+      if (!where) where = "where: { book: {";
       where = where.concat(ratingSubWhere).concat(",");
     }
+    if (searchSubWhere) {
+      if (!where) where = "where: { book: {";
+      where = where.concat(searchSubWhere).concat(",");
+    }
     if (where) {
-      where = where.concat("}}}");
+      where = where.concat("}}");
     }
 
     let orderBy;
@@ -129,6 +137,7 @@ export class FilterBookRequest {
 }
 
 export type FilterBookRequestProperty =
+  | "search"
   | "categoryIds"
   | "authorIds"
   | "rating"

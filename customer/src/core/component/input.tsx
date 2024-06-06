@@ -9,6 +9,7 @@ export type AppInputProps = {
   textColor?: string | undefined;
   focusBorderColor: string;
   onChange?: (event: any) => void;
+  onEnter?: () => void;
 };
 
 const AppInput = (props: AppInputProps) => {
@@ -24,6 +25,9 @@ const AppInput = (props: AppInputProps) => {
         width={props.width}
         color={props.textColor}
         onChange={props.onChange}
+        onKeyDown={(event) => {
+          if (event.key == "Enter") props.onEnter?.call(this);
+        }}
       />
     </InputGroup>
   );
