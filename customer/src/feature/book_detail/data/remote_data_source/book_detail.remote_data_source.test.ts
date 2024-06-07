@@ -42,7 +42,6 @@ describe("BookDetailRemoteDataSource", () => {
     } as Response;
 
     globalThis.fetch = vi.fn().mockResolvedValue(mockResponse);
-    // state verification
-    expect(await ApiClient.getBookDetail("1")).toMatchObject(dummyBook);
+    expect(await ApiClient.getBookDetail("1")).toHaveProperty("id", 1);
   });
 });

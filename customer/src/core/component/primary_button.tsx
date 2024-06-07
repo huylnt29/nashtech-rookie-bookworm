@@ -19,6 +19,7 @@ const PrimaryButton = (props: PrimaryButtonProps) => {
       color={props.color}
       fullWidth={!props.fitContent}
       className="font-bold"
+      role="button"
     >
       {props.text}
     </Button>

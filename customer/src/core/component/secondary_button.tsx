@@ -20,6 +20,7 @@ const SecondaryButton = (props: SecondaryButtonProps) => {
       color={props.color}
       fullWidth={!props.fitContent}
       className="font-bold"
+      role="button"
     >
       {props.text}
     </Button>
