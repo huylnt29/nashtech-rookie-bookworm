@@ -38,6 +38,7 @@ const CreateReviewForm = () => {
           <RatingStar
             value={review.rating ?? 0}
             onChange={(event) => updateReview("rating", event)}
+            size={5}
           />
         </HStack>
         <Textarea

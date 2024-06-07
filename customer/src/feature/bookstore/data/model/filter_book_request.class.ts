@@ -112,6 +112,7 @@ export class FilterBookRequest {
             id
             index
             price
+            importedAt
             book {
               id 
               imageUrls

@@ -9,14 +9,14 @@ const BookPrice = ({ initialPrice, discountPercentage }: BookPriceProps) => {
   if (discountPercentage) {
     return (
       <Flex gap={3} align="center">
-        <Text fontSize="lg" fontWeight="semibold">
+        <Text fontSize="md" fontWeight="semibold">
           {UI.formatNumberWithDots(
             Math.round(initialPrice * discountPercentage)
           )}{" "}
           VND
         </Text>
         <Text
-          fontSize="md"
+          fontSize="sm"
           className="text-slate-300"
           fontWeight="semibold"
           textDecoration="line-through"

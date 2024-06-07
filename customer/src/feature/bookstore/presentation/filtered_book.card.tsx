@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router";
 import { Image } from "@nextui-org/image";
 import { Spacer } from "@nextui-org/react";
-import { Center, Flex, Text } from "@chakra-ui/react";
+import { Center, Flex, Tag, Text } from "@chakra-ui/react";
 import AppContainer from "../../../core/component/container";
 import RatingStar from "../../../core/component/rating_star";
 import { RouteBuilder } from "../../../core/router/route_path";
 import BookPrice from "../../../core/component/book_price";
 import { FilteredBatch } from "../data/model/filtered_book.type";
+import { DateUtil } from "../../../core/util/date.util";
 
 const FilteredBookCard = (filteredBatch: FilteredBatch) => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const FilteredBookCard = (filteredBatch: FilteredBatch) => {
       <Flex direction="column" width="100%">
         <Center>
           <Image
-            className="h-56 w-96 object-cover object-center rounded-xl"
+            className="h-44 w-56 object-cover object-center rounded-xl"
             alt={book.name}
             src={book.imageUrls?.[0]}
             fallbackSrc="https://via.placeholder.com/300x200"
@@ -30,7 +31,7 @@ const FilteredBookCard = (filteredBatch: FilteredBatch) => {
           {book.name.slice(0, 30).concat("...")}
         </Text>
         <Spacer y={1} />
-        <Text fontSize="md">{book.totalSoldQuantity} sold</Text>
+
         <Spacer y={1} />
         <RatingStar value={book.averageRating} onChange={() => {}} size={8} />
         <Spacer y={5} />
@@ -38,6 +39,12 @@ const FilteredBookCard = (filteredBatch: FilteredBatch) => {
           initialPrice={filteredBatch!.price}
           discountPercentage={discount?.percentage}
         />
+        <Spacer y={3} />
+        <Tag colorScheme="orange" fontSize="md" width="fit-content">
+          {DateUtil.isBeforeToday(new Date(filteredBatch.importedAt))
+            ? `${filteredBatch.book.totalSoldQuantity} sold`
+            : "Coming soon"}
+        </Tag>
       </Flex>
     </AppContainer>
   );

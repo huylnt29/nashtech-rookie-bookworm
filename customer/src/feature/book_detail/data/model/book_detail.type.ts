@@ -37,5 +37,5 @@ export type Discount = {
   percentage: number;
   minQuantity: number;
   maxQuantity: string;
-  endAt: Date;
+  endAt: string;
 };

@@ -32,11 +32,13 @@ import { OrderModule } from './module/order/order.module';
 import { CustomerModule } from './module/customer/customer.module';
 import { ReviewModule } from './module/review/review.module';
 import { CollectionResolver } from './module/collection/collection.resolver';
+import { S3Module } from './core/service/s3/s3.module';
 
 @Module({
   imports: [
     PrismaModule,
     ConfigModule,
+    S3Module,
     AuthModule,
     AuthorModule,
     PublisherModule,
