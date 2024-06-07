@@ -58,7 +58,12 @@ export class CollectionController {
     @Res() res: Response,
   ): Promise<void> {
     const collection = await this.collectionService.selectOne(id);
-    const batches = await this.batchService.selectPromotable();
+    let batches: any;
+    if (id == 1) {
+      batches = await this.batchService.selectPromotable();
+    } else {
+      batches = await this.batchService.selectManySimple();
+    }
     res.render('./view_collection_detail/view_collection_detail_page', {
       collection,
       batches,

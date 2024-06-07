@@ -8,7 +8,6 @@ const SortBookBox = () => {
   const { filterRequest, booksResultRequestState, updateFilterRequest } =
     useBookstoreStore();
   if (booksResultRequestState != RequestState.LOADED) return <></>;
-  console.log(filterRequest.sortBy);
 
   return (
     <AppContainer>

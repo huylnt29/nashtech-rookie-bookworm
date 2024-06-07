@@ -123,6 +123,7 @@ export class OrderService {
               select: {
                 id: true,
                 bookId: true,
+                discountId: true,
               },
             },
           },
@@ -152,6 +153,18 @@ export class OrderService {
               },
             },
           });
+          if (line.batch.discountId) {
+            await this.prisma.discount.update({
+              where: {
+                id: line.batch.discountId,
+              },
+              data: {
+                maxQuantity: {
+                  decrement: line.quantity,
+                },
+              },
+            });
+          }
         }
         break;
     }

@@ -9,6 +9,7 @@ export type FilteredBatch = {
   id: number;
   index: number;
   price: number;
+  importedAt: string;
   book: FilteredBatchBook;
   discount: Discount | null;
 };

@@ -24,9 +24,9 @@ export class BatchResolver {
         where: {
           ...args.where,
           book: {
-            ...omit(args.where.book, 'search'),
+            ...omit(args?.where?.book, 'search'),
             name: {
-              contains: args.where.book.search ?? '',
+              contains: args?.where?.book?.search ?? '',
               mode: 'insensitive',
             },
           },

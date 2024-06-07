@@ -16,7 +16,7 @@ export class CreateBookDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  @MinLength(7)
+  @MinLength(5)
   @MaxLength(300)
   name: string;
 
