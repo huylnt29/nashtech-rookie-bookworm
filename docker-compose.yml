@@ -12,8 +12,13 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - my_network
 
   server:
+    env_file:
+      - path: ./admin/.env
+        required: true
     build:
       context: ./admin
       dockerfile: Dockerfile
@@ -22,6 +27,8 @@ services:
       - PORT=${PORT}
     ports:
       - "3000:3000"
+    networks:
+      - my_network
     depends_on:
       - database
 
@@ -36,3 +43,7 @@ services:
   #     - "8000:8000"
   #   depends_on:
   #     - server
+
+networks:
+  my_network:
+    driver: bridge
