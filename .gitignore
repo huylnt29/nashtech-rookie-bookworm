@@ -1,3 +1,5 @@
 /pgdata
 admin/graphql/schema.gql
 admin/graphql/schema.gql
+admin/docker.env
+customer/docker.env

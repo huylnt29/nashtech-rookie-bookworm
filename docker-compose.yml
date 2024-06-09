@@ -17,7 +17,7 @@ services:
 
   server:
     env_file:
-      - path: ./admin/.env
+      - path: ./admin/docker.env
         required: true
     build:
       context: ./admin
@@ -32,17 +32,22 @@ services:
     depends_on:
       - database
 
-  # customer:
-  #   build:
-  #     context: ./customer
-  #     dockerfile: Dockerfile
-  #   container_name: bookworm-customer-client
-  #   environment:
-  #     - PORT=${PORT}
-  #   ports:
-  #     - "8000:8000"
-  #   depends_on:
-  #     - server
+  customer:
+    env_file:
+      - path: ./customer/docker.env
+        required: true
+    build:
+      context: ./customer
+      dockerfile: Dockerfile
+    container_name: bookworm-customer-client
+    environment:
+      - PORT=${PORT}
+    ports:
+      - "2901:2901"
+    networks:
+      - my_network
+    depends_on:
+      - server
 
 networks:
   my_network:
