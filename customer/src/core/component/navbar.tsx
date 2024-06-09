@@ -40,7 +40,7 @@ const AppNavbar = () => {
   const [drawer, setDrawer] = useState(false);
 
   return (
-    <Flex className="w-full justify-between items-center bg-slate-800 py-3 px-[15vw] overflow-x-hidden overflow-y-hidden">
+    <Flex className="w-full h-full justify-between items-center bg-slate-800 px-[15vw] overflow-x-hidden overflow-y-hidden">
       <Flex align="center">
         <Box onClick={() => setDrawer(!drawer)}>
           <Logo />

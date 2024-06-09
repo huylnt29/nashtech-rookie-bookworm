@@ -8,13 +8,11 @@ const App = () => {
   const onAppStart = (event: any) => {
     event.preventDefault();
     retrieveCart();
-    return (event.returnValue = undefined);
   };
 
   const onAppClose = (event: any) => {
     event.preventDefault();
     saveCart();
-    return (event.returnValue = undefined);
   };
 
   useEffect(() => {
