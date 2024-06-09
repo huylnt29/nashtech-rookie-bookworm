@@ -22,7 +22,6 @@ block content
                               tr.table-row
                                    th.table-cell.text-left.p-3 ID
                                    th.table-cell.text-left PERCENTAGE
-                                   th.table-cell.text-left MIN QUANTITY
                                    th.table-cell.text-left MAX QUANTITY
                                    th.table-cell.text-left START DATE
                                    th.table-cell.text-left END DATE
@@ -34,7 +33,6 @@ block content
                                         tr(class="table-row hover:bg-slate-50 hover:cursor-pointer group")
                                              td.table-cell.p-3(onclick=`navigateToDetailPage(${discount.id})`) #{discount.id}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`)= discount.percentage * 100 + '%'
-                                             td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.minQuantity}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.maxQuantity}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.startAt.toLocaleString()}
                                              td.table-cell(onclick=`navigateToDetailPage(${discount.id})`) #{discount.endAt.toLocaleString()}

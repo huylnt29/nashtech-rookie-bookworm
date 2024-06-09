@@ -8,7 +8,7 @@ block content
                div.grow
                +primary_button("Delete", `openDeleteModal(${discount.id})`, "red")
                div.w-3
-               +primary_button(discount.isRecurring ? "Disable recurrence": "Enable recurrence", ``, "slate")
+               +primary_button(discount.isRecurring ? "Disable recurrence": "Enable recurrence", `toggleRecurrence(${discount.isRecurring})`, "slate")
           div.h-4
           div.flex.items-center
                div.w-2.bg-slate-600.mr-3.rounded-xl ''
@@ -64,6 +64,13 @@ block content
           const removeBatch = (id) => {
                axios.patch(`/batch/${id}`, {
                     discountId: null
+               })
+               .then(() => location.reload(true))
+          }
+          const toggleRecurrence = (isRecurring) => {
+               const id = location.href.split('/').at(-1)
+               axios.patch(`/discount/${id}`, {
+                    isRecurring: !isRecurring
                })
                .then(() => location.reload(true))
           }

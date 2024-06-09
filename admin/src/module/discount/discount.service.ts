@@ -10,9 +10,6 @@ export class DiscountService {
 
   async selectMany(): Promise<any[]> {
     return this.prisma.discount.findMany({
-      where: {
-        state: State.ACTIVE,
-      },
       select: {
         id: true,
         percentage: true,
@@ -21,6 +18,7 @@ export class DiscountService {
         startAt: true,
         endAt: true,
         isRecurring: true,
+        state: true,
         _count: {
           select: {
             batches: true,
