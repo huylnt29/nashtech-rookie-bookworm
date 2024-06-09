@@ -40,7 +40,7 @@ export class CollectionController {
 
   @Get('/new')
   async buildCreateCollectionPage(@Res() res: Response) {
-    const batches = await this.batchService.selectPromotable();
+    const batches = await this.batchService.selectManySimple();
     res.render('./create_collection/create_collection_page', {
       batches,
     });
