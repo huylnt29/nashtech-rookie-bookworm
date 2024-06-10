@@ -48,7 +48,7 @@ const OnSaleCollectionItemCard = (collectionBatch: CollectionBatch) => {
         />
         <VStack align="start">
           <Text fontSize="lg" fontWeight="semibold" maxWidth="15vw">
-            {book.name}
+            {book.name.slice(0, 45).concat("...")}
           </Text>
           <RatingStar value={book.averageRating} onChange={() => {}} size={8} />
           <BookPrice
